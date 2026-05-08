@@ -167,24 +167,6 @@
   .rank-btn { font-family: var(--font-sans,"DM Sans",sans-serif); font-size:11px; font-weight:500; padding:5px 12px; border-radius:20px; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--text-2); transition:all 0.15s; }
   .rank-btn:hover { border-color:var(--blue); color:var(--blue); }
   .rank-btn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
-  .spain-flag-corner {
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    width: 44px;
-    height: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
-    z-index: 1000;
-    overflow: hidden;
-    background: #fff;
-  }
-  .spain-flag-corner svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .sidebar { display: none; }
@@ -192,24 +174,9 @@
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
     .bbva-metrics { display: none; }
   }
-  @media print {
-    .spain-flag-corner {
-      position: fixed;
-      top: 8mm;
-      right: 8mm;
-      width: 18mm;
-      height: 12mm;
-    }
-  }
 </style>
 </head>
 <body>
-<div class="spain-flag-corner" aria-label="Bandera de España" title="Bandera de España">
-  <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" role="img">
-    <rect width="3" height="2" fill="#AA151B"></rect>
-    <rect y="0.5" width="3" height="1" fill="#F1BF00"></rect>
-  </svg>
-</div>
 <div class="layout">
 
 <!-- SIDEBAR -->

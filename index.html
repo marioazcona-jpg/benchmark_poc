@@ -34,6 +34,21 @@
   --radius-sm: 6px;
   --shadow: 0 1px 3px rgba(0,68,129,0.08), 0 4px 16px rgba(0,68,129,0.06);
   --shadow-md: 0 4px 20px rgba(0,68,129,0.12);
+  /* YOY module additions */
+  --green-border: rgba(26,127,75,0.3);
+  --green-text: #1A7F4B;
+  --red-border: rgba(185,28,28,0.3);
+  --red-text: #B91C1C;
+  --amber-border: rgba(180,83,9,0.3);
+  --amber-text: #B45309;
+  --blue-bg: #EEF4FA;
+  --blue-border: rgba(0,68,129,0.25);
+  --blue-text: var(--bbva-blue);
+  --mixed-bg: #F5F3FF;
+  --mixed-border: #DDD6FE;
+  --mixed-text: #6D28D9;
+  --surface2: var(--gray-bg);
+  --border2: #D5DBE6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); background: var(--bg); color: var(--text-primary); font-size: 14px; line-height: 1.5; display: flex; min-height: 100vh; }
@@ -89,9 +104,9 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .card-subtitle { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
 .bank-toggles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .bank-toggle { display: flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--gray-bg); color: var(--text-secondary); transition: all .15s; user-select: none; }
-.bank-toggle.active { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
+.bank-toggle.active { background: #fff; font-weight: 600; }
 .bank-toggle.bbva-toggle { border-color: var(--bbva-blue); color: var(--bbva-blue); background: #EEF4FA; }
-.bank-toggle.bbva-toggle.active { background: var(--bbva-blue); color: #fff; }
+.bank-toggle.bbva-toggle.active { background: #fff; }
 .bank-toggle .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .add-bank-btn { font-size: 11px; color: var(--bbva-blue); border: 1px dashed var(--bbva-blue); background: transparent; padding: 4px 9px; border-radius: 20px; cursor: pointer; font-family: var(--font); font-weight: 500; transition: all .15s; }
 .add-bank-btn:hover { background: #EEF4FA; }
@@ -138,12 +153,12 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
 .pct-val { font-family: var(--mono); font-size: 12px; }
 .pct-val.positive { color: var(--green); }
 .pct-val.negative { color: var(--red); }
-.status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; white-space: nowrap; }
-.status-pill.ahead { background: var(--green-bg); color: var(--green); }
-.status-pill.on-track { background: var(--amber-bg); color: var(--amber); }
-.status-pill.misaligned { background: var(--red-bg); color: var(--red); }
-.status-pill.na { background: var(--gray-bg); color: var(--text-tertiary); }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; font-size: 10px; font-weight: 600; white-space: nowrap; letter-spacing: .02em; border: 1px solid; }
+.status-pill.ahead { color: var(--green); border-color: rgba(26,127,75,0.35); background: rgba(26,127,75,0.05); }
+.status-pill.on-track { color: var(--amber); border-color: rgba(180,83,9,0.35); background: rgba(180,83,9,0.05); }
+.status-pill.misaligned { color: var(--red); border-color: rgba(185,28,28,0.35); background: rgba(185,28,28,0.05); }
+.status-pill.na { color: var(--text-tertiary); border-color: var(--border); background: transparent; }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .metric-tag { font-size: 10px; color: var(--text-tertiary); background: var(--gray-bg); padding: 2px 6px; border-radius: 4px; }
 
 /* MODAL */
@@ -182,30 +197,218 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
 
 /* TOOLTIP */
 .chart-tooltip { background: var(--bbva-cib) !important; border: none !important; border-radius: 8px !important; padding: 10px 14px !important; font-family: var(--font) !important; box-shadow: var(--shadow-md) !important; }
+
+/* ─── YOY MODULE STYLES ──────────────────────────────────────────────────── */
+.page-header { margin-bottom: 24px; }
+.page-header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); letter-spacing: -.02em; }
+.page-header p { font-size: 13px; color: var(--text-secondary); }
+
+.view-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 20px; background: var(--surface); box-shadow: var(--shadow); }
+.toggle-btn { padding: 8px 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font); transition: all .15s; }
+.toggle-btn.active { background: var(--bbva-blue); color: #fff; }
+.toggle-btn:not(.active):hover { background: var(--gray-bg); color: var(--text-primary); }
+
+.two-panel { display: grid; grid-template-columns: 230px 1fr; gap: 20px; align-items: start; }
+.bank-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.panel-header { padding: 11px 16px; font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 1px solid var(--border); background: var(--gray-bg); }
+.panel-subheader { padding: 6px 16px 8px; font-size: 10px; color: var(--text-tertiary); border-bottom: 1px solid var(--border); background: var(--gray-bg); transition: color .2s; }
+
+.bank-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background .1s; position: relative; }
+.bank-item:last-child { border-bottom: none; }
+.bank-item:hover { background: var(--gray-bg); }
+.bank-item.selected { background: var(--blue-bg); border-left: 3px solid var(--bbva-blue); }
+.bank-avatar { width: 30px; height: 30px; border-radius: 7px; border: 1px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.bank-avatar svg, .bank-avatar img { width: 24px; height: 24px; object-fit: contain; }
+.bank-item.selected .bank-avatar { border-color: var(--blue-border); }
+.bank-check { width: 17px; height: 17px; border-radius: 4px; border: 1.5px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.bank-item.selected .bank-check { background: var(--bbva-blue); border-color: var(--bbva-blue); }
+.bank-check-inner { display: none; }
+.bank-item.selected .bank-check-inner { display: block; }
+.bank-info { flex: 1; min-width: 0; }
+.bank-name.faded { opacity: .4; }
+.bank-meta { font-size: 11px; color: var(--text-secondary); margin-top: 2px; display: flex; gap: 5px; align-items: center; letter-spacing: .01em; }
+.alert-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+.content-panel { display: flex; flex-direction: column; gap: 10px; }
+.alert-banner { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: var(--radius-sm); padding: 12px 16px; }
+.alert-label { font-size: 10px; font-weight: 700; letter-spacing: .07em; color: var(--red-text); text-transform: uppercase; margin-bottom: 4px; }
+.alert-text { font-size: 12px; color: var(--red-text); line-height: 1.5; }
+.section-label { font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-tertiary); margin: 8px 0 4px; }
+
+.sector-accordion { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 8px; box-shadow: var(--shadow); transition: box-shadow .15s; }
+.sector-accordion:hover { box-shadow: var(--shadow-md); }
+.sector-acc-header { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; user-select: none; transition: background .1s; }
+.sector-acc-header:hover { background: var(--gray-bg); }
+.sector-acc-name { font-size: 13px; font-weight: 600; color: var(--text-primary); flex: 1; }
+.sector-acc-badges { display: flex; gap: 4px; align-items: center; }
+.sector-acc-count { font-size: 10px; font-family: var(--mono); color: var(--text-tertiary); margin-right: 4px; }
+.sector-acc-chevron { color: var(--text-tertiary); transition: transform .2s; flex-shrink: 0; }
+.sector-acc-chevron.open { transform: rotate(180deg); }
+.sector-acc-body { display: none; border-top: 1px solid var(--border); }
+.sector-acc-body.open { display: block; }
+
+.change-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .15s, box-shadow .15s; margin-bottom: 8px; }
+.change-card:last-child { margin-bottom: 0; }
+.change-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.sector-acc-body .change-card, .bank-sector-cards .change-card { border-radius: 0; border-left: none; border-right: none; border-top: none; box-shadow: none; margin-bottom: 0; }
+.sector-acc-body .change-card:last-child, .bank-sector-cards .change-card:last-child { border-bottom: none; }
+.card-main { padding: 12px 16px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.change-icon { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; font-family: var(--mono); font-weight: 700; }
+.icon-D { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red-border); }
+.icon-F { background: var(--green-bg); color: var(--green-text); border: 1px solid var(--green-border); }
+.icon-M { background: var(--amber-bg); color: var(--amber-text); border: 1px solid var(--amber-border); }
+.icon-N { background: var(--gray-bg); color: var(--text-tertiary); border: 1px solid var(--border); }
+.icon-DM, .icon-MF { background: var(--mixed-bg); color: var(--mixed-text); border: 1px solid var(--mixed-border); font-size: 9px; }
+.change-body { flex: 1; min-width: 0; }
+.change-header { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; flex-wrap: wrap; }
+.sector-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.bank-tag { font-size: 10px; font-weight: 600; font-family: var(--mono); color: var(--text-secondary); background: var(--gray-bg); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; }
+.change-badge { font-size: 10px; font-weight: 600; padding: 2px 10px; border-radius: 20px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.badge-D { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red-border); }
+.badge-F { background: var(--green-bg); color: var(--green-text); border: 1px solid var(--green-border); }
+.badge-M { background: var(--amber-bg); color: var(--amber-text); border: 1px solid var(--amber-border); }
+.badge-N { background: var(--gray-bg); color: var(--text-tertiary); border: 1px solid var(--border); }
+.badge-DM, .badge-MF { background: var(--mixed-bg); color: var(--mixed-text); border: 1px solid var(--mixed-border); }
+.expand-btn { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-tertiary); flex-shrink: 0; padding: 2px 7px; border-radius: 4px; transition: background .1s; }
+.expand-btn:hover { background: var(--gray-bg); color: var(--text-secondary); }
+.change-summary { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+.card-detail { display: none; padding: 0 16px 12px 54px; border-top: 1px dashed var(--border); }
+.card-detail.open { display: block; }
+.detail-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin: 10px 0 5px; }
+.detail-text { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+.detail-refs { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.ref-chip { font-size: 10px; font-family: var(--mono); background: var(--gray-bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; color: var(--text-tertiary); }
+
+.bank-sector-group { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 10px; box-shadow: var(--shadow); }
+.bank-sector-group:hover { box-shadow: var(--shadow-md); }
+.bank-logo-row { display: flex; align-items: center; gap: 10px; padding: 10px 16px 9px; border-bottom: 1px solid var(--border); background: var(--gray-bg); }
+.bank-logo-sm { width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.bank-logo-sm svg { width: 20px; height: 20px; }
+.bank-logo-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.bank-logo-meta { margin-left: auto; display: flex; gap: 6px; }
+
+.no-change-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.no-change-item { display: flex; align-items: center; gap: 8px; padding: 7px 12px; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-sm); opacity: .5; }
+.no-change-text { font-size: 11px; color: var(--text-tertiary); }
+
+.sector-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.pill { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); transition: all .12s; user-select: none; box-shadow: var(--shadow); }
+.pill:hover { border-color: var(--bbva-blue); color: var(--bbva-blue); }
+.pill.active { background: var(--bbva-blue); border-color: var(--bbva-blue); color: #fff; }
+
+.inner-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+.inner-tab { padding: 9px 20px; font-size: 13px; font-weight: 500; color: var(--text-tertiary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .15s; user-select: none; display: flex; align-items: center; gap: 6px; }
+.inner-tab:hover { color: var(--text-secondary); }
+.inner-tab.active { color: var(--bbva-blue); border-bottom-color: var(--bbva-blue); }
+.tab-count { font-size: 10px; font-family: var(--mono); background: var(--gray-bg); border: 1px solid var(--border); padding: 1px 6px; border-radius: 10px; color: var(--text-tertiary); }
+.inner-tab.active .tab-count { background: var(--blue-bg); border-color: var(--blue-border); color: var(--bbva-blue); }
+
+.analysis-wrap { display: flex; flex-direction: column; gap: 10px; }
+.analysis-intro { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--bbva-blue); border-radius: var(--radius-sm); padding: 14px 18px; box-shadow: var(--shadow); }
+.analysis-intro-text { font-size: 13px; color: var(--text-secondary); line-height: 1.75; }
+.analysis-point { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; transition: box-shadow .15s; box-shadow: var(--shadow); }
+.analysis-point:hover { box-shadow: var(--shadow-md); }
+.ap-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; transition: background .1s; }
+.ap-header:hover { background: var(--gray-bg); }
+.ap-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ap-title { font-size: 13px; font-weight: 600; color: var(--text-primary); flex: 1; line-height: 1.4; }
+.ap-chevron { color: var(--text-tertiary); transition: transform .2s; flex-shrink: 0; }
+.ap-header.open .ap-chevron { transform: rotate(180deg); }
+.ap-body { display: none; padding: 2px 16px 14px 54px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.8; border-top: 1px dashed var(--border); }
+.ap-body.open { display: block; }
+
+.compare-grid { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.compare-header-row { display: grid; background: var(--gray-bg); border-bottom: 2px solid var(--border); }
+.compare-sector-col { padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text-tertiary); letter-spacing: .06em; text-transform: uppercase; border-right: 1px solid var(--border); }
+.compare-bank-col { padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--border); }
+.compare-bank-col:last-child { border-right: none; }
+.compare-bank-logo { width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; }
+.compare-bank-logo svg { width: 16px; height: 16px; }
+.compare-bank-label { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.compare-row { display: grid; border-bottom: 1px solid var(--border); background: var(--surface); }
+.compare-row:last-child { border-bottom: none; }
+.compare-row:hover { background: var(--blue-bg); }
+.compare-sector-cell { padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--text-secondary); border-right: 1px solid var(--border); background: var(--gray-bg); }
+.compare-cell { padding: 8px 12px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+.compare-cell:last-child { border-right: none; }
+.compare-cell-empty { padding: 10px 12px; border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); font-size: 11px; }
+.compare-cell-empty:last-child { border-right: none; }
+.mini-card { background: var(--gray-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 9px; cursor: pointer; transition: border-color .1s; }
+.mini-card:hover { border-color: var(--border2); }
+.mini-badge { font-size: 9px; font-weight: 600; padding: 1px 7px; border-radius: 20px; text-transform: uppercase; margin-bottom: 4px; display: inline-block; }
+.mini-text { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+.mini-card-detail { display: none; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); font-size: 11px; color: var(--text-secondary); line-height: 1.55; }
+.mini-card-detail.open { display: block; }
+.mini-refs { margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; }
+.mini-ref { font-size: 9px; font-family: var(--mono); background: var(--surface); border: 1px solid var(--border); padding: 1px 5px; border-radius: 3px; color: var(--text-tertiary); }
+
+.empty-state { text-align: center; padding: 3rem; color: var(--text-tertiary); font-size: 13px; }
+.tooltip { position: fixed; background: var(--bbva-cib); color: #fff; font-size: 11px; font-family: var(--font); padding: 5px 10px; border-radius: 5px; pointer-events: none; opacity: 0; transition: opacity .1s; z-index: 1000; max-width: 220px; line-height: 1.4; }
+
+/* ─── COMPARATOR VISUAL IMPROVEMENTS ──────────────────────────────────────── */
+/* Bank list – better items */
+.bank-item { border-left: 3px solid transparent; }
+.bank-item.selected { border-left-color: var(--bbva-blue); }
+.bank-avatar img { border-radius: 4px; }
+.bank-change-count { font-size: 10px; font-family: var(--mono); font-weight: 600; background: var(--gray-bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 20px; color: var(--text-tertiary); white-space: nowrap; }
+.bank-item.selected .bank-change-count { background: #DBEAFE; border-color: rgba(0,68,129,0.2); color: var(--bbva-blue); }
+.bank-item.has-alert .bank-change-count { background: #FEE2E2; border-color: rgba(185,28,28,0.2); color: var(--red); }
+
+/* Bank header card */
+.bank-header-card { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--bbva-blue); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow); }
+.bank-header-logo { width: 48px; height: 48px; border-radius: 10px; border: 1px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08); flex-shrink: 0; }
+.bank-header-logo img { width: 36px; height: 36px; border-radius: 6px; object-fit: contain; }
+.bank-header-info { flex: 1; min-width: 0; }
+.bank-header-name { font-size: 17px; font-weight: 700; color: var(--text-primary); letter-spacing: -.02em; line-height: 1.2; }
+.bank-header-meta { font-size: 12px; color: var(--text-secondary); margin-top: 3px; display: flex; align-items: center; gap: 8px; }
+.bank-header-flag { font-size: 14px; }
+.bank-header-stats { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+.bstat { display: flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; font-family: var(--mono); border: 1px solid; }
+.bstat.d { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
+.bstat.f { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
+.bstat.m { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-border); }
+.bstat.n { background: var(--gray-bg); color: var(--text-tertiary); border-color: var(--border); }
+
+/* Change card – colored left border */
+.change-card.type-D { border-left: 3px solid var(--red); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.change-card.type-F { border-left: 3px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.change-card.type-M { border-left: 3px solid var(--amber); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.change-card.type-N { border-left: 3px solid #9CA3AF; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.change-card.type-DM, .change-card.type-MF { border-left: 3px solid var(--mixed-text); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+/* Compare grid – favicon logos */
+.compare-bank-logo img { width: 16px; height: 16px; border-radius: 3px; object-fit: contain; display: block; }
+
+/* Sector view – bank logo rows */
+.bank-logo-sm img { width: 18px; height: 18px; border-radius: 3px; object-fit: contain; display: block; }
+
+/* Page header badge */
+.page-header-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; }
+.page-header-row .page-header { margin-bottom: 0; }
+.data-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; box-shadow: var(--shadow); }
+.data-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 </style>
 </head>
 <body>
+<div id="tooltip" class="tooltip"></div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAqAIADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAECAwT/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A8xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2Q==" alt="BBVA CIB" class="header-logo" style="height:28px">
+    <svg width="108" height="44" viewBox="0 0 108 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="30" font-family="DM Sans, sans-serif" font-size="26" font-weight="700" fill="white" letter-spacing="-1">BBVA</text>
+      <text x="2" y="42" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.4)" letter-spacing="3.5">CIB</text>
+    </svg>
   </div>
   <div class="nav-label">Navigation</div>
   <a class="nav-item active" onclick="showScreen('executive')" href="#">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     Executive Summary
   </a>
-  <a class="nav-item" onclick="showScreen('trends')" href="#">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    Trend Analyzer
-  </a>
-  <div class="nav-placeholder">In development</div>
   <a class="nav-item" onclick="showScreen('comparator')" href="#">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     Comparator
   </a>
-  <div class="nav-placeholder">In development</div>
   <div class="nav-bottom">BBVA CIB · DCB v3.0</div>
 </nav>
 
@@ -276,9 +479,10 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
         <div class="table-toolbar">
           <div class="filter-tabs" id="filterTabs">
             <button class="filter-tab active" onclick="setFilter('all', this)">All banks</button>
-            <button class="filter-tab" onclick="setFilter('tier1', this)">Tier 1</button>
+            <button class="filter-tab" onclick="setFilter('mainPeer', this)">Main Peers</button>
             <button class="filter-tab" onclick="setFilter('european', this)">European</button>
             <button class="filter-tab" onclick="setFilter('spanish', this)">Spanish</button>
+            <button class="filter-tab" onclick="setFilter('top5', this)">Top 5</button>
           </div>
           <button class="col-config-btn" onclick="openColModal()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
@@ -295,30 +499,50 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
     </div>
   </div>
 
-  <!-- SCREEN: TRENDS -->
-  <div class="screen" id="screen-trends">
-    <div class="content">
-      <div class="placeholder-screen">
-        <div class="placeholder-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5A6B80" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="placeholder-badge">In development</div>
-        <div class="placeholder-title">Trend Analyzer</div>
-        <div class="placeholder-sub">This module is being developed by the analytics team and will be integrated in the next release.</div>
-      </div>
-    </div>
-  </div>
-
   <!-- SCREEN: COMPARATOR -->
   <div class="screen" id="screen-comparator">
     <div class="content">
-      <div class="placeholder-screen">
-        <div class="placeholder-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5A6B80" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <div class="page-header-row">
+        <div class="page-header">
+          <h1>Comparador de cambios</h1>
+          <p>Evolución YoY · cambios detectados 2024 → 2025</p>
         </div>
-        <div class="placeholder-badge">In development</div>
-        <div class="placeholder-title">Comparator</div>
-        <div class="placeholder-sub">Side-by-side bank comparison with commitment analysis. Coming in next release.</div>
+        <div class="data-badge">
+          <span class="data-badge-dot"></span>
+          2 bancos analizados &middot; 35 cambios registrados
+        </div>
+      </div>
+      <div class="view-toggle">
+        <button class="toggle-btn active" onclick="setView('banco')" id="btn-banco">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+          Por banco
+        </button>
+        <button class="toggle-btn" onclick="setView('sector')" id="btn-sector">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><line x1="1" y1="4" x2="15" y2="4"/><line x1="1" y1="8" x2="15" y2="8"/><line x1="1" y1="12" x2="15" y2="12"/></svg>
+          Por sector
+        </button>
+      </div>
+      <!-- VISTA BANCO -->
+      <div id="view-banco">
+        <div class="two-panel">
+          <div>
+            <div class="bank-list">
+              <div class="panel-header">Banco</div>
+              <div class="panel-subheader" id="select-hint">Selecciona 1–4 bancos para comparar</div>
+              <div id="bank-list-items"></div>
+            </div>
+          </div>
+          <div class="content-panel" id="bank-content">
+            <div class="empty-state">Selecciona un banco para ver sus cambios</div>
+          </div>
+        </div>
+      </div>
+      <!-- VISTA SECTOR -->
+      <div id="view-sector" style="display:none;">
+        <div class="sector-pills" id="sector-pills"></div>
+        <div class="content-panel" id="sector-content">
+          <div class="empty-state">Selecciona un sector</div>
+        </div>
       </div>
     </div>
   </div>
@@ -342,18 +566,18 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
 // ─── DATA ───────────────────────────────────────────────────────────────────
 
 const BANK_META = {
-  'BBVA':            { flag: '🇪🇸', tier1: true,  european: true,  spanish: true,  color: '#004481', bbva: true },
-  'Sabadell':        { flag: '🇪🇸', tier1: false, european: true,  spanish: true,  color: '#B91C1C' },
-  'CaixaBank':       { flag: '🇪🇸', tier1: false, european: true,  spanish: true,  color: '#1A7F4B' },
-  'Santander':       { flag: '🇪🇸', tier1: true,  european: true,  spanish: true,  color: '#CC0000' },
-  'SocGen':          { flag: '🇫🇷', tier1: true,  european: true,  spanish: false, color: '#E84B23' },
-  'ING':             { flag: '🇳🇱', tier1: true,  european: true,  spanish: false, color: '#FF6200' },
-  'Intesa':          { flag: '🇮🇹', tier1: true,  european: true,  spanish: false, color: '#006B3C' },
-  'Barclays':        { flag: '🇬🇧', tier1: true,  european: false, spanish: false, color: '#00AEEF' },
-  'StanChart':       { flag: '🇬🇧', tier1: true,  european: false, spanish: false, color: '#0F7B3F' },
-  'Nordea':          { flag: '🇫🇮', tier1: true,  european: true,  spanish: false, color: '#00005E' },
-  'Bancolombia':     { flag: '🇨🇴', tier1: false, european: false, spanish: false, color: '#FDBD12' },
-  'Citigroup':       { flag: '🇺🇸', tier1: true,  european: false, spanish: false, color: '#056DAE' },
+  'BBVA':            { flag: '🇪🇸', tier1: true,  mainPeer: true,  european: true,  spanish: true,  color: '#004481', bbva: true },
+  'Sabadell':        { flag: '🇪🇸', tier1: false, mainPeer: false, european: true,  spanish: true,  color: '#B91C1C' },
+  'CaixaBank':       { flag: '🇪🇸', tier1: false, mainPeer: false, european: true,  spanish: true,  color: '#1A7F4B' },
+  'Santander':       { flag: '🇪🇸', tier1: true,  mainPeer: true,  european: true,  spanish: true,  color: '#CC0000' },
+  'SocGen':          { flag: '🇫🇷', tier1: true,  mainPeer: true,  european: true,  spanish: false, color: '#E84B23' },
+  'ING':             { flag: '🇳🇱', tier1: true,  mainPeer: true,  european: true,  spanish: false, color: '#FF6200' },
+  'Intesa':          { flag: '🇮🇹', tier1: true,  mainPeer: true,  european: true,  spanish: false, color: '#006B3C' },
+  'Barclays':        { flag: '🇬🇧', tier1: true,  mainPeer: true,  european: false, spanish: false, color: '#00AEEF' },
+  'StanChart':       { flag: '🇬🇧', tier1: true,  mainPeer: false, european: false, spanish: false, color: '#0F7B3F' },
+  'Nordea':          { flag: '🇫🇮', tier1: true,  mainPeer: true,  european: true,  spanish: false, color: '#00005E' },
+  'Bancolombia':     { flag: '🇨🇴', tier1: false, mainPeer: false, european: false, spanish: false, color: '#FDBD12' },
+  'Citigroup':       { flag: '🇺🇸', tier1: true,  mainPeer: true,  european: false, spanish: false, color: '#056DAE' },
 };
 
 const SECTORS = {
@@ -425,13 +649,14 @@ let currentFilter = 'all';
 let sortCol = null;
 let sortDir = 1;
 let chartInst = null;
+let _animProg = 1;
+let _isDrawAnim = false;
 
-const DEFAULT_COLS = ['bank','country','baseline','y2023','y2024','y2025','pctYTD','status'];
+const DEFAULT_COLS = ['bank','country','baseline','y2023','y2024','y2025','obj','pctReduction','status'];
 const EXTRA_COLS = [
   { id: 'scope',    label: 'Scope' },
   { id: 'metod',   label: 'Methodology' },
-  { id: 'obj',     label: '2030 Target' },
-  { id: 'baseYear',label: 'Base Year' },
+  { id: 'baseYear', label: 'Base Year' },
 ];
 let activeCols = [...DEFAULT_COLS];
 
@@ -453,14 +678,14 @@ function fmt(v, dec=3) {
 }
 
 function statusPill(s) {
-  if (!s) return '<span class="status-pill na"><span class="status-dot"></span>N/A</span>';
+  if (!s) return '<span class="status-pill na">N/A</span>';
   const map = {
-    'ahead':      ['ahead',     'Ahead of target'],
-    'on-track':   ['on-track',  'On track'],
-    'misaligned': ['misaligned','Misaligned'],
+    'ahead':      ['ahead',      '↑ Ahead of path'],
+    'on-track':   ['on-track',   '✓ On path'],
+    'misaligned': ['misaligned', '✗ Off path'],
   };
   const [cls, label] = map[s] || ['na', s];
-  return `<span class="status-pill ${cls}"><span class="status-dot"></span>${label}</span>`;
+  return `<span class="status-pill ${cls}">${label}</span>`;
 }
 
 function getSectorData() { return SECTORS[currentSector] || DEFAULT_SECTOR; }
@@ -523,13 +748,29 @@ function renderToggles() {
     const meta = BANK_META[b.name] || {};
     const isActive = b.show;
     const isBBVA = b.name === 'BBVA';
+    const bankColor = meta.color || 'var(--bbva-blue)';
     const div = document.createElement('div');
     div.className = `bank-toggle${isBBVA ? ' bbva-toggle' : ''}${isActive ? ' active' : ''}`;
+    if (isActive) {
+      div.style.borderColor = bankColor;
+      div.style.borderWidth = '2px';
+      div.style.color = bankColor;
+    }
     div.innerHTML = `<img src="${getFavicon(b.name)}" style="width:14px;height:14px;border-radius:3px;object-fit:contain;background:#fff;padding:1px;flex-shrink:0" onerror="this.style.display='none'">${b.name}`;
     div.onclick = () => {
       b.show = !b.show;
       div.classList.toggle('active', b.show);
-      drawChart();
+      div.style.borderColor = b.show ? bankColor : '';
+      div.style.borderWidth = b.show ? '2px' : '';
+      div.style.color     = b.show ? bankColor : '';
+      if (chartInst) {
+        chartInst.data.datasets.forEach((ds, i) => {
+          if (ds.label === b.name || ds.label === `${b.name} target`) {
+            chartInst.setDatasetVisibility(i, b.show);
+          }
+        });
+        chartInst.update();
+      }
     };
     el.appendChild(div);
   });
@@ -539,6 +780,7 @@ function drawChart() {
   const sd = getSectorData();
   const canvas = document.getElementById('trajChart');
   if (chartInst) chartInst.destroy();
+  _animProg = 0; _isDrawAnim = true;
 
   document.getElementById('chartTitle').textContent = `${currentSector} — Emissions Intensity Trajectory`;
   document.getElementById('chartSubtitle').textContent = `Reported values (solid) · Projected pathway to 2030 target (dashed) · Metric: ${sd.metric}`;
@@ -568,7 +810,7 @@ function drawChart() {
       tension: 0, order: 99,
     });
   }
-  sd.banks.filter(b => b.show).forEach(b => {
+  sd.banks.forEach(b => {
     const meta = BANK_META[b.name] || {};
     const color = meta.color || '#999';
     const isBBVA = b.name === 'BBVA';
@@ -577,6 +819,7 @@ function drawChart() {
     const solidData = YEARS.map(y => y === 2030 ? null : getVal(b, y));
     datasets.push({
       label: b.name,
+      hidden: !b.show,
       data: solidData,
       borderColor: color,
       backgroundColor: color,
@@ -600,6 +843,7 @@ function drawChart() {
         });
         datasets.push({
           label: `${b.name} target`,
+          hidden: !b.show,
           data: projData,
           borderColor: color,
           borderWidth: isBBVA ? 2 : 1.2,
@@ -634,6 +878,19 @@ function drawChart() {
 
   const _scenarioPlugin = {
     id: 'chartLabels',
+    beforeDatasetsDraw(chart) {
+      if (_animProg >= 1) return;
+      const { ctx, chartArea } = chart;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(chartArea.left, chartArea.top - 10,
+               (chartArea.right - chartArea.left) * _animProg,
+               chartArea.bottom - chartArea.top + 20);
+      ctx.clip();
+    },
+    afterDatasetsDraw(chart) {
+      if (_animProg < 1) chart.ctx.restore();
+    },
     afterDraw(chart) {
       const sd = getSectorData();
       const { ctx, scales: { x, y }, data } = chart;
@@ -641,7 +898,8 @@ function drawChart() {
       // Bank end-of-line labels
       const usedY = [];
       const GAP = 13;
-      data.datasets.forEach(ds => {
+      data.datasets.forEach((ds, i) => {
+        if (!chart.isDatasetVisible(i)) return;
         if (ds.order === 99 || !ds.label || ds.label.includes(' target') || ds.label === 'IEA NZE 2030') return;
         const bm = BANK_META[ds.label];
         if (!bm) return;
@@ -709,6 +967,17 @@ function drawChart() {
       responsive: true, maintainAspectRatio: false,
       interaction: { mode: 'nearest', intersect: true },
       layout: { padding: { right: 105 } },
+      animation: {
+        duration: 650,
+        easing: 'linear',
+        onProgress: (e) => {
+          if (!_isDrawAnim) return;
+          const t = e.currentStep / e.numSteps;
+          _animProg = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+        },
+        onComplete: () => { _animProg = 1; _isDrawAnim = false; },
+      },
+      animations: { y: { duration: 0 } },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -753,8 +1022,8 @@ const COL_DEFS = {
   y2023:    { label: '2023', sortFn: b => b.y2023 ?? 999 },
   y2024:    { label: '2024', sortFn: b => b.y2024 ?? 999 },
   y2025:    { label: '2025', sortFn: b => b.y2025 ?? 999 },
-  pctYTD:   { label: '% Δ YTD', sortFn: b => b.pctYTD ?? -999 },
-  status:   { label: 'Status', sortFn: b => b.status || 'z' },
+  pctReduction: { label: '% Red. Baseline→2030', sortFn: b => (b.base && b.obj) ? (b.base - b.obj) / b.base * 100 : -999 },
+  status:       { label: 'Status', sortFn: b => b.status || 'z' },
   scope:    { label: 'Scope', sortFn: b => b.scope },
   metod:    { label: 'Methodology', sortFn: b => b.metod },
   obj:      { label: '2030 Target', sortFn: b => b.obj ?? 999 },
@@ -767,13 +1036,25 @@ function renderTable() {
 
   // Filter
   if (currentFilter !== 'all') {
-    banks = banks.filter(b => {
-      const m = BANK_META[b.name] || {};
-      if (currentFilter === 'tier1') return m.tier1 || b.name === 'BBVA';
-      if (currentFilter === 'european') return m.european;
-      if (currentFilter === 'spanish') return m.spanish;
-      return true;
-    });
+    if (currentFilter === 'top5') {
+      const withVal = banks.filter(b => (b.y2025 ?? b.y2024 ?? b.y2023) !== undefined && (b.y2025 ?? b.y2024 ?? b.y2023) !== null);
+      withVal.sort((a, b) => {
+        const va = a.y2025 ?? a.y2024 ?? a.y2023 ?? Infinity;
+        const vb = b.y2025 ?? b.y2024 ?? b.y2023 ?? Infinity;
+        return va - vb;
+      });
+      const top5names = new Set(withVal.slice(0, 5).map(b => b.name));
+      top5names.add('BBVA');
+      banks = banks.filter(b => top5names.has(b.name));
+    } else {
+      banks = banks.filter(b => {
+        const m = BANK_META[b.name] || {};
+        if (currentFilter === 'mainPeer') return m.mainPeer;
+        if (currentFilter === 'european') return m.european;
+        if (currentFilter === 'spanish') return m.spanish;
+        return true;
+      });
+    }
   }
 
   // Sort: BBVA always first
@@ -805,10 +1086,10 @@ function renderTable() {
       if (id === 'y2023') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2023)}</td>`;
       if (id === 'y2024') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2024)}</td>`;
       if (id === 'y2025') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2025)}</td>`;
-      if (id === 'pctYTD') {
-        if (b.pctYTD === null) return `<td><span class="intensity-val empty">—</span></td>`;
-        const cls = b.pctYTD >= 0 ? 'positive' : 'negative';
-        return `<td><span class="pct-val ${cls}">${b.pctYTD > 0 ? '+' : ''}${b.pctYTD}%</span></td>`;
+      if (id === 'pctReduction') {
+        if (!b.base || !b.obj) return `<td><span class="intensity-val empty">—</span></td>`;
+        const pct = ((b.base - b.obj) / b.base * 100).toFixed(1);
+        return `<td><span class="pct-val positive">↓ ${pct}%</span></td>`;
       }
       if (id === 'status') return `<td>${statusPill(b.status)}</td>`;
       if (id === 'scope') return `<td><span class="metric-tag">${b.scope}</span></td>`;
@@ -898,6 +1179,489 @@ function showScreen(id) {
   event.currentTarget.classList.add('active');
 }
 
+// ─── YOY MODULE ───────────────────────────────────────────────────────────────
+
+const YOY_DOMAINS = {
+  santander:'santander.com', ing:'ing.com', hsbc:'hsbc.com', bnp:'bnpparibas.com',
+  jpmorgan:'jpmorgan.com', citi:'citigroup.com', barclays:'barclays.com', natwest:'natwest.com',
+  socgen:'societegenerale.com', deutsche:'db.com', unicredit:'unicredit.eu',
+  sabadell:'bancsabadell.com', intesa:'intesasanpaolo.com', nordea:'nordea.com', caixabank:'caixabank.es',
+};
+function logoImg(id, size=24) {
+  const d = YOY_DOMAINS[id];
+  if (!d) return `<span style="width:${size}px;height:${size}px;border-radius:5px;background:#E2E7EF;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#8FA0B4">${(id||'?').slice(0,2).toUpperCase()}</span>`;
+  return `<img src="https://www.google.com/s2/favicons?domain=${d}&sz=64" width="${size}" height="${size}" style="border-radius:5px;object-fit:contain;display:block" onerror="this.style.display='none'">`;
+}
+
+const AP_ICONS = {
+  alert:`<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14.5 13.5H1.5L8 1.5Z" fill="#FEE2E2" stroke="#B91C1C" stroke-width="1.4" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="9.5" stroke="#B91C1C" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.8" fill="#B91C1C"/></svg>`,
+  warn:`<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" fill="#FEF3C7" stroke="#B45309" stroke-width="1.4"/><line x1="8" y1="5.5" x2="8" y2="9" stroke="#B45309" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.8" fill="#B45309"/></svg>`,
+  info:`<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" fill="#EEF4FA" stroke="#004481" stroke-width="1.4"/><circle cx="8" cy="5.5" r="0.8" fill="#004481"/><line x1="8" y1="7.5" x2="8" y2="11.5" stroke="#004481" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  neutral:`<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" fill="#F1F5F9" stroke="#5A6B80" stroke-width="1.4"/><line x1="5" y1="8" x2="11" y2="8" stroke="#5A6B80" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+};
+const AP_BG = {alert:'var(--red-bg)',warn:'var(--amber-bg)',info:'var(--blue-bg)',neutral:'var(--gray-bg)'};
+
+const YOY_DATA = [
+  // ── SANTANDER ──
+  {banco:'santander',sector:'Oil & Gas',tipo:'D',resumen:'Cambio de límite absoluto a métrica de intensidad, eliminando el tope de emisiones totales.',descripcion:'El objetivo pasa de ser de emisiones absolutas (16.98 mtCO2e en Informe 2024) a una métrica de intensidad 2.31-3.03tCO2e/TJ en Informe 2025.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:'Tendencia clara hacia mayor flexibilidad operativa: sectores degradados a seguimiento y relajación generalizada de objetivos.'},
+  {banco:'santander',sector:'Oil & Gas',tipo:'D',resumen:'Exclusión de las emisiones de Alcance 3 en la meta de alineamiento, reduciendo la exigencia climática.',descripcion:'El objetivo de alineamiento en el Informe 2025 se centra ahora exclusivamente en alcances 1 y 2. El banco argumenta que los clientes tienen mayor control operativo sobre los alcances 1 y 2, y que las emisiones de alcance 3 ahora se monitorizan a través del nuevo "Índice de energía primaria".',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Oil & Gas',tipo:'M',resumen:'Actualización metodológica del año base a 2023, reseteando el punto de partida.',descripcion:'Se informa que el año base ha sido actualizado a 2023 en el Informe 2025, sustituyendo al año 2019 empleado en el Informe 2024.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Power',tipo:'M',resumen:'Cambio de métrica hacia un rango objetivo que refleja distintas velocidades de transición.',descripcion:'El objetivo a 2030 ha pasado de un valor fijo de 0,11 tCO2e/MWh a un rango objetivo de 102-124 kgCO2e/MWh para reflejar las diferentes velocidades de transición regionales y normativas.',ref2024:'pág. 48',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Power',tipo:'F',resumen:'Fuerte mejora del desempeño físico con caída significativa en intensidad de emisiones, impulsada por renovables.',descripcion:'La intensidad física de emisiones cayó significativamente de 0,15 tCO2e/MWh en 2023 a 88 kgCO2e/MWh en 2024, impulsada por la reducción de exposición a clientes intensivos en carbono y el aumento en financiación de proyectos renovables.',ref2024:'pág. 48',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Power',tipo:'DM',resumen:'Discrepancia contable en los datos de exposición de 2023 reportados entre ambos informes.',descripcion:'Se observa una discrepancia: el Informe 2024 reporta 10,75 mil millones EUR para 2023, mientras que el Informe 2025 registra 12,79 mil millones EUR para el mismo periodo.',ref2024:'pág. 47',ref2025:'pág. 65',alerta:null},
+  {banco:'santander',sector:'Steel',tipo:'D',resumen:'Relajación de la meta a 2030, pasando de un objetivo fijo a un rango más permisivo.',descripcion:'El objetivo para el año 2030 ha sido actualizado en el Informe 2025 a un rango de 1,17-1,28, en sustitución del valor puntual de 1,07 consignado en el Informe 2024.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Steel',tipo:'M',resumen:'Actualización metodológica que desplaza el año base de referencia a 2023.',descripcion:'Se ha actualizado el año base a 2023 para el Informe 2025, en sustitución del año 2019 empleado en el Informe 2024.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Steel',tipo:'M',resumen:'Incremento notable en la intensidad física de emisiones justificado por cambio en composición de cartera.',descripcion:'Se registró una subida en la intensidad desde los 1,38 tCO2e/tS reportados para 2023 hasta los 1,51 tCO2e/tS para 2024 debido a un cambio en la composición de la cartera por amortizaciones de clientes con perfiles de bajas emisiones.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Automotive',tipo:'D',resumen:'Adaptación a rangos para las carteras de fabricación y préstamos, flexibilizando objetivos 2030.',descripcion:'Los objetivos para 2030 se han flexibilizado pasando de metas fijas (103 gCO2/vkm fabricación y 75-89 gCO2e/vkm préstamos europeos) a rangos de 80-98 gCO2/vkm y 70-109 gCO2e/vkm respectivamente.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Automotive',tipo:'D',resumen:'Suavización de la exigencia de transición al adoptar un escenario mixto (NZE2050 + APS).',descripcion:'El banco ha sustituido el escenario IEA Net Zero 2050 para ambos subsectores por los escenarios combinados IEA NZE2050 y APS.',ref2024:'pág. 43',ref2025:'pág. 61',alerta:null},
+  {banco:'santander',sector:'Cement',tipo:'N',resumen:'El sector carece de reporte activo de métricas, objetivos o exposición en ambos ejercicios.',descripcion:'No reportado en ningún informe.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'santander',sector:'Aviation',tipo:'D',resumen:'Retirada del objetivo formal de reducción a 2030, degradando la exposición a cartera en "seguimiento".',descripcion:'El sector de la aviación ha pasado de tener un objetivo de alineamiento definido para 2030 de 61,71 gCO2e/RPK a ser clasificado únicamente como cartera en seguimiento, justificado por menor materialidad y dependencia de SAF.',ref2024:'pág. 43',ref2025:'pág. 59 / pág. 68',alerta:null},
+  {banco:'santander',sector:'Shipping',tipo:'N',resumen:'El sector carece de reporte activo de métricas, objetivos o exposición en ambos ejercicios.',descripcion:'No reportado en ningún informe.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'santander',sector:'CRE',tipo:'M',resumen:'Ampliación del perímetro al integrar los datos de inmuebles comerciales e hipotecas de Portugal.',descripcion:'El análisis de emisiones financiadas del sector inmobiliario comercial se ha expandido sumando la cartera de Portugal a las métricas de España y Reino Unido.',ref2024:'pág. 51',ref2025:'pág. 70',alerta:null},
+  {banco:'santander',sector:'Coal',tipo:'MF',resumen:'Caída brusca de la financiación ligada al carbón, con ajuste metodológico retroactivo en saldos de 2024.',descripcion:'La exposición reportada a cierre de 2024 es de 4.2 mil millones en el Informe 2025, frente a 4.8 mil millones del Informe 2024. Se incorpora el valor para 2025 en 2.3 mil millones.',ref2024:'pág. 50',ref2025:'pág. 68',alerta:null},
+  {banco:'santander',sector:'Aluminium',tipo:'N',resumen:'El sector carece de reporte activo de métricas, objetivos o exposición en ambos ejercicios.',descripcion:'No reportado en ningún informe.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'santander',sector:'Agriculture',tipo:'M',resumen:'Refinamiento en la medición de la cartera en Brasil, acotando el análisis a soja, maíz y ganadería bovina.',descripcion:'La medición de emisiones financiadas en la cartera agrícola de Brasil se ha refinado para incluir únicamente soja, maíz y ganadería bovina, recalculando las emisiones base de 9,83 a 8,41 MtCO2e.',ref2024:'pág. 51 / pág. 43',ref2025:'pág. 69 / pág. 61',alerta:null},
+  // ── ING ──
+  {banco:'ing',sector:'Oil & Gas',tipo:'F',resumen:'Cambio a límites de crédito (loan limits) para medir la exposición, con mejora real en intensidad.',descripcion:'En el sector Upstream, conforme a la validación de SBTi, el banco pasó de saldos dispuestos (1.001 M€ en 2024) a límites de crédito (1.900 M€ en 2025). En Mid y Downstream la intensidad mejoró de 19,1 a 19,0 kg CO2e/boe con caída de exposición de 7.400 a 5.600 M€.',ref2024:'pág. 111',ref2025:'pág. 113 / pág. 364',alerta:null},
+  {banco:'ing',sector:'Oil & Gas',tipo:'F',resumen:'Compromiso vinculante de cesar la financiación a nuevas terminales de exportación de GNL desde 2026.',descripcion:'El informe 2025 confirma que, a partir de 2026, el banco no financiará nuevas terminales de exportación de GNL.',ref2024:'pág. 126',ref2025:'pág. 115',alerta:null},
+  {banco:'ing',sector:'Power',tipo:'F',resumen:'Fuerte descenso de la intensidad de emisiones de la cartera por alta canalización hacia proyectos renovables.',descripcion:'La intensidad cayó de 63 kg CO2e/MWh en 2024 a 43.6 kg CO2e/MWh en 2025, con crecimiento del volumen de 11.5 a 13.3 mil millones de euros impulsado por renovables.',ref2024:'pág. 111',ref2025:'pág. 113',alerta:null},
+  {banco:'ing',sector:'Power',tipo:'F',resumen:'Incremento notable del apetito en energías limpias, elevando compromisos en eólica y solar a 9.600 M€.',descripcion:'Los compromisos en energía eólica y solar aumentaron de €7.0 mil millones en el Informe 2024 a €9.6 mil millones en el Informe 2025.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'ing',sector:'Power',tipo:'M',resumen:'Actualización metodológica del año base para la huella operativa, saltando de 2014 a 2023.',descripcion:'En el Informe 2025 se establece 2023 como nuevo año base para la huella operativa, sustituyendo la referencia de 2014.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'ing',sector:'Steel',tipo:'M',resumen:'Adopción del estándar SSP con mejora real en intensidad de cartera pese a desviación temporal.',descripcion:'El banco actualizó su métrica al estándar SSP, pasando de "SSP Alignment score" (0.83 en 2024) a "SSP percentage deviation" (+5.4% en 2025), con mejora real de 1.93 a 1.90 t CO2/t acero.',ref2024:'pág. 111',ref2025:'pág. 113',alerta:null},
+  {banco:'ing',sector:'Steel',tipo:'M',resumen:'Limitación detectada: el modelo no captura el impacto de financiar proyectos de "acero verde".',descripcion:'El Informe 2025 señala que la metodología actual aún no refleja el impacto de la financiación de proyectos de "acero verde" en fase de desarrollo.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'ing',sector:'Automotive',tipo:'D',resumen:'Ligero deterioro en intensidad de cartera por efecto composición: clientes más emisores aumentaron disposiciones.',descripcion:'La intensidad se incrementó de 0.146 a 0.150 kg CO2/vkm en 2025 para un volumen estable de 4.0 mil millones de euros.',ref2024:'pág. 111',ref2025:'pág. 120',alerta:null},
+  {banco:'ing',sector:'Cement',tipo:'D',resumen:'Empeoramiento de la métrica de intensidad por mayor uso de facilidades crediticias por clientes con peores ratios.',descripcion:'La intensidad pasó de 0.688 a 0.695 t CO2/t cemento en 2025, con caída del volumen de 0.7 a 0.6 mil millones de euros.',ref2024:'pág. 111',ref2025:'pág. 118',alerta:null},
+  {banco:'ing',sector:'Aviation',tipo:'D',resumen:'Repunte de intensidad y aumento de exposición por distorsiones temporales de liquidez en aeronaves.',descripcion:'El volumen de compromisos aumentó de 4.1 a 4.8 mil millones de euros, y la intensidad repuntó un 2%, de 844 a 861 g CO2e/RTK.',ref2024:'pág. 111',ref2025:'pág. 121',alerta:null},
+  {banco:'ing',sector:'Shipping',tipo:'MF',resumen:'Mejora continua en la senda de alineamiento a 1.5°C, aunque moderándose respecto al año anterior.',descripcion:'El delta de alineación frente al escenario de 1.5°C se moderó desde el -7.6% en 2024 al -4.6% en 2025, con volumen estable de 8.6 mil millones de euros.',ref2024:'pág. 111',ref2025:'pág. 122',alerta:null},
+  {banco:'ing',sector:'CRE',tipo:'F',resumen:'Adopción del estándar CRREM que aflora una importante mejora en la intensidad climática de inmuebles comerciales.',descripcion:'Tras ajuste de factores de emisión al modelo CRREM ("Well-to-Wheel" a "Tank-to-Wheel"), la intensidad mejoró de 39.5 a 34.0 kg CO2e/m2 en 2025 para una exposición que creció a 27.8 mil millones.',ref2024:'—',ref2025:'pág. 123 / pág. 367',alerta:null},
+  {banco:'ing',sector:'RRE',tipo:'F',resumen:'Dinámica muy positiva en el sector hipotecario: caída de intensidad con fuerte crecimiento del volumen financiado.',descripcion:'La intensidad mejoró de 37.5 a 35.5 kg CO2e/m2 en 2025, con crecimiento del volumen de 294.3 a 315.0 mil millones de euros.',ref2024:'pág. 111',ref2025:'pág. 113',alerta:null},
+  {banco:'ing',sector:'Coal',tipo:'F',resumen:'Cumplimiento del plan de salida del carbón con amortización continuada de financiación a plantas eléctricas.',descripcion:'La financiación a plantas de carbón descendió de 77 a 63 millones de euros.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'ing',sector:'Coal',tipo:'F',resumen:'Drástica reducción del riesgo de transición: un único cliente por encima del umbral del 5% en carbón térmico.',descripcion:'En 2025 queda un solo cliente por encima del umbral del 5% de actividad en carbón térmico (por mandato gubernamental en la UE).',ref2024:'—',ref2025:'pág. 114',alerta:null},
+  {banco:'ing',sector:'Aluminium',tipo:'M',resumen:'Expansión del marco metodológico Terra para integrar el sector aluminio, con planes en desarrollo.',descripcion:'El banco ha comenzado a incorporar el aluminio en el perímetro de su metodología Terra. Los planes de transición están en desarrollo sin objetivos numéricos consolidados.',ref2024:'—',ref2025:'—',alerta:null},
+  {banco:'ing',sector:'Agriculture',tipo:'M',resumen:'Ampliación del mapa de riesgos climáticos al incorporar el sector lácteo, con objetivos en desarrollo.',descripcion:'La actividad láctea (Dairy) se menciona como nuevo perímetro cuyos planes de transición están todavía en fase de desarrollo.',ref2024:'—',ref2025:'—',alerta:null},
+];
+
+const YOY_BANKS = [
+  {id:'santander',name:'Santander',      abbr:'SA', color:'#EC0000', flag:'🇪🇸', country:'España'},
+  {id:'ing',      name:'ING Group',       abbr:'IN', color:'#FF6200', flag:'🇳🇱', country:'Países Bajos'},
+  {id:'hsbc',     name:'HSBC',            abbr:'HS', color:'#DB0011', flag:'🇬🇧', country:'Reino Unido'},
+  {id:'bnp',      name:'BNP Paribas',     abbr:'BN', color:'#00965E', flag:'🇫🇷', country:'Francia'},
+  {id:'jpmorgan', name:'JPMorgan',        abbr:'JP', color:'#003087', flag:'🇺🇸', country:'Estados Unidos'},
+  {id:'citi',     name:'Citi',            abbr:'CI', color:'#003B70', flag:'🇺🇸', country:'Estados Unidos'},
+  {id:'barclays', name:'Barclays',        abbr:'BA', color:'#00AEEF', flag:'🇬🇧', country:'Reino Unido'},
+  {id:'natwest',  name:'NatWest',         abbr:'NW', color:'#42145F', flag:'🇬🇧', country:'Reino Unido'},
+  {id:'socgen',   name:'Société Générale',abbr:'SG', color:'#E30613', flag:'🇫🇷', country:'Francia'},
+  {id:'deutsche', name:'Deutsche Bank',   abbr:'DB', color:'#003399', flag:'🇩🇪', country:'Alemania'},
+  {id:'unicredit',name:'UniCredit',       abbr:'UC', color:'#E2001A', flag:'🇮🇹', country:'Italia'},
+  {id:'sabadell', name:'Sabadell',        abbr:'SB', color:'#002D72', flag:'🇪🇸', country:'España'},
+  {id:'intesa',   name:'Intesa Sanpaolo', abbr:'IS', color:'#009A44', flag:'🇮🇹', country:'Italia'},
+  {id:'nordea',   name:'Nordea',          abbr:'NO', color:'#00005E', flag:'🇫🇮', country:'Finlandia'},
+  {id:'caixabank',name:'CaixaBank',       abbr:'CX', color:'#007BC4', flag:'🇪🇸', country:'España'},
+];
+
+const YOY_SECTORS = ['Oil & Gas','Power','Steel','Automotive','Cement','Aviation','Shipping','CRE','RRE','Coal','Aluminium','Agriculture'];
+
+const CT = {
+  D:{label:'Debilitamiento',icon:'▼'},
+  F:{label:'Fortalecimiento',icon:'▲'},
+  M:{label:'Cambio metodológico',icon:'≈'},
+  N:{label:'Sin cambio relevante',icon:'='},
+  DM:{label:'Debil./Metodológico',icon:'▼≈'},
+  MF:{label:'Metod./Fortalec.',icon:'≈▲'},
+};
+
+const YOY_ANALYSIS = {
+  santander:{
+    intro:'Como conclusión final de este análisis comparativo, se observa una evolución hacia la flexibilidad y el pragmatismo operativo, en detrimento de la rigidez de los compromisos iniciales. La evolución general de Banco Santander muestra un reenfoque pragmático en su estrategia de descarbonización, alejándose de metas fijas y absolutas hacia rangos de intensidad flexibles. Este ajuste, que el banco atribuye a la necesidad de reflejar el ritmo real de transición y la dependencia de las políticas públicas, afecta principalmente a la comparabilidad de sus compromisos en los sectores más contaminantes.',
+    points:[
+      {icon:'alert',title:'Retroceso en la ambición de Oil & Gas',body:'Se elimina el objetivo de emisiones absolutas y se excluye el Alcance 3 de la meta de alineamiento, trasladándose a una métrica de solo seguimiento (Primary Energy Index). Las emisiones de Alcance 3 suelen representar más del 80-90% del impacto total del sector. Al mover estas emisiones a un "índice de seguimiento" en lugar de un objetivo de reducción vinculado a la cartera, la presión directa sobre el desbalance de carbono de los clientes disminuye.'},
+      {icon:'warn',title:'Cambio metodológico hacia rangos objetivo',body:'El banco ha sustituido de forma sistémica sus objetivos de emisiones fijados como valor estricto por rangos de intensidad flexibles (en Power, Steel, Automotive) argumentando la necesidad de absorber las diferentes velocidades de transición internacionales.'},
+      {icon:'warn',title:'Actualización masiva de años base',body:'Se han reseteado los años base de la mayoría de sectores de CIB de 2019 a 2023, dificultando la trazabilidad del progreso histórico a largo plazo. Si un banco reduce emisiones entre 2019 y 2023 pero luego "reinicia" el contador, la trayectoria de largo plazo se fragmenta.'},
+      {icon:'alert',title:'Reclasificación de sectores hard-to-abate',body:'El banco ha desistido de mantener un objetivo de descarbonización para aviación, moviéndolo a "seguimiento" alegando falta de control sobre las palancas del sector. Esto supone una relajación del compromiso climático en un sector de difícil abatimiento.'},
+      {icon:'info',title:'Alteración del escenario climático base',body:'La entidad ha abandonado la exclusividad del escenario IEA Net Zero 2050, incorporando el escenario menos restrictivo de Compromisos Anunciados (APS) en la definición de todos sus nuevos rangos de objetivos sectoriales.'},
+    ]
+  },
+  ing:{
+    intro:'A lo largo de los ejercicios evaluados, ING demuestra una evolución favorable y sumamente activa hacia la descarbonización de sus carteras, logrando reducciones consistentes en la intensidad de emisiones de los sectores más pesados de su balance (Power e inmobiliario). No obstante, la entidad sigue enfrentándose a la difícil realidad de los sectores "hard-to-abate" (aviación, automoción y cemento), donde la intensidad ha sufrido ligeros repuntes.',
+    points:[
+      {icon:'alert',title:'Validación de metas por SBTi',body:'Un punto de inflexión corporativo, reportado en 2025, ha sido la validación de las metas climáticas del banco (enfoque Terra) por parte de la iniciativa Science Based Targets (SBTi) alineadas a un escenario de 1.5°C.'},
+      {icon:'warn',title:'Modificación sustancial del perímetro en Upstream Oil & Gas',body:'Para alinearse con las exigencias del marco metodológico validado por SBTi, el banco ha transicionado de establecer sus metas en base a saldos dispuestos (outstandings) a basarse en límites de préstamo comprometidos (loan limits).'},
+      {icon:'info',title:'Actualización metodológica en Commercial Real Estate',body:'Se ha implementado una reformulación material de las emisiones sustituyendo factores de emisión "Well-to-Wheel" por "Tank-to-Wheel", lo que ha alterado retrospectivamente su línea base.'},
+      {icon:'info',title:'Cambio en la métrica de medición del sector Acero',body:'El banco ha reemplazado su anterior puntuación de "Alignment score" por un sistema más estricto de desviación porcentual ("percentage deviation") basándose en las últimas actualizaciones del estándar Sustainable STEEL Principles.'},
+      {icon:'warn',title:'Nuevos sectores para Terra',body:'La metodología de seguimiento climático del banco empieza a ramificarse hacia áreas complejas de la economía real, anunciando la incorporación de planes de transición para el aluminio y la agricultura (lácteos).'},
+    ]
+  }
+};
+
+// ─── YOY STATE ────────────────────────────────────────────────────────────────
+let selectedBanks = ['santander'];
+let selectedSector = null;
+const bankTabState = {};
+const MAX_BANKS = 4;
+
+// ─── YOY HELPERS ─────────────────────────────────────────────────────────────
+function bankSummary(id) {
+  const ch = YOY_DATA.filter(d => d.banco === id);
+  if (!ch.length) return 'sin datos aún';
+  const deb = ch.filter(d => d.tipo.includes('D')).length;
+  const fort = ch.filter(d => d.tipo.includes('F')).length;
+  let t = `${ch.length} cambio${ch.length !== 1 ? 's' : ''}`;
+  if (deb) t += ` · ${deb}▼`;
+  if (fort) t += ` · ${fort}▲`;
+  return t;
+}
+
+function setView(v) {
+  document.getElementById('btn-banco').classList.toggle('active', v === 'banco');
+  document.getElementById('btn-sector').classList.toggle('active', v === 'sector');
+  document.getElementById('view-banco').style.display = v === 'banco' ? '' : 'none';
+  document.getElementById('view-sector').style.display = v === 'sector' ? '' : 'none';
+}
+
+// ─── BANK LIST ────────────────────────────────────────────────────────────────
+function renderBankList() {
+  const withData = new Set(YOY_DATA.map(d => d.banco));
+  const n = selectedBanks.length;
+  const hint = n === 0 ? 'Selecciona 1–4 bancos' : n === 1 ? '1 banco · añade más para comparar' : `${n} bancos seleccionados`;
+  document.getElementById('select-hint').textContent = hint;
+  document.getElementById('bank-list-items').innerHTML = YOY_BANKS.map(b => {
+    const hasData = withData.has(b.id);
+    const isSel = selectedBanks.includes(b.id);
+    const hasDeb = YOY_DATA.some(d => d.banco === b.id && d.tipo.includes('D'));
+    const disabled = !isSel && n >= MAX_BANKS;
+    const changeCount = YOY_DATA.filter(d => d.banco === b.id).length;
+    return `<div class="bank-item ${isSel ? 'selected' : ''} ${hasDeb && hasData ? 'has-alert' : ''}" onclick="${disabled ? 'showMaxWarn()' : `toggleBank('${b.id}')`}" style="${disabled ? 'opacity:0.3;cursor:not-allowed' : ''}">
+      <div class="bank-avatar">${logoImg(b.id, 22)}</div>
+      <div class="bank-info">
+        <div class="bank-name ${!hasData ? 'faded' : ''}">${b.name}</div>
+        <div class="bank-meta">${hasDeb && hasData ? '<div class="alert-dot"></div>' : ''}<span>${b.flag || ''}</span><span>${hasData ? b.country : 'Sin datos aún'}</span></div>
+      </div>
+      ${hasData ? `<span class="bank-change-count">${changeCount}</span>` : ''}
+      <div class="bank-check">
+        <svg class="bank-check-inner" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2"><polyline points="1.5,5 4,7.5 8.5,2"/></svg>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleBank(id) {
+  if (selectedBanks.includes(id)) {
+    if (selectedBanks.length === 1) return;
+    selectedBanks = selectedBanks.filter(x => x !== id);
+  } else {
+    if (selectedBanks.length >= MAX_BANKS) return;
+    selectedBanks = [...selectedBanks, id];
+  }
+  renderBankList();
+  renderBankContent();
+}
+
+function showMaxWarn() {
+  const h = document.getElementById('select-hint');
+  h.textContent = 'Máximo 4 bancos a la vez';
+  h.style.color = 'var(--red-text)';
+  setTimeout(() => { h.style.color = ''; renderBankList(); }, 1500);
+}
+
+// ─── BANK CONTENT ─────────────────────────────────────────────────────────────
+function renderBankContent() {
+  const container = document.getElementById('bank-content');
+  if (!container) return;
+  if (!selectedBanks.length) { container.innerHTML = '<div class="empty-state">Selecciona un banco</div>'; return; }
+  if (selectedBanks.length === 1) renderSingleBank(selectedBanks[0], container);
+  else renderCompareGrid(selectedBanks, container);
+}
+
+function renderSingleBank(id, container) {
+  const bank = YOY_BANKS.find(b => b.id === id);
+  const changes = YOY_DATA.filter(d => d.banco === id);
+  const analysis = YOY_ANALYSIS[id];
+  const hasAnalysis = !!analysis;
+  const alertMsg = YOY_DATA.find(d => d.banco === id && d.alerta)?.alerta;
+  if (!bankTabState[id]) bankTabState[id] = 'changes';
+  const tab = bankTabState[id];
+
+  const dC = changes.filter(c => c.tipo.includes('D') && !c.tipo.includes('F')).length;
+  const fC = changes.filter(c => c.tipo.includes('F') && !c.tipo.includes('D')).length;
+  const mC = changes.filter(c => c.tipo === 'M').length;
+  const nC = changes.filter(c => c.tipo === 'N').length;
+  const accentColor = bank?.color || 'var(--bbva-blue)';
+
+  let html = `<div class="bank-header-card" style="border-top-color:${accentColor}">
+    <div class="bank-header-logo">
+      ${logoImg(id, 36)}
+    </div>
+    <div class="bank-header-info">
+      <div class="bank-header-name">${bank?.name || id}</div>
+      <div class="bank-header-meta">
+        <span class="bank-header-flag">${bank?.flag || ''}</span>
+        <span>${changes.length} cambios detectados · 2024 → 2025</span>
+      </div>
+    </div>
+    <div class="bank-header-stats">
+      ${dC ? `<div class="bstat d">▼ ${dC}</div>` : ''}
+      ${fC ? `<div class="bstat f">▲ ${fC}</div>` : ''}
+      ${mC ? `<div class="bstat m">≈ ${mC}</div>` : ''}
+      ${nC ? `<div class="bstat n">= ${nC}</div>` : ''}
+    </div>
+  </div>`;
+
+  html += `<div class="inner-tabs">
+    <div class="inner-tab ${tab === 'changes' ? 'active' : ''}" onclick="switchBankTab('${id}','changes')">
+      Cambios <span class="tab-count">${changes.length}</span>
+    </div>
+    <div class="inner-tab ${tab === 'analysis' ? 'active' : ''}" onclick="switchBankTab('${id}','analysis')"
+      style="${!hasAnalysis ? 'opacity:0.35;cursor:not-allowed' : ''}">
+      Análisis <span class="tab-count">${hasAnalysis ? analysis.points.length : '—'}</span>
+    </div>
+  </div>`;
+
+  if (tab === 'changes') {
+    if (alertMsg) html += `<div class="alert-banner"><div class="alert-label">⚠ Señal de alerta</div><div class="alert-text">${alertMsg}</div></div>`;
+    if (!changes.length) {
+      html += `<div class="empty-state" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:24px;margin-bottom:8px">📋</div>
+        <div style="font-weight:500;color:var(--text-secondary)">Datos pendientes</div>
+        <div style="font-size:12px;margin-top:4px">Los datos de <strong>${bank?.name}</strong> se incorporarán próximamente.</div>
+      </div>`;
+    } else {
+      const typeOrder = ['D','DM','F','MF','M','N'];
+      const covered = [...new Set(changes.map(c => c.sector))];
+      const missing = YOY_SECTORS.filter(s => !covered.includes(s));
+      covered.forEach(sector => {
+        const sc = changes.filter(c => c.sector === sector);
+        const uid = `sacc-${id}-${sector.replace(/\W/g,'_')}`;
+        const types = [...new Set(sc.map(c => c.tipo))];
+        const badges = types.map(t => `<span class="change-badge badge-${t}" style="font-size:9px;padding:1px 7px">${(CT[t]||{icon:'?'}).icon} ${(CT[t]||{label:t}).label}</span>`).join('');
+        html += `<div class="sector-accordion">
+          <div class="sector-acc-header" onclick="toggleSectorAcc('${uid}')">
+            <div class="sector-acc-name">${sector}</div>
+            <div class="sector-acc-badges">${badges}</div>
+            <span class="sector-acc-count">${sc.length} cambio${sc.length !== 1 ? 's' : ''}</span>
+            <svg class="sector-acc-chevron" id="chev-${uid}" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,4 7,10 12,4"/></svg>
+          </div>
+          <div class="sector-acc-body" id="body-${uid}">
+            ${[...sc].sort((a,b) => typeOrder.indexOf(a.tipo)-typeOrder.indexOf(b.tipo)).map((c,i) => changeCard(null,null,c,`sacc-${id}-${sector}-${i}`)).join('')}
+          </div>
+        </div>`;
+      });
+      if (missing.length) {
+        html += '<div class="section-label" style="margin-top:14px;margin-bottom:6px;">Sin cambio detectado</div><div class="no-change-grid">';
+        missing.forEach(s => html += `<div class="no-change-item"><div class="no-change-text">· ${s}</div></div>`);
+        html += '</div>';
+      }
+    }
+  }
+
+  if (tab === 'analysis') {
+    if (!hasAnalysis) {
+      html += `<div class="empty-state" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:24px;margin-bottom:8px">📝</div>
+        <div style="font-weight:500;color:var(--text-secondary)">Análisis pendiente</div>
+      </div>`;
+    } else {
+      html += `<div class="analysis-wrap">`;
+      if (analysis.intro) html += `<div class="analysis-intro"><div class="analysis-intro-text">${analysis.intro}</div></div>`;
+      analysis.points.forEach((p, i) => {
+        const uid = `ap-${id}-${i}`;
+        html += `<div class="analysis-point">
+          <div class="ap-header" id="aph-${uid}" onclick="toggleAP('${uid}')">
+            <div class="ap-icon" style="background:${AP_BG[p.icon]||AP_BG.neutral}">${AP_ICONS[p.icon]||AP_ICONS.neutral}</div>
+            <div class="ap-title">${p.title}</div>
+            <svg class="ap-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,4 7,10 12,4"/></svg>
+          </div>
+          <div class="ap-body" id="apb-${uid}">${p.body}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+  }
+  container.innerHTML = html;
+}
+
+function switchBankTab(id, tab) { bankTabState[id] = tab; renderBankContent(); }
+
+function toggleSectorAcc(uid) {
+  const b = document.getElementById('body-'+uid), c = document.getElementById('chev-'+uid);
+  if (!b) return;
+  const open = b.classList.toggle('open');
+  if (c) c.classList.toggle('open', open);
+}
+
+function toggleAP(uid) {
+  const h = document.getElementById('aph-'+uid), b = document.getElementById('apb-'+uid);
+  if (!b) return;
+  const open = b.classList.toggle('open');
+  if (h) h.classList.toggle('open', open);
+}
+
+function renderCompareGrid(ids, container) {
+  const banks = ids.map(id => YOY_BANKS.find(b => b.id === id));
+  const gc = `140px ${ids.map(() => '1fr').join(' ')}`;
+  let html = `<div style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;">
+    Comparativa de <strong style="color:var(--text-primary)">${ids.length} bancos</strong> · haz clic en cada cambio para expandir
+  </div><div class="compare-grid">
+  <div class="compare-header-row" style="grid-template-columns:${gc}">
+    <div class="compare-sector-col">Sector</div>`;
+  banks.forEach(b => html += `<div class="compare-bank-col">
+    <div class="compare-bank-logo">${logoImg(b.id, 18)}</div>
+    <div class="compare-bank-label">${b.name}</div>
+  </div>`);
+  html += `</div>`;
+  YOY_SECTORS.forEach(s => {
+    const any = ids.some(id => YOY_DATA.some(d => d.banco === id && d.sector === s));
+    html += `<div class="compare-row" style="grid-template-columns:${gc};${!any ? 'opacity:0.35' : ''}">
+      <div class="compare-sector-cell">${s}</div>`;
+    ids.forEach((id) => {
+      const entries = YOY_DATA.filter(d => d.banco === id && d.sector === s);
+      if (!entries.length) { html += `<div class="compare-cell-empty">·</div>`; return; }
+      html += `<div class="compare-cell">`;
+      entries.forEach((c, ci) => {
+        const ct = CT[c.tipo] || {label:c.tipo,icon:'?'};
+        const uid = `cmp-${s}-${id}-${ci}`;
+        const hasDesc = c.descripcion && c.descripcion !== c.resumen;
+        html += `<div class="mini-card" onclick="${hasDesc ? `toggleMini('${uid}')` : ''}" style="${!hasDesc ? 'cursor:default' : ''}">
+          <div class="mini-badge badge-${c.tipo}">${ct.icon} ${ct.label}</div>
+          <div class="mini-text">${c.resumen}</div>
+          ${hasDesc ? `<div class="mini-card-detail" id="mini-${uid}">${c.descripcion}
+            <div class="mini-refs">
+              ${c.ref2024 && c.ref2024 !== '—' ? `<span class="mini-ref">2024·${c.ref2024}</span>` : ''}
+              ${c.ref2025 && c.ref2025 !== '—' ? `<span class="mini-ref">2025·${c.ref2025}</span>` : ''}
+            </div>
+          </div>` : ''}
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function toggleMini(uid) { const el = document.getElementById('mini-'+uid); if (el) el.classList.toggle('open'); }
+
+// ─── SECTOR VIEW ──────────────────────────────────────────────────────────────
+function renderSectorPills() {
+  const el = document.getElementById('sector-pills');
+  if (!el) return;
+  el.innerHTML = YOY_SECTORS.map(s =>
+    `<div class="pill ${selectedSector === s ? 'active' : ''}" onclick="selectSector('${s}')">${s}</div>`
+  ).join('');
+}
+
+function selectSector(s) {
+  selectedSector = s;
+  renderSectorPills();
+  const changes = YOY_DATA.filter(d => d.sector === s);
+  const covIds = [...new Set(changes.map(c => c.banco))];
+  const missing = YOY_BANKS.filter(b => !covIds.includes(b.id) && YOY_DATA.some(d => d.banco === b.id));
+  const order = ['D','DM','F','MF','M','N'];
+  let html = '';
+  if (!changes.length) {
+    html = `<div class="empty-state">No hay datos registrados para <strong>${s}</strong> todavía.</div>`;
+  } else {
+    covIds.forEach(bid => {
+      const bank = YOY_BANKS.find(b => b.id === bid);
+      const bc = changes.filter(c => c.banco === bid);
+      const dC = bc.filter(c => c.tipo.includes('D')).length;
+      const fC = bc.filter(c => c.tipo.includes('F')).length;
+      const mC = bc.filter(c => c.tipo === 'M').length;
+      const pills = [
+        dC ? `<span class="change-badge badge-D" style="font-size:9px">${dC} ▼</span>` : '',
+        fC ? `<span class="change-badge badge-F" style="font-size:9px">${fC} ▲</span>` : '',
+        mC ? `<span class="change-badge badge-M" style="font-size:9px">${mC} ≈</span>` : '',
+      ].filter(Boolean).join('');
+      html += `<div class="bank-sector-group">
+        <div class="bank-logo-row">
+          <div class="bank-logo-sm">${logoImg(bid, 20)}</div>
+          <span class="bank-logo-name">${bank?.name || bid}</span>
+          <div class="bank-logo-meta">${pills}</div>
+        </div>
+        <div class="bank-sector-cards">`;
+      [...bc].sort((a,b) => order.indexOf(a.tipo)-order.indexOf(b.tipo)).forEach((c, i) => {
+        const ct = CT[c.tipo] || {label:c.tipo,icon:'?'};
+        const uid = `sv-${s.replace(/\W/g,'_')}-${bid}-${i}`;
+        const hasDesc = c.descripcion && c.descripcion !== c.resumen;
+        html += `<div class="change-card type-${c.tipo}">
+          <div class="card-main" onclick="${hasDesc ? `toggleCard('${uid}')` : ''}" style="${!hasDesc ? 'cursor:default' : ''}">
+            <div class="change-icon icon-${c.tipo}">${ct.icon}</div>
+            <div class="change-body">
+              <div class="change-header">
+                <span class="change-badge badge-${c.tipo}">${ct.label}</span>
+                ${hasDesc ? `<span class="expand-btn" id="btn-${uid}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,4 6,8 10,4"/></svg> Ver más</span>` : ''}
+              </div>
+              <div class="change-summary">${c.resumen}</div>
+            </div>
+          </div>
+          ${hasDesc ? `<div class="card-detail" id="detail-${uid}">
+            <div class="detail-label">Descripción completa</div>
+            <div class="detail-text">${c.descripcion}</div>
+            <div class="detail-refs">
+              ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
+              ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+            </div>
+          </div>` : ''}
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+  }
+  if (missing.length) {
+    html += '<div class="section-label" style="margin-top:14px;">Sin cambio detectado</div>';
+    missing.forEach(b => html += `<div class="no-change-item" style="margin-bottom:6px;">
+      <div class="bank-logo-sm">${logoImg(b.id, 20)}</div>
+      <div class="no-change-text">${b.name} — sin cambio detectado en este sector</div>
+    </div>`);
+  }
+  document.getElementById('sector-content').innerHTML = html;
+}
+
+// ─── CHANGE CARD ─────────────────────────────────────────────────────────────
+function changeCard(sectorLabel, bank, c, uid) {
+  const ct = CT[c.tipo] || {label:c.tipo,icon:'?'};
+  const hasDesc = c.descripcion && c.descripcion !== c.resumen;
+  return `<div class="change-card type-${c.tipo}" id="card-${uid}">
+    <div class="card-main" onclick="${hasDesc ? `toggleCard('${uid}')` : ''}" style="${!hasDesc ? 'cursor:default' : ''}">
+      <div class="change-icon icon-${c.tipo}">${ct.icon}</div>
+      <div class="change-body">
+        <div class="change-header">
+          ${sectorLabel ? `<span class="sector-name">${sectorLabel}</span>` : ''}
+          ${bank ? `<span class="bank-tag">${bank.abbr}</span>` : ''}
+          <span class="change-badge badge-${c.tipo}">${ct.label}</span>
+          ${hasDesc ? `<span class="expand-btn" id="btn-${uid}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,4 6,8 10,4"/></svg> Ver más</span>` : ''}
+        </div>
+        <div class="change-summary">${c.resumen}</div>
+      </div>
+    </div>
+    ${hasDesc ? `<div class="card-detail" id="detail-${uid}">
+      <div class="detail-label">Descripción completa</div>
+      <div class="detail-text">${c.descripcion}</div>
+      <div class="detail-refs">
+        ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
+        ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+      </div>
+    </div>` : (c.ref2024 !== '—' || c.ref2025 !== '—' ? `<div style="padding:0 16px 10px 54px"><div class="detail-refs">
+      ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
+      ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+    </div></div>` : '')}
+  </div>`;
+}
+
+function toggleCard(uid) {
+  const d = document.getElementById('detail-'+uid), b = document.getElementById('btn-'+uid);
+  if (!d) return;
+  const open = d.classList.toggle('open');
+  if (b) b.innerHTML = open
+    ? `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,8 6,4 10,8"/></svg> Ver menos`
+    : `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,4 6,8 10,4"/></svg> Ver más`;
+}
+
+// ─── TOOLTIP ─────────────────────────────────────────────────────────────────
+const ttEl = document.getElementById('tooltip');
+function showTip(e,t){ttEl.textContent=t;ttEl.style.opacity='1';ttEl.style.left=(e.clientX+12)+'px';ttEl.style.top=(e.clientY-8)+'px';}
+function hideTip(){ttEl.style.opacity='0';}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function renderAll() {
   renderKPIs();
@@ -908,6 +1672,9 @@ function renderAll() {
 }
 
 renderAll();
+renderBankList();
+renderSectorPills();
+renderBankContent();
 </script>
 </body>
 </html>

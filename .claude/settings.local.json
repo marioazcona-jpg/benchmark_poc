@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\" status)",
+      "Bash(git -C \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\" log --oneline -5)",
+      "Bash(git -C \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\" add index.html)",
+      "Bash(git -C 'c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark' commit -m ' *)",
+      "Bash(powershell -command \"\\(Get-Content 'c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html' | Measure-Object -Line\\).Lines\")",
+      "Bash(powershell -command \"Select-String -Path 'c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html' -Pattern '</html>' | Select-Object -Last 1\")",
+      "Bash(powershell -command \"Select-String -Path 'c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html' -Pattern 'placeholder|In development' | Select-Object LineNumber, Line\")",
+      "Bash(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\")",
+      "Bash(Measure-Object -Line)",
+      "Bash(Select-Object Lines)",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\"\\).Count; \\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\" | Select-Object -Last 3\\))"
+    ]
+  }
+}
