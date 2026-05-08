@@ -426,7 +426,7 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
         <div class="header-subtitle">BBVA Corporate & Investment Banking</div>
       </div>
     </div>
-    <div class="header-right">
+    <div class="header-right" id="headerRight">
       <span class="sector-label">Sector</span>
       <select class="sector-select" id="sectorSelect" onchange="onSectorChange(this.value)">
         <option value="Aluminum">Aluminum</option>
@@ -512,16 +512,6 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
           2 bancos analizados &middot; 35 cambios registrados
         </div>
       </div>
-      <div class="view-toggle">
-        <button class="toggle-btn active" onclick="setView('banco')" id="btn-banco">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-          Por banco
-        </button>
-        <button class="toggle-btn" onclick="setView('sector')" id="btn-sector">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><line x1="1" y1="4" x2="15" y2="4"/><line x1="1" y1="8" x2="15" y2="8"/><line x1="1" y1="12" x2="15" y2="12"/></svg>
-          Por sector
-        </button>
-      </div>
       <!-- VISTA BANCO -->
       <div id="view-banco">
         <div class="two-panel">
@@ -535,13 +525,6 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
           <div class="content-panel" id="bank-content">
             <div class="empty-state">Selecciona un banco para ver sus cambios</div>
           </div>
-        </div>
-      </div>
-      <!-- VISTA SECTOR -->
-      <div id="view-sector" style="display:none;">
-        <div class="sector-pills" id="sector-pills"></div>
-        <div class="content-panel" id="sector-content">
-          <div class="empty-state">Selecciona un sector</div>
         </div>
       </div>
     </div>
@@ -656,7 +639,7 @@ const DEFAULT_COLS = ['bank','country','baseline','y2023','y2024','y2025','obj',
 const EXTRA_COLS = [
   { id: 'scope',    label: 'Scope' },
   { id: 'metod',   label: 'Methodology' },
-  { id: 'baseYear', label: 'Base Year' },
+  { id: 'cagr',    label: 'CAGR' },
 ];
 let activeCols = [...DEFAULT_COLS];
 
@@ -1056,6 +1039,12 @@ const COL_DEFS = {
   metod:    { label: 'Methodology', sortFn: b => b.metod },
   obj:      { label: '2030 Target', sortFn: b => b.obj ?? 999 },
   baseYear: { label: 'Base Year', sortFn: b => b.baseY || 0 },
+  cagr: { label: 'CAGR', sortFn: b => {
+    const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
+    const ly = b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
+    if (!b.base || !lv || !b.baseY || !ly || ly === b.baseY) return 999;
+    return Math.pow(lv / b.base, 1 / (ly - b.baseY)) - 1;
+  }},
 };
 
 function renderTable() {
@@ -1124,6 +1113,15 @@ function renderTable() {
       if (id === 'metod') return `<td><span class="metric-tag">${b.metod}</span></td>`;
       if (id === 'obj') return `<td>${fmt(b.obj)}</td>`;
       if (id === 'baseYear') return `<td><span class="metric-tag">${b.baseY || '—'}</span></td>`;
+      if (id === 'cagr') {
+        const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
+        const ly = b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
+        if (!b.base || !lv || !b.baseY || !ly || ly === b.baseY) return `<td><span class="intensity-val empty">—</span></td>`;
+        const cagr = (Math.pow(lv / b.base, 1 / (ly - b.baseY)) - 1) * 100;
+        const sign = cagr >= 0 ? '+' : '';
+        const cls = cagr < 0 ? 'positive' : 'negative';
+        return `<td><span class="pct-val ${cls}">${sign}${cagr.toFixed(1)}%/yr</span></td>`;
+      }
       return `<td>—</td>`;
     }).join('');
     return `<tr class="${isBBVA ? 'bbva-row' : ''}">${cells}</tr>`;
@@ -1205,6 +1203,7 @@ function showScreen(id) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(`screen-${id}`).classList.add('active');
   event.currentTarget.classList.add('active');
+  document.getElementById('headerRight').style.visibility = id === 'executive' ? '' : 'hidden';
 }
 
 // ─── YOY MODULE ───────────────────────────────────────────────────────────────
@@ -1339,12 +1338,7 @@ function bankSummary(id) {
   return t;
 }
 
-function setView(v) {
-  document.getElementById('btn-banco').classList.toggle('active', v === 'banco');
-  document.getElementById('btn-sector').classList.toggle('active', v === 'sector');
-  document.getElementById('view-banco').style.display = v === 'banco' ? '' : 'none';
-  document.getElementById('view-sector').style.display = v === 'sector' ? '' : 'none';
-}
+function setView(v) {}
 
 // ─── BANK LIST ────────────────────────────────────────────────────────────────
 function renderBankList() {
