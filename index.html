@@ -592,7 +592,7 @@ const SECTORS = {
     relevantText: `The cement sector accounts for approximately <strong>8% of global CO₂ emissions</strong>, making it one of the hardest-to-abate industries due to process emissions from clinker production.\n\nAcross the peer group, there is <strong>broad alignment on IEA NZE 2050</strong> as the reference scenario, with most banks using PCAF or SBTi methodologies. The current peer average intensity sits around <strong>0.62 tCO₂e/t</strong>, well above the 2030 IEA target of ~0.35 tCO₂e/t.\n\nKey dynamics: <strong>ING and Intesa</strong> show the most ambitious trajectories with SBTi validation. <strong>Bancolombia</strong> is already at target intensity, reflecting a low-carbon energy mix in Colombia. The sector requires a ~45% average intensity reduction by 2030, a significant challenge given current pace.`,
     relevantFooter: 'Source: Bank sustainability reports 2024–2025 · IEA NZE WEO 2023',
     banks: [
-      { name: 'BBVA',        base: null, baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null,  objY: 2030, status: null,   pctYTD: null,  scope: '—',        metod: '—',    show: true },
+      { name: 'BBVA',        base: 0.700, baseY: 2020, y2022: null, y2023: 0.713, y2024: 0.731, y2025: 0.724, obj: 0.579, objY: 2030, status: 'on-track', pctYTD: -3, scope: 'S1+2', metod: 'PACTA', show: true },
       { name: 'Sabadell',    base: 0.660, baseY: 2020, y2022: null, y2023: 0.609, y2024: 0.574, y2025: null, obj: 0.510, objY: 2030, status: 'on-track', pctYTD: 13, scope: 'S1+2', metod: 'SBTi', show: true },
       { name: 'SocGen',      base: 0.712, baseY: 2022, y2022: 0.712, y2023: null, y2024: null, y2025: 0.677, obj: 0.570, objY: 2030, status: 'on-track', pctYTD: 5, scope: 'S1+2', metod: 'PACTA', show: true },
       { name: 'ING',         base: 0.734, baseY: 2020, y2022: null, y2023: null, y2024: 0.688, y2025: 0.695, obj: 0.519, objY: 2030, status: 'on-track', pctYTD: 5, scope: 'S1+2', metod: 'PACTA', show: true },
@@ -702,7 +702,7 @@ function renderKPIs() {
     return (v !== null && (best === null || v < best.v)) ? { name: b.name, v } : best;
   }, null);
 
-  const totalBanks = sd.banks.filter(b => b.name !== 'BBVA').length;
+  const totalBanks = 15;
 
   document.getElementById('kpiRow').innerHTML = `
     <div class="kpi-card">
@@ -744,6 +744,34 @@ function renderToggles() {
   const sd = getSectorData();
   const el = document.getElementById('bankToggles');
   el.innerHTML = '';
+
+  // "All Banks" toggle
+  const allActive = sd.banks.every(b => b.show);
+  const allDiv = document.createElement('div');
+  allDiv.className = `bank-toggle${allActive ? ' active' : ''}`;
+  if (allActive) {
+    allDiv.style.borderColor = 'var(--bbva-blue)';
+    allDiv.style.borderWidth = '2px';
+    allDiv.style.color = 'var(--bbva-blue)';
+  }
+  allDiv.innerHTML = `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>All Banks`;
+  allDiv.onclick = () => {
+    const allOn = sd.banks.every(b => b.show);
+    sd.banks.forEach(b => { b.show = !allOn || b.name === 'BBVA'; });
+    if (chartInst) {
+      sd.banks.forEach(b => {
+        chartInst.data.datasets.forEach((ds, i) => {
+          if (ds.label === b.name || ds.label === `${b.name} target`) {
+            chartInst.setDatasetVisibility(i, b.show);
+          }
+        });
+      });
+      chartInst.update();
+    }
+    renderToggles();
+  };
+  el.appendChild(allDiv);
+
   sd.banks.forEach(b => {
     const meta = BANK_META[b.name] || {};
     const isActive = b.show;
