@@ -458,8 +458,8 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
         <div class="chart-card">
           <div class="card-header">
             <div>
-              <div class="card-title" id="chartTitle">Emissions Intensity Trajectory</div>
-              <div class="card-subtitle" id="chartSubtitle">Reported values · Dashed = projected pathway to 2030 target</div>
+              <div class="card-title" id="chartTitle">Trayectoria de Intensidad de Emisiones</div>
+              <div class="card-subtitle" id="chartSubtitle"></div>
             </div>
           </div>
           <div class="bank-toggles" id="bankToggles"></div>
@@ -468,7 +468,7 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
           </div>
         </div>
         <div class="relevant-card">
-          <div class="relevant-title">Relevant Data</div>
+          <div class="relevant-title">Datos relevantes</div>
           <div class="relevant-text" id="relevantText"></div>
           <div class="relevant-footer" id="relevantFooter"></div>
         </div>
@@ -478,10 +478,8 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
       <div class="table-card">
         <div class="table-toolbar">
           <div class="filter-tabs" id="filterTabs">
-            <button class="filter-tab active" onclick="setFilter('all', this)">All banks</button>
-            <button class="filter-tab" onclick="setFilter('mainPeer', this)">Main Peers</button>
-            <button class="filter-tab" onclick="setFilter('european', this)">European</button>
-            <button class="filter-tab" onclick="setFilter('spanish', this)">Spanish</button>
+            <button class="filter-tab active" onclick="setFilter('all', this)">All Banks</button>
+            <button class="filter-tab" onclick="setFilter('european', this)">Europe</button>
             <button class="filter-tab" onclick="setFilter('top5', this)">Top 5</button>
           </div>
           <button class="col-config-btn" onclick="openColModal()">
@@ -589,8 +587,8 @@ const SECTORS = {
       s2:  { label: 'Below 2°C', start: 0.620, end: 0.480 },
       s15: { label: '1.5°C',     start: 0.620, end: 0.350 },
     },
-    relevantText: `The cement sector accounts for approximately <strong>8% of global CO₂ emissions</strong>, making it one of the hardest-to-abate industries due to process emissions from clinker production.\n\nAcross the peer group, there is <strong>broad alignment on IEA NZE 2050</strong> as the reference scenario, with most banks using PCAF or SBTi methodologies. The current peer average intensity sits around <strong>0.62 tCO₂e/t</strong>, well above the 2030 IEA target of ~0.35 tCO₂e/t.\n\nKey dynamics: <strong>ING and Intesa</strong> show the most ambitious trajectories with SBTi validation. <strong>Bancolombia</strong> is already at target intensity, reflecting a low-carbon energy mix in Colombia. The sector requires a ~45% average intensity reduction by 2030, a significant challenge given current pace.`,
-    relevantFooter: 'Source: Bank sustainability reports 2024–2025 · IEA NZE WEO 2023',
+    relevantText: `El sector del cemento representa aproximadamente el <strong>8% de las emisiones globales de CO₂</strong>, siendo una de las industrias más difíciles de descarbonizar debido a las emisiones de proceso derivadas de la producción de clinker.\n\nEntre el grupo de pares existe una <strong>amplia convergencia en torno al escenario IEA NZE 2050</strong> como referencia, con la mayoría de los bancos empleando metodologías PCAF o SBTi. La intensidad media actual del grupo se sitúa en torno a <strong>0,62 tCO₂e/t</strong>, muy por encima del objetivo IEA 2030 de ~0,35 tCO₂e/t.\n\nDinámicas clave: <strong>ING e Intesa</strong> muestran las trayectorias más ambiciosas con validación SBTi. <strong>Bancolombia</strong> ya se encuentra en la intensidad objetivo, reflejo del bajo perfil de carbono del mix energético colombiano. El sector requiere una reducción media de intensidad de ~45% para 2030, un reto significativo dado el ritmo actual.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
     banks: [
       { name: 'BBVA',        base: 0.700, baseY: 2020, y2022: null, y2023: 0.713, y2024: 0.731, y2025: 0.724, obj: 0.579, objY: 2030, status: 'on-track', pctYTD: -3, scope: 'S1+2', metod: 'PACTA', show: true },
       { name: 'Sabadell',    base: 0.660, baseY: 2020, y2022: null, y2023: 0.609, y2024: 0.574, y2025: null, obj: 0.510, objY: 2030, status: 'on-track', pctYTD: 13, scope: 'S1+2', metod: 'SBTi', show: true },
@@ -611,8 +609,8 @@ const SECTORS = {
       s2:  { label: 'Below 2°C', start: 1.450, end: 1.100 },
       s15: { label: '1.5°C',     start: 1.450, end: 0.890 },
     },
-    relevantText: `Steel is one of the most carbon-intensive industries globally, responsible for approximately <strong>7–9% of global CO₂ emissions</strong>. Decarbonization pathways depend heavily on the transition from blast furnace to electric arc furnace (EAF) technology.\n\n<strong>Note on comparability:</strong> Some banks (ING, SocGen, Citigroup) use alignment scores (SSP methodology) rather than physical intensity metrics. These are shown in the table but excluded from the trajectory chart.\n\nAmong intensity reporters, values range from <strong>1.05 to 1.59 tCO₂e/t</strong>, all above the IEA 2030 target. The sector requires substantial green hydrogen and scrap availability to decarbonize at pace.`,
-    relevantFooter: 'Source: Bank sustainability reports 2024–2025 · IEA NZE WEO 2023',
+    relevantText: `El acero es una de las industrias más intensivas en carbono a nivel global, responsable de aproximadamente el <strong>7–9% de las emisiones globales de CO₂</strong>. Las vías de descarbonización dependen en gran medida de la transición del alto horno al horno de arco eléctrico (EAF).\n\n<strong>Nota sobre comparabilidad:</strong> Algunos bancos (ING, SocGen, Citigroup) utilizan puntuaciones de alineamiento (metodología SSP) en lugar de métricas de intensidad física. Se muestran en la tabla pero se excluyen del gráfico de trayectoria.\n\nEntre los reportantes de intensidad, los valores oscilan entre <strong>1,05 y 1,59 tCO₂e/t</strong>, todos por encima del objetivo IEA 2030. El sector requiere disponibilidad significativa de hidrógeno verde y chatarra para descarbonizarse al ritmo necesario.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
     banks: [
       { name: 'BBVA',      base: null,  baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null,  objY: 2030, status: null, pctYTD: null, scope: '—', metod: '—', show: true },
       { name: 'Santander', base: 1.470, baseY: 2023, y2022: null, y2023: 1.470, y2024: 1.510, y2025: null, obj: 1.225, objY: 2030, status: 'misaligned', pctYTD: -3, scope: 'S1+2', metod: 'PCAF', show: true },
@@ -627,7 +625,7 @@ const SECTORS = {
     metric: 'kgCO₂e/MWh',
     ieaRef: 165,
     ieaYear: 2030,
-    relevantText: `Power sector decarbonization is central to the net zero transition. Banks are financing the shift from fossil fuel generation toward renewables.\n\n<strong>Note:</strong> Sector data for Power is available. Select Power from the sector dropdown to explore this data.`,
+    relevantText: `La descarbonización del sector eléctrico es un eje central de la transición net zero. Los bancos están financiando el cambio desde la generación con combustibles fósiles hacia las energías renovables.\n\n<strong>Nota:</strong> Los datos del sector eléctrico están disponibles. Selecciona Power en el desplegable de sectores para explorar esta información.`,
     relevantFooter: 'Source: Bank sustainability reports 2024–2025',
     banks: [
       { name: 'BBVA', base: null, baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null, pctYTD: null, scope: '—', metod: '—', show: true },
@@ -638,7 +636,7 @@ const SECTORS = {
 // Default for unloaded sectors
 const DEFAULT_SECTOR = {
   metric: '—', ieaRef: null, ieaYear: 2030,
-  relevantText: 'Data for this sector is being collected and will be available in a future release.',
+  relevantText: 'Los datos de este sector están siendo recopilados y estarán disponibles en una próxima versión.',
   relevantFooter: '',
   banks: [{ name: 'BBVA', base: null, baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null, pctYTD: null, scope: '—', metod: '—', show: true }]
 };
@@ -652,11 +650,14 @@ let chartInst = null;
 let _animProg = 1;
 let _isDrawAnim = false;
 
-const DEFAULT_COLS = ['bank','country','baseline','y2023','y2024','y2025','obj','pctReduction','status'];
-const EXTRA_COLS = [
-  { id: 'scope',    label: 'Scope' },
-  { id: 'metod',   label: 'Methodology' },
-  { id: 'cagr',    label: 'CAGR' },
+const DEFAULT_COLS = ['bank','country','baseline','baseInt','y2024','y2025','obj','pctYTD','status'];
+const ALL_OPTIONAL_COLS = [
+  { id: 'y2022',        label: '2022' },
+  { id: 'y2023',        label: '2023' },
+  { id: 'pctReduction', label: 'Target Reduction (from baseline)' },
+  { id: 'scope',        label: 'Scope' },
+  { id: 'metod',        label: 'Methodology' },
+  { id: 'cagr',         label: 'CAGR' },
 ];
 let activeCols = [...DEFAULT_COLS];
 
@@ -693,35 +694,41 @@ function getSectorData() { return SECTORS[currentSector] || DEFAULT_SECTOR; }
 // ─── KPIs ────────────────────────────────────────────────────────────────────
 function renderKPIs() {
   const sd = getSectorData();
-  const banks = sd.banks.filter(b => !b.bbva && b.name !== 'BBVA');
-  const reporters = banks.filter(b => b.y2024 !== null || b.y2025 !== null);
-  const latestVals = reporters.map(b => b.y2025 || b.y2024).filter(v => v !== null);
+  const peers = sd.banks.filter(b => b.name !== 'BBVA');
+  const reporters = peers.filter(b => b.y2024 !== null || b.y2025 !== null);
+  const latestVals = reporters.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
   const avg = latestVals.length ? (latestVals.reduce((a,b)=>a+b,0)/latestVals.length) : null;
   const best = reporters.reduce((best, b) => {
-    const v = b.y2025 || b.y2024;
+    const v = b.y2025 ?? b.y2024;
     return (v !== null && (best === null || v < best.v)) ? { name: b.name, v } : best;
   }, null);
+
+  const bbva = sd.banks.find(b => b.name === 'BBVA');
+  const bbvaLatest = bbva ? (bbva.y2025 ?? bbva.y2024 ?? bbva.y2023 ?? null) : null;
+  const bbvaObj = bbva ? (bbva.obj ?? null) : null;
 
   const totalBanks = 15;
 
   document.getElementById('kpiRow').innerHTML = `
     <div class="kpi-card">
-      <div class="kpi-label">Banks reporting</div>
+      <div class="kpi-label">Bancos reportando</div>
       <div class="kpi-value">${reporters.length}<span>/ ${totalBanks}</span></div>
-      <div class="kpi-sub">with intensity data in ${currentSector}</div>
+      <div class="kpi-sub">con datos de intensidad en ${currentSector}</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Peer avg. intensity</div>
+      <div class="kpi-label">Intensidad media (pares)</div>
       <div class="kpi-value">${avg !== null ? avg.toFixed(2) : '—'}<span>${sd.metric}</span></div>
-      <div class="kpi-sub">Latest reported year (2024/25)</div>
+      <div class="kpi-sub">Último año reportado (2024/25)</div>
+      ${bbvaLatest !== null ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><div class="kpi-label" style="margin-bottom:3px">BBVA</div><div style="font-size:20px;font-weight:600;font-family:var(--mono);line-height:1">${bbvaLatest.toFixed(3)}<span style="font-size:12px;font-weight:400;margin-left:3px;font-family:var(--font);color:var(--text-secondary)">${sd.metric}</span></div></div>` : ''}
     </div>
     <div class="kpi-card accent">
-      <div class="kpi-label">IEA NZE target ${sd.ieaYear}</div>
+      <div class="kpi-label">Objetivo IEA NZE ${sd.ieaYear}</div>
       <div class="kpi-value">${sd.ieaRef !== null ? sd.ieaRef : '—'}<span>${sd.metric}</span></div>
-      <div class="kpi-sub">Reference: IEA Net Zero 2050</div>
+      <div class="kpi-sub">Referencia: IEA Net Zero 2050</div>
+      ${bbvaObj !== null ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><div class="kpi-label" style="margin-bottom:3px">Objetivo BBVA 2030</div><div style="font-size:20px;font-weight:600;font-family:var(--mono);line-height:1">${bbvaObj.toFixed(3)}<span style="font-size:12px;font-weight:400;margin-left:3px;font-family:var(--font);color:var(--text-secondary)">${sd.metric}</span></div></div>` : ''}
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Best peer</div>
+      <div class="kpi-label">Mejor par</div>
       <div class="kpi-value">${best ? best.v.toFixed(2) : '—'}<span>${sd.metric}</span></div>
       <div class="kpi-sub">${best ? best.name : '—'}</div>
     </div>
@@ -810,8 +817,8 @@ function drawChart() {
   if (chartInst) chartInst.destroy();
   _animProg = 0; _isDrawAnim = true;
 
-  document.getElementById('chartTitle').textContent = `${currentSector} — Emissions Intensity Trajectory`;
-  document.getElementById('chartSubtitle').textContent = `Reported values (solid) · Projected pathway to 2030 target (dashed) · Metric: ${sd.metric}`;
+  document.getElementById('chartTitle').textContent = `${currentSector} — Trayectoria de Intensidad de Emisiones`;
+  document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>Valores reportados</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>Senda proyectada al objetivo 2030</span>`;
 
   const datasets = [];
   const _lerp = (a, b, t) => a + (b - a) * t;
@@ -1026,7 +1033,7 @@ function drawChart() {
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' } },
-        y: { grid: { color: 'rgba(0,0,0,0.04)' },
+        y: { min: 0, grid: { color: 'rgba(0,0,0,0.04)' },
           ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' },
           title: { display: true, text: getSectorData().metric, font: { size: 11 }, color: '#8FA0B4' }
         }
@@ -1046,16 +1053,22 @@ function renderRelevant() {
 const COL_DEFS = {
   bank:     { label: 'Bank', sortFn: b => b.name },
   country:  { label: 'Country', sortFn: b => BANK_META[b.name]?.flag || '' },
-  baseline: { label: 'Base year', sortFn: b => b.baseY || 0 },
+  baseline: { label: 'Base Year', sortFn: b => b.baseY || 0 },
+  baseInt:  { label: 'Base Year Int.', sortFn: b => b.base ?? 999 },
+  y2022:    { label: '2022', sortFn: b => b.y2022 ?? 999 },
   y2023:    { label: '2023', sortFn: b => b.y2023 ?? 999 },
   y2024:    { label: '2024', sortFn: b => b.y2024 ?? 999 },
   y2025:    { label: '2025', sortFn: b => b.y2025 ?? 999 },
-  pctReduction: { label: '% Red. Baseline→2030', sortFn: b => (b.base && b.obj) ? (b.base - b.obj) / b.base * 100 : -999 },
-  status:       { label: 'Status', sortFn: b => b.status || 'z' },
+  obj:      { label: '2030 Target', sortFn: b => b.obj ?? 999 },
+  pctYTD:   { label: '% Red. YTD', sortFn: b => {
+    const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
+    if (!b.base || lv == null) return -9999;
+    return (b.base - lv) / b.base * 100;
+  }},
+  status:   { label: 'Status', sortFn: b => b.status || 'z' },
+  pctReduction: { label: 'Target Reduction (from baseline)', sortFn: b => (b.base && b.obj) ? (b.base - b.obj) / b.base * 100 : -999 },
   scope:    { label: 'Scope', sortFn: b => b.scope },
   metod:    { label: 'Methodology', sortFn: b => b.metod },
-  obj:      { label: '2030 Target', sortFn: b => b.obj ?? 999 },
-  baseYear: { label: 'Base Year', sortFn: b => b.baseY || 0 },
   cagr: { label: 'CAGR', sortFn: b => {
     const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
     const ly = b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
@@ -1117,19 +1130,28 @@ function renderTable() {
       if (id === 'bank') return `<td><div class="bank-cell"><img class="bank-logo" src="${getFavicon(b.name)}" onerror="this.style.display='none'"><span class="bank-name">${b.name}${isBBVA ? '<span class="bbva-badge">CIB</span>' : ''}</span></div></td>`;
       if (id === 'country') return `<td><span class="country-flag">${meta.flag||'🌐'}</span></td>`;
       if (id === 'baseline') return `<td><span class="metric-tag">${b.baseY || '—'}</span></td>`;
+      if (id === 'baseInt') return `<td>${fmt(b.base)}</td>`;
+      if (id === 'y2022') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2022)}</td>`;
       if (id === 'y2023') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2023)}</td>`;
       if (id === 'y2024') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2024)}</td>`;
       if (id === 'y2025') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2025)}</td>`;
+      if (id === 'obj') return `<td>${fmt(b.obj)}</td>`;
+      if (id === 'pctYTD') {
+        const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
+        if (!b.base || lv == null) return `<td><span class="intensity-val empty">—</span></td>`;
+        const pct = ((b.base - lv) / b.base * 100);
+        const sign = pct >= 0 ? '↓ ' : '↑ ';
+        const cls = pct >= 0 ? 'positive' : 'negative';
+        return `<td><span class="pct-val ${cls}">${sign}${Math.abs(pct).toFixed(1)}%</span></td>`;
+      }
+      if (id === 'status') return `<td>${statusPill(b.status)}</td>`;
       if (id === 'pctReduction') {
         if (!b.base || !b.obj) return `<td><span class="intensity-val empty">—</span></td>`;
         const pct = ((b.base - b.obj) / b.base * 100).toFixed(1);
         return `<td><span class="pct-val positive">↓ ${pct}%</span></td>`;
       }
-      if (id === 'status') return `<td>${statusPill(b.status)}</td>`;
       if (id === 'scope') return `<td><span class="metric-tag">${b.scope}</span></td>`;
       if (id === 'metod') return `<td><span class="metric-tag">${b.metod}</span></td>`;
-      if (id === 'obj') return `<td>${fmt(b.obj)}</td>`;
-      if (id === 'baseYear') return `<td><span class="metric-tag">${b.baseY || '—'}</span></td>`;
       if (id === 'cagr') {
         const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
         const ly = b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
@@ -1164,44 +1186,31 @@ function setFilter(f, btn) {
 // ─── COLUMN MODAL ─────────────────────────────────────────────────────────────
 function openColModal() {
   const el = document.getElementById('colOptions');
-  const extraActive = activeCols.filter(c => !DEFAULT_COLS.includes(c));
-  const atLimit = extraActive.length >= 3;
-
+  const ALL_COL_ORDER = ['bank','country','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','status','pctReduction','scope','metod','cagr'];
   el.innerHTML = `
-    <div style="font-size:11px;color:var(--text-tertiary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Default columns (always shown)</div>
-    ${DEFAULT_COLS.map(id => `<div class="col-option locked"><label><input type="checkbox" checked disabled> ${COL_DEFS[id].label}</label></div>`).join('')}
-    <div style="font-size:11px;color:var(--text-tertiary);margin:12px 0 8px;text-transform:uppercase;letter-spacing:.06em">Additional columns (max 3)</div>
-    ${EXTRA_COLS.map(c => {
-      const isActive = activeCols.includes(c.id);
-      const isDisabled = !isActive && atLimit;
-      return `<div class="col-option"><label><input type="checkbox" id="col_${c.id}" ${isActive?'checked':''} ${isDisabled?'disabled':''} onchange="onColToggle()"> ${c.label}</label></div>`;
+    <div style="font-size:11px;color:var(--text-tertiary);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Selecciona las columnas visibles</div>
+    ${ALL_COL_ORDER.map(id => {
+      const def = COL_DEFS[id];
+      if (!def) return '';
+      const isActive = activeCols.includes(id);
+      return `<div class="col-option"><label><input type="checkbox" id="col_${id}" ${isActive?'checked':''}> ${def.label}</label></div>`;
     }).join('')}
   `;
-  document.getElementById('colLimitNote').style.display = atLimit ? 'block' : 'none';
+  document.getElementById('colLimitNote').style.display = 'none';
   document.getElementById('colModal').classList.add('open');
 }
 
-function onColToggle() {
-  const extraActive = EXTRA_COLS.filter(c => {
-    const el = document.getElementById(`col_${c.id}`);
-    return el && el.checked;
-  });
-  const atLimit = extraActive.length >= 3;
-  document.getElementById('colLimitNote').style.display = atLimit ? 'block' : 'none';
-  EXTRA_COLS.forEach(c => {
-    const el = document.getElementById(`col_${c.id}`);
-    if (el && !el.checked) el.disabled = atLimit;
-  });
-}
+function onColToggle() {}
 
 function closeColModal() { document.getElementById('colModal').classList.remove('open'); }
 
 function applyColConfig() {
-  const extra = EXTRA_COLS.filter(c => {
-    const el = document.getElementById(`col_${c.id}`);
+  const ALL_COL_ORDER = ['bank','country','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','status','pctReduction','scope','metod','cagr'];
+  activeCols = ALL_COL_ORDER.filter(id => {
+    const el = document.getElementById(`col_${id}`);
     return el && el.checked;
-  }).map(c => c.id);
-  activeCols = [...DEFAULT_COLS, ...extra];
+  });
+  if (!activeCols.includes('bank')) activeCols.unshift('bank');
   closeColModal();
   renderTable();
 }
