@@ -512,6 +512,16 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
           2 bancos analizados &middot; 35 cambios registrados
         </div>
       </div>
+      <div class="view-toggle">
+        <button class="toggle-btn active" onclick="setView('banco')" id="btn-banco">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+          Por banco
+        </button>
+        <button class="toggle-btn" onclick="setView('sector')" id="btn-sector">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><line x1="1" y1="4" x2="15" y2="4"/><line x1="1" y1="8" x2="15" y2="8"/><line x1="1" y1="12" x2="15" y2="12"/></svg>
+          Por sector
+        </button>
+      </div>
       <!-- VISTA BANCO -->
       <div id="view-banco">
         <div class="two-panel">
@@ -525,6 +535,13 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
           <div class="content-panel" id="bank-content">
             <div class="empty-state">Selecciona un banco para ver sus cambios</div>
           </div>
+        </div>
+      </div>
+      <!-- VISTA SECTOR -->
+      <div id="view-sector" style="display:none;">
+        <div class="sector-pills" id="sector-pills"></div>
+        <div class="content-panel" id="sector-content">
+          <div class="empty-state">Selecciona un sector</div>
         </div>
       </div>
     </div>
@@ -1338,7 +1355,12 @@ function bankSummary(id) {
   return t;
 }
 
-function setView(v) {}
+function setView(v) {
+  document.getElementById('btn-banco').classList.toggle('active', v === 'banco');
+  document.getElementById('btn-sector').classList.toggle('active', v === 'sector');
+  document.getElementById('view-banco').style.display = v === 'banco' ? '' : 'none';
+  document.getElementById('view-sector').style.display = v === 'sector' ? '' : 'none';
+}
 
 // ─── BANK LIST ────────────────────────────────────────────────────────────────
 function renderBankList() {
