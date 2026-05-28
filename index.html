@@ -126,6 +126,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .filter-tabs { display: flex; gap: 4px; }
 .filter-tab { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-family: var(--font); transition: all .15s; }
 .filter-tab.active { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
+.submetric-selector { display:flex; gap:4px; margin-top:8px; }
+.submetric-tab { padding:4px 11px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-family:var(--font); transition:all .15s; letter-spacing:.02em; text-transform:uppercase; }
+.submetric-tab.active { background:var(--bbva-blue); color:#fff; border-color:var(--bbva-blue); }
+.submetric-tab:hover:not(.active) { background:#EEF4FA; }
 .col-config-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 500; color: var(--bbva-blue); border: 1px solid var(--bbva-blue); background: transparent; cursor: pointer; font-family: var(--font); transition: all .15s; }
 .col-config-btn:hover { background: #EEF4FA; }
 .col-config-btn svg { width: 13px; height: 13px; }
@@ -429,18 +433,18 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
     <div class="header-right" id="headerRight">
       <span class="sector-label">Sector</span>
       <select class="sector-select" id="sectorSelect" onchange="onSectorChange(this.value)">
-        <option value="Aluminum">Aluminum</option>
-        <option value="Agriculture">Agriculture</option>
-        <option value="Aviation">Aviation</option>
         <option value="Cement" selected>Cement</option>
-        <option value="Commercial Real Estate">Commercial Real Estate</option>
-        <option value="Oil & Gas">Oil &amp; Gas</option>
-        <option value="Power">Power</option>
-        <option value="Residential Real Estate">Residential Real Estate</option>
-        <option value="Shipping">Shipping</option>
         <option value="Steel">Steel</option>
-        <option value="Thermal Coal Mining">Thermal Coal Mining</option>
+        <option value="Power">Power</option>
+        <option value="Aviation">Aviation</option>
+        <option value="Oil & Gas">Oil &amp; Gas</option>
         <option value="Automotive">Automotive</option>
+        <option value="Shipping">Shipping</option>
+        <option value="CRE">Commercial Real Estate</option>
+        <option value="RRE">Residential Real Estate</option>
+        <option value="Coal">Thermal Coal Mining</option>
+        <option value="Aluminium">Aluminium</option>
+        <option value="Agriculture">Agriculture</option>
       </select>
       <span class="last-update" id="lastUpdate">Updated 2025</span>
     </div>
@@ -460,6 +464,7 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
             <div>
               <div class="card-title" id="chartTitle">Trayectoria de Intensidad de Emisiones</div>
               <div class="card-subtitle" id="chartSubtitle"></div>
+              <div class="submetric-selector" id="subMetricSelector" style="display:none"></div>
             </div>
           </div>
           <div class="bank-toggles" id="bankToggles"></div>
@@ -576,6 +581,9 @@ const BANK_META = {
   'Nordea':          { flag: '🇫🇮', tier1: true,  mainPeer: true,  european: true,  spanish: false, color: '#00005E' },
   'Bancolombia':     { flag: '🇨🇴', tier1: false, mainPeer: false, european: false, spanish: false, color: '#FDBD12' },
   'Citigroup':       { flag: '🇺🇸', tier1: true,  mainPeer: true,  european: false, spanish: false, color: '#056DAE' },
+  'JPMorgan':        { flag: '🇺🇸', tier1: true,  mainPeer: false, european: false, spanish: false, color: '#003087' },
+  'Lloyds':          { flag: '🇬🇧', tier1: false, mainPeer: false, european: false, spanish: false, color: '#024731' },
+  'UniCredit':       { flag: '🇮🇹', tier1: true,  mainPeer: false, european: true,  spanish: false, color: '#DD0011' },
 };
 
 const SECTORS = {
@@ -590,15 +598,16 @@ const SECTORS = {
     relevantText: `El sector del cemento representa aproximadamente el <strong>8% de las emisiones globales de CO₂</strong>, siendo una de las industrias más difíciles de descarbonizar debido a las emisiones de proceso derivadas de la producción de clinker.\n\nEntre el grupo de pares existe una <strong>amplia convergencia en torno al escenario IEA NZE 2050</strong> como referencia, con la mayoría de los bancos empleando metodologías PCAF o SBTi. La intensidad media actual del grupo se sitúa en torno a <strong>0,62 tCO₂e/t</strong>, muy por encima del objetivo IEA 2030 de ~0,35 tCO₂e/t.\n\nDinámicas clave: <strong>ING e Intesa</strong> muestran las trayectorias más ambiciosas con validación SBTi. <strong>Bancolombia</strong> ya se encuentra en la intensidad objetivo, reflejo del bajo perfil de carbono del mix energético colombiano. El sector requiere una reducción media de intensidad de ~45% para 2030, un reto significativo dado el ritmo actual.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
     banks: [
-      { name: 'BBVA',        base: 0.700, baseY: 2020, y2022: null, y2023: 0.713, y2024: 0.731, y2025: 0.724, obj: 0.579, objY: 2030, status: 'on-track', pctYTD: -3, scope: 'S1+2', metod: 'PACTA', show: true },
-      { name: 'Sabadell',    base: 0.660, baseY: 2020, y2022: null, y2023: 0.609, y2024: 0.574, y2025: null, obj: 0.510, objY: 2030, status: 'on-track', pctYTD: 13, scope: 'S1+2', metod: 'SBTi', show: true },
-      { name: 'SocGen',      base: 0.712, baseY: 2022, y2022: 0.712, y2023: null, y2024: null, y2025: 0.677, obj: 0.570, objY: 2030, status: 'on-track', pctYTD: 5, scope: 'S1+2', metod: 'PACTA', show: true },
-      { name: 'ING',         base: 0.734, baseY: 2020, y2022: null, y2023: null, y2024: 0.688, y2025: 0.695, obj: 0.519, objY: 2030, status: 'on-track', pctYTD: 5, scope: 'S1+2', metod: 'PACTA', show: true },
-      { name: 'Intesa',      base: 0.650, baseY: 2022, y2022: 0.650, y2023: null, y2024: 0.640, y2025: 0.630, obj: 0.500, objY: 2030, status: 'on-track', pctYTD: 3, scope: 'S1+2', metod: 'SBTi', show: false },
-      { name: 'Barclays',    base: 0.631, baseY: 2021, y2022: null, y2023: null, y2024: 0.551, y2025: 0.551, obj: 0.486, objY: 2030, status: 'on-track', pctYTD: 13, scope: 'S1', metod: 'Blue Track', show: false },
-      { name: 'StanChart',   base: 0.670, baseY: 2021, y2022: null, y2023: 0.620, y2024: 0.600, y2025: null, obj: 0.520, objY: 2030, status: 'on-track', pctYTD: 10, scope: 'S1+2', metod: 'PCAF', show: false },
-      { name: 'Bancolombia', base: 0.620, baseY: 2021, y2022: null, y2023: null, y2024: 0.620, y2025: null, obj: 0.520, objY: 2030, status: 'on-track', pctYTD: 0, scope: 'S3', metod: 'SBTi', show: false },
-      { name: 'Citigroup',   base: 0.680, baseY: 2023, y2022: null, y2023: 0.680, y2024: 0.650, y2025: null, obj: 0.460, objY: 2030, status: 'on-track', pctYTD: 4, scope: 'S1+2', metod: 'PCAF', show: false },
+      { name: 'BBVA',        base: 0.700, baseY: 2020, y2022: null,  y2023: 0.713, y2024: 0.731, y2025: 0.724, obj: 0.579, objY: 2030, status: 'on-track',  pctYTD: -3,  scope: 'S1+2',   metod: 'PACTA',          show: true  },
+      { name: 'Sabadell',    base: 0.660, baseY: 2020, y2022: null,  y2023: 0.609, y2024: 0.574, y2025: null,  obj: 0.510, objY: 2030, status: 'on-track',  pctYTD: 13,  scope: 'S1+2',   metod: 'SBTi',           show: true  },
+      { name: 'SocGen',      base: 0.671, baseY: 2022, y2022: 0.671, y2023: null,  y2024: null,  y2025: 0.639, obj: 0.535, objY: 2030, status: 'on-track',  pctYTD: 5,   scope: 'S1+2',   metod: 'PACTA',          show: true  },
+      { name: 'ING',         base: 0.734, baseY: 2020, y2022: null,  y2023: null,  y2024: 0.688, y2025: 0.695, obj: 0.519, objY: 2030, status: 'on-track',  pctYTD: 5,   scope: 'S1+2',   metod: 'PACTA',          show: true  },
+      { name: 'Intesa',      base: 0.650, baseY: 2022, y2022: 0.650, y2023: 0.650, y2024: 0.640, y2025: 0.630, obj: 0.500, objY: 2030, status: 'on-track',  pctYTD: 3,   scope: 'S1+2',   metod: 'SBTi',           show: false },
+      { name: 'Barclays',    base: 0.631, baseY: 2021, y2022: null,  y2023: null,  y2024: null,  y2025: 0.551, obj: 0.486, objY: 2030, status: 'on-track',  pctYTD: 13,  scope: 'S1',     metod: 'Blue Track',     show: false },
+      { name: 'StanChart',   base: 0.670, baseY: 2021, y2022: null,  y2023: 0.620, y2024: 0.600, y2025: null,  obj: 0.520, objY: 2030, status: 'on-track',  pctYTD: 10,  scope: 'S1+2',   metod: 'PCAF',           show: false },
+      { name: 'Bancolombia', base: 0.620, baseY: 2021, y2022: null,  y2023: null,  y2024: 0.620, y2025: null,  obj: 0.520, objY: 2030, status: 'on-track',  pctYTD: 0,   scope: 'S3',     metod: 'SBTi',           show: false },
+      { name: 'Citigroup',   base: 0.680, baseY: 2023, y2022: null,  y2023: 0.680, y2024: 0.650, y2025: null,  obj: 0.460, objY: 2030, status: 'on-track',  pctYTD: 4,   scope: 'S1+2',   metod: 'PCAF',           show: false },
+      { name: 'JPMorgan',    base: 0.639, baseY: 2020, y2022: null,  y2023: null,  y2024: 0.620, y2025: null,  obj: 0.460, objY: 2030, status: 'on-track',  pctYTD: 3,   scope: 'S1+2',   metod: 'Carbon Compass', show: false },
     ]
   },
   'Steel': {
@@ -609,28 +618,263 @@ const SECTORS = {
       s2:  { label: 'Below 2°C', start: 1.450, end: 1.100 },
       s15: { label: '1.5°C',     start: 1.450, end: 0.890 },
     },
-    relevantText: `El acero es una de las industrias más intensivas en carbono a nivel global, responsable de aproximadamente el <strong>7–9% de las emisiones globales de CO₂</strong>. Las vías de descarbonización dependen en gran medida de la transición del alto horno al horno de arco eléctrico (EAF).\n\n<strong>Nota sobre comparabilidad:</strong> Algunos bancos (ING, SocGen, Citigroup) utilizan puntuaciones de alineamiento (metodología SSP) en lugar de métricas de intensidad física. Se muestran en la tabla pero se excluyen del gráfico de trayectoria.\n\nEntre los reportantes de intensidad, los valores oscilan entre <strong>1,05 y 1,59 tCO₂e/t</strong>, todos por encima del objetivo IEA 2030. El sector requiere disponibilidad significativa de hidrógeno verde y chatarra para descarbonizarse al ritmo necesario.`,
+    relevantText: `El acero es una de las industrias más intensivas en carbono a nivel global, responsable de aproximadamente el <strong>7–9% de las emisiones globales de CO₂</strong>. Las vías de descarbonización dependen en gran medida de la transición del alto horno al horno de arco eléctrico (EAF).\n\n<strong>Nota sobre comparabilidad:</strong> SocGen y Citigroup utilizan puntuaciones de alineamiento (SSP/Alignment Score) en lugar de métricas de intensidad física, y aparecen en la tabla sin datos de gráfico. ING reporta intensidad física de 1,90 tCO₂/t steel (2025), incluida en el gráfico.\n\nBBVA, Santander y CaixaBank se han incorporado en esta actualización con sus datos de intensidad de cartera. Los valores del grupo oscilan entre <strong>0,82 y 1,95 tCO₂e/t</strong>, todos por encima del objetivo IEA NZE 2030 (~0,89 tCO₂e/t). El sector requiere disponibilidad de hidrógeno verde y chatarra para descarbonizarse al ritmo necesario.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
     banks: [
-      { name: 'BBVA',      base: null,  baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null,  objY: 2030, status: null, pctYTD: null, scope: '—', metod: '—', show: true },
-      { name: 'Santander', base: 1.470, baseY: 2023, y2022: null, y2023: 1.470, y2024: 1.510, y2025: null, obj: 1.225, objY: 2030, status: 'misaligned', pctYTD: -3, scope: 'S1+2', metod: 'PCAF', show: true },
-      { name: 'CaixaBank', base: 1.230, baseY: 2022, y2022: 1.230, y2023: 0.991, y2024: null, y2025: null, obj: 1.046, objY: 2030, status: 'on-track', pctYTD: 19, scope: 'S1+2', metod: 'PCAF', show: true },
-      { name: 'Sabadell',  base: 1.593, baseY: 2022, y2022: 1.593, y2023: 1.497, y2024: 1.403, y2025: null, obj: 1.172, objY: 2030, status: 'on-track', pctYTD: 12, scope: 'S1+2', metod: 'SBTi', show: true },
-      { name: 'Intesa',    base: 1.050, baseY: 2022, y2022: 1.050, y2023: null, y2024: 0.820, y2025: 0.900, obj: 0.810, objY: 2030, status: 'on-track', pctYTD: 14, scope: 'S1+2', metod: 'SBTi', show: false },
-      { name: 'Barclays',  base: 1.945, baseY: 2021, y2022: null, y2023: null, y2024: 1.352, y2025: 1.352, obj: 1.362, objY: 2030, status: 'on-track', pctYTD: 30, scope: 'S1+2', metod: 'Blue Track', show: false },
-      { name: 'StanChart', base: 1.870, baseY: 2021, y2022: null, y2023: 1.870, y2024: 1.750, y2025: null, obj: 1.500, objY: 2030, status: 'on-track', pctYTD: 15, scope: 'S1+2', metod: 'PCAF', show: false },
+      { name: 'BBVA',       base: 1.270, baseY: 2020, y2022: null,  y2023: 1.181, y2024: 1.146, y2025: 1.126, obj: 0.984, objY: 2030, status: 'on-track',  pctYTD: 11,   scope: 'S1+2',   metod: 'PACTA',                       show: true  },
+      { name: 'Santander',  base: 1.470, baseY: 2023, y2022: null,  y2023: 1.470, y2024: 1.510, y2025: null,  obj: 1.230, objY: 2030, status: 'on-track',  pctYTD: -3,   scope: 'S1+2',   metod: 'PCAF',                        show: true  },
+      { name: 'CaixaBank',  base: 1.230, baseY: 2022, y2022: 1.230, y2023: 1.141, y2024: 1.073, y2025: 0.991, obj: 1.046, objY: 2030, status: 'on-track',  pctYTD: 19,   scope: 'S1+2',   metod: 'PCAF',                        show: true  },
+      { name: 'Intesa',     base: 1.050, baseY: 2022, y2022: 1.050, y2023: 1.000, y2024: 0.820, y2025: 0.900, obj: 0.810, objY: 2030, status: 'on-track',  pctYTD: 14,   scope: 'S1+2',   metod: 'SBTi',                        show: true  },
+      { name: 'Barclays',   base: 1.945, baseY: 2021, y2022: null,  y2023: null,  y2024: 1.352, y2025: 1.352, obj: 1.362, objY: 2030, status: 'on-track',  pctYTD: 30,   scope: 'S1+2',   metod: 'Blue Track',                  show: true  },
+      { name: 'UniCredit',  base: 1.450, baseY: 2022, y2022: null,  y2023: 1.500, y2024: 1.280, y2025: null,  obj: 1.110, objY: 2030, status: 'on-track',  pctYTD: 12,   scope: 'S1+2+3', metod: 'PCAF',                        show: false },
+      { name: 'JPMorgan',   base: 1.412, baseY: 2020, y2022: null,  y2023: null,  y2024: 1.291, y2025: null,  obj: 0.981, objY: 2030, status: 'on-track',  pctYTD: 9,    scope: 'S1+2',   metod: 'Carbon Compass',              show: false },
+      { name: 'ING',        base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: 1.900, obj: null,  objY: 2030, status: 'misaligned', pctYTD: null, scope: 'S1+2+3', metod: 'Sustainable STEEL Principles', show: false },
+      { name: 'StanChart',  base: 1.870, baseY: 2021, y2022: null,  y2023: 1.870, y2024: 1.750, y2025: null,  obj: 1.500, objY: 2030, status: 'on-track',  pctYTD: 15,   scope: 'S1+2',   metod: 'PCAF',                        show: false },
+      { name: 'SocGen',     base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: null,  obj: null,  objY: 2030, status: 'on-track',  pctYTD: null, scope: 'S1+2',   metod: 'Sustainable Steel Principles', show: false },
+      { name: 'Citigroup',  base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: null,  obj: null,  objY: 2030, status: 'misaligned', pctYTD: null, scope: 'S1+2+3', metod: 'PCAF; SSP',                   show: false },
     ]
   },
   'Power': {
     metric: 'kgCO₂e/MWh',
     ieaRef: 165,
     ieaYear: 2030,
-    relevantText: `La descarbonización del sector eléctrico es un eje central de la transición net zero. Los bancos están financiando el cambio desde la generación con combustibles fósiles hacia las energías renovables.\n\n<strong>Nota:</strong> Los datos del sector eléctrico están disponibles. Selecciona Power en el desplegable de sectores para explorar esta información.`,
-    relevantFooter: 'Source: Bank sustainability reports 2024–2025',
+    scenarios: {
+      s2:  { label: 'Below 2°C', start: 380, end: 250 },
+      s15: { label: '1.5°C',     start: 380, end: 165 },
+    },
+    relevantText: `La descarbonización del sector eléctrico es un eje central de la transición net zero. La intensidad de carbono de las carteras de generación eléctrica refleja el mix entre combustibles fósiles y renovables financiado por cada entidad.\n\nEl objetivo de referencia IEA NZE para 2030 es <strong>~165 kgCO₂e/MWh</strong> a escala global. La mayoría del grupo registra reducciones significativas respecto a sus años base, con varios bancos ya por debajo de este umbral: <strong>ING (44), Nordea (20) y Lloyds (6)</strong> reflejan carteras muy sesgadas hacia renovables.\n\n<strong>Dinámicas clave:</strong> StanChart parte de la intensidad más alta (520 kgCO₂e/MWh en 2021), reflejo de su exposición en mercados emergentes con alta dependencia del carbón. Bancolombia presenta un valor inusualmente alto (240 kgCO₂e/MWh) pese a la abundancia hidroeléctrica colombiana, explicado por el impacto del fenómeno de El Niño en 2024. BBVA y CaixaBank muestran las trayectorias de reducción más consistentes entre los bancos españoles.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
     banks: [
-      { name: 'BBVA', base: null, baseY: null, y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null, pctYTD: null, scope: '—', metod: '—', show: true },
+      { name: 'BBVA',        base: 221, baseY: 2020, y2022: null, y2023: 167, y2024: 139, y2025: 103, obj: 107, objY: 2030, status: 'ahead of target', pctYTD: 53, scope: 'S1+2',  metod: 'PACTA',          show: true  },
+      { name: 'Santander',   base: 149, baseY: 2023, y2022: null, y2023: 149, y2024: 88,  y2025: null, obj: 113, objY: 2030, status: 'on-track',       pctYTD: 41, scope: 'S1',    metod: 'PCAF',           show: true  },
+      { name: 'CaixaBank',   base: 136, baseY: 2020, y2022: null, y2023: 105, y2024: 93,  y2025: 79,  obj: 95,  objY: 2030, status: 'ahead of target', pctYTD: 42, scope: 'S1',    metod: 'PCAF',           show: true  },
+      { name: 'Sabadell',    base: 61,  baseY: 2020, y2022: null, y2023: 63,  y2024: 40,  y2025: null, obj: 65,  objY: 2030, status: 'on-track',       pctYTD: 34, scope: 'S1+2',  metod: 'SBTi',           show: true  },
+      { name: 'SocGen',      base: 219, baseY: 2019, y2022: null, y2023: null, y2024: null, y2025: 85, obj: 125, objY: 2030, status: 'ahead of target', pctYTD: 61, scope: 'S1+2',  metod: 'PACTA',          show: true  },
+      { name: 'ING',         base: 297, baseY: 2018, y2022: null, y2023: null, y2024: 63,  y2025: 44,  obj: 66,  objY: 2030, status: 'ahead of target', pctYTD: 85, scope: 'S1',    metod: 'PACTA',          show: true  },
+      { name: 'Intesa',      base: 202, baseY: 2022, y2022: 202,  y2023: 180,  y2024: 123, y2025: 108, obj: 110, objY: 2030, status: 'ahead of target', pctYTD: 47, scope: 'S1+2',  metod: 'SBTi',           show: true  },
+      { name: 'Barclays',    base: 316, baseY: 2020, y2022: null, y2023: null, y2024: null, y2025: 204, obj: 128, objY: 2030, status: 'on-track',        pctYTD: 35, scope: 'S1',    metod: 'Blue Track',     show: false },
+      { name: 'StanChart',   base: 520, baseY: 2021, y2022: null, y2023: 430,  y2024: 390, y2025: null, obj: 225, objY: 2030, status: 'on-track',        pctYTD: 25, scope: 'S1+2',  metod: 'PCAF',           show: false },
+      { name: 'Nordea',      base: 220, baseY: 2021, y2022: null, y2023: null, y2024: 20,  y2025: null, obj: 66,  objY: 2030, status: 'ahead of target', pctYTD: 91, scope: 'S1+2',  metod: 'SDA',            show: false },
+      { name: 'Bancolombia', base: 240, baseY: 2021, y2022: null, y2023: null, y2024: 240, y2025: null, obj: 60,  objY: 2030, status: null,              pctYTD: null, scope: 'S3',  metod: 'SBTi',           show: false },
+      { name: 'Citigroup',   base: 314, baseY: 2020, y2022: null, y2023: 278,  y2024: 247, y2025: null, obj: 115, objY: 2030, status: 'on-track',        pctYTD: 21, scope: 'S1',    metod: 'PCAF',           show: false },
+      { name: 'JPMorgan',    base: 343, baseY: 2019, y2022: null, y2023: null, y2024: 248, y2025: null, obj: 105, objY: 2030, status: 'on-track',        pctYTD: 28, scope: 'S1',    metod: 'Carbon Compass', show: false },
+      { name: 'Lloyds',      base: 264, baseY: 2020, y2022: null, y2023: 52,   y2024: 6,   y2025: null, obj: 51,  objY: 2030, status: 'on-track',        pctYTD: 98, scope: 'S1+2',  metod: 'PCAF',           show: false },
+      { name: 'UniCredit',   base: 209, baseY: 2021, y2022: null, y2023: null, y2024: 93,  y2025: null, obj: 111, objY: 2030, status: 'ahead of target', pctYTD: 56, scope: 'S1',    metod: 'PCAF',           show: false },
     ]
-  }
+  },
+  'Aviation': {
+    hasSubMetrics: true,
+    defaultSubMetric: 'RPK',
+    subMetrics: {
+      RPK: {
+        metric: 'gCO₂e/RPK',
+        ieaRef: 65,
+        ieaYear: 2030,
+        scenarios: {
+          s2:  { label: 'Below 2°C', start: 102, end: 78 },
+          s15: { label: '1.5°C',     start: 102, end: 65 },
+        },
+        banks: [
+          { name: 'BBVA',      base: 89,    baseY: 2022, y2022: null,  y2023: 103,  y2024: 90,   y2025: 85,   obj: 73,   objY: 2030, status: 'on-track',  pctYTD: 4,    scope: 'S1',   metod: 'PACTA',         show: true  },
+          { name: 'Santander', base: null,  baseY: null,  y2022: null,  y2023: 83,   y2024: 78,   y2025: null, obj: null, objY: null,  status: null,        pctYTD: null, scope: 'S1',   metod: 'PCAF',          show: true  },
+          { name: 'CaixaBank', base: 101.8, baseY: 2022, y2022: 101.8, y2023: 115,  y2024: 98.9, y2025: 95.3, obj: 71,   objY: 2030, status: 'on-track',  pctYTD: 6,    scope: 'S1',   metod: 'PCAF; Pegasus', show: true  },
+          { name: 'Sabadell',  base: 94,    baseY: 2022, y2022: 94,    y2023: 90,   y2024: 91,   y2025: null, obj: 65,   objY: 2030, status: 'on-track',  pctYTD: 3,    scope: 'S1+2', metod: 'SBTi',          show: true  },
+        ]
+      },
+      RTK: {
+        metric: 'gCO₂e/RTK',
+        ieaRef: 680,
+        ieaYear: 2030,
+        scenarios: {
+          s2:  { label: 'Below 2°C', start: 920, end: 780 },
+          s15: { label: '1.5°C',     start: 920, end: 680 },
+        },
+        banks: [
+          { name: 'BBVA',      base: null,  baseY: null,  y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null,         pctYTD: null, scope: '—',    metod: '—',         show: true  },
+          { name: 'SocGen',    base: 950,   baseY: 2019, y2022: null, y2023: null, y2024: null, y2025: 821,  obj: 775,  objY: 2030, status: 'on-track',   pctYTD: 14,   scope: 'S1',   metod: 'Pegasus',   show: true  },
+          { name: 'ING',       base: 844,   baseY: 2023, y2022: null, y2023: 844,  y2024: 861,  y2025: null, obj: 681,  objY: 2030, status: 'misaligned', pctYTD: -2,   scope: 'S1+3', metod: 'Pegasus',   show: true  },
+          { name: 'Barclays',  base: 882,   baseY: 2023, y2022: null, y2023: 882,  y2024: 866,  y2025: 866,  obj: 763,  objY: 2030, status: 'on-track',   pctYTD: 2,    scope: 'S1+3', metod: 'Blue Track', show: true  },
+          { name: 'JPMorgan',  base: 973,   baseY: 2021, y2022: null, y2023: null, y2024: 777,  y2025: null, obj: 625,  objY: 2030, status: 'on-track',   pctYTD: 20,   scope: 'S1',   metod: 'Carbon Compass', show: true },
+          { name: 'Lloyds',    base: 1143,  baseY: 2019, y2022: null, y2023: 901,  y2024: 743,  y2025: null, obj: 788,  objY: 2030, status: 'on-track',   pctYTD: 35,   scope: 'S1+2+3', metod: 'PCAF',    show: false },
+          { name: 'StanChart', base: 1152,  baseY: 2021, y2022: null, y2023: 782,  y2024: 771,  y2025: null, obj: 773,  objY: 2030, status: 'on-track',   pctYTD: 33,   scope: 'S1',   metod: 'PCAF',      show: false },
+          { name: 'Citigroup', base: 901,   baseY: 2023, y2022: null, y2023: 901,  y2024: 897,  y2025: null, obj: 773,  objY: 2030, status: 'on-track',   pctYTD: 0,    scope: 'S1+3', metod: 'PCAF; MPP', show: false },
+        ]
+      }
+    },
+    relevantText: `La aviación comercial representa aproximadamente el <strong>2–3% de las emisiones globales de CO₂</strong>, pero su contribución al forzamiento radiativo total es significativamente mayor cuando se incluyen los efectos no-CO₂ (estelas de condensación, ozono).\n\n<strong>Nota sobre comparabilidad de métricas:</strong> Los bancos del grupo utilizan dos métricas distintas: <strong>gCO₂e/RPK</strong> (pasajeros-kilómetro, usada por BBVA, CaixaBank, Sabadell y Santander) y <strong>gCO₂e/RTK</strong> (toneladas-kilómetro de ingresos, incluye carga, usada por ING, Barclays, StanChart, SocGen, JPMorgan, Lloyds y Citigroup). No son directamente comparables — utiliza el selector de métrica en el gráfico para visualizar grupos homogéneos.\n\nEl escenario de referencia dominante es el <strong>MPP Prudent (Mission Possible Partnership)</strong>, alineado con 1,5°C. La mayoría de bancos reportan progreso. BBVA presenta 85 gCO₂e/RPK en 2025, por encima del objetivo 2030 (73), pero con tendencia positiva. ING registró un retroceso del 2% en 2024 en RTK.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · MPP Sector Transition Strategy · IEA NZE WEO 2023',
+  },
+  'Oil & Gas': {
+    metric: 'MtCO₂e',
+    ieaRef: null,
+    ieaYear: 2030,
+    relevantText: `El sector de petróleo y gas es el mayor contribuyente individual a las emisiones financiadas de los bancos. La mayoría del grupo utiliza <strong>emisiones absolutas financiadas (MtCO₂e)</strong> como métrica principal, alineadas con IEA NZE 2050.\n\n<strong>Nota crítica sobre comparabilidad:</strong> Las cifras absolutas reflejan el tamaño de la cartera, no la eficiencia del sector. Citigroup (168 MtCO₂e en 2020) y SocGen (24,8 MtCO₂e en 2019) no son directamente comparables con Sabadell (6,3 MtCO₂e en 2020). El gráfico muestra las trayectorias de reducción individuales, no rankings absolutos.\n\nBancos con métricas de intensidad distintas (Santander en tCO₂e/TJ, Intesa en gCO₂e/MJ) aparecen en la tabla sin datos de gráfico.\n\n<strong>Dinámicas clave:</strong> SocGen lidera con una reducción del 76% YTD. Nordea ha logrado prácticamente el phase-out total del sector (0,01 MtCO₂e en 2025 vs. 2,8 MtCO₂e en 2019). Lloyds ya ha superado su objetivo 2030 (1,6 MtCO₂e vs. objetivo 3,6 MtCO₂e).`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: 14.0,  baseY: 2021, y2022: null, y2023: 10.6,  y2024: 10.5,  y2025: 5.7,   obj: 9.8,   objY: 2030, status: 'ahead of target', pctYTD: 59,  scope: 'S1+2+3', metod: 'PCAF',              show: true  },
+      { name: 'CaixaBank', base: 9.1,   baseY: 2020, y2022: null, y2023: 5.6,   y2024: 5.9,   y2025: 4.9,   obj: 7.0,   objY: 2030, status: 'ahead of target', pctYTD: 46,  scope: 'S1+2+3', metod: 'PCAF',              show: true  },
+      { name: 'Sabadell',  base: 6.3,   baseY: 2020, y2022: null, y2023: 4.82,  y2024: 5.28,  y2025: null,  obj: 4.85,  objY: 2030, status: 'on-track',       pctYTD: 16,  scope: 'S1+2+3', metod: 'SBTi',              show: true  },
+      { name: 'SocGen',    base: 24.8,  baseY: 2019, y2022: null, y2023: null,  y2024: null,  y2025: 7.9,   obj: 7.5,   objY: 2030, status: 'ahead of target', pctYTD: 76,  scope: 'S1+2+3', metod: 'PACTA',             show: true  },
+      { name: 'Intesa',    base: null,  baseY: null,  y2022: null, y2023: null,  y2024: null,  y2025: null,  obj: null,  objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+2+3', metod: 'SBTi (gCO₂e/MJ)',  show: true  },
+      { name: 'Barclays',  base: 74.1,  baseY: 2020, y2022: null, y2023: null,  y2024: null,  y2025: 43.7,  obj: 44.5,  objY: 2030, status: 'on-track',       pctYTD: 41,  scope: 'S1+2+3', metod: 'Blue Track',        show: false },
+      { name: 'StanChart', base: 13.1,  baseY: 2020, y2022: null, y2023: 8.7,   y2024: 7.2,   y2025: null,  obj: 9.3,   objY: 2030, status: 'on-track',       pctYTD: 45,  scope: 'S1+2+3', metod: 'PCAF',              show: false },
+      { name: 'ING',       base: 99.0,  baseY: 2019, y2022: null, y2023: null,  y2024: null,  y2025: 12.2,  obj: 50.0,  objY: 2040, status: 'ahead of target', pctYTD: 71,  scope: 'S1+2+3', metod: 'PCAF',              show: false },
+      { name: 'Nordea',    base: 2.8,   baseY: 2019, y2022: null, y2023: null,  y2024: null,  y2025: 0.01,  obj: 1.2,   objY: 2030, status: 'ahead of target', pctYTD: 100, scope: 'S1+2+3', metod: 'Absolute Contraction', show: false },
+      { name: 'Citigroup', base: 168.0, baseY: 2020, y2022: null, y2023: 93.5,  y2024: 91.1,  y2025: null,  obj: 119.3, objY: 2030, status: 'ahead of target', pctYTD: 46,  scope: 'S1+2+3', metod: 'PCAF',              show: false },
+      { name: 'Santander', base: null,  baseY: null,  y2022: null, y2023: null,  y2024: null,  y2025: null,  obj: null,  objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+2',  metod: 'PCAF (tCO₂e/TJ)',   show: false },
+      { name: 'Lloyds',    base: 7.2,   baseY: 2019, y2022: null, y2023: 1.7,   y2024: 1.6,   y2025: null,  obj: 3.6,   objY: 2030, status: 'ahead of target', pctYTD: 78,  scope: 'S1+2+3', metod: 'PCAF',              show: false },
+      { name: 'UniCredit', base: 19.4,  baseY: 2021, y2022: null, y2023: null,  y2024: 9.9,   y2025: null,  obj: 13.7,  objY: 2030, status: 'ahead of target', pctYTD: 49,  scope: 'S1+2+3', metod: 'PCAF',              show: false },
+      { name: 'JPMorgan',  base: null,  baseY: null,  y2022: null, y2023: null,  y2024: null,  y2025: null,  obj: null,  objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+2+3', metod: 'Carbon Compass (gCO₂e/MJ)', show: false },
+    ]
+  },
+  'Automotive': {
+    metric: 'gCO₂/vkm',
+    ieaRef: 75,
+    ieaYear: 2030,
+    scenarios: {
+      s2:  { label: 'Below 2°C', start: 190, end: 120 },
+      s15: { label: '1.5°C',     start: 190, end: 75 },
+    },
+    relevantText: `El sector del automóvil es uno de los de mayor cobertura entre los bancos del grupo. La métrica dominante es la <strong>intensidad de emisiones de los vehículos financiados (gCO₂/vkm)</strong>, que captura el mix entre vehículos de combustión (ICE) y eléctricos (EV) en la cartera de préstamos a fabricantes (OEMs) y, en algunos casos, a usuarios finales.\n\n<strong>Dinámicas clave:</strong> La mayoría del grupo reporta mejoras, aunque <strong>Citigroup muestra un empeoramiento notable</strong> (154 → 211 gCO₂/vkm, +37%), atribuido a cambios metodológicos y de composición de cartera. CaixaBank también ve un retroceso en 2025 (163,9 gCO₂/vkm vs. base 154,1). Estos casos reflejan la sensibilidad de la métrica a variaciones de portfolio más que a cambios en el parque vehicular real.\n\nBBVA y UniCredit lideran las reducciones sostenidas del grupo (33% YTD). El objetivo IEA NZE 2030 de ~75 gCO₂/vkm requiere una electrificación masiva de las ventas de vehículos nuevos.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: 205, baseY: 2020, y2022: null,  y2023: 173,  y2024: 165,  y2025: 136,  obj: 110, objY: 2030, status: 'on-track',  pctYTD: 33,  scope: 'S3',     metod: 'PACTA',          show: true  },
+      { name: 'Santander', base: 135, baseY: 2023, y2022: null,  y2023: 135,  y2024: 128,  y2025: null, obj: 89,  objY: 2030, status: 'on-track',  pctYTD: 5,   scope: 'S3',     metod: 'PCAF',           show: true  },
+      { name: 'CaixaBank', base: 154, baseY: 2022, y2022: 154,  y2023: 146,  y2024: 146,  y2025: 164,  obj: 103, objY: 2030, status: 'misaligned', pctYTD: -7,  scope: 'S3',     metod: 'PCAF',           show: true  },
+      { name: 'Sabadell',  base: 211, baseY: 2022, y2022: 211,  y2023: 220,  y2024: 183,  y2025: null, obj: 124, objY: 2030, status: 'on-track',  pctYTD: 13,  scope: 'S3',     metod: 'SBTi',           show: true  },
+      { name: 'SocGen',    base: 184, baseY: 2021, y2022: null,  y2023: null, y2024: null, y2025: 154,  obj: 90,  objY: 2030, status: 'on-track',  pctYTD: 16,  scope: 'S3',     metod: 'PACTA',          show: false },
+      { name: 'ING',       base: 199, baseY: 2020, y2022: null,  y2023: null, y2024: 146,  y2025: 150,  obj: 101, objY: 2030, status: 'on-track',  pctYTD: 25,  scope: 'S3',     metod: 'PACTA',          show: false },
+      { name: 'Intesa',    base: 192, baseY: 2022, y2022: 192,  y2023: 185,  y2024: 192,  y2025: 175,  obj: 100, objY: 2030, status: 'on-track',  pctYTD: 9,   scope: 'S3',     metod: 'SBTi',           show: false },
+      { name: 'Barclays',  base: 175, baseY: 2022, y2022: 175,  y2023: null, y2024: null, y2025: 169,  obj: 84,  objY: 2030, status: 'on-track',  pctYTD: 3,   scope: 'S1+2+3', metod: 'Blue Track',     show: false },
+      { name: 'StanChart', base: 178, baseY: 2021, y2022: null,  y2023: null, y2024: 145,  y2025: null, obj: 83,  objY: 2030, status: 'on-track',  pctYTD: 19,  scope: 'S1+2+3', metod: 'PCAF',           show: false },
+      { name: 'Citigroup', base: 154, baseY: 2021, y2022: null,  y2023: 184,  y2024: 211,  y2025: null, obj: 106, objY: 2030, status: 'misaligned', pctYTD: -37, scope: 'S1+2+3', metod: 'PCAF',          show: false },
+      { name: 'JPMorgan',  base: 165, baseY: 2019, y2022: null,  y2023: null, y2024: 131,  y2025: null, obj: 86,  objY: 2030, status: 'on-track',  pctYTD: 20,  scope: 'S1+2+3', metod: 'Carbon Compass', show: false },
+      { name: 'Lloyds',    base: 246, baseY: 2020, y2022: null,  y2023: 293,  y2024: 234,  y2025: null, obj: 131, objY: 2030, status: 'on-track',  pctYTD: 5,   scope: 'S1+2+3', metod: 'PCAF',           show: false },
+      { name: 'UniCredit', base: 161, baseY: 2021, y2022: null,  y2023: 116,  y2024: 108,  y2025: null, obj: 95,  objY: 2030, status: 'on-track',  pctYTD: 33,  scope: 'S3',     metod: 'PCAF',           show: false },
+    ]
+  },
+  'Shipping': {
+    metric: 'Alignment delta (%)',
+    ieaRef: 0,
+    ieaYear: 2030,
+    relevantText: `El sector marítimo representa aproximadamente el <strong>2,5% de las emisiones globales de CO₂</strong>. La métrica estándar entre los bancos del grupo es el <strong>delta de alineamiento (%)</strong> con la senda IMO/Poseidon Principles: valores positivos indican desalineamiento respecto a la trayectoria, valores negativos o cero indican cumplimiento o superación del objetivo.\n\n<strong>Nota sobre comparabilidad:</strong> La mayoría de bancos utiliza el framework de Poseidon Principles o IMO para su cartera de shipping. Sin embargo, algunos bancos (Nordea, Sabadell, JPMorgan, UniCredit) reportan métricas físicas de intensidad (gCO₂/DWT-nm, gCO₂/t-nm) que no son directamente comparables al delta de alineamiento y aparecen en la tabla sin datos de gráfico.\n\n<strong>Dinámicas clave:</strong> CaixaBank lidera el grupo con un delta de <strong>−4,3%</strong> en 2025, superando ampliamente el objetivo. ING también está alineado (−4,6% en 2024). BBVA reporta por primera vez en 2024 un delta de 13,4%, indicando desalineamiento moderado. Citigroup muestra el mayor desalineamiento (20,4%).`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · Poseidon Principles · IMO GHG Strategy',
+    banks: [
+      { name: 'BBVA',      base: null,   baseY: null,  y2022: null,   y2023: null,   y2024: 13.4,  y2025: null,  obj: 0, objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+2+3', metod: 'IMO',                  show: true  },
+      { name: 'CaixaBank', base: 11.9,   baseY: 2022, y2022: 11.9,   y2023: 2.4,    y2024: null,  y2025: -4.3,  obj: 0, objY: 2030, status: 'ahead of target', pctYTD: null, scope: 'S1',     metod: 'Poseidon Principles',  show: true  },
+      { name: 'SocGen',    base: 24.2,   baseY: 2022, y2022: 24.2,   y2023: null,   y2024: 7.9,   y2025: null,  obj: 0, objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+3',   metod: 'Poseidon Principles',  show: true  },
+      { name: 'ING',       base: -7.6,   baseY: 2023, y2022: null,   y2023: -7.6,   y2024: -4.6,  y2025: null,  obj: 0, objY: 2030, status: 'ahead of target', pctYTD: null, scope: 'S1+3',   metod: 'Poseidon Principles',  show: true  },
+      { name: 'Citigroup', base: 24.6,   baseY: 2023, y2022: null,   y2023: 24.6,   y2024: 20.4,  y2025: null,  obj: 0, objY: 2030, status: 'on-track',       pctYTD: null, scope: 'S1+2',   metod: 'Poseidon Principles',  show: false },
+      { name: 'StanChart', base: 7.3,    baseY: 2021, y2022: null,   y2023: 3.2,    y2024: -0.9,  y2025: null,  obj: 0, objY: 2030, status: 'ahead of target', pctYTD: null, scope: 'S1+3',   metod: 'Poseidon Principles',  show: false },
+      { name: 'Nordea',    base: null,   baseY: null,  y2022: null,   y2023: null,   y2024: 7.0,   y2025: null,  obj: null, objY: 2030, status: 'on-track',    pctYTD: null, scope: 'S1',     metod: 'Poseidon (AER gCO₂/dwt-nm)', show: false },
+      { name: 'UniCredit', base: null,   baseY: null,  y2022: null,   y2023: null,   y2024: null,  y2025: null,  obj: null, objY: 2030, status: 'on-track',    pctYTD: null, scope: 'S1+3',   metod: 'PCAF (gCO₂/DWT-nm)',   show: false },
+      { name: 'Sabadell',  base: null,   baseY: null,  y2022: null,   y2023: null,   y2024: null,  y2025: null,  obj: 0,  objY: 2030, status: 'misaligned',   pctYTD: null, scope: 'S1+3',   metod: 'SBTi (Δ gCO₂/tnm)',    show: false },
+      { name: 'JPMorgan',  base: null,   baseY: null,  y2022: null,   y2023: null,   y2024: null,  y2025: null,  obj: null, objY: 2030, status: 'misaligned',  pctYTD: null, scope: 'S1',     metod: 'Carbon Compass (gCO₂/t-nm)', show: false },
+    ]
+  },
+  'CRE': {
+    metric: 'kgCO₂e/m²',
+    ieaRef: 12,
+    ieaYear: 2030,
+    scenarios: {
+      s2:  { label: 'Below 2°C', start: 50, end: 20 },
+      s15: { label: '1.5°C',     start: 50, end: 12 },
+    },
+    relevantText: `El inmobiliario comercial (CRE) es uno de los sectores con mayor cobertura entre los bancos europeos del grupo. La métrica dominante es la <strong>intensidad operativa (kgCO₂e/m²)</strong>, con el escenario de referencia CRREM 1.5°C como principal benchmark.\n\nLos valores actuales del grupo oscilan entre <strong>18,8 y 53 kgCO₂e/m²</strong>, con el objetivo IEA/CRREM 2030 en torno a ~12 kgCO₂e/m². La geografía explica gran parte de la variabilidad: carteras en países mediterráneos presentan valores más bajos, mientras que mercados como el alemán (UniCredit) o las carteras diversificadas (StanChart, con base 73 kgCO₂e/m²) parten de una línea base más alta.\n\n<strong>Dinámicas clave:</strong> BBVA reporta una intensidad de 18,8 kgCO₂e/m² en 2025 (cobertura España), por encima del objetivo 2030 (11,7). CaixaBank muestra una leve regresión en 2025 (21 kgCO₂e/m²) atribuida a actualizaciones de proxies. Citigroup presenta la mayor reducción porcentual del grupo (40% YTD, ya por debajo de su objetivo 2030).`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · CRREM v2 · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: 21.0, baseY: 2023, y2022: null,  y2023: 21.0, y2024: 21.5, y2025: 18.8, obj: 11.7, objY: 2030, status: 'on-track',  pctYTD: 10,  scope: 'S1+2',   metod: 'PCAF; PNIEC',    show: true  },
+      { name: 'CaixaBank', base: 20.5, baseY: 2022, y2022: 20.5, y2023: 20.1, y2024: 19.9, y2025: 21.0, obj: 12.1, objY: 2030, status: 'misaligned', pctYTD: -2,  scope: 'S1+2',   metod: 'PCAF; CRREM',    show: true  },
+      { name: 'Sabadell',  base: 25.7, baseY: 2023, y2022: null,  y2023: 25.7, y2024: 22.4, y2025: null, obj: 12.6, objY: 2030, status: 'on-track',  pctYTD: 13,  scope: 'S1+2',   metod: 'SBTi; CRREM',    show: true  },
+      { name: 'SocGen',    base: 49.0, baseY: 2022, y2022: 49.0, y2023: null,  y2024: null, y2025: 47.0, obj: 18.0, objY: 2030, status: 'on-track',  pctYTD: 4,   scope: 'S1+2',   metod: 'CRREM',          show: true  },
+      { name: 'ING',       base: 37.0, baseY: 2022, y2022: 37.0, y2023: null,  y2024: 36.1, y2025: 34.0, obj: 16.2, objY: 2030, status: 'on-track',  pctYTD: 8,   scope: 'S1+2',   metod: 'PCAF; CRREM',    show: false },
+      { name: 'Intesa',    base: 43.2, baseY: 2022, y2022: 43.2, y2023: 44.3,  y2024: 38.9, y2025: 36.1, obj: 22.1, objY: 2030, status: 'on-track',  pctYTD: 16,  scope: 'S1+2+3', metod: 'SBTi; PCAF',     show: false },
+      { name: 'Barclays',  base: 30.0, baseY: 2023, y2022: null,  y2023: 30.0, y2024: null, y2025: 24.7, obj: 14.7, objY: 2030, status: 'on-track',  pctYTD: 6,   scope: 'S1+2',   metod: 'Blue Track; CRREM', show: false },
+      { name: 'StanChart', base: 73.0, baseY: 2021, y2022: null,  y2023: 58.0, y2024: 53.0, y2025: null, obj: 29.0, objY: 2030, status: 'on-track',  pctYTD: 27,  scope: 'S1+2',   metod: 'PCAF',           show: false },
+      { name: 'Citigroup', base: 61.0, baseY: 2021, y2022: null,  y2023: 51.8, y2024: 36.6, y2025: null, obj: 36.0, objY: 2030, status: 'on-track',  pctYTD: 40,  scope: 'S1+2',   metod: 'PCAF; CRREM',    show: false },
+      { name: 'Lloyds',    base: 38.0, baseY: 2021, y2022: null,  y2023: 34.0, y2024: 34.0, y2025: null, obj: 22.0, objY: 2030, status: 'on-track',  pctYTD: 11,  scope: 'S1+2',   metod: 'PCAF; CCC',      show: false },
+      { name: 'UniCredit', base: 44.2, baseY: 2022, y2022: 44.2, y2023: 43.4,  y2024: 39.8, y2025: null, obj: null, objY: 2030, status: 'on-track',  pctYTD: 10,  scope: 'S1+2+3', metod: 'PCAF; CRREM',    show: false },
+      { name: 'Santander', base: null, baseY: null,  y2022: null,  y2023: 22.9, y2024: 26.1, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: null, scope: 'S1+2',  metod: 'PCAF',           show: false },
+    ]
+  },
+  'RRE': {
+    metric: 'kgCO₂e/m²',
+    ieaRef: 15,
+    ieaYear: 2030,
+    scenarios: {
+      s2:  { label: 'Below 2°C', start: 45, end: 20 },
+      s15: { label: '1.5°C',     start: 45, end: 15 },
+    },
+    relevantText: `Las hipotecas residenciales (RRE) representan la mayor cartera de emisiones financiadas para los bancos de retail. La métrica dominante es la <strong>intensidad operativa (kgCO₂e/m²)</strong>, con el pathway CRREM 1.5°C o equivalentes nacionales como referencia.\n\nLos valores actuales del grupo oscilan entre <strong>19,5 y 42 kgCO₂e/m²</strong>. El objetivo de referencia de ~15 kgCO₂e/m² para 2030 implica renovaciones profundas del parque residencial.\n\n<strong>Dinámicas clave:</strong> Lloyds parte del valor más alto del grupo (46 kgCO₂e/m² en 2020) pero ha reducido un 9% hasta 42 kgCO₂e/m² en 2024. CaixaBank muestra una fuerte reducción (17% YTD, con y2025=19,5 ya cerca del objetivo de 19 kgCO₂e/m²). BBVA cubre exclusivamente España y registra una reducción modesta del 3% desde 2023. ING no tiene un objetivo 2030 formalizado (solo seguimiento).`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · CRREM v2 · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: 21.2, baseY: 2023, y2022: null,  y2023: 21.2, y2024: 21.1, y2025: 20.6, obj: 14.8, objY: 2030, status: 'on-track',  pctYTD: 3,   scope: 'S1+2',   metod: 'PCAF; PNIEC',  show: true  },
+      { name: 'CaixaBank', base: 23.6, baseY: 2022, y2022: 23.6, y2023: 23.7, y2024: 19.8, y2025: 19.5, obj: 19.0, objY: 2030, status: 'on-track',  pctYTD: 17,  scope: 'S1+2',   metod: 'PCAF; CRREM',  show: true  },
+      { name: 'Sabadell',  base: 20.9, baseY: 2023, y2022: null,  y2023: 20.9, y2024: 20.7, y2025: null, obj: 16.8, objY: 2030, status: 'on-track',  pctYTD: 1,   scope: 'S1+2',   metod: 'SBTi; CRREM',  show: true  },
+      { name: 'Intesa',    base: 30.1, baseY: 2022, y2022: 30.1, y2023: 29.7, y2024: 28.8, y2025: 26.9, obj: 19.3, objY: 2030, status: 'on-track',  pctYTD: 11,  scope: 'S1+2+3', metod: 'PCAF',         show: false },
+      { name: 'ING',       base: 39.8, baseY: 2021, y2022: null,  y2023: null, y2024: 37.5, y2025: 35.5, obj: null, objY: 2030, status: null,        pctYTD: 11,  scope: 'S1+2',   metod: 'PCAF; CRREM',  show: false },
+      { name: 'Barclays',  base: 27.9, baseY: 2023, y2022: null,  y2023: 27.9, y2024: null, y2025: 27.1, obj: 19.3, objY: 2030, status: 'on-track',  pctYTD: 3,   scope: 'S1+2',   metod: 'Blue Track; CCC', show: false },
+      { name: 'StanChart', base: 37.6, baseY: 2021, y2022: null,  y2023: 36.0, y2024: 34.2, y2025: null, obj: 30.5, objY: 2030, status: 'on-track',  pctYTD: 9,   scope: 'S1+2',   metod: 'CRREM',        show: false },
+      { name: 'Lloyds',    base: 46.0, baseY: 2020, y2022: null,  y2023: 43.0, y2024: 42.0, y2025: null, obj: 30.0, objY: 2030, status: 'on-track',  pctYTD: 9,   scope: 'S1+2',   metod: 'PCAF; CCC',    show: false },
+      { name: 'UniCredit', base: 36.3, baseY: 2022, y2022: 36.3, y2023: 35.8, y2024: 33.8, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: 7,   scope: 'S1+2+3', metod: 'PCAF',         show: false },
+      { name: 'Santander', base: null, baseY: null,  y2022: null,  y2023: 21.1, y2024: 19.0, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: null, scope: 'S1+2',  metod: 'PCAF',         show: false },
+    ]
+  },
+  'Coal': {
+    metric: 'Exposición (€mn)',
+    ieaRef: null,
+    ieaYear: 2030,
+    relevantText: `El carbón térmico es el sector con el <strong>compromiso de salida total (phase-out)</strong> más extendido entre los bancos del grupo. La mayoría ha establecido fechas de desinversión completa alineadas con la senda IEA NZE: 2030 para países desarrollados (OCDE) y 2040 para el resto del mundo en muchos casos.\n\n<strong>Nota sobre la métrica:</strong> Los valores representan la <strong>exposición crediticia en €mn</strong>, que refleja el tamaño de la cartera restante — no la eficiencia del sector. Los valores son por tanto no comparables directamente entre entidades (distintos tamaños de balance y coberturas geográficas). El objetivo universal es reducción a cero.\n\n<strong>Estado del grupo:</strong> Nordea, Intesa y Sabadell presentan exposiciones ya muy reducidas o nulas. BBVA, Santander y CaixaBank mantienen exposiciones en fase de reducción activa. SocGen utiliza un índice normalizado (base 100 = 2019) que indica reducción del 70% YTD.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023 · PPCA',
+    banks: [
+      { name: 'BBVA',      base: null,   baseY: null,  y2022: null,   y2023: null,  y2024: 1500,  y2025: 1341, obj: 0, objY: 2030, status: 'on-track',  pctYTD: 21,   scope: 'Phase-out', metod: 'Internal',  show: true  },
+      { name: 'Santander', base: null,   baseY: null,  y2022: null,   y2023: 4400,  y2024: 4200,  y2025: 2300, obj: 0, objY: 2030, status: 'on-track',  pctYTD: null, scope: 'Phase-out', metod: 'Internal',  show: true  },
+      { name: 'CaixaBank', base: 3154,   baseY: 2023, y2022: null,   y2023: 3154,  y2024: 2731,  y2025: 2358, obj: 0, objY: 2030, status: 'on-track',  pctYTD: 25,   scope: 'Phase-out', metod: 'Internal',  show: true  },
+      { name: 'Sabadell',  base: null,   baseY: null,  y2022: null,   y2023: null,  y2024: 1.7,   y2025: null, obj: 0, objY: 2030, status: 'on-track',  pctYTD: 41,   scope: 'Phase-out', metod: 'SBTi',      show: false },
+      { name: 'SocGen',    base: null,   baseY: null,  y2022: null,   y2023: null,  y2024: null,  y2025: null, obj: 0, objY: 2030, status: 'on-track',  pctYTD: 70,   scope: 'Phase-out', metod: 'IEA NZE',   show: false },
+      { name: 'Intesa',    base: 200,    baseY: 2021, y2022: null,   y2023: 30,    y2024: 10,    y2025: 10,   obj: 0, objY: 2025, status: 'on-track',  pctYTD: 95,   scope: 'Phase-out', metod: 'Internal',  show: false },
+      { name: 'Nordea',    base: 52,     baseY: 2022, y2022: 52,    y2023: null,  y2024: null,  y2025: 18,   obj: 0, objY: 2025, status: 'on-track',  pctYTD: 65,   scope: 'Phase-out', metod: 'IEA NZE',   show: false },
+      { name: 'Bancolombia', base: null, baseY: null,  y2022: null,   y2023: null,  y2024: 0.04,  y2025: null, obj: 0, objY: 2030, status: 'on-track',  pctYTD: null, scope: 'Phase-out', metod: 'Internal',  show: false },
+      { name: 'Lloyds',    base: null,   baseY: null,  y2022: null,   y2023: null,  y2024: null,  y2025: null, obj: 0, objY: 2030, status: 'on-track',  pctYTD: null, scope: 'Phase-out', metod: 'PPCA',      show: false },
+      { name: 'UniCredit', base: null,   baseY: null,  y2022: null,   y2023: null,  y2024: null,  y2025: null, obj: 0, objY: 2028, status: 'on-track',  pctYTD: null, scope: 'Phase-out', metod: 'Internal',  show: false },
+    ]
+  },
+  'Aluminium': {
+    metric: 'tCO₂e/t Al',
+    ieaRef: 6.5,
+    ieaYear: 2030,
+    scenarios: {
+      s2:  { label: 'Below 2°C', start: 10.0, end: 8.0 },
+      s15: { label: '1.5°C',     start: 10.0, end: 6.5 },
+    },
+    relevantText: `El aluminio primario es una de las industrias más electro-intensivas, con una huella de carbono muy dependiente del mix eléctrico. La intensidad de referencia global para aluminio primario oscila entre <strong>4 y 17 tCO₂e/t</strong>, con el objetivo IEA/IAI NZE 2030 en torno a <strong>~6,5 tCO₂e/t</strong>.\n\n<strong>Nota sobre comparabilidad:</strong> Los valores muy inferiores (Sabadell, ~0,6 tCO₂e/t) reflejan carteras de aluminio secundario (reciclado), que tiene una intensidad radicalmente menor que el primario. BBVA reporta mediante delta de alineamiento (%), no en tCO₂e/t, y aparece en la tabla sin datos de gráfico. Citigroup usa el SAFF Climate Alignment Score, también incompatible con la métrica del gráfico.\n\n<strong>Dinámicas clave:</strong> Intesa presenta la trayectoria más positiva (−37% YTD, desde 4,79 hasta 3,03 tCO₂e/t en 2025). StanChart y JPMorgan muestran deterioros significativos, atribuidos a variaciones de composición de cartera a corto plazo.`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IAI 1.5°C Pathway · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: null,  obj: null, objY: 2030, status: 'aligned',    pctYTD: null, scope: 'S1+2',   metod: 'SAFF/RMI (Alignment Δ%)', show: true  },
+      { name: 'SocGen',    base: 8.0,   baseY: 2022, y2022: 8.0,   y2023: null,  y2024: null,  y2025: 7.6,   obj: 6.0,  objY: 2030, status: 'on-track',   pctYTD: 5,    scope: 'S1+2+3', metod: 'PACTA; IAI',              show: true  },
+      { name: 'Intesa',    base: 4.79,  baseY: 2022, y2022: 4.79,  y2023: 4.33,  y2024: 4.38,  y2025: 3.03,  obj: 4.31, objY: 2030, status: 'ahead of target', pctYTD: 37, scope: 'S1+2',  metod: 'SBTi; IAI',               show: true  },
+      { name: 'StanChart', base: 5.62,  baseY: 2021, y2022: null,  y2023: null,  y2024: 6.75,  y2025: null,  obj: 6.1,  objY: 2030, status: 'misaligned', pctYTD: -20,  scope: 'S1+2',   metod: 'PCAF; MPP',               show: false },
+      { name: 'JPMorgan',  base: 8.6,   baseY: 2021, y2022: null,  y2023: null,  y2024: 9.5,   y2025: null,  obj: 6.5,  objY: 2030, status: 'misaligned', pctYTD: -10,  scope: 'S1+2',   metod: 'Carbon Compass; IAI',     show: false },
+      { name: 'Sabadell',  base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: null,  obj: null, objY: 2030, status: 'misaligned', pctYTD: null, scope: 'S1+2',   metod: 'SBTi; IAI (Al. secundario)', show: false },
+      { name: 'Citigroup', base: null,  baseY: null,  y2022: null,  y2023: null,  y2024: null,  y2025: null,  obj: null, objY: 2030, status: 'misaligned', pctYTD: null, scope: 'S1+2+3', metod: 'PCAF; SAFF (Alignment Score)', show: false },
+    ]
+  },
+  'Agriculture': {
+    metric: 'MtCO₂e',
+    ieaRef: null,
+    ieaYear: 2030,
+    relevantText: `La agricultura es el sector con mayor heterogeneidad metodológica del grupo. Los bancos utilizan métricas muy distintas según su enfoque y geografía: <strong>emisiones absolutas (MtCO₂e)</strong> para carteras agrícolas amplias (Barclays, Lloyds, Santander), <strong>intensidad económica (tCO₂e/€mn ingresos)</strong> para Intesa y Nordea, o <strong>intensidad física por cultivo</strong> (kgCO₂e/ton) para IsBank (trigo, maíz, arroz).\n\nDado que la métrica y la cobertura geográfica varían ampliamente, el gráfico muestra únicamente los bancos que reportan emisiones absolutas en MtCO₂e. Los demás aparecen en la tabla sin datos de gráfico.\n\n<strong>Dinámicas clave:</strong> Lloyds tiene la mayor cartera agrícola del grupo (6,6 MtCO₂e base 2021), siendo el principal prestamista agrícola del Reino Unido. Barclays reporta exclusivamente UK. Santander cubre agricultura en Brasil y reporta en seguimiento (sin objetivo formal).`,
+    relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · SBTi FLAG 1.5°C · IEA NZE WEO 2023',
+    banks: [
+      { name: 'BBVA',      base: null, baseY: null,  y2022: null,  y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: null, scope: '—',      metod: '—',                   show: true  },
+      { name: 'Barclays',  base: 0.53, baseY: 2023, y2022: null,  y2023: 0.53, y2024: null, y2025: 0.46, obj: 0.42, objY: 2030, status: 'on-track',  pctYTD: 13,   scope: 'S1+2+3', metod: 'Blue Track; CCC',      show: true  },
+      { name: 'Lloyds',    base: 6.6,  baseY: 2021, y2022: null,  y2023: 5.8,  y2024: 5.4,  y2025: null, obj: 5.1,  objY: 2030, status: 'on-track',  pctYTD: 18,   scope: 'S1+2',   metod: 'PCAF; CCC',           show: true  },
+      { name: 'Santander', base: 8.41, baseY: 2023, y2022: null,  y2023: 8.41, y2024: 7.12, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: 15,   scope: 'S1+2',   metod: 'PCAF',                show: false },
+      { name: 'Intesa',    base: null, baseY: null,  y2022: null,  y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: 'on-track',  pctYTD: null, scope: 'S1+2',   metod: 'SBTi (tCO₂e/€mn rev.)', show: false },
+      { name: 'Nordea',    base: null, baseY: null,  y2022: null,  y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: 'on-track',  pctYTD: null, scope: 'S1+2',   metod: 'SDA (tCO₂e/€mn)',     show: false },
+      { name: 'CaixaBank', base: null, baseY: null,  y2022: null,  y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null,        pctYTD: null, scope: 'S1+2',   metod: 'Seguimiento',          show: false },
+    ]
+  },
 };
 
 // Default for unloaded sectors
@@ -647,6 +891,7 @@ let currentFilter = 'all';
 let sortCol = null;
 let sortDir = 1;
 let chartInst = null;
+let currentSubMetric = 'RPK';
 let _animProg = 1;
 let _isDrawAnim = false;
 
@@ -689,7 +934,14 @@ function statusPill(s) {
   return `<span class="status-pill ${cls}">${label}</span>`;
 }
 
-function getSectorData() { return SECTORS[currentSector] || DEFAULT_SECTOR; }
+function getSectorData() {
+  const sector = SECTORS[currentSector] || DEFAULT_SECTOR;
+  if (sector.hasSubMetrics) {
+    const sub = sector.subMetrics[currentSubMetric] || sector.subMetrics[sector.defaultSubMetric];
+    return { ...sub, relevantText: sector.relevantText, relevantFooter: sector.relevantFooter, hasSubMetrics: true };
+  }
+  return sector;
+}
 
 // ─── KPIs ────────────────────────────────────────────────────────────────────
 function renderKPIs() {
@@ -819,6 +1071,16 @@ function drawChart() {
 
   document.getElementById('chartTitle').textContent = `${currentSector} — Trayectoria de Intensidad de Emisiones`;
   document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>Valores reportados</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>Senda proyectada al objetivo 2030</span>`;
+  const _sectorObj = SECTORS[currentSector];
+  const _subEl = document.getElementById('subMetricSelector');
+  if (_sectorObj?.hasSubMetrics) {
+    _subEl.style.display = '';
+    _subEl.innerHTML = Object.keys(_sectorObj.subMetrics).map(m =>
+      `<button class="submetric-tab${m === currentSubMetric ? ' active' : ''}" onclick="setSubMetric('${m}', this)">${m}</button>`
+    ).join('');
+  } else {
+    _subEl.style.display = 'none';
+  }
 
   const datasets = [];
   const _lerp = (a, b, t) => a + (b - a) * t;
@@ -1183,6 +1445,16 @@ function setFilter(f, btn) {
   renderTable();
 }
 
+function setSubMetric(m, btn) {
+  currentSubMetric = m;
+  document.querySelectorAll('.submetric-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderKPIs();
+  renderToggles();
+  drawChart();
+  renderTable();
+}
+
 // ─── COLUMN MODAL ─────────────────────────────────────────────────────────────
 function openColModal() {
   const el = document.getElementById('colOptions');
@@ -1219,6 +1491,8 @@ function applyColConfig() {
 function onSectorChange(val) {
   currentSector = val;
   sortCol = null; sortDir = 1; currentFilter = 'all';
+  const sec = SECTORS[val];
+  currentSubMetric = sec?.defaultSubMetric || 'RPK';
   document.querySelectorAll('.filter-tab').forEach((b,i) => b.classList.toggle('active', i===0));
   renderAll();
 }
