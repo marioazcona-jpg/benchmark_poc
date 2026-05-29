@@ -87,7 +87,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 
 /* KPI CARDS */
 .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
-.kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--bbva-blue); border-radius: var(--radius) var(--radius) 0 0; }
 .kpi-card.accent::before { background: linear-gradient(90deg, var(--bbva-blue), var(--bbva-light)); }
 .kpi-label { font-size: 11px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
@@ -97,7 +97,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .kpi-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-top: 6px; font-weight: 500; }
 
 /* MIDDLE ROW */
-.mid-row { display: grid; grid-template-columns: 1fr 280px; gap: 14px; margin-bottom: 20px; }
+.mid-row { display: grid; grid-template-columns: 1fr 330px; gap: 14px; margin-bottom: 20px; }
 .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
 .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
@@ -110,7 +110,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .bank-toggle .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .add-bank-btn { font-size: 11px; color: var(--bbva-blue); border: 1px dashed var(--bbva-blue); background: transparent; padding: 4px 9px; border-radius: 20px; cursor: pointer; font-family: var(--font); font-weight: 500; transition: all .15s; }
 .add-bank-btn:hover { background: #EEF4FA; }
-.chart-wrap { position: relative; flex: 1; min-height: 180px; }
+.chart-wrap { position: relative; flex: 1; min-height: 340px; }
 
 /* RELEVANT DATA */
 .relevant-card { background: var(--bbva-cib); border-radius: var(--radius); padding: 18px 18px; box-shadow: var(--shadow-md); color: #fff; display: flex; flex-direction: column; }
@@ -144,7 +144,7 @@ tbody tr:hover { background: #F7FAFD; }
 tbody tr:last-child { border-bottom: none; }
 tbody tr.bbva-row { background: #EEF4FA; }
 tbody tr.bbva-row:hover { background: #E4EEF8; }
-td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
+td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
 .bank-cell { display: flex; align-items: center; gap: 8px; }
 .bank-logo { width: 20px; height: 20px; border-radius: 4px; object-fit: contain; background: #fff; border: 1px solid var(--border); padding: 2px; flex-shrink: 0; }
 .bank-name { font-weight: 500; font-size: 12px; color: var(--text-primary); }
@@ -198,6 +198,19 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* SECTOR HERO CUSTOM DROPDOWN */
+.sector-hero-dropdown { position: relative; }
+.sector-hero-trigger { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+.sector-hero-trigger-label { color: #fff; font-size: 26px; font-weight: 700; font-family: var(--font); letter-spacing: -.02em; line-height: 1.1; }
+.sector-hero-trigger-chevron { color: rgba(255,255,255,.45); flex-shrink: 0; transition: transform .18s; }
+.sector-hero-trigger:hover .sector-hero-trigger-label { opacity: .88; }
+.sector-hero-dropdown.open .sector-hero-trigger-chevron { transform: rotate(180deg); }
+.sector-hero-menu { position: absolute; top: calc(100% + 10px); left: 0; background: #0e2d52; border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 5px; min-width: 230px; z-index: 300; display: none; box-shadow: 0 12px 40px rgba(0,0,0,.45); }
+.sector-hero-dropdown.open .sector-hero-menu { display: block; }
+.sector-hero-option { padding: 8px 12px; border-radius: 6px; color: rgba(255,255,255,.68); font-size: 13px; font-weight: 500; font-family: var(--font); cursor: pointer; transition: background .1s, color .1s; }
+.sector-hero-option:hover { background: rgba(255,255,255,.09); color: #fff; }
+.sector-hero-option.selected { color: var(--bbva-light); background: rgba(91,196,245,.1); font-weight: 600; }
 
 /* TOOLTIP */
 .chart-tooltip { background: var(--bbva-cib) !important; border: none !important; border-radius: 8px !important; padding: 10px 14px !important; font-family: var(--font) !important; box-shadow: var(--shadow-md) !important; }
@@ -406,12 +419,12 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
   </div>
   <div class="nav-label">Navigation</div>
   <a class="nav-item active" onclick="showScreen('executive')" href="#">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    Executive Summary
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    Quantitative Analysis
   </a>
   <a class="nav-item" onclick="showScreen('comparator')" href="#">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    Comparator
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Qualitative Analysis
   </a>
   <div class="nav-bottom">BBVA CIB · DCB v3.0</div>
 </nav>
@@ -421,38 +434,47 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
   <!-- HEADER -->
   <header class="header">
     <div class="header-left">
-      <svg width="72" height="22" viewBox="0 0 72 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="17" font-family="DM Sans, sans-serif" font-size="18" font-weight="700" fill="#004481" letter-spacing="-1">BBVA</text>
-      </svg>
-      <div class="header-divider"></div>
       <div>
         <div class="header-title">Decarbonization Peers Benchmark</div>
         <div class="header-subtitle">BBVA Corporate & Investment Banking</div>
       </div>
     </div>
     <div class="header-right" id="headerRight">
-      <span class="sector-label">Sector</span>
-      <select class="sector-select" id="sectorSelect" onchange="onSectorChange(this.value)">
-        <option value="Cement" selected>Cement</option>
-        <option value="Steel">Steel</option>
-        <option value="Power">Power</option>
-        <option value="Aviation">Aviation</option>
-        <option value="Oil & Gas">Oil &amp; Gas</option>
-        <option value="Automotive">Automotive</option>
-        <option value="Shipping">Shipping</option>
-        <option value="CRE">Commercial Real Estate</option>
-        <option value="RRE">Residential Real Estate</option>
-        <option value="Coal">Thermal Coal Mining</option>
-        <option value="Aluminium">Aluminium</option>
-        <option value="Agriculture">Agriculture</option>
-      </select>
-      <span class="last-update" id="lastUpdate">Updated 2025</span>
+      <span style="font-size:11px;color:var(--text-tertiary);background:var(--gray-bg);padding:4px 10px;border-radius:20px;font-weight:500">Datos: FY2025</span>
     </div>
   </header>
 
   <!-- SCREEN: EXECUTIVE SUMMARY -->
   <div class="screen active" id="screen-executive">
     <div class="content">
+
+      <!-- SECTOR HERO -->
+      <div style="background:var(--bbva-cib);border-radius:var(--radius);padding:14px 22px 12px;margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+        <div>
+          <div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35);margin-bottom:6px">Sector activo</div>
+          <div class="sector-hero-dropdown" id="sectorDropdown">
+            <div class="sector-hero-trigger" onclick="toggleSectorDropdown(event)">
+              <span class="sector-hero-trigger-label" id="sectorLabel">Cement</span>
+              <svg class="sector-hero-trigger-chevron" width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="sector-hero-menu" id="sectorMenu">
+              <div class="sector-hero-option selected" data-value="Cement" onclick="chooseSector('Cement','Cement')">Cement</div>
+              <div class="sector-hero-option" data-value="Steel" onclick="chooseSector('Steel','Steel')">Steel</div>
+              <div class="sector-hero-option" data-value="Power" onclick="chooseSector('Power','Power')">Power</div>
+              <div class="sector-hero-option" data-value="Aviation" onclick="chooseSector('Aviation','Aviation')">Aviation</div>
+              <div class="sector-hero-option" data-value="Oil & Gas" onclick="chooseSector('Oil &amp; Gas','Oil &amp; Gas')">Oil &amp; Gas</div>
+              <div class="sector-hero-option" data-value="Automotive" onclick="chooseSector('Automotive','Automotive')">Automotive</div>
+              <div class="sector-hero-option" data-value="Shipping" onclick="chooseSector('Shipping','Shipping')">Shipping</div>
+              <div class="sector-hero-option" data-value="CRE" onclick="chooseSector('CRE','Commercial Real Estate')">Commercial Real Estate</div>
+              <div class="sector-hero-option" data-value="RRE" onclick="chooseSector('RRE','Residential Real Estate')">Residential Real Estate</div>
+              <div class="sector-hero-option" data-value="Coal" onclick="chooseSector('Coal','Thermal Coal Mining')">Thermal Coal Mining</div>
+              <div class="sector-hero-option" data-value="Aluminium" onclick="chooseSector('Aluminium','Aluminium')">Aluminium</div>
+              <div class="sector-hero-option" data-value="Agriculture" onclick="chooseSector('Agriculture','Agriculture')">Agriculture</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:5px" id="sectorHeroMeta"></div>
+        </div>
+      </div>
 
       <!-- KPIs -->
       <div class="kpi-row" id="kpiRow"></div>
@@ -465,6 +487,11 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
               <div class="card-title" id="chartTitle">Trayectoria de Intensidad de Emisiones</div>
               <div class="card-subtitle" id="chartSubtitle"></div>
               <div class="submetric-selector" id="subMetricSelector" style="display:none"></div>
+            </div>
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">All Banks</button>
+              <button class="filter-tab" data-filter="european" onclick="setFilter('european', this)">Europe</button>
+              <button class="filter-tab" data-filter="top5" onclick="setFilter('top5', this)">Top 5</button>
             </div>
           </div>
           <div class="bank-toggles" id="bankToggles"></div>
@@ -482,15 +509,18 @@ td { padding: 10px 12px; vertical-align: middle; white-space: nowrap; }
       <!-- TABLE -->
       <div class="table-card">
         <div class="table-toolbar">
-          <div class="filter-tabs" id="filterTabs">
-            <button class="filter-tab active" onclick="setFilter('all', this)">All Banks</button>
-            <button class="filter-tab" onclick="setFilter('european', this)">Europe</button>
-            <button class="filter-tab" onclick="setFilter('top5', this)">Top 5</button>
+          <span style="font-size:13px;font-weight:600;color:var(--text-primary);letter-spacing:-.01em">Comparativa de intensidad de emisiones</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="filter-tabs" id="filterTabs">
+              <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">All Banks</button>
+              <button class="filter-tab" data-filter="european" onclick="setFilter('european', this)">Europe</button>
+              <button class="filter-tab" data-filter="top5" onclick="setFilter('top5', this)">Top 5</button>
+            </div>
+            <button class="col-config-btn" onclick="openColModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              Configure columns
+            </button>
           </div>
-          <button class="col-config-btn" onclick="openColModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Configure columns
-          </button>
         </div>
         <div class="table-wrap">
           <table id="mainTable">
@@ -589,11 +619,11 @@ const BANK_META = {
 const SECTORS = {
   'Cement': {
     metric: 'tCO₂e/t cement',
-    ieaRef: 0.35,
+    ieaRef: 0.373,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 0.620, end: 0.480 },
-      s15: { label: '1.5°C',     start: 0.620, end: 0.350 },
+      s2:  { label: 'Below 2°C', start: 0.490, end: 0.454 },
+      s15: { label: '1.5°C',     start: 0.455, end: 0.373 },
     },
     relevantText: `El sector del cemento representa aproximadamente el <strong>8% de las emisiones globales de CO₂</strong>, siendo una de las industrias más difíciles de descarbonizar debido a las emisiones de proceso derivadas de la producción de clinker.\n\nEntre el grupo de pares existe una <strong>amplia convergencia en torno al escenario IEA NZE 2050</strong> como referencia, con la mayoría de los bancos empleando metodologías PCAF o SBTi. La intensidad media actual del grupo se sitúa en torno a <strong>0,62 tCO₂e/t</strong>, muy por encima del objetivo IEA 2030 de ~0,35 tCO₂e/t.\n\nDinámicas clave: <strong>ING e Intesa</strong> muestran las trayectorias más ambiciosas con validación SBTi. <strong>Bancolombia</strong> ya se encuentra en la intensidad objetivo, reflejo del bajo perfil de carbono del mix energético colombiano. El sector requiere una reducción media de intensidad de ~45% para 2030, un reto significativo dado el ritmo actual.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -612,11 +642,11 @@ const SECTORS = {
   },
   'Steel': {
     metric: 'tCO₂e/t steel',
-    ieaRef: 0.89,
+    ieaRef: 0.815,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 1.450, end: 1.100 },
-      s15: { label: '1.5°C',     start: 1.450, end: 0.890 },
+      s2:  { label: 'Below 2°C', start: 1.498, end: 1.130 },
+      s15: { label: '1.5°C',     start: 1.325, end: 0.815 },
     },
     relevantText: `El acero es una de las industrias más intensivas en carbono a nivel global, responsable de aproximadamente el <strong>7–9% de las emisiones globales de CO₂</strong>. Las vías de descarbonización dependen en gran medida de la transición del alto horno al horno de arco eléctrico (EAF).\n\n<strong>Nota sobre comparabilidad:</strong> SocGen y Citigroup utilizan puntuaciones de alineamiento (SSP/Alignment Score) en lugar de métricas de intensidad física, y aparecen en la tabla sin datos de gráfico. ING reporta intensidad física de 1,90 tCO₂/t steel (2025), incluida en el gráfico.\n\nBBVA, Santander y CaixaBank se han incorporado en esta actualización con sus datos de intensidad de cartera. Los valores del grupo oscilan entre <strong>0,82 y 1,95 tCO₂e/t</strong>, todos por encima del objetivo IEA NZE 2030 (~0,89 tCO₂e/t). El sector requiere disponibilidad de hidrógeno verde y chatarra para descarbonizarse al ritmo necesario.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -636,11 +666,11 @@ const SECTORS = {
   },
   'Power': {
     metric: 'kgCO₂e/MWh',
-    ieaRef: 165,
+    ieaRef: 138,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 380, end: 250 },
-      s15: { label: '1.5°C',     start: 380, end: 165 },
+      s2:  { label: 'Below 2°C', start: 438, end: 220 },
+      s15: { label: '1.5°C',     start: 438, end: 138 },
     },
     relevantText: `La descarbonización del sector eléctrico es un eje central de la transición net zero. La intensidad de carbono de las carteras de generación eléctrica refleja el mix entre combustibles fósiles y renovables financiado por cada entidad.\n\nEl objetivo de referencia IEA NZE para 2030 es <strong>~165 kgCO₂e/MWh</strong> a escala global. La mayoría del grupo registra reducciones significativas respecto a sus años base, con varios bancos ya por debajo de este umbral: <strong>ING (44), Nordea (20) y Lloyds (6)</strong> reflejan carteras muy sesgadas hacia renovables.\n\n<strong>Dinámicas clave:</strong> StanChart parte de la intensidad más alta (520 kgCO₂e/MWh en 2021), reflejo de su exposición en mercados emergentes con alta dependencia del carbón. Bancolombia presenta un valor inusualmente alto (240 kgCO₂e/MWh) pese a la abundancia hidroeléctrica colombiana, explicado por el impacto del fenómeno de El Niño en 2024. BBVA y CaixaBank muestran las trayectorias de reducción más consistentes entre los bancos españoles.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -683,11 +713,11 @@ const SECTORS = {
       },
       RTK: {
         metric: 'gCO₂e/RTK',
-        ieaRef: 680,
+        ieaRef: 616,
         ieaYear: 2030,
         scenarios: {
-          s2:  { label: 'Below 2°C', start: 920, end: 780 },
-          s15: { label: '1.5°C',     start: 920, end: 680 },
+          s2:  { label: 'Below 2°C', start: 877, end: 720 },
+          s15: { label: '1.5°C',     start: 845, end: 616 },
         },
         banks: [
           { name: 'BBVA',      base: null,  baseY: null,  y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null,         pctYTD: null, scope: '—',    metod: '—',         show: true  },
@@ -841,11 +871,11 @@ const SECTORS = {
   },
   'Aluminium': {
     metric: 'tCO₂e/t Al',
-    ieaRef: 6.5,
+    ieaRef: 3.069,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 10.0, end: 8.0 },
-      s15: { label: '1.5°C',     start: 10.0, end: 6.5 },
+      s2:  { label: 'Below 2°C', start: 5.255, end: 3.142 },
+      s15: { label: '1.5°C',     start: 5.067, end: 3.069 },
     },
     relevantText: `El aluminio primario es una de las industrias más electro-intensivas, con una huella de carbono muy dependiente del mix eléctrico. La intensidad de referencia global para aluminio primario oscila entre <strong>4 y 17 tCO₂e/t</strong>, con el objetivo IEA/IAI NZE 2030 en torno a <strong>~6,5 tCO₂e/t</strong>.\n\n<strong>Nota sobre comparabilidad:</strong> Los valores muy inferiores (Sabadell, ~0,6 tCO₂e/t) reflejan carteras de aluminio secundario (reciclado), que tiene una intensidad radicalmente menor que el primario. BBVA reporta mediante delta de alineamiento (%), no en tCO₂e/t, y aparece en la tabla sin datos de gráfico. Citigroup usa el SAFF Climate Alignment Score, también incompatible con la métrica del gráfico.\n\n<strong>Dinámicas clave:</strong> Intesa presenta la trayectoria más positiva (−37% YTD, desde 4,79 hasta 3,03 tCO₂e/t en 2025). StanChart y JPMorgan muestran deterioros significativos, atribuidos a variaciones de composición de cartera a corto plazo.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IAI 1.5°C Pathway · IEA NZE WEO 2023',
@@ -892,8 +922,6 @@ let sortCol = null;
 let sortDir = 1;
 let chartInst = null;
 let currentSubMetric = 'RPK';
-let _animProg = 1;
-let _isDrawAnim = false;
 
 const DEFAULT_COLS = ['bank','country','baseline','baseInt','y2024','y2025','obj','pctYTD','status'];
 const ALL_OPTIONAL_COLS = [
@@ -918,7 +946,7 @@ function getFavicon(bank) {
   return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=32` : '';
 }
 
-function fmt(v, dec=3) {
+function fmt(v, dec=2) {
   if (v === null || v === undefined) return '<span class="intensity-val empty">—</span>';
   return `<span class="intensity-val">${Number(v).toFixed(dec)}</span>`;
 }
@@ -946,43 +974,150 @@ function getSectorData() {
 // ─── KPIs ────────────────────────────────────────────────────────────────────
 function renderKPIs() {
   const sd = getSectorData();
-  const peers = sd.banks.filter(b => b.name !== 'BBVA');
+  const allBanks = sd.banks;
+  const peers = allBanks.filter(b => b.name !== 'BBVA');
   const reporters = peers.filter(b => b.y2024 !== null || b.y2025 !== null);
-  const latestVals = reporters.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
-  const avg = latestVals.length ? (latestVals.reduce((a,b)=>a+b,0)/latestVals.length) : null;
-  const best = reporters.reduce((best, b) => {
-    const v = b.y2025 ?? b.y2024;
-    return (v !== null && (best === null || v < best.v)) ? { name: b.name, v } : best;
-  }, null);
-
-  const bbva = sd.banks.find(b => b.name === 'BBVA');
-  const bbvaLatest = bbva ? (bbva.y2025 ?? bbva.y2024 ?? bbva.y2023 ?? null) : null;
-  const bbvaObj = bbva ? (bbva.obj ?? null) : null;
-
   const totalBanks = 15;
 
+  const _avg = arr => arr.length ? arr.reduce((a, v) => a + v, 0) / arr.length : null;
+
+  // Metric label — drives KPI row copy
+  const mLabel = sd.metric.toLowerCase().includes('delta') ? 'Delta' :
+                 sd.metric.includes('Exposición') ? 'Exposición' :
+                 sd.metric.toLowerCase().includes('mtco') ? 'Emisiones' : 'Intensidad';
+  const mLabelLow = mLabel === 'Delta' ? 'Delta más bajo' :
+                    mLabel === 'Emisiones' ? 'Emisiones más bajas' : `${mLabel} más baja`;
+
+  // Sector averages (all banks with valid data)
+  const sIntVals = allBanks.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
+  const sObjVals = allBanks.filter(b => b.obj !== null).map(b => b.obj);
+  const sPctVals = allBanks.filter(b => b.pctYTD !== null).map(b => b.pctYTD);
+  const sectorAvgInt = _avg(sIntVals);
+  const sectorAvgObj = _avg(sObjVals);
+  const sectorAvgPct = _avg(sPctVals);
+
+  // BBVA
+  const bbva    = allBanks.find(b => b.name === 'BBVA');
+  const bbvaInt = bbva ? (bbva.y2025 ?? bbva.y2024 ?? bbva.y2023 ?? null) : null;
+  const bbvaObj = bbva ? (bbva.obj    ?? null) : null;
+  const bbvaPct = bbva ? (bbva.pctYTD ?? null) : null;
+
+  // Latest data year per bank / sector
+  const latestBankYear = b => b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
+  const sectorDataYear = allBanks.reduce((mx, b) => { const y = latestBankYear(b); return (y && y > mx) ? y : mx; }, 0) || null;
+  const bbvaYear = bbva ? latestBankYear(bbva) : null;
+
+  // Best peers per metric (excluding BBVA)
+  const bestInt = reporters.reduce((acc, b) => {
+    const v = b.y2025 ?? b.y2024;
+    return (v !== null && (acc === null || v < acc.v)) ? { name: b.name, v } : acc;
+  }, null);
+  const bestObj = peers.filter(b => b.obj !== null).reduce((acc, b) =>
+    acc === null || b.obj < acc.v ? { name: b.name, v: b.obj } : acc, null);
+  const bestPct = peers.filter(b => b.pctYTD !== null).reduce((acc, b) =>
+    acc === null || b.pctYTD > acc.v ? { name: b.name, v: b.pctYTD } : acc, null);
+
+  // ─── Render helpers ───────────────────────────────────────────────────────
+  const fv = (v, d = 2) => (v !== null && v !== undefined) ? Number(v).toFixed(d) : '—';
+
+  const valEl = (v, d = 2) =>
+    `<span style="font-size:20px;font-weight:600;font-family:var(--mono);color:var(--text-primary);line-height:1">${fv(v, d)}</span>`;
+  const unitEl = t =>
+    `<span style="font-size:11px;color:var(--text-secondary);margin-left:2px">${t}</span>`;
+
+  const delta = (bv, sv, upGood = false) => {
+    if (bv === null || sv === null || sv === 0) return '';
+    const bIsHigh = bv > sv;
+    const good  = upGood ? bIsHigh : !bIsHigh;
+    const color = good ? '#1A7F4B' : '#D93025';
+    const arrow = bIsHigh ? '▲' : '▼';
+    const pct   = Math.abs(((bv - sv) / Math.abs(sv)) * 100).toFixed(1);
+    return `<span style="font-size:10.5px;font-weight:700;color:${color};margin-left:5px;white-space:nowrap;vertical-align:middle">${arrow}${pct}%</span>`;
+  };
+
+  const logo = name => name
+    ? `<img src="${getFavicon(name)}" style="width:13px;height:13px;border-radius:2px;object-fit:contain;background:#fff;padding:1px;flex-shrink:0;display:inline-block" onerror="this.style.display='none'">`
+    : '';
+
+  const logoBig = name => name
+    ? `<img src="${getFavicon(name)}" style="width:20px;height:20px;border-radius:4px;object-fit:contain;background:#fff;padding:2px;flex-shrink:0;display:inline-block" onerror="this.style.display='none'">`
+    : '';
+
+  const kpiRow = (label, valueHtml, subHtml = '') => `
+    <div>
+      <div style="font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:4px">${label}</div>
+      <div style="display:flex;align-items:center;gap:2px;flex-wrap:wrap">${valueHtml}</div>
+      ${subHtml ? `<div style="display:flex;align-items:center;gap:3px;margin-top:3px">${subHtml}</div>` : ''}
+    </div>`;
+
+  const kpiRowInline = (label, leftHtml, rightHtml) => `
+    <div>
+      <div style="font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:4px">${label}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+        <div style="display:flex;align-items:center;gap:2px">${leftHtml}</div>
+        <div style="display:flex;align-items:center;gap:4px;flex-shrink:0">${rightHtml}</div>
+      </div>
+    </div>`;
+
+  const hr = `<div style="height:1px;background:var(--border)"></div>`;
+
+  const cardHead = content =>
+    `<div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">${content}</div>`;
+
+  const headLabel = t =>
+    `<span style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-secondary)">${t}</span>`;
+
+  const yearChip = y => y
+    ? `<span style="margin-left:auto;font-size:10px;background:var(--gray-bg);border:1px solid var(--border);border-radius:10px;padding:1px 7px;color:var(--text-tertiary);font-weight:500">${y}</span>`
+    : '';
+
   document.getElementById('kpiRow').innerHTML = `
-    <div class="kpi-card">
+    <div class="kpi-card" style="display:flex;flex-direction:column;justify-content:center;gap:10px">
       <div class="kpi-label">Bancos reportando</div>
-      <div class="kpi-value">${reporters.length}<span>/ ${totalBanks}</span></div>
-      <div class="kpi-sub">con datos de intensidad en ${currentSector}</div>
+      <div class="kpi-value" style="font-size:28px">${reporters.length}<span style="font-size:14px;font-weight:400;color:var(--text-tertiary);margin-left:4px;font-family:var(--font)">/ ${totalBanks}</span></div>
+      <div class="kpi-sub">con datos en ${currentSector}</div>
     </div>
+
     <div class="kpi-card">
-      <div class="kpi-label">Intensidad media (pares)</div>
-      <div class="kpi-value">${avg !== null ? avg.toFixed(2) : '—'}<span>${sd.metric}</span></div>
-      <div class="kpi-sub">Último año reportado (2024/25)</div>
-      ${bbvaLatest !== null ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><div class="kpi-label" style="margin-bottom:3px">BBVA</div><div style="font-size:20px;font-weight:600;font-family:var(--mono);line-height:1">${bbvaLatest.toFixed(3)}<span style="font-size:12px;font-weight:400;margin-left:3px;font-family:var(--font);color:var(--text-secondary)">${sd.metric}</span></div></div>` : ''}
+      ${cardHead(headLabel('Sector') + yearChip(sectorDataYear))}
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${kpiRow(`${mLabel} actual (media)`, valEl(sectorAvgInt) + unitEl(sd.metric))}
+        ${hr}
+        ${kpiRow('Objetivo 2030 (media)', valEl(sectorAvgObj) + unitEl(sd.metric))}
+        ${hr}
+        ${kpiRow('Reducción vs base (media)', valEl(sectorAvgPct, 1) + unitEl('%'))}
+      </div>
     </div>
+
     <div class="kpi-card accent">
-      <div class="kpi-label">Objetivo IEA NZE ${sd.ieaYear}</div>
-      <div class="kpi-value">${sd.ieaRef !== null ? sd.ieaRef : '—'}<span>${sd.metric}</span></div>
-      <div class="kpi-sub">Referencia: IEA Net Zero 2050</div>
-      ${bbvaObj !== null ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><div class="kpi-label" style="margin-bottom:3px">Objetivo BBVA 2030</div><div style="font-size:20px;font-weight:600;font-family:var(--mono);line-height:1">${bbvaObj.toFixed(3)}<span style="font-size:12px;font-weight:400;margin-left:3px;font-family:var(--font);color:var(--text-secondary)">${sd.metric}</span></div></div>` : ''}
+      ${cardHead(`<img src="${getFavicon('BBVA')}" style="width:16px;height:16px;border-radius:3px;object-fit:contain;background:#fff;padding:1px;flex-shrink:0" onerror="this.style.display='none'">${headLabel('BBVA')}` + yearChip(bbvaYear))}
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${kpiRow(`${mLabel} actual`, valEl(bbvaInt) + unitEl(sd.metric) + delta(bbvaInt, sectorAvgInt))}
+        ${hr}
+        ${kpiRow('Objetivo 2030', valEl(bbvaObj) + unitEl(sd.metric) + delta(bbvaObj, sectorAvgObj))}
+        ${hr}
+        ${kpiRow('Reducción vs base', valEl(bbvaPct, 1) + unitEl('%') + delta(bbvaPct, sectorAvgPct, true))}
+      </div>
     </div>
+
     <div class="kpi-card">
-      <div class="kpi-label">Mejor par</div>
-      <div class="kpi-value">${best ? best.v.toFixed(2) : '—'}<span>${sd.metric}</span></div>
-      <div class="kpi-sub">${best ? best.name : '—'}</div>
+      ${cardHead(headLabel('Mejor par') + `<span style="font-size:10px;color:var(--text-tertiary)">(por métrica)</span>` + yearChip(sectorDataYear))}
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${kpiRowInline(mLabelLow,
+          valEl(bestInt ? bestInt.v : null) + unitEl(sd.metric),
+          bestInt ? logoBig(bestInt.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestInt.name}</span>` : '—'
+        )}
+        ${hr}
+        ${kpiRowInline('Objetivo 2030 más bajo',
+          valEl(bestObj ? bestObj.v : null) + unitEl(sd.metric),
+          bestObj ? logoBig(bestObj.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestObj.name}</span>` : '—'
+        )}
+        ${hr}
+        ${kpiRowInline('Mayor reducción (%)',
+          valEl(bestPct ? bestPct.v : null, 1) + unitEl('%'),
+          bestPct ? logoBig(bestPct.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestPct.name}</span>` : '—'
+        )}
+      </div>
     </div>
   `;
 }
@@ -1028,6 +1163,7 @@ function renderToggles() {
       chartInst.update();
     }
     renderToggles();
+    renderTable();
   };
   el.appendChild(allDiv);
 
@@ -1058,6 +1194,7 @@ function renderToggles() {
         });
         chartInst.update();
       }
+      renderTable();
     };
     el.appendChild(div);
   });
@@ -1067,8 +1204,6 @@ function drawChart() {
   const sd = getSectorData();
   const canvas = document.getElementById('trajChart');
   if (chartInst) chartInst.destroy();
-  _animProg = 0; _isDrawAnim = true;
-
   document.getElementById('chartTitle').textContent = `${currentSector} — Trayectoria de Intensidad de Emisiones`;
   document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>Valores reportados</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>Senda proyectada al objetivo 2030</span>`;
   const _sectorObj = SECTORS[currentSector];
@@ -1175,19 +1310,6 @@ function drawChart() {
 
   const _scenarioPlugin = {
     id: 'chartLabels',
-    beforeDatasetsDraw(chart) {
-      if (_animProg >= 1) return;
-      const { ctx, chartArea } = chart;
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(chartArea.left, chartArea.top - 10,
-               (chartArea.right - chartArea.left) * _animProg,
-               chartArea.bottom - chartArea.top + 20);
-      ctx.clip();
-    },
-    afterDatasetsDraw(chart) {
-      if (_animProg < 1) chart.ctx.restore();
-    },
     afterDraw(chart) {
       const sd = getSectorData();
       const { ctx, scales: { x, y }, data } = chart;
@@ -1256,6 +1378,9 @@ function drawChart() {
     }
   };
 
+  const _allBankVals = sd.banks.flatMap(b => [b.base, b.y2022, b.y2023, b.y2024, b.y2025].filter(v => v !== null));
+  const _hasNegVals = _allBankVals.some(v => v < 0);
+
   chartInst = new Chart(canvas.getContext('2d'), {
     type: 'line',
     data: { labels: YEARS, datasets },
@@ -1266,13 +1391,7 @@ function drawChart() {
       layout: { padding: { right: 105 } },
       animation: {
         duration: 650,
-        easing: 'linear',
-        onProgress: (e) => {
-          if (!_isDrawAnim) return;
-          const t = e.currentStep / e.numSteps;
-          _animProg = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
-        },
-        onComplete: () => { _animProg = 1; _isDrawAnim = false; },
+        easing: 'easeInOutCubic',
       },
       animations: { y: { duration: 0 } },
       plugins: {
@@ -1287,15 +1406,19 @@ function drawChart() {
             label: ctx => {
               const v = ctx.raw;
               if (v === null) return null;
-              return `${ctx.dataset.label}: ${Number(v).toFixed(3)} ${getSectorData().metric}`;
+              return `${ctx.dataset.label}: ${Number(v).toFixed(2)} ${getSectorData().metric}`;
             }
           },
           filter: item => item.raw !== null
         }
       },
       scales: {
-        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' } },
-        y: { min: 0, grid: { color: 'rgba(0,0,0,0.04)' },
+        x: {
+          position: _hasNegVals ? { y: 0 } : 'bottom',
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' }
+        },
+        y: { ...(_hasNegVals ? {} : { min: 0 }), grid: { color: 'rgba(0,0,0,0.04)' },
           ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' },
           title: { display: true, text: getSectorData().metric, font: { size: 11 }, color: '#8FA0B4' }
         }
@@ -1307,7 +1430,56 @@ function drawChart() {
 // ─── RELEVANT DATA ────────────────────────────────────────────────────────────
 function renderRelevant() {
   const sd = getSectorData();
-  document.getElementById('relevantText').innerHTML = sd.relevantText.replace(/\n/g,'<br><br>');
+
+  // Hero meta — peers only, consistent with KPI card
+  const heroMeta = document.getElementById('sectorHeroMeta');
+  if (heroMeta) {
+    const rCount = sd.banks.filter(b => b.name !== 'BBVA' && (b.y2024 !== null || b.y2025 !== null)).length;
+    heroMeta.textContent = `${sd.metric} · Referencia IEA 2030: ${sd.ieaRef} · ${rCount} peers reportando`;
+  }
+
+  // Dynamic analytical snapshot — no bank count (already in KPI)
+  const reporters = sd.banks.filter(b => (b.y2025 ?? b.y2024) !== null);
+  const sVals = reporters.map(b => b.y2025 ?? b.y2024);
+  const sAvg = sVals.length ? sVals.reduce((a, v) => a + v, 0) / sVals.length : null;
+  const bbva = sd.banks.find(b => b.name === 'BBVA');
+  const bbvaInt = bbva ? (bbva.y2025 ?? bbva.y2024 ?? null) : null;
+  const ahead = sd.banks.filter(b => b.status === 'ahead of target').length;
+  const onTrack = sd.banks.filter(b => b.status === 'on-track').length;
+  const misaligned = sd.banks.filter(b => b.status === 'misaligned').length;
+
+  let avgLine = '';
+  if (sAvg !== null) {
+    const ieaVal = parseFloat(sd.ieaRef);
+    const gap = ((sAvg - ieaVal) / Math.abs(ieaVal) * 100).toFixed(1);
+    const gapStr = sAvg > ieaVal
+      ? `<strong>${gap}% por encima</strong> del objetivo`
+      : `<strong>${Math.abs(gap)}% por debajo</strong> del objetivo`;
+    avgLine = `Media del sector: <strong>${Number(sAvg).toFixed(2)} ${sd.metric}</strong> vs objetivo IEA 2030 de <strong>${sd.ieaRef} ${sd.metric}</strong> (${gapStr}).`;
+  }
+
+  let bbvaLine = '';
+  if (bbvaInt !== null && sAvg !== null) {
+    const diff = ((bbvaInt - sAvg) / Math.abs(sAvg) * 100).toFixed(1);
+    const dir = bbvaInt < sAvg
+      ? `<strong>${Math.abs(diff)}% inferior</strong> a la media`
+      : `<strong>${diff}% superior</strong> a la media`;
+    bbvaLine = `<br>BBVA: <strong>${Number(bbvaInt).toFixed(2)} ${sd.metric}</strong> — ${dir} del sector.`;
+  }
+
+  const statusLine = [
+    ahead > 0 ? `<strong>${ahead}</strong> adelantado${ahead > 1 ? 's' : ''}` : '',
+    onTrack > 0 ? `<strong>${onTrack}</strong> en trayectoria` : '',
+    misaligned > 0 ? `<strong>${misaligned}</strong> desalineado${misaligned > 1 ? 's' : ''}` : '',
+  ].filter(Boolean).join(', ');
+
+  const dynamicBlock = avgLine + bbvaLine +
+    (statusLine ? `<br>Estado del panel: ${statusLine}.` : '');
+
+  const staticParagraphs = sd.relevantText.split('\n\n');
+  const restStatic = staticParagraphs.slice(1).join('\n\n').replace(/\n\n/g, '<br><br>');
+
+  document.getElementById('relevantText').innerHTML = dynamicBlock + (restStatic ? '<br><br>' + restStatic : '');
   document.getElementById('relevantFooter').textContent = sd.relevantFooter;
 }
 
@@ -1343,28 +1515,8 @@ function renderTable() {
   const sd = getSectorData();
   let banks = [...sd.banks];
 
-  // Filter
-  if (currentFilter !== 'all') {
-    if (currentFilter === 'top5') {
-      const withVal = banks.filter(b => (b.y2025 ?? b.y2024 ?? b.y2023) !== undefined && (b.y2025 ?? b.y2024 ?? b.y2023) !== null);
-      withVal.sort((a, b) => {
-        const va = a.y2025 ?? a.y2024 ?? a.y2023 ?? Infinity;
-        const vb = b.y2025 ?? b.y2024 ?? b.y2023 ?? Infinity;
-        return va - vb;
-      });
-      const top5names = new Set(withVal.slice(0, 5).map(b => b.name));
-      top5names.add('BBVA');
-      banks = banks.filter(b => top5names.has(b.name));
-    } else {
-      banks = banks.filter(b => {
-        const m = BANK_META[b.name] || {};
-        if (currentFilter === 'mainPeer') return m.mainPeer;
-        if (currentFilter === 'european') return m.european;
-        if (currentFilter === 'spanish') return m.spanish;
-        return true;
-      });
-    }
-  }
+  // Filter: table mirrors chart visibility (b.show is the single source of truth)
+  banks = banks.filter(b => b.show);
 
   // Sort: BBVA always first
   const bbva = banks.find(b => b.name === 'BBVA');
@@ -1438,10 +1590,37 @@ function toggleSort(col) {
   renderTable();
 }
 
-function setFilter(f, btn) {
+function setFilter(f) {
   currentFilter = f;
-  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  // Sync active state across both filter tab sets
+  document.querySelectorAll('.filter-tab[data-filter]').forEach(el => {
+    el.classList.toggle('active', el.dataset.filter === f);
+  });
+  // Update b.show for each bank based on filter
+  const sd = getSectorData();
+  if (f === 'all') {
+    sd.banks.forEach(b => { b.show = true; });
+  } else if (f === 'european') {
+    sd.banks.forEach(b => { b.show = !!(BANK_META[b.name]?.european) || b.name === 'BBVA'; });
+  } else if (f === 'top5') {
+    const withVal = [...sd.banks]
+      .filter(b => (b.y2025 ?? b.y2024 ?? b.y2023) !== null)
+      .sort((a, bk) => (a.y2025??a.y2024??a.y2023??Infinity) - (bk.y2025??bk.y2024??bk.y2023??Infinity));
+    const top5 = new Set([...withVal.slice(0, 5).map(b => b.name), 'BBVA']);
+    sd.banks.forEach(b => { b.show = top5.has(b.name); });
+  }
+  // Update chart visibility
+  if (chartInst) {
+    sd.banks.forEach(b => {
+      chartInst.data.datasets.forEach((ds, i) => {
+        if (ds.label === b.name || ds.label === `${b.name} target`) {
+          chartInst.setDatasetVisibility(i, b.show);
+        }
+      });
+    });
+    chartInst.update();
+  }
+  renderToggles();
   renderTable();
 }
 
@@ -1487,13 +1666,38 @@ function applyColConfig() {
   renderTable();
 }
 
+// ─── SECTOR HERO DROPDOWN ────────────────────────────────────────────────────
+function toggleSectorDropdown(e) {
+  e.stopPropagation();
+  document.getElementById('sectorDropdown').classList.toggle('open');
+}
+
+function chooseSector(val, label) {
+  document.getElementById('sectorLabel').textContent = label;
+  document.querySelectorAll('.sector-hero-option').forEach(el => {
+    el.classList.toggle('selected', el.dataset.value === val);
+  });
+  document.getElementById('sectorDropdown').classList.remove('open');
+  onSectorChange(val);
+}
+
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('sectorDropdown');
+  if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
+
 // ─── SECTOR CHANGE ────────────────────────────────────────────────────────────
 function onSectorChange(val) {
   currentSector = val;
   sortCol = null; sortDir = 1; currentFilter = 'all';
   const sec = SECTORS[val];
   currentSubMetric = sec?.defaultSubMetric || 'RPK';
-  document.querySelectorAll('.filter-tab').forEach((b,i) => b.classList.toggle('active', i===0));
+  // Reset all banks to visible when switching sector (filter is 'all')
+  const sd = getSectorData();
+  sd.banks.forEach(b => { b.show = true; });
+  document.querySelectorAll('.filter-tab[data-filter]').forEach(el => {
+    el.classList.toggle('active', el.dataset.filter === 'all');
+  });
   renderAll();
 }
 
@@ -1503,7 +1707,6 @@ function showScreen(id) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(`screen-${id}`).classList.add('active');
   event.currentTarget.classList.add('active');
-  document.getElementById('headerRight').style.visibility = id === 'executive' ? '' : 'hidden';
 }
 
 // ─── YOY MODULE ───────────────────────────────────────────────────────────────
@@ -1998,6 +2201,8 @@ function renderAll() {
   renderTable();
 }
 
+// On initial load: ensure all banks visible (filter is 'all')
+getSectorData().banks.forEach(b => { b.show = true; });
 renderAll();
 renderBankList();
 renderSectorPills();
