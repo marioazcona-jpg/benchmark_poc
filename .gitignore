@@ -1,0 +1,3 @@
+# Artefactos de build (se regeneran desde data/peers.csv con tools/build_data.mjs)
+data/generated.js
+data/generated.json
