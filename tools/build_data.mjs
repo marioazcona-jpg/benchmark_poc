@@ -40,6 +40,7 @@ const BANK_KEY = {
   'ING Groep N.V.': 'ING', 'Intesa Sanpaolo S.p.A.': 'Intesa',
   'Barclays PLC': 'Barclays', 'Standard Chartered PLC': 'StanChart',
   'NatWest Group plc': 'NatWest', 'Nordea Bank Abp': 'Nordea',
+  'HSBC Holdings plc': 'HSBC',
   'Bancolombia S.A.': 'Bancolombia', 'Citigroup Inc.': 'Citigroup',
   'Banco Bilbao Vizcaya Argentaria, S.A.': 'BBVA',
   'Türkiye İş Bankası A.Ş.': 'Isbank', 'Akbank T.A.Ş.': 'Akbank',
@@ -375,6 +376,7 @@ fs.writeFileSync(OUT_JSON, JSON.stringify({ records: merged, bySector }, null, 1
 // ---------------------------------------------------------------------------
 const NEW_META = {
   NatWest:       { flag: '🇬🇧', color: '#5A287D', european: false, spanish: false, tier1: true,  mainPeer: true,  label: 'NatWest' },
+  HSBC:          { flag: '🇬🇧', color: '#DB0011', european: false, spanish: false, tier1: true,  mainPeer: true,  label: 'HSBC' },
   Isbank:        { flag: '🇹🇷', color: '#0E4C92', european: false, spanish: false, tier1: false, mainPeer: false, label: 'İşbank' },
   Akbank:        { flag: '🇹🇷', color: '#E2001A', european: false, spanish: false, tier1: false, mainPeer: false, label: 'Akbank' },
   MorganStanley: { flag: '🇺🇸', color: '#00488D', european: false, spanish: false, tier1: true,  mainPeer: false, label: 'Morgan Stanley' },
@@ -386,7 +388,7 @@ const NEW_META = {
 const SELECTOR_DEFAULT = { 'Oil & Gas': 'Absolutas', Shipping: 'Alignment', Steel: 'Intensidad', Aluminium: 'Intensidad', Agriculture: 'Absolutas', Aviation: 'RTK' };
 const SUBMETRIC_LABEL = { 'Oil & Gas': 'MtCO₂e', Intensidad: 'gCO₂e/MJ', Score: 'SSP score', Alignment: 'Alignment Δ (%)', 'Int. económica': 'tCO₂e/€m', 'Int. física': 'físico' };
 
-const ORDER = ['BBVA', 'Sabadell', 'CaixaBank', 'Santander', 'SocGen', 'ING', 'Intesa', 'Barclays', 'StanChart', 'Nordea', 'Bancolombia', 'Citigroup', 'JPMorgan', 'Lloyds', 'UniCredit', 'NatWest', 'Commerzbank', 'UBS', 'MorganStanley', 'Goldman', 'Isbank', 'Akbank'];
+const ORDER = ['BBVA', 'Sabadell', 'CaixaBank', 'Santander', 'SocGen', 'ING', 'Intesa', 'Barclays', 'StanChart', 'HSBC', 'Nordea', 'Bancolombia', 'Citigroup', 'JPMorgan', 'Lloyds', 'UniCredit', 'NatWest', 'Commerzbank', 'UBS', 'MorganStanley', 'Goldman', 'Isbank', 'Akbank'];
 const rank = (b) => { const i = ORDER.indexOf(b); return i < 0 ? 999 : i; };
 const PRIORITY = new Set(['BBVA', 'Santander', 'CaixaBank', 'Sabadell', 'SocGen', 'ING', 'Intesa']);
 const rnd = (v) => v == null ? null : Math.round(v * 1000) / 1000;
