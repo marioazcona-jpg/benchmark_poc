@@ -488,10 +488,14 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
               <div class="card-subtitle" id="chartSubtitle"></div>
               <div class="submetric-selector" id="subMetricSelector" style="display:none"></div>
             </div>
-            <div class="filter-tabs">
-              <button class="filter-tab" data-filter="all" onclick="setFilter('all', this)">All Banks</button>
-              <button class="filter-tab" data-filter="european" onclick="setFilter('european', this)">Europe</button>
-              <button class="filter-tab active" data-filter="top5" onclick="setFilter('top5', this)">Top 5</button>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div id="scenarioSelector" style="display:none;align-items:center;gap:6px"></div>
+              <div id="scenarioDivider" style="display:none;width:1px;height:18px;background:var(--border)"></div>
+              <div class="filter-tabs">
+                <button class="filter-tab" data-filter="all" onclick="setFilter('all', this)">All Banks</button>
+                <button class="filter-tab" data-filter="european" onclick="setFilter('european', this)">Europe</button>
+                <button class="filter-tab active" data-filter="top5" onclick="setFilter('top5', this)">Top 5</button>
+              </div>
             </div>
           </div>
           <div class="bank-toggles" id="bankToggles"></div>
@@ -619,11 +623,12 @@ const BANK_META = {
 const SECTORS = {
   'Cement': {
     metric: 'tCO₂e/t cement',
-    ieaRef: 0.373,
+    ieaRef: 0.49,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 0.490, end: 0.454 },
-      s15: { label: '1.5°C',     start: 0.455, end: 0.373 },
+      stated:  { label: 'Stated Policies',  v2024: 0.59, end: 0.57 },
+      nze:     { label: 'Net Zero 2050',    v2024: 0.59, end: 0.49 },
+      current: { label: 'Current Policies', v2024: 0.59, end: 0.58 },
     },
     relevantText: `El sector del cemento representa aproximadamente el <strong>8% de las emisiones globales de CO₂</strong>, siendo una de las industrias más difíciles de descarbonizar debido a las emisiones de proceso derivadas de la producción de clinker.\n\nEntre el grupo de pares existe una <strong>amplia convergencia en torno al escenario IEA NZE 2050</strong> como referencia, con la mayoría de los bancos empleando metodologías PCAF o SBTi. La intensidad media actual del grupo se sitúa en torno a <strong>0,62 tCO₂e/t</strong>, muy por encima del objetivo IEA 2030 de ~0,35 tCO₂e/t.\n\nDinámicas clave: <strong>ING e Intesa</strong> muestran las trayectorias más ambiciosas con validación SBTi. <strong>Bancolombia</strong> ya se encuentra en la intensidad objetivo, reflejo del bajo perfil de carbono del mix energético colombiano. El sector requiere una reducción media de intensidad de ~45% para 2030, un reto significativo dado el ritmo actual.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -642,11 +647,12 @@ const SECTORS = {
   },
   'Steel': {
     metric: 'tCO₂e/t steel',
-    ieaRef: 0.815,
+    ieaRef: 1.20,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 1.498, end: 1.130 },
-      s15: { label: '1.5°C',     start: 1.325, end: 0.815 },
+      stated:  { label: 'Stated Policies',  v2024: 1.46, end: 1.34 },
+      nze:     { label: 'Net Zero 2050',    v2024: 1.46, end: 1.20 },
+      current: { label: 'Current Policies', v2024: 1.46, end: 1.39 },
     },
     relevantText: `El acero es una de las industrias más intensivas en carbono a nivel global, responsable de aproximadamente el <strong>7–9% de las emisiones globales de CO₂</strong>. Las vías de descarbonización dependen en gran medida de la transición del alto horno al horno de arco eléctrico (EAF).\n\n<strong>Nota sobre comparabilidad:</strong> SocGen y Citigroup utilizan puntuaciones de alineamiento (SSP/Alignment Score) en lugar de métricas de intensidad física, y aparecen en la tabla sin datos de gráfico. ING reporta intensidad física de 1,90 tCO₂/t steel (2025), incluida en el gráfico.\n\nBBVA, Santander y CaixaBank se han incorporado en esta actualización con sus datos de intensidad de cartera. Los valores del grupo oscilan entre <strong>0,82 y 1,95 tCO₂e/t</strong>, todos por encima del objetivo IEA NZE 2030 (~0,89 tCO₂e/t). El sector requiere disponibilidad de hidrógeno verde y chatarra para descarbonizarse al ritmo necesario.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -666,11 +672,12 @@ const SECTORS = {
   },
   'Power': {
     metric: 'kgCO₂e/MWh',
-    ieaRef: 138,
+    ieaRef: 239,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 470, end: 255 },
-      s15: { label: '1.5°C',     start: 470, end: 186 },
+      stated:  { label: 'Stated Policies',  v2024: 445.56, end: 335.62 },
+      nze:     { label: 'Net Zero 2050',    v2024: 445.56, end: 238.56 },
+      current: { label: 'Current Policies', v2024: 445.56, end: 353.50 },
     },
     relevantText: `La descarbonización del sector eléctrico es un eje central de la transición net zero. La intensidad de carbono de las carteras de generación eléctrica refleja el mix entre combustibles fósiles y renovables financiado por cada entidad.\n\nEl objetivo de referencia IEA NZE para 2030 es <strong>~165 kgCO₂e/MWh</strong> a escala global. La mayoría del grupo registra reducciones significativas respecto a sus años base, con varios bancos ya por debajo de este umbral: <strong>ING (44), Nordea (20) y Lloyds (6)</strong> reflejan carteras muy sesgadas hacia renovables.\n\n<strong>Dinámicas clave:</strong> StanChart parte de la intensidad más alta (520 kgCO₂e/MWh en 2021), reflejo de su exposición en mercados emergentes con alta dependencia del carbón. Bancolombia presenta un valor inusualmente alto (240 kgCO₂e/MWh) pese a la abundancia hidroeléctrica colombiana, explicado por el impacto del fenómeno de El Niño en 2024. BBVA y CaixaBank muestran las trayectorias de reducción más consistentes entre los bancos españoles.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -698,11 +705,12 @@ const SECTORS = {
     subMetrics: {
       RPK: {
         metric: 'gCO₂e/RPK',
-        ieaRef: 65,
+        ieaRef: 92,
         ieaYear: 2030,
         scenarios: {
-          s2:  { label: 'Below 2°C', start: 102, end: 78 },
-          s15: { label: '1.5°C',     start: 102, end: 65 },
+          stated:  { label: 'Stated Policies',  v2024: 109.15, end:  99.81 },
+          nze:     { label: 'Net Zero 2050',    v2024: 109.15, end:  91.56 },
+          current: { label: 'Current Policies', v2024: 109.15, end: 100.32 },
         },
         banks: [
           { name: 'BBVA',      base: 89,    baseY: 2022, y2022: null,  y2023: 103,  y2024: 90,   y2025: 85,   obj: 73,   objY: 2030, status: 'on-track',  pctYTD: 4,    scope: 'S1',   metod: 'PACTA',         show: true  },
@@ -716,8 +724,8 @@ const SECTORS = {
         ieaRef: 616,
         ieaYear: 2030,
         scenarios: {
-          s2:  { label: 'Below 2°C', start: 877, end: 720 },
-          s15: { label: '1.5°C',     start: 845, end: 616 },
+          stated:  { label: 'Stated Policies', v2024: 814, end: 720 },
+          nze:     { label: 'Net Zero 2050',   v2024: 814, end: 616 },
         },
         banks: [
           { name: 'BBVA',      base: null,  baseY: null,  y2022: null, y2023: null, y2024: null, y2025: null, obj: null, objY: 2030, status: null,         pctYTD: null, scope: '—',    metod: '—',         show: true  },
@@ -762,8 +770,8 @@ const SECTORS = {
     ieaRef: 75,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 190, end: 120 },
-      s15: { label: '1.5°C',     start: 190, end: 75 },
+      stated:  { label: 'Stated Policies', v2024: 162, end: 120 },
+      nze:     { label: 'Net Zero 2050',   v2024: 162, end: 75 },
     },
     relevantText: `El sector del automóvil es uno de los de mayor cobertura entre los bancos del grupo. La métrica dominante es la <strong>intensidad de emisiones de los vehículos financiados (gCO₂/vkm)</strong>, que captura el mix entre vehículos de combustión (ICE) y eléctricos (EV) en la cartera de préstamos a fabricantes (OEMs) y, en algunos casos, a usuarios finales.\n\n<strong>Dinámicas clave:</strong> La mayoría del grupo reporta mejoras, aunque <strong>Citigroup muestra un empeoramiento notable</strong> (154 → 211 gCO₂/vkm, +37%), atribuido a cambios metodológicos y de composición de cartera. CaixaBank también ve un retroceso en 2025 (163,9 gCO₂/vkm vs. base 154,1). Estos casos reflejan la sensibilidad de la métrica a variaciones de portfolio más que a cambios en el parque vehicular real.\n\nBBVA y UniCredit lideran las reducciones sostenidas del grupo (33% YTD). El objetivo IEA NZE 2030 de ~75 gCO₂/vkm requiere una electrificación masiva de las ventas de vehículos nuevos.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IEA NZE WEO 2023',
@@ -807,8 +815,8 @@ const SECTORS = {
     ieaRef: 12,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 50, end: 20 },
-      s15: { label: '1.5°C',     start: 50, end: 12 },
+      stated:  { label: 'Stated Policies', v2024: 38, end: 20 },
+      nze:     { label: 'Net Zero 2050',   v2024: 38, end: 12 },
     },
     relevantText: `El inmobiliario comercial (CRE) es uno de los sectores con mayor cobertura entre los bancos europeos del grupo. La métrica dominante es la <strong>intensidad operativa (kgCO₂e/m²)</strong>, con el escenario de referencia CRREM 1.5°C como principal benchmark.\n\nLos valores actuales del grupo oscilan entre <strong>18,8 y 53 kgCO₂e/m²</strong>, con el objetivo IEA/CRREM 2030 en torno a ~12 kgCO₂e/m². La geografía explica gran parte de la variabilidad: carteras en países mediterráneos presentan valores más bajos, mientras que mercados como el alemán (UniCredit) o las carteras diversificadas (StanChart, con base 73 kgCO₂e/m²) parten de una línea base más alta.\n\n<strong>Dinámicas clave:</strong> BBVA reporta una intensidad de 18,8 kgCO₂e/m² en 2025 (cobertura España), por encima del objetivo 2030 (11,7). CaixaBank muestra una leve regresión en 2025 (21 kgCO₂e/m²) atribuida a actualizaciones de proxies. Citigroup presenta la mayor reducción porcentual del grupo (40% YTD, ya por debajo de su objetivo 2030).`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · CRREM v2 · IEA NZE WEO 2023',
@@ -829,11 +837,12 @@ const SECTORS = {
   },
   'RRE': {
     metric: 'kgCO₂e/m²',
-    ieaRef: 15,
+    ieaRef: 5.99,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 45, end: 20 },
-      s15: { label: '1.5°C',     start: 45, end: 15 },
+      stated:  { label: 'Stated Policies',  v2024: 9.05, end: 7.69 },
+      nze:     { label: 'Net Zero 2050',    v2024: 9.05, end: 5.99 },
+      current: { label: 'Current Policies', v2024: 9.05, end: 7.86 },
     },
     relevantText: `Las hipotecas residenciales (RRE) representan la mayor cartera de emisiones financiadas para los bancos de retail. La métrica dominante es la <strong>intensidad operativa (kgCO₂e/m²)</strong>, con el pathway CRREM 1.5°C o equivalentes nacionales como referencia.\n\nLos valores actuales del grupo oscilan entre <strong>19,5 y 42 kgCO₂e/m²</strong>. El objetivo de referencia de ~15 kgCO₂e/m² para 2030 implica renovaciones profundas del parque residencial.\n\n<strong>Dinámicas clave:</strong> Lloyds parte del valor más alto del grupo (46 kgCO₂e/m² en 2020) pero ha reducido un 9% hasta 42 kgCO₂e/m² en 2024. CaixaBank muestra una fuerte reducción (17% YTD, con y2025=19,5 ya cerca del objetivo de 19 kgCO₂e/m²). BBVA cubre exclusivamente España y registra una reducción modesta del 3% desde 2023. ING no tiene un objetivo 2030 formalizado (solo seguimiento).`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · CRREM v2 · IEA NZE WEO 2023',
@@ -871,11 +880,12 @@ const SECTORS = {
   },
   'Aluminium': {
     metric: 'tCO₂e/t Al',
-    ieaRef: 3.069,
+    ieaRef: 1.81,
     ieaYear: 2030,
     scenarios: {
-      s2:  { label: 'Below 2°C', start: 5.255, end: 3.142 },
-      s15: { label: '1.5°C',     start: 5.067, end: 3.069 },
+      stated:  { label: 'Stated Policies',  v2024: 2.22, end: 2.05 },
+      nze:     { label: 'Net Zero 2050',    v2024: 2.22, end: 1.81 },
+      current: { label: 'Current Policies', v2024: 2.22, end: 2.12 },
     },
     relevantText: `El aluminio primario es una de las industrias más electro-intensivas, con una huella de carbono muy dependiente del mix eléctrico. La intensidad de referencia global para aluminio primario oscila entre <strong>4 y 17 tCO₂e/t</strong>, con el objetivo IEA/IAI NZE 2030 en torno a <strong>~6,5 tCO₂e/t</strong>.\n\n<strong>Nota sobre comparabilidad:</strong> Los valores muy inferiores (Sabadell, ~0,6 tCO₂e/t) reflejan carteras de aluminio secundario (reciclado), que tiene una intensidad radicalmente menor que el primario. BBVA reporta mediante delta de alineamiento (%), no en tCO₂e/t, y aparece en la tabla sin datos de gráfico. Citigroup usa el SAFF Climate Alignment Score, también incompatible con la métrica del gráfico.\n\n<strong>Dinámicas clave:</strong> Intesa presenta la trayectoria más positiva (−37% YTD, desde 4,79 hasta 3,03 tCO₂e/t en 2025). StanChart y JPMorgan muestran deterioros significativos, atribuidos a variaciones de composición de cartera a corto plazo.`,
     relevantFooter: 'Fuente: Informes de sostenibilidad de bancos 2024–2025 · IAI 1.5°C Pathway · IEA NZE WEO 2023',
@@ -1660,168 +1670,6 @@ const GEN = {
             "pctYTD": 83,
             "scope": "S1+2+3",
             "metod": "PCAF",
-            "show": false
-          }
-        ],
-        "Intensidad": [
-          {
-            "name": "Santander",
-            "seg": null,
-            "base": 3.08,
-            "baseY": 2023,
-            "y2022": null,
-            "y2023": 3.08,
-            "y2024": 3.15,
-            "y2025": null,
-            "y2026": null,
-            "obj": null,
-            "objLow": 2.31,
-            "objHigh": 3.03,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": -2,
-            "scope": "S1+2",
-            "metod": "PCAF",
-            "show": true
-          },
-          {
-            "name": "Intesa",
-            "seg": null,
-            "base": 64,
-            "baseY": 2021,
-            "y2022": null,
-            "y2023": 64,
-            "y2024": 64,
-            "y2025": 63,
-            "y2026": null,
-            "obj": null,
-            "objLow": 52,
-            "objHigh": 58,
-            "objY": 2030,
-            "status": "on-track",
-            "pctYTD": 2,
-            "scope": "S1+2+3",
-            "metod": "SBTi; PCAF; SDA",
-            "show": true
-          },
-          {
-            "name": "JPMorgan",
-            "seg": "Uso final",
-            "base": 45.9,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": null,
-            "y2024": 30.6,
-            "y2025": null,
-            "y2026": null,
-            "obj": 29.5,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 33,
-            "scope": "S3",
-            "metod": "Carbon Compass / PCAF",
-            "show": false
-          },
-          {
-            "name": "JPMorgan",
-            "seg": "Operac.",
-            "base": 4.9,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": null,
-            "y2024": 4,
-            "y2025": null,
-            "y2026": null,
-            "obj": 2.7,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 18,
-            "scope": "S1+2",
-            "metod": "Carbon Compass / PCAF",
-            "show": false
-          },
-          {
-            "name": "MorganStanley",
-            "seg": "Uso final",
-            "base": 60.4,
-            "baseY": 2022,
-            "y2022": 60.4,
-            "y2023": 60.2,
-            "y2024": null,
-            "y2025": null,
-            "y2026": null,
-            "obj": null,
-            "objLow": 48.9,
-            "objHigh": 54.4,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 0,
-            "scope": "S3",
-            "metod": "—",
-            "show": false
-          },
-          {
-            "name": "MorganStanley",
-            "seg": "Operac.",
-            "base": 6.2,
-            "baseY": 2022,
-            "y2022": 6.2,
-            "y2023": 6.1,
-            "y2024": null,
-            "y2025": null,
-            "y2026": null,
-            "obj": null,
-            "objLow": 4.9,
-            "objHigh": 5.4,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 2,
-            "scope": "S1+2",
-            "metod": "—",
-            "show": false
-          },
-          {
-            "name": "Goldman",
-            "seg": null,
-            "base": 72,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": 67,
-            "y2024": null,
-            "y2025": null,
-            "y2026": null,
-            "obj": null,
-            "objLow": 56,
-            "objHigh": 60,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 7,
-            "scope": "S1+2+3",
-            "metod": "—",
-            "show": false
-          },
-          {
-            "name": "Isbank",
-            "seg": null,
-            "base": 58,
-            "baseY": 2023,
-            "y2022": null,
-            "y2023": 58,
-            "y2024": null,
-            "y2025": null,
-            "y2026": null,
-            "obj": 49,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "on-track",
-            "pctYTD": 0,
-            "scope": "S1+2+3",
-            "metod": "—",
             "show": false
           }
         ]
@@ -4279,7 +4127,7 @@ const GEN = {
 // curados (metric, ieaRef, scenarios, relevantText) de cada sector/submétrica.
 Object.assign(BANK_META, GEN.bankMeta);
 const SUBMETA = {
-  'Oil & Gas':   { Absolutas: { metric: 'MtCO₂e', ieaRef: null }, Intensidad: { metric: 'gCO₂e/MJ', ieaRef: null } },
+  'Oil & Gas':   { Absolutas: { metric: 'MtCO₂e', ieaRef: null } },
   'Steel':       { Intensidad: 'INHERIT', Score: { metric: 'SSP score (0 = alineado)', ieaRef: 0 } },
   'Aluminium':   { Intensidad: 'INHERIT', Score: { metric: 'Alignment score (0 = alineado)', ieaRef: 0 } },
   'Shipping':    { Alignment: 'INHERIT', Intensidad: { metric: 'gCO₂/dwt-nm', ieaRef: null } },
@@ -4315,6 +4163,17 @@ function dispName(name) { const m = BANK_META[name]; return (m && m.label) || na
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let currentSector = 'Cement';
 let currentFilter = 'top5';
+let activeScenarios = new Set(['stated', 'nze']);
+
+function toggleScenario(key, btn) {
+  if (activeScenarios.has(key)) {
+    if (activeScenarios.size <= 1) return; // siempre al menos 1 activo
+    activeScenarios.delete(key);
+  } else {
+    activeScenarios.add(key);
+  }
+  drawChart();
+}
 let sortCol = null;
 let sortDir = 1;
 let chartInst = null;
@@ -4610,9 +4469,10 @@ function drawChart() {
   document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>Valores reportados</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>Senda proyectada al objetivo 2030</span>`;
   const _sectorObj = SECTORS[currentSector];
   const _subEl = document.getElementById('subMetricSelector');
-  if (_sectorObj?.hasSubMetrics) {
+  const _subKeys = _sectorObj?.hasSubMetrics ? Object.keys(_sectorObj.subMetrics) : [];
+  if (_subKeys.length > 1) {
     _subEl.style.display = '';
-    _subEl.innerHTML = Object.keys(_sectorObj.subMetrics).map(m =>
+    _subEl.innerHTML = _subKeys.map(m =>
       `<button class="submetric-tab${m === currentSubMetric ? ' active' : ''}" onclick="setSubMetric('${m}', this)">${m}</button>`
     ).join('');
   } else {
@@ -4622,28 +4482,100 @@ function drawChart() {
 
   const datasets = [];
   const _lerp = (a, b, t) => a + (b - a) * t;
+  // ── Selector de escenarios ──────────────────────────────────────────────────
+  const _scSel = document.getElementById('scenarioSelector');
   if (sd.scenarios) {
-    const scData = (s, e) => YEARS.map(y => parseFloat(_lerp(s, e, (y - 2020) / 10).toFixed(4)));
-    datasets.push({
-      label: sd.scenarios.s2.label,
-      data: scData(sd.scenarios.s2.start, sd.scenarios.s2.end),
-      borderColor: 'rgba(91,155,213,0.3)',
-      borderWidth: 1,
-      backgroundColor: 'rgba(91,155,213,0.13)',
-      fill: '+1',
-      pointRadius: 0, pointHitRadius: 0,
-      tension: 0, order: 99,
+    const _avail = ['current', 'stated', 'nze'].filter(k => sd.scenarios[k]);
+    const _div = document.getElementById('scenarioDivider');
+    if (_avail.length > 1) {
+      _scSel.style.display = 'flex';
+      if (_div) _div.style.display = '';
+      _scSel.innerHTML =
+        `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px">IEA:</span>` +
+        _avail.map(k => {
+          const on = activeScenarios.has(k);
+          return `<button class="filter-tab${on ? ' active' : ''}" style="font-size:11px;padding:4px 10px"
+            onclick="toggleScenario('${k}',this)">${sd.scenarios[k].label}</button>`;
+        }).join('');
+    } else {
+      _scSel.style.display = 'none';
+      if (_div) _div.style.display = 'none';
+    }
+  } else {
+    _scSel.style.display = 'none';
+    const _div = document.getElementById('scenarioDivider');
+    if (_div) _div.style.display = 'none';
+  }
+
+  // ── Datasets de escenarios ──────────────────────────────────────────────────
+  if (sd.scenarios) {
+    // Línea plana hasta 2024, luego interpolación lineal hasta 2030
+    const scData = (v24, v30) => YEARS.map(y => {
+      if (y <= 2024) return parseFloat(v24.toFixed(4));
+      return parseFloat(_lerp(v24, v30, (y - 2024) / 6).toFixed(4));
     });
-    datasets.push({
-      label: sd.scenarios.s15.label,
-      data: scData(sd.scenarios.s15.start, sd.scenarios.s15.end),
-      borderColor: 'rgba(91,155,213,0.3)',
-      borderWidth: 1,
-      backgroundColor: 'transparent',
-      fill: false,
-      pointRadius: 0, pointHitRadius: 0,
-      tension: 0, order: 99,
-    });
+    // Escenarios activos para este sector, ordenados por valor 2030 desc
+    const activeSc = ['current', 'stated', 'nze']
+      .filter(k => sd.scenarios[k] && activeScenarios.has(k))
+      .sort((a, b) => sd.scenarios[b].end - sd.scenarios[a].end);
+    const n = activeSc.length;
+
+    if (n === 1) {
+      const sc = sd.scenarios[activeSc[0]];
+      datasets.push({
+        label: sc.label,
+        data: scData(sc.v2024, sc.end),
+        borderColor: 'rgba(91,155,213,0.7)',
+        borderWidth: 1.5,
+        backgroundColor: 'transparent',
+        fill: false,
+        pointRadius: 0, pointHitRadius: 0,
+        tension: 0, order: 99,
+      });
+    } else if (n >= 2) {
+      // Con 3 activos: banda entre stated-nze + current en gris
+      // Con 2 activos: banda entre los 2 seleccionados
+      const bandTopKey = (n === 3) ? 'stated' : activeSc[0];
+      const bandBotKey = (n === 3) ? 'nze'    : activeSc[activeSc.length - 1];
+      const grayKey    = (n === 3) ? 'current' : null;
+
+      const topSc = sd.scenarios[bandTopKey];
+      datasets.push({
+        label: topSc.label,
+        data: scData(topSc.v2024, topSc.end),
+        borderColor: 'rgba(91,155,213,0.35)',
+        borderWidth: 1,
+        backgroundColor: 'rgba(91,155,213,0.13)',
+        fill: '+1',
+        pointRadius: 0, pointHitRadius: 0,
+        tension: 0, order: 99,
+      });
+      const botSc = sd.scenarios[bandBotKey];
+      datasets.push({
+        label: botSc.label,
+        data: scData(botSc.v2024, botSc.end),
+        borderColor: 'rgba(91,155,213,0.35)',
+        borderWidth: 1,
+        backgroundColor: 'transparent',
+        fill: false,
+        pointRadius: 0, pointHitRadius: 0,
+        tension: 0, order: 99,
+      });
+      if (grayKey) {
+        const graySc = sd.scenarios[grayKey];
+        datasets.push({
+          label: graySc.label,
+          data: scData(graySc.v2024, graySc.end),
+          borderColor: 'rgba(160,160,160,0.55)',
+          borderWidth: 1.2,
+          borderDash: [5, 3],
+          backgroundColor: 'transparent',
+          fill: false,
+          pointRadius: 0, pointHitRadius: 0,
+          tension: 0, order: 99,
+        });
+      }
+    }
   }
   sd.banks.forEach(b => {
     const meta = BANK_META[b.name] || {};
@@ -4750,33 +4682,63 @@ function drawChart() {
 
       // Scenario bracket + labels
       if (!sd.scenarios) return;
-      const lp = (a, b, t) => a + (b - a) * t;
-      const rx  = chart.chartArea.right + 10;
-      const py2 = y.getPixelForValue(lp(sd.scenarios.s2.start,  sd.scenarios.s2.end,  1));
-      const p15 = y.getPixelForValue(lp(sd.scenarios.s15.start, sd.scenarios.s15.end, 1));
+      const rx = chart.chartArea.right + 10;
+      // Escenarios activos, ordenados por end desc (arriba → abajo en el gráfico)
+      const _activeSc = ['current', 'stated', 'nze']
+        .filter(k => sd.scenarios[k] && activeScenarios.has(k))
+        .sort((a, b) => sd.scenarios[b].end - sd.scenarios[a].end);
+      if (_activeSc.length === 0) return;
+      const _n = _activeSc.length;
+
       ctx.save();
-      ctx.strokeStyle = 'rgba(70,120,200,0.45)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(rx, py2); ctx.lineTo(rx + 4, py2);
-      ctx.lineTo(rx + 4, p15); ctx.lineTo(rx, p15);
-      ctx.stroke();
       ctx.textAlign = 'left';
-      ctx.font = 'italic 8px "DM Sans", sans-serif';
-      ctx.fillStyle = 'rgba(70,120,200,0.4)';
-      ctx.fillText('IEA scenarios', rx + 8, (py2 + p15) / 2 + 4);
-      ctx.font = '600 9.5px "DM Sans", sans-serif';
-      ctx.fillStyle = 'rgba(70,120,200,0.9)';
-      ctx.fillText(sd.scenarios.s2.label, rx + 8, py2 + 4);
-      ctx.font = '500 8.5px "DM Mono", monospace';
-      ctx.fillStyle = 'rgba(70,120,200,0.65)';
-      ctx.fillText(sd.scenarios.s2.end.toFixed(2), rx + 8, py2 + 15);
-      ctx.font = '600 9.5px "DM Sans", sans-serif';
-      ctx.fillStyle = 'rgba(70,120,200,0.9)';
-      ctx.fillText(sd.scenarios.s15.label, rx + 8, p15 + 4);
-      ctx.font = '500 8.5px "DM Mono", monospace';
-      ctx.fillStyle = 'rgba(70,120,200,0.65)';
-      ctx.fillText(sd.scenarios.s15.end.toFixed(2), rx + 8, p15 + 15);
+
+      // Corchete entre los límites de la banda (si hay 2+ escenarios)
+      if (_n >= 2) {
+        const bTop = _n === 3 ? 'stated' : _activeSc[0];
+        const bBot = _n === 3 ? 'nze'    : _activeSc[_activeSc.length - 1];
+        const pT = y.getPixelForValue(sd.scenarios[bTop].end);
+        const pB = y.getPixelForValue(sd.scenarios[bBot].end);
+        ctx.strokeStyle = 'rgba(70,120,200,0.45)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(rx, pT); ctx.lineTo(rx + 4, pT);
+        ctx.lineTo(rx + 4, pB); ctx.lineTo(rx, pB);
+        ctx.stroke();
+        ctx.font = 'italic 8px "DM Sans", sans-serif';
+        ctx.fillStyle = 'rgba(70,120,200,0.35)';
+        ctx.fillText('IEA scenarios', rx + 8, (pT + pB) / 2 + 4);
+      }
+
+      // Posiciones de etiquetas con anti-colisión (mínimo 26px entre ellas)
+      const _pts = _activeSc.map(k => ({ key: k, py: y.getPixelForValue(sd.scenarios[k].end) }));
+      const MIN_GAP = 26;
+      for (let i = 1; i < _pts.length; i++) {
+        if (_pts[i].py - _pts[i - 1].py < MIN_GAP) _pts[i].py = _pts[i - 1].py + MIN_GAP;
+      }
+
+      _pts.forEach(({ key, py }) => {
+        const sc     = sd.scenarios[key];
+        const pNat   = y.getPixelForValue(sc.end);
+        const isGray = key === 'current' && _n === 3;
+        const cLabel = isGray ? 'rgba(130,130,130,0.75)' : 'rgba(70,120,200,0.9)';
+        const cVal   = isGray ? 'rgba(130,130,130,0.55)' : 'rgba(70,120,200,0.65)';
+        // Línea conectora si la etiqueta fue desplazada
+        if (Math.abs(py - pNat) > 3) {
+          ctx.strokeStyle = isGray ? 'rgba(130,130,130,0.3)' : 'rgba(70,120,200,0.3)';
+          ctx.lineWidth = 0.7;
+          ctx.setLineDash([2, 2]);
+          ctx.beginPath(); ctx.moveTo(rx + 3, pNat); ctx.lineTo(rx + 3, py); ctx.stroke();
+          ctx.setLineDash([]);
+        }
+        ctx.font = '600 9px "DM Sans", sans-serif';
+        ctx.fillStyle = cLabel;
+        ctx.fillText(sc.label, rx + 8, py + 4);
+        ctx.font = '500 8px "DM Mono", monospace';
+        ctx.fillStyle = cVal;
+        ctx.fillText(sc.end.toFixed(2), rx + 8, py + 14);
+      });
+
       ctx.restore();
     }
   };
@@ -4812,7 +4774,7 @@ function drawChart() {
               return `${ctx.dataset.label}: ${Number(v).toFixed(2)} ${getSectorData().metric}`;
             }
           },
-          filter: item => item.raw !== null
+          filter: item => item.raw !== null && item.dataset.order !== 99
         }
       },
       scales: {
@@ -5099,6 +5061,7 @@ document.addEventListener('click', function(e) {
 function onSectorChange(val) {
   currentSector = val;
   sortCol = null; sortDir = 1; currentFilter = 'top5';
+  activeScenarios = new Set(['stated', 'nze']);
   const sec = SECTORS[val];
   currentSubMetric = sec?.defaultSubMetric || 'RPK';
   // Default to the decluttered Top-5 view on every sector change
