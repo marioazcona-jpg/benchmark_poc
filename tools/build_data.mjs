@@ -57,10 +57,29 @@ const SECTOR_KEY = {
   'Shipping': 'Shipping', 'Other': null,
 };
 const C = {
-  bank: 0, sectorRaw: 1, sectorNorm: 2, scope: 3, method: 8, scenario: 9, unit: 10,
+  bank: 0, sectorRaw: 1, sectorNorm: 2, scope: 3, geo: 6, method: 8, scenario: 9, unit: 10,
   baseY: 12, lastY: 13, objY: 14, vBase: 15, v2023: 16, v2024: 17, v2025: 18,
   v2026: 19, vObj: 20, status: 24, validation: 25, currency: 26, comments: 41,
 };
+
+// Cobertura geográfica del objetivo: normaliza variantes a una etiqueta corta para tabla.
+function normGeo(s) {
+  let t = String(s || '').trim();
+  if (!t || /^global$/i.test(t)) return t ? 'Global' : null;
+  // multi-país: deja el primero + "…"
+  const parts = t.split(/[;,]/).map(x => x.trim()).filter(Boolean);
+  const map = {
+    'türkiye': 'Turquía', 'turkiye': 'Turquía', 'turkey': 'Turquía',
+    'uk': 'UK', 'reino unido': 'UK', 'united kingdom': 'UK',
+    'españa': 'España', 'spain': 'España', 'península ibérica': 'Iberia',
+    'italia': 'Italia', 'italy': 'Italia', 'germany': 'Alemania', 'alemania': 'Alemania',
+    'switzerland': 'Suiza', 'nordics': 'Nórdicos', 'europa': 'Europa', 'europe': 'Europa',
+    'holanda': 'Holanda', 'brasil': 'Brasil',
+  };
+  const first = parts[0];
+  const lbl = map[first.toLowerCase()] || first;
+  return parts.length > 1 ? `${lbl} +${parts.length - 1}` : lbl;
+}
 
 // ---------------------------------------------------------------------------
 // Number parsing: comma OR dot decimal; both => last separator is decimal.
@@ -167,8 +186,8 @@ function classify(sectorKey, unit, rawVal) {
       if (/\bmt|million metric|millones|m mt/i.test(lu)) return { submetric: 'Absolutas', canonical: 'MtCO₂e', factor: 1 };
       if (/boe/i.test(lu)) return { exclude: true, reason: 'O&G intensidad en base boe (no comparable a /MJ)' };
       if (/mj|\/tj/i.test(lu)) {
-        // tCO2e/TJ == gCO2e/MJ ; kgCO2e/MJ mislabel (values ~50-70) => treat as g/MJ
-        return { submetric: 'Intensidad', canonical: 'gCO₂e/MJ', factor: 1 };
+        // Submétrica Intensidad (gCO₂e/MJ) retirada a petición: O&G solo muestra Absolutas.
+        return { exclude: true, reason: 'O&G Intensidad /MJ retirada (solo Absolutas)' };
       }
       if (atypical) return { exclude: true, reason: 'O&G métrica atípica (' + u + ')' };
       return { exclude: true, reason: 'O&G unidad no reconocida (' + u + ')' };
@@ -307,7 +326,7 @@ for (let ri = 0; ri < data.length; ri++) {
     csvLine, bank, sector, sectorRaw: (r[C.sectorRaw] || '').trim(),
     submetric: cls.submetric, canonical: cls.canonical, factor: f, exposure: !!cls.exposure,
     scope: normScope(r[C.scope]), metod: (r[C.method] || '').trim(),
-    scenario: (r[C.scenario] || '').trim(),
+    scenario: (r[C.scenario] || '').trim(), geo: normGeo(r[C.geo]),
     baseY, objY, series, baseVal, latest, latestY,
     obj, objLow, objHigh,
     status: normStatus(r[C.status]), pctYTD,
@@ -403,6 +422,7 @@ function recOut(rec) {
     obj: rec.isRange ? null : rnd(rec.obj),
     objLow: rnd(rec.objLow), objHigh: rnd(rec.objHigh), objY: rec.objY,
     status: rec.status, pctYTD: rec.pctYTD, scope: rec.scope, metod: rec.metod || '—',
+    geo: rec.geo || null,
     show: rec.bank === 'BBVA' || (PRIORITY.has(rec.bank) && Object.keys(rec.series).length > 0),
   };
 }
@@ -444,6 +464,108 @@ if (si >= 0 && ei > si) {
   console.log('GEN inyectado en index.html (' + genLiteral.length + ' chars)');
 } else {
   console.log('!! marcadores GEN_START/END no encontrados en index.html');
+}
+
+// ---------------------------------------------------------------------------
+// SENDAS PROPIAS DE BBVA (data/bbva_pathways.csv) → literal PATHWAYS (PGEN)
+// Sendas de BBVA derivadas de los escenarios globales WEO2025, ancladas al valor
+// base de la entidad. Se ignora la columna WEO2021 (solo se usó para comparar).
+// Unidades convertidas a las del dashboard (Cement/Steel kg→t).
+// ---------------------------------------------------------------------------
+const PW_SECTOR = {
+  Cement:   { key: 'Cement',     factor: 0.001, unit: 'tCO₂e/t' },
+  Steel:    { key: 'Steel',      factor: 0.001, unit: 'tCO₂e/t' },
+  Aviation: { key: 'Aviation',   factor: 1,     unit: 'gCO₂e/RPK' },
+  Autos:    { key: 'Automotive', factor: 1,     unit: 'gCO₂/vkm' },
+  Power:    { key: 'Power',       factor: 1,     unit: 'kgCO₂e/MWh' },
+};
+const PW_SCEN = { 'BBVA CPS WEO2025': 'cps', 'BBVA STEPS WEO2025': 'steps', 'BBVA NZ WEO2025': 'nz' };
+
+const PATHWAYS = {};
+const pwReport = [];
+try {
+  const pwRows = parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'bbva_pathways.csv'), 'utf8'));
+  const yearCols = pwRows[0].slice(3).map(y => parseInt(y)).filter(Boolean);
+  for (const r of pwRows.slice(1)) {
+    if (!r.some(c => (c || '').trim())) continue;
+    const secDef = PW_SECTOR[(r[0] || '').trim()];
+    const scen = PW_SCEN[(r[1] || '').trim()];
+    if (!secDef || !scen) continue; // ignora WEO2021 y sectores no mapeados
+    const obj = (PATHWAYS[secDef.key] ||= { years: yearCols, unit: secDef.unit });
+    obj[scen] = yearCols.map((_, i) => {
+      const raw = parseNum(r[3 + i]);
+      return raw == null ? null : Math.round(raw * secDef.factor * 1000) / 1000;
+    });
+  }
+  for (const [k, v] of Object.entries(PATHWAYS))
+    pwReport.push(`${k}{${Object.keys(v).filter(x => x !== 'years' && x !== 'unit').join(',')}}`);
+} catch (e) {
+  console.log('!! No se pudo leer data/bbva_pathways.csv: ' + e.message);
+}
+
+const pwLiteral = 'const PATHWAYS = ' + JSON.stringify(PATHWAYS) + ';';
+{
+  const PS = '/*PGEN_START*/', PE = '/*PGEN_END*/';
+  const psi = html.indexOf(PS), pei = html.indexOf(PE);
+  if (psi >= 0 && pei > psi) {
+    html = html.slice(0, psi + PS.length) + '\n' + pwLiteral + '\n' + html.slice(pei);
+    fs.writeFileSync(htmlPath, html);
+    console.log('PATHWAYS inyectado (' + pwLiteral.length + ' chars) — ' + (pwReport.join(' · ') || 'sin datos'));
+  } else {
+    console.log('!! marcadores PGEN_START/END no encontrados en index.html');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// ESCENARIOS GLOBALES WEO2025 (data/weo2025_global.csv) → literal GLOBALS (GGEN)
+// Comunes a todos los bancos. Ya vienen en unidades del dashboard (sin conversión).
+// Se recorta a 2020-2050 para alinear con las sendas de BBVA.
+// ---------------------------------------------------------------------------
+const GW_SECTOR = {
+  'Cement': 'Cement', 'Steel': 'Steel', 'Aviation': 'Aviation', 'Automotive': 'Automotive',
+  'Commercial RE': 'CRE', 'Residential RE': 'RRE', 'Aluminium': 'Aluminium', 'Power': 'Power',
+};
+const GW_SCEN = { CPS: 'cps', STEPS: 'steps', NZE: 'nz' };
+const GW_UNIT = {
+  Cement: 'tCO₂e/t', Steel: 'tCO₂e/t', Aluminium: 'tCO₂e/t',
+  Aviation: 'gCO₂e/RPK', Automotive: 'gCO₂/vkm', Power: 'kgCO₂e/MWh',
+  CRE: 'kgCO₂e/m²', RRE: 'kgCO₂e/m²',
+};
+
+const GLOBALS = {};
+const gwReport = [];
+try {
+  const gRows = parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'weo2025_global.csv'), 'utf8'));
+  const c2020 = gRows[0].indexOf('2020');
+  const gYears = gRows[0].slice(c2020).map(y => parseInt(y)).filter(Boolean); // 2020..2050
+  for (const r of gRows.slice(1)) {
+    if (!r.some(c => (c || '').trim())) continue;
+    const key = GW_SECTOR[(r[0] || '').trim()];
+    const scen = GW_SCEN[(r[2] || '').trim()];
+    if (!key || !scen) continue;
+    const obj = (GLOBALS[key] ||= { years: gYears, unit: GW_UNIT[key] || (r[4] || '').trim() });
+    obj[scen] = gYears.map((_, i) => {
+      const v = parseNum(r[c2020 + i]);
+      return v == null ? null : Math.round(v * 1000) / 1000;
+    });
+  }
+  for (const [k, v] of Object.entries(GLOBALS))
+    gwReport.push(`${k}{${Object.keys(v).filter(x => x !== 'years' && x !== 'unit').join(',')}}`);
+} catch (e) {
+  console.log('!! No se pudo leer data/weo2025_global.csv: ' + e.message);
+}
+
+const gwLiteral = 'const GLOBALS = ' + JSON.stringify(GLOBALS) + ';';
+{
+  const GS = '/*GGEN_START*/', GE = '/*GGEN_END*/';
+  const gsi = html.indexOf(GS), gei = html.indexOf(GE);
+  if (gsi >= 0 && gei > gsi) {
+    html = html.slice(0, gsi + GS.length) + '\n' + gwLiteral + '\n' + html.slice(gei);
+    fs.writeFileSync(htmlPath, html);
+    console.log('GLOBALS inyectado (' + gwLiteral.length + ' chars) — ' + (gwReport.join(' · ') || 'sin datos'));
+  } else {
+    console.log('!! marcadores GGEN_START/END no encontrados en index.html');
+  }
 }
 
 // ---------------------------------------------------------------------------

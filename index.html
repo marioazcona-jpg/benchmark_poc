@@ -126,6 +126,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .filter-tabs { display: flex; gap: 4px; }
 .filter-tab { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-family: var(--font); transition: all .15s; }
 .filter-tab.active { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
+.region-select { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); font-family: var(--font); transition: all .15s; max-width: 200px; }
+.region-select:focus { outline: none; border-color: var(--bbva-blue); }
+.region-select.region-on { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
+.scn-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.scn-block { display: inline-flex; align-items: center; }
+.scn-block.off { opacity: .4; text-decoration: line-through; }
+.scn-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; flex-shrink: 0; }
+.scn-pill { padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); font-family: var(--font); transition: all .15s; }
+.scn-pill:hover { border-color: var(--bbva-blue); }
+.scn-pill.active { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
+.scn-verdict { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
 .submetric-selector { display:flex; gap:4px; margin-top:8px; }
 .submetric-tab { padding:4px 11px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-family:var(--font); transition:all .15s; letter-spacing:.02em; text-transform:uppercase; }
 .submetric-tab.active { background:var(--bbva-blue); color:#fff; border-color:var(--bbva-blue); }
@@ -426,6 +437,10 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
     Qualitative Analysis
   </a>
+  <a class="nav-item" onclick="showScreen('scenarios')" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+    Climate Scenarios
+  </a>
   <div class="nav-bottom">BBVA CIB · DCB v3.0</div>
 </nav>
 
@@ -491,6 +506,19 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
             <div style="display:flex;align-items:center;gap:10px">
               <div id="scenarioSelector" style="display:none;align-items:center;gap:6px"></div>
               <div id="scenarioDivider" style="display:none;width:1px;height:18px;background:var(--border)"></div>
+              <select class="region-select" onchange="setRegion(this.value)" title="Filtra los pares por su zona geográfica de origen (sede)">
+                <option value="">🌍 Todas las zonas</option>
+                <option value="Iberia">🇪🇸 Iberia</option>
+                <option value="DACH">🇩🇪 DACH (Alemania/Suiza)</option>
+                <option value="Reino Unido">🇬🇧 Reino Unido</option>
+                <option value="Italia">🇮🇹 Italia</option>
+                <option value="Francia">🇫🇷 Francia</option>
+                <option value="Benelux">🇳🇱 Benelux</option>
+                <option value="Nórdicos">🇸🇪 Nórdicos</option>
+                <option value="EE.UU.">🇺🇸 EE.UU.</option>
+                <option value="Turquía">🇹🇷 Turquía</option>
+                <option value="LatAm">🇨🇴 LatAm</option>
+              </select>
               <div class="filter-tabs">
                 <button class="filter-tab" data-filter="all" onclick="setFilter('all', this)">All Banks</button>
                 <button class="filter-tab" data-filter="european" onclick="setFilter('european', this)">Europe</button>
@@ -531,6 +559,52 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
             <thead id="tableHead"></thead>
             <tbody id="tableBody"></tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: CLIMATE SCENARIOS -->
+  <div class="screen" id="screen-scenarios">
+    <div class="content">
+      <div class="page-header-row">
+        <div class="page-header">
+          <h1>Climate Scenarios</h1>
+          <p>Sendas propias de BBVA (WEO2025) frente a su valor real reportado y su objetivo 2030</p>
+        </div>
+        <div class="data-badge">
+          <span class="data-badge-dot"></span>
+          Sendas BBVA &middot; WEO2025 &middot; NZE · STEPS · CPS
+        </div>
+      </div>
+      <div class="scn-pills" id="scnSectorPills"></div>
+      <div class="kpi-row" id="scnCards" style="margin-top:18px"></div>
+      <div class="mid-row" style="margin-top:20px">
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title" id="scnChartTitle">—</div>
+              <div class="card-subtitle" id="scnChartSub"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+              <div class="filter-tabs" id="scnBlockTabs">
+                <button class="filter-tab scn-block" data-block="global" onclick="toggleScnBlock('global', this)" title="Mostrar/ocultar la banda de escenarios globales"><span class="scn-dot" style="background:#9AA7B4"></span>Global</button>
+                <button class="filter-tab scn-block" data-block="bbva" onclick="toggleScnBlock('bbva', this)" title="Mostrar/ocultar las sendas propias de BBVA"><span class="scn-dot" style="background:#2E6FB7"></span>Sendas BBVA</button>
+                <button class="filter-tab scn-block" data-block="real" onclick="toggleScnBlock('real', this)" title="Mostrar/ocultar el valor real y el objetivo de BBVA"><span class="scn-dot" style="background:#072146"></span>Real BBVA</button>
+              </div>
+              <div style="width:1px;height:18px;background:var(--border)"></div>
+              <div class="filter-tabs" id="scnYearTabs">
+                <button class="filter-tab" data-year="2030" onclick="setScnHorizon(2030, this)">2030</button>
+                <button class="filter-tab active" data-year="2050" onclick="setScnHorizon(2050, this)">2050</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="scnChart"></canvas></div>
+        </div>
+        <div class="relevant-card">
+          <div class="relevant-title">¿Qué son estos escenarios?</div>
+          <div class="relevant-text" id="scnLegend"></div>
+          <div class="relevant-footer">Fuente: IEA World Energy Outlook · sendas sectoriales NZE/STEPS/CPS</div>
         </div>
       </div>
     </div>
@@ -1025,6 +1099,7 @@ const GEN = {
           "pctYTD": 53,
           "scope": "S1+2",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1045,6 +1120,7 @@ const GEN = {
           "pctYTD": 34,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1065,6 +1141,7 @@ const GEN = {
           "pctYTD": 42,
           "scope": "S1",
           "metod": "PCAF",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1085,6 +1162,7 @@ const GEN = {
           "pctYTD": 41,
           "scope": "S1",
           "metod": "PCAF",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1105,6 +1183,7 @@ const GEN = {
           "pctYTD": 61,
           "scope": "S1+2",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1125,6 +1204,7 @@ const GEN = {
           "pctYTD": 85,
           "scope": "S1",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1145,6 +1225,7 @@ const GEN = {
           "pctYTD": 47,
           "scope": "S1+2",
           "metod": "SBTi; PCAF; SDA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -1165,6 +1246,7 @@ const GEN = {
           "pctYTD": 35,
           "scope": "S1",
           "metod": "Blue Track",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1185,6 +1267,7 @@ const GEN = {
           "pctYTD": 25,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1205,6 +1288,7 @@ const GEN = {
           "pctYTD": 18,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1225,6 +1309,7 @@ const GEN = {
           "pctYTD": 91,
           "scope": "S1+2",
           "metod": "SDA",
+          "geo": "Nórdicos",
           "show": false
         },
         {
@@ -1245,6 +1330,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1265,6 +1351,7 @@ const GEN = {
           "pctYTD": 21,
           "scope": "S1",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1285,6 +1372,7 @@ const GEN = {
           "pctYTD": 27,
           "scope": "S1",
           "metod": "Carbon Compass / PCAF",
+          "geo": null,
           "show": false
         },
         {
@@ -1305,6 +1393,7 @@ const GEN = {
           "pctYTD": 98,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "UK +1",
           "show": false
         },
         {
@@ -1325,6 +1414,7 @@ const GEN = {
           "pctYTD": 56,
           "scope": "S1",
           "metod": "PCAF; UNEP FI",
+          "geo": "Europa",
           "show": false
         },
         {
@@ -1345,6 +1435,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2+3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1365,6 +1456,7 @@ const GEN = {
           "pctYTD": 55,
           "scope": "S1",
           "metod": "PCAF / SDA",
+          "geo": "Global",
           "show": false
         },
         {
@@ -1385,6 +1477,7 @@ const GEN = {
           "pctYTD": 11,
           "scope": "S1",
           "metod": "—",
+          "geo": null,
           "show": false
         },
         {
@@ -1405,6 +1498,7 @@ const GEN = {
           "pctYTD": 36,
           "scope": "S1",
           "metod": "—",
+          "geo": null,
           "show": false
         },
         {
@@ -1425,256 +1519,10 @@ const GEN = {
           "pctYTD": 12,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Turquía",
           "show": false
         }
       ]
-    },
-    "Oil & Gas": {
-      "subMetrics": {
-        "Absolutas": [
-          {
-            "name": "BBVA",
-            "seg": null,
-            "base": 14,
-            "baseY": 2021,
-            "y2022": null,
-            "y2023": 10.6,
-            "y2024": 10.5,
-            "y2025": 5.7,
-            "y2026": null,
-            "obj": 9.8,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 59,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": true
-          },
-          {
-            "name": "CaixaBank",
-            "seg": null,
-            "base": 9.1,
-            "baseY": 2020,
-            "y2022": null,
-            "y2023": 5.6,
-            "y2024": 5.9,
-            "y2025": 4.9,
-            "y2026": null,
-            "obj": 7,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 46,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": true
-          },
-          {
-            "name": "SocGen",
-            "seg": null,
-            "base": 24.8,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": null,
-            "y2024": null,
-            "y2025": 7.9,
-            "y2026": null,
-            "obj": 7.5,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 68,
-            "scope": "S1+2+3",
-            "metod": "PACTA",
-            "show": true
-          },
-          {
-            "name": "Barclays",
-            "seg": null,
-            "base": 74.1,
-            "baseY": 2020,
-            "y2022": null,
-            "y2023": null,
-            "y2024": null,
-            "y2025": 43.74,
-            "y2026": null,
-            "obj": null,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 41,
-            "scope": "S1+2+3",
-            "metod": "Blue Track",
-            "show": false
-          },
-          {
-            "name": "StanChart",
-            "seg": null,
-            "base": 13.1,
-            "baseY": 2020,
-            "y2022": null,
-            "y2023": 8.7,
-            "y2024": 7.2,
-            "y2025": null,
-            "y2026": null,
-            "obj": 9.3,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "on-track",
-            "pctYTD": 45,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": false
-          },
-          {
-            "name": "HSBC",
-            "seg": null,
-            "base": 46.2,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": 28.9,
-            "y2024": 28.5,
-            "y2025": null,
-            "y2026": null,
-            "obj": null,
-            "objLow": 32.34,
-            "objHigh": 39.73,
-            "objY": 2030,
-            "status": "on-track",
-            "pctYTD": 38,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": false
-          },
-          {
-            "name": "Nordea",
-            "seg": null,
-            "base": 2.8,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": null,
-            "y2024": null,
-            "y2025": 0.01,
-            "y2026": null,
-            "obj": 1.2,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 100,
-            "scope": "S1+2+3",
-            "metod": "Absolute Contraction",
-            "show": false
-          },
-          {
-            "name": "Citigroup",
-            "seg": null,
-            "base": 168,
-            "baseY": 2020,
-            "y2022": null,
-            "y2023": 93.5,
-            "y2024": 91.1,
-            "y2025": null,
-            "y2026": null,
-            "obj": 119.3,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 46,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": false
-          },
-          {
-            "name": "Lloyds",
-            "seg": null,
-            "base": 7.2,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": 1.7,
-            "y2024": 1.6,
-            "y2025": null,
-            "y2026": null,
-            "obj": 3.6,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 78,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": false
-          },
-          {
-            "name": "UniCredit",
-            "seg": null,
-            "base": 19.4,
-            "baseY": 2021,
-            "y2022": null,
-            "y2023": null,
-            "y2024": 9.9,
-            "y2025": null,
-            "y2026": null,
-            "obj": 13.7,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "ahead of target",
-            "pctYTD": 49,
-            "scope": "S1+2+3",
-            "metod": "PCAF; UNEP FI",
-            "show": false
-          },
-          {
-            "name": "NatWest",
-            "seg": null,
-            "base": 0.91,
-            "baseY": 2019,
-            "y2022": null,
-            "y2023": 0.52,
-            "y2024": 0.49,
-            "y2025": 0.49,
-            "y2026": null,
-            "obj": null,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": "on-track",
-            "pctYTD": 46,
-            "scope": "S3",
-            "metod": "—",
-            "show": false
-          },
-          {
-            "name": "UBS",
-            "seg": null,
-            "base": 64.7,
-            "baseY": 2021,
-            "y2022": null,
-            "y2023": 12.9,
-            "y2024": 10.9,
-            "y2025": null,
-            "y2026": null,
-            "obj": 19.4,
-            "objLow": null,
-            "objHigh": null,
-            "objY": 2030,
-            "status": null,
-            "pctYTD": 83,
-            "scope": "S1+2+3",
-            "metod": "PCAF",
-            "show": false
-          }
-        ]
-      },
-      "defaultSubMetric": "Absolutas"
     },
     "Steel": {
       "subMetrics": {
@@ -1697,6 +1545,7 @@ const GEN = {
             "pctYTD": 11,
             "scope": "S1+2",
             "metod": "PACTA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1717,6 +1566,7 @@ const GEN = {
             "pctYTD": 12,
             "scope": "S1+2",
             "metod": "SBTi",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1737,6 +1587,7 @@ const GEN = {
             "pctYTD": 19,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1757,6 +1608,7 @@ const GEN = {
             "pctYTD": -3,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1777,6 +1629,7 @@ const GEN = {
             "pctYTD": 14,
             "scope": "S1+2",
             "metod": "SBTi; PCAF; SDA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1797,6 +1650,7 @@ const GEN = {
             "pctYTD": 30,
             "scope": "S1+2",
             "metod": "Blue Track",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1817,6 +1671,7 @@ const GEN = {
             "pctYTD": 15,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1837,6 +1692,7 @@ const GEN = {
             "pctYTD": -5,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1857,6 +1713,7 @@ const GEN = {
             "pctYTD": 9,
             "scope": "S1+2",
             "metod": "Carbon Compass / PCAF",
+            "geo": null,
             "show": false
           },
           {
@@ -1877,6 +1734,7 @@ const GEN = {
             "pctYTD": 12,
             "scope": "S1+2+3",
             "metod": "PCAF; UNEP FI",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1897,6 +1755,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2+3",
             "metod": "SBTi",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1917,6 +1776,7 @@ const GEN = {
             "pctYTD": 14,
             "scope": "S1+2",
             "metod": "PCAF / SDA",
+            "geo": "Global",
             "show": false
           },
           {
@@ -1937,6 +1797,7 @@ const GEN = {
             "pctYTD": 28,
             "scope": "S1+2",
             "metod": "SBTi",
+            "geo": "Turquía",
             "show": false
           }
         ],
@@ -1959,6 +1820,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2",
             "metod": "Sustainable Steel Principles",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1979,6 +1841,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2+3",
             "metod": "Sustainable STEEL Principles",
+            "geo": "Global",
             "show": true
           },
           {
@@ -1999,6 +1862,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2+3",
             "metod": "PCAF; SSP",
+            "geo": "Global",
             "show": false
           }
         ]
@@ -2025,6 +1889,7 @@ const GEN = {
           "pctYTD": 34,
           "scope": "S3",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2045,6 +1910,7 @@ const GEN = {
           "pctYTD": 13,
           "scope": "S3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2065,6 +1931,7 @@ const GEN = {
           "pctYTD": -6,
           "scope": "S3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2085,6 +1952,7 @@ const GEN = {
           "pctYTD": 5,
           "scope": "S3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2105,6 +1973,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Europa",
           "show": true
         },
         {
@@ -2125,6 +1994,7 @@ const GEN = {
           "pctYTD": 16,
           "scope": "S3",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2145,6 +2015,7 @@ const GEN = {
           "pctYTD": 25,
           "scope": "S3",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2165,6 +2036,7 @@ const GEN = {
           "pctYTD": 9,
           "scope": "S3",
           "metod": "SBTi; PCAF; SDA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2185,6 +2057,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2+3",
           "metod": "Blue Track",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2205,6 +2078,7 @@ const GEN = {
           "pctYTD": 19,
           "scope": "S1+2+3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2225,6 +2099,7 @@ const GEN = {
           "pctYTD": 4,
           "scope": "S1+2+3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2245,6 +2120,7 @@ const GEN = {
           "pctYTD": 18,
           "scope": "S1",
           "metod": "PCAF",
+          "geo": "Nórdicos",
           "show": false
         },
         {
@@ -2265,6 +2141,7 @@ const GEN = {
           "pctYTD": -37,
           "scope": "S1+2+3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2285,6 +2162,7 @@ const GEN = {
           "pctYTD": 20,
           "scope": "S1+2+3",
           "metod": "Carbon Compass / PCAF",
+          "geo": null,
           "show": false
         },
         {
@@ -2305,6 +2183,7 @@ const GEN = {
           "pctYTD": 16,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "UK",
           "show": false
         },
         {
@@ -2325,6 +2204,7 @@ const GEN = {
           "pctYTD": 5,
           "scope": "S1+2+3",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2345,6 +2225,7 @@ const GEN = {
           "pctYTD": 33,
           "scope": "S3",
           "metod": "PCAF; UNEP FI",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2365,6 +2246,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2+3",
           "metod": "—",
+          "geo": null,
           "show": false
         },
         {
@@ -2385,6 +2267,7 @@ const GEN = {
           "pctYTD": 2,
           "scope": "S1+2+3",
           "metod": "—",
+          "geo": null,
           "show": false
         }
       ]
@@ -2410,6 +2293,7 @@ const GEN = {
             "pctYTD": 4,
             "scope": "S1",
             "metod": "PACTA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -2430,6 +2314,7 @@ const GEN = {
             "pctYTD": 3,
             "scope": "S1+2",
             "metod": "SBTi",
+            "geo": "Global",
             "show": true
           },
           {
@@ -2450,6 +2335,7 @@ const GEN = {
             "pctYTD": 6,
             "scope": "S1",
             "metod": "PCAF; Pegasus",
+            "geo": "Global",
             "show": true
           },
           {
@@ -2470,6 +2356,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1",
             "metod": "PCAF",
+            "geo": "Global",
             "show": true
           }
         ],
@@ -2492,6 +2379,7 @@ const GEN = {
             "pctYTD": 14,
             "scope": "S1+3",
             "metod": "Pegasus Guidelines",
+            "geo": "Global",
             "show": true
           },
           {
@@ -2512,6 +2400,7 @@ const GEN = {
             "pctYTD": -2,
             "scope": "S1+3",
             "metod": "Pegasus Guidelines",
+            "geo": "Global",
             "show": true
           },
           {
@@ -2532,6 +2421,7 @@ const GEN = {
             "pctYTD": 2,
             "scope": "S1+3",
             "metod": "Blue Track",
+            "geo": "Global",
             "show": false
           },
           {
@@ -2552,6 +2442,7 @@ const GEN = {
             "pctYTD": 33,
             "scope": "S1+3",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -2572,6 +2463,7 @@ const GEN = {
             "pctYTD": 1,
             "scope": "S1+2+3",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -2592,6 +2484,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+3",
             "metod": "PCAF; MPP",
+            "geo": "Global",
             "show": false
           },
           {
@@ -2612,6 +2505,7 @@ const GEN = {
             "pctYTD": 20,
             "scope": "S1",
             "metod": "Carbon Compass / PCAF",
+            "geo": null,
             "show": false
           },
           {
@@ -2632,6 +2526,7 @@ const GEN = {
             "pctYTD": 35,
             "scope": "S1+2+3",
             "metod": "PCAF",
+            "geo": "UK",
             "show": false
           },
           {
@@ -2652,6 +2547,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2+3",
             "metod": "SBTi",
+            "geo": "Global",
             "show": false
           },
           {
@@ -2672,6 +2568,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1",
             "metod": "—",
+            "geo": null,
             "show": false
           }
         ]
@@ -2698,6 +2595,7 @@ const GEN = {
           "pctYTD": 10,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "España",
           "show": true
         },
         {
@@ -2718,6 +2616,7 @@ const GEN = {
           "pctYTD": 13,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "España",
           "show": true
         },
         {
@@ -2738,6 +2637,7 @@ const GEN = {
           "pctYTD": -2,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Iberia",
           "show": true
         },
         {
@@ -2758,6 +2658,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "España +2",
           "show": true
         },
         {
@@ -2778,6 +2679,7 @@ const GEN = {
           "pctYTD": 4,
           "scope": "S1+2",
           "metod": "CRREM",
+          "geo": "Global",
           "show": true
         },
         {
@@ -2798,6 +2700,7 @@ const GEN = {
           "pctYTD": 8,
           "scope": "S1+2",
           "metod": "PCAF; CRREM",
+          "geo": "Holanda",
           "show": true
         },
         {
@@ -2818,6 +2721,7 @@ const GEN = {
           "pctYTD": 16,
           "scope": "S1+2+3",
           "metod": "SBTi; PCAF; SDA",
+          "geo": "Italia",
           "show": true
         },
         {
@@ -2838,6 +2742,7 @@ const GEN = {
           "pctYTD": 18,
           "scope": "S1+2",
           "metod": "Blue Track",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2858,6 +2763,7 @@ const GEN = {
           "pctYTD": 27,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2878,6 +2784,7 @@ const GEN = {
           "pctYTD": 40,
           "scope": "S1+2",
           "metod": "PCAF; CRREM",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2898,6 +2805,7 @@ const GEN = {
           "pctYTD": 11,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "UK",
           "show": false
         },
         {
@@ -2918,6 +2826,7 @@ const GEN = {
           "pctYTD": 10,
           "scope": "S1+2+3",
           "metod": "PCAF; UNEP FI",
+          "geo": "Italia +2",
           "show": false
         },
         {
@@ -2938,6 +2847,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2+3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -2958,6 +2868,7 @@ const GEN = {
           "pctYTD": 11,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Suiza",
           "show": false
         },
         {
@@ -2978,6 +2889,7 @@ const GEN = {
           "pctYTD": 0,
           "scope": "S1+2+3",
           "metod": "—",
+          "geo": "Turquía",
           "show": false
         }
       ]
@@ -3002,6 +2914,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "España",
           "show": true
         },
         {
@@ -3022,6 +2935,7 @@ const GEN = {
           "pctYTD": 1,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "España",
           "show": true
         },
         {
@@ -3042,6 +2956,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "UK",
           "show": true
         },
         {
@@ -3062,6 +2977,7 @@ const GEN = {
           "pctYTD": 17,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "España +1",
           "show": true
         },
         {
@@ -3082,6 +2998,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "España +2",
           "show": true
         },
         {
@@ -3102,6 +3019,7 @@ const GEN = {
           "pctYTD": 11,
           "scope": "S1+2",
           "metod": "PCAF; CRREM",
+          "geo": "Holanda +4",
           "show": true
         },
         {
@@ -3122,6 +3040,7 @@ const GEN = {
           "pctYTD": 11,
           "scope": "S1+2+3",
           "metod": "PCAF; SDA",
+          "geo": "Italia",
           "show": true
         },
         {
@@ -3142,6 +3061,7 @@ const GEN = {
           "pctYTD": 16,
           "scope": "S1+2",
           "metod": "Blue Track",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3162,6 +3082,7 @@ const GEN = {
           "pctYTD": 9,
           "scope": "S1+2",
           "metod": "CRREM",
+          "geo": "Hong Kong +2",
           "show": false
         },
         {
@@ -3182,6 +3103,7 @@ const GEN = {
           "pctYTD": 34,
           "scope": "S1+2",
           "metod": "SDA",
+          "geo": "Nórdicos",
           "show": false
         },
         {
@@ -3202,6 +3124,7 @@ const GEN = {
           "pctYTD": 9,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "UK",
           "show": false
         },
         {
@@ -3222,6 +3145,7 @@ const GEN = {
           "pctYTD": 7,
           "scope": "S1+2+3",
           "metod": "PCAF; UNEP FI",
+          "geo": "Italia +2",
           "show": false
         },
         {
@@ -3242,6 +3166,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2+3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3262,6 +3187,7 @@ const GEN = {
           "pctYTD": 15,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Suiza",
           "show": false
         }
       ]
@@ -3287,6 +3213,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Brasil",
             "show": true
           },
           {
@@ -3307,6 +3234,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2+3",
             "metod": "Blue Track",
+            "geo": "Global",
             "show": false
           },
           {
@@ -3327,6 +3255,7 @@ const GEN = {
             "pctYTD": 18,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "UK",
             "show": false
           }
         ],
@@ -3349,6 +3278,7 @@ const GEN = {
             "pctYTD": 7,
             "scope": "S1+2",
             "metod": "SBTi; PCAF; SDA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3369,6 +3299,7 @@ const GEN = {
             "pctYTD": -1,
             "scope": "S1+2",
             "metod": "Economic Intensity Contraction",
+            "geo": "Nórdicos",
             "show": false
           }
         ],
@@ -3391,6 +3322,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2",
             "metod": "—",
+            "geo": "Turquía",
             "show": false
           },
           {
@@ -3411,6 +3343,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2",
             "metod": "—",
+            "geo": "Turquía",
             "show": false
           },
           {
@@ -3431,6 +3364,266 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2",
             "metod": "—",
+            "geo": "Turquía",
+            "show": false
+          }
+        ]
+      },
+      "defaultSubMetric": "Absolutas"
+    },
+    "Oil & Gas": {
+      "subMetrics": {
+        "Absolutas": [
+          {
+            "name": "BBVA",
+            "seg": null,
+            "base": 14,
+            "baseY": 2021,
+            "y2022": null,
+            "y2023": 10.6,
+            "y2024": 10.5,
+            "y2025": 5.7,
+            "y2026": null,
+            "obj": 9.8,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 59,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
+            "show": true
+          },
+          {
+            "name": "CaixaBank",
+            "seg": null,
+            "base": 9.1,
+            "baseY": 2020,
+            "y2022": null,
+            "y2023": 5.6,
+            "y2024": 5.9,
+            "y2025": 4.9,
+            "y2026": null,
+            "obj": 7,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 46,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
+            "show": true
+          },
+          {
+            "name": "SocGen",
+            "seg": null,
+            "base": 24.8,
+            "baseY": 2019,
+            "y2022": null,
+            "y2023": null,
+            "y2024": null,
+            "y2025": 7.9,
+            "y2026": null,
+            "obj": 7.5,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 68,
+            "scope": "S1+2+3",
+            "metod": "PACTA",
+            "geo": "Global",
+            "show": true
+          },
+          {
+            "name": "Barclays",
+            "seg": null,
+            "base": 74.1,
+            "baseY": 2020,
+            "y2022": null,
+            "y2023": null,
+            "y2024": null,
+            "y2025": 43.74,
+            "y2026": null,
+            "obj": null,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 41,
+            "scope": "S1+2+3",
+            "metod": "Blue Track",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "StanChart",
+            "seg": null,
+            "base": 13.1,
+            "baseY": 2020,
+            "y2022": null,
+            "y2023": 8.7,
+            "y2024": 7.2,
+            "y2025": null,
+            "y2026": null,
+            "obj": 9.3,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "on-track",
+            "pctYTD": 45,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "HSBC",
+            "seg": null,
+            "base": 46.2,
+            "baseY": 2019,
+            "y2022": null,
+            "y2023": 28.9,
+            "y2024": 28.5,
+            "y2025": null,
+            "y2026": null,
+            "obj": null,
+            "objLow": 32.34,
+            "objHigh": 39.73,
+            "objY": 2030,
+            "status": "on-track",
+            "pctYTD": 38,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "Nordea",
+            "seg": null,
+            "base": 2.8,
+            "baseY": 2019,
+            "y2022": null,
+            "y2023": null,
+            "y2024": null,
+            "y2025": 0.01,
+            "y2026": null,
+            "obj": 1.2,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 100,
+            "scope": "S1+2+3",
+            "metod": "Absolute Contraction",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "Citigroup",
+            "seg": null,
+            "base": 168,
+            "baseY": 2020,
+            "y2022": null,
+            "y2023": 93.5,
+            "y2024": 91.1,
+            "y2025": null,
+            "y2026": null,
+            "obj": 119.3,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 46,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "Lloyds",
+            "seg": null,
+            "base": 7.2,
+            "baseY": 2019,
+            "y2022": null,
+            "y2023": 1.7,
+            "y2024": 1.6,
+            "y2025": null,
+            "y2026": null,
+            "obj": 3.6,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 78,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "UK",
+            "show": false
+          },
+          {
+            "name": "UniCredit",
+            "seg": null,
+            "base": 19.4,
+            "baseY": 2021,
+            "y2022": null,
+            "y2023": null,
+            "y2024": 9.9,
+            "y2025": null,
+            "y2026": null,
+            "obj": 13.7,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "ahead of target",
+            "pctYTD": 49,
+            "scope": "S1+2+3",
+            "metod": "PCAF; UNEP FI",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "NatWest",
+            "seg": null,
+            "base": 0.91,
+            "baseY": 2019,
+            "y2022": null,
+            "y2023": 0.52,
+            "y2024": 0.49,
+            "y2025": 0.49,
+            "y2026": null,
+            "obj": null,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": "on-track",
+            "pctYTD": 46,
+            "scope": "S3",
+            "metod": "—",
+            "geo": "Global",
+            "show": false
+          },
+          {
+            "name": "UBS",
+            "seg": null,
+            "base": 64.7,
+            "baseY": 2021,
+            "y2022": null,
+            "y2023": 12.9,
+            "y2024": 10.9,
+            "y2025": null,
+            "y2026": null,
+            "obj": 19.4,
+            "objLow": null,
+            "objHigh": null,
+            "objY": 2030,
+            "status": null,
+            "pctYTD": 83,
+            "scope": "S1+2+3",
+            "metod": "PCAF",
+            "geo": "Global",
             "show": false
           }
         ]
@@ -3458,6 +3651,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2+3",
             "metod": "IMO",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3478,6 +3672,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+3",
             "metod": "SBTi",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3498,6 +3693,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1",
             "metod": "Principios de Poseidón",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3518,6 +3714,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+3",
             "metod": "Poseidon Principles",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3538,6 +3735,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+3",
             "metod": "Poseidon Principles",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3558,6 +3756,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+3",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -3578,6 +3777,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2",
             "metod": "PCAF; Poseidon Principles",
+            "geo": "Global",
             "show": false
           }
         ],
@@ -3600,6 +3800,7 @@ const GEN = {
             "pctYTD": 16,
             "scope": "S1",
             "metod": "Poseidon Principles",
+            "geo": "Global",
             "show": false
           },
           {
@@ -3620,6 +3821,7 @@ const GEN = {
             "pctYTD": -6,
             "scope": "S1",
             "metod": "Carbon Compass / PCAF",
+            "geo": null,
             "show": false
           },
           {
@@ -3640,6 +3842,7 @@ const GEN = {
             "pctYTD": 6,
             "scope": "S1+3",
             "metod": "PCAF; UNEP FI",
+            "geo": "Global",
             "show": false
           },
           {
@@ -3660,6 +3863,7 @@ const GEN = {
             "pctYTD": 11,
             "scope": "S1+3",
             "metod": "PCAF; UNEP FI",
+            "geo": "Global",
             "show": false
           }
         ]
@@ -3686,6 +3890,7 @@ const GEN = {
           "pctYTD": -3,
           "scope": "S1+2",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -3706,6 +3911,7 @@ const GEN = {
           "pctYTD": 13,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "Global",
           "show": true
         },
         {
@@ -3726,6 +3932,7 @@ const GEN = {
           "pctYTD": 5,
           "scope": "S1+2",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -3746,6 +3953,7 @@ const GEN = {
           "pctYTD": 5,
           "scope": "S1+2",
           "metod": "PACTA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -3766,6 +3974,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2",
           "metod": "SBTi; PCAF; SDA",
+          "geo": "Global",
           "show": true
         },
         {
@@ -3786,6 +3995,7 @@ const GEN = {
           "pctYTD": 13,
           "scope": "S1+2",
           "metod": "Blue Track",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3806,6 +4016,7 @@ const GEN = {
           "pctYTD": 10,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3826,6 +4037,7 @@ const GEN = {
           "pctYTD": -3,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3846,6 +4058,7 @@ const GEN = {
           "pctYTD": 0,
           "scope": "S3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3866,6 +4079,7 @@ const GEN = {
           "pctYTD": 4,
           "scope": "S1+2",
           "metod": "PCAF",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3886,6 +4100,7 @@ const GEN = {
           "pctYTD": 3,
           "scope": "S1+2",
           "metod": "Carbon Compass / PCAF",
+          "geo": null,
           "show": false
         },
         {
@@ -3906,6 +4121,7 @@ const GEN = {
           "pctYTD": null,
           "scope": "S1+2+3",
           "metod": "SBTi",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3926,6 +4142,7 @@ const GEN = {
           "pctYTD": 5,
           "scope": "S1+2",
           "metod": "PCAF / SDA",
+          "geo": "Global",
           "show": false
         },
         {
@@ -3946,6 +4163,7 @@ const GEN = {
           "pctYTD": 35,
           "scope": "S1+2",
           "metod": "SBTi",
+          "geo": "Turquía",
           "show": false
         }
       ]
@@ -3971,6 +4189,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2",
             "metod": "SAFF (RMI)",
+            "geo": "Global",
             "show": true
           },
           {
@@ -3991,6 +4210,7 @@ const GEN = {
             "pctYTD": null,
             "scope": "S1+2+3",
             "metod": "PCAF; SAFF",
+            "geo": "Global",
             "show": false
           }
         ],
@@ -4013,6 +4233,7 @@ const GEN = {
             "pctYTD": -10,
             "scope": "S1+2",
             "metod": "SBTi",
+            "geo": "Global",
             "show": true
           },
           {
@@ -4033,6 +4254,7 @@ const GEN = {
             "pctYTD": 5,
             "scope": "S1+2+3",
             "metod": "PACTA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -4053,6 +4275,7 @@ const GEN = {
             "pctYTD": 37,
             "scope": "S1+2",
             "metod": "SBTi; PCAF; SDA",
+            "geo": "Global",
             "show": true
           },
           {
@@ -4073,6 +4296,7 @@ const GEN = {
             "pctYTD": -20,
             "scope": "S1+2",
             "metod": "PCAF",
+            "geo": "Global",
             "show": false
           },
           {
@@ -4093,6 +4317,7 @@ const GEN = {
             "pctYTD": -10,
             "scope": "S1+2",
             "metod": "Carbon Compass / PCAF",
+            "geo": null,
             "show": false
           },
           {
@@ -4113,6 +4338,7 @@ const GEN = {
             "pctYTD": 0,
             "scope": "S1+2",
             "metod": "—",
+            "geo": "Turquía",
             "show": false
           }
         ]
@@ -4122,6 +4348,16 @@ const GEN = {
   }
 };
 /*GEN_END*/
+
+// Sendas propias de BBVA (WEO2025) — generadas desde data/bbva_pathways.csv.
+/*PGEN_START*/
+const PATHWAYS = {"Cement":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[0.699,0.704,0.709,0.715,0.717,0.715,0.714,0.712,0.711,0.709,0.707,0.706,0.704,0.703,0.701,0.7,0.698,0.697,0.695,0.694,0.693,0.691,0.69,0.689,0.687,0.686,0.685,0.684,0.682,0.681,0.68],"steps":[0.699,0.704,0.709,0.715,0.717,0.715,0.713,0.711,0.709,0.707,0.705,0.703,0.7,0.698,0.696,0.695,0.693,0.691,0.689,0.687,0.685,0.681,0.677,0.673,0.669,0.665,0.66,0.655,0.65,0.645,0.64],"nz":[0.699,0.704,0.709,0.715,0.717,0.697,0.677,0.657,0.637,0.617,0.597,0.577,0.556,0.536,0.515,0.495,0.452,0.408,0.364,0.319,0.274,0.245,0.216,0.186,0.157,0.127,0.105,0.084,0.062,0.039,0.017]},"Steel":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[1.272,1.261,1.25,1.24,1.248,1.238,1.227,1.217,1.207,1.198,1.188,1.179,1.17,1.161,1.152,1.143,1.134,1.125,1.116,1.108,1.099,1.091,1.082,1.074,1.066,1.058,1.049,1.041,1.033,1.025,1.017],"steps":[1.272,1.261,1.25,1.24,1.248,1.23,1.212,1.195,1.178,1.161,1.144,1.128,1.112,1.097,1.081,1.066,1.053,1.039,1.026,1.013,1,0.985,0.971,0.957,0.943,0.929,0.913,0.897,0.881,0.866,0.851],"nz":[1.272,1.261,1.25,1.24,1.248,1.21,1.173,1.135,1.098,1.061,1.025,0.988,0.952,0.916,0.88,0.844,0.783,0.722,0.661,0.599,0.538,0.486,0.435,0.383,0.331,0.279,0.242,0.206,0.169,0.133,0.096]},"Aviation":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂e/RPK","cps":[null,null,102.68,101.27,97.11,95.52,94.06,92.71,91.47,90.32,89.25,88.25,87.32,86.44,85.62,84.85,84.15,83.48,82.84,82.24,81.66,81.14,80.65,80.17,79.72,79.29,78.39,77.53,76.69,75.89,75.11],"steps":[null,null,102.68,101.27,97.11,96.38,95.7,95.07,94.48,93.92,93.4,92.91,92.44,92,91.58,91.19,89.45,87.82,86.28,84.83,83.47,81.8,80.23,78.76,77.37,76.06,74.07,72.2,70.44,68.79,67.22],"nz":[null,null,102.68,101.27,97.11,94.09,91.26,88.6,86.08,83.71,81.46,79.33,77.3,75.38,73.55,71.81,68.22,64.69,61.22,57.82,54.47,50.85,47.32,43.89,40.55,37.3,33.3,29.43,25.66,22.01,18.46]},"Automotive":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂/vkm","cps":[199.97,196.164,192.433,188.773,184.245,177.939,171.985,166.354,161.02,155.961,151.155,146.585,142.232,138.083,134.123,130.339,126.674,123.192,119.879,116.723,113.714,111.75,109.865,108.055,106.315,104.641,103.618,102.628,101.669,100.74,99.84],"steps":[199.97,196.16,192.43,188.77,184.24,177.65,171.38,165.41,159.73,154.3,149.12,144.17,139.43,134.88,130.53,126.35,121.53,116.92,112.53,108.33,104.31,100.8,97.45,94.26,91.2,88.28,85.68,83.2,80.83,78.56,76.39],"nz":[199.97,196.16,192.43,188.77,184.24,171.69,159.71,148.26,137.32,126.83,116.79,107.16,97.91,89.02,80.48,72.26,63.46,55.02,46.91,39.12,31.63,27.47,23.42,19.49,15.67,11.94,10.29,8.69,7.14,5.63,4.17]},"Power":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/MWh","cps":[227.87,224.996,222.155,219.351,213.668,206.875,200.297,193.928,187.762,181.792,176.012,170.415,164.997,159.751,154.671,149.753,144.992,140.382,135.918,131.597,127.412,123.361,119.439,115.641,111.964,108.404,104.957,101.62,98.389,95.261,92.232],"steps":[227.87,224.996,222.155,219.351,213.668,203.312,193.457,184.08,175.158,166.668,158.59,150.903,143.588,136.629,130.006,123.705,117.709,112.003,106.575,101.409,96.494,91.816,87.366,83.131,79.102,75.268,71.62,68.148,64.845,61.702,58.711],"nz":[227.87,224.996,222.155,219.351,213.668,181.142,153.567,130.19,110.372,93.57,79.326,67.25,57.013,48.334,40.976,34.739,29.45,24.967,21.167,17.944,15.213,12.897,10.934,9.269,7.858,6.662,5.648,4.788,4.059,3.441,-1.856]}};
+/*PGEN_END*/
+
+// Escenarios globales WEO2025 (comunes a todos los bancos) — desde data/weo2025_global.csv.
+/*GGEN_START*/
+const GLOBALS = {"Cement":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[0.574,0.578,0.582,0.586,0.588,0.587,0.586,0.584,0.583,0.582,0.58,0.579,0.578,0.577,0.575,0.574,0.573,0.572,0.57,0.569,0.568,0.567,0.566,0.565,0.564,0.563,0.562,0.561,0.56,0.559,0.558],"steps":[0.574,0.578,0.582,0.586,0.588,0.586,0.585,0.583,0.581,0.58,0.578,0.576,0.575,0.573,0.571,0.57,0.568,0.567,0.565,0.563,0.562,0.559,0.555,0.552,0.549,0.546,0.542,0.537,0.533,0.529,0.52],"nz":[0.574,0.578,0.582,0.586,0.588,0.572,0.556,0.539,0.523,0.506,0.49,0.473,0.456,0.439,0.423,0.406,0.371,0.335,0.299,0.262,0.225,0.201,0.177,0.153,0.128,0.104,0.086,0.069,0.051,0.032,0.01]},"Steel":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[1.488,1.476,1.463,1.451,1.461,1.448,1.436,1.425,1.413,1.402,1.391,1.38,1.369,1.358,1.348,1.338,1.327,1.317,1.307,1.296,1.287,1.277,1.267,1.257,1.247,1.238,1.228,1.219,1.209,1.2,1.19],"steps":[1.488,1.476,1.463,1.451,1.461,1.439,1.419,1.398,1.378,1.359,1.339,1.32,1.302,1.284,1.266,1.248,1.232,1.216,1.201,1.186,1.171,1.153,1.136,1.12,1.103,1.087,1.068,1.049,1.031,1.013,1],"nz":[1.488,1.476,1.463,1.451,1.461,1.416,1.372,1.329,1.285,1.242,1.199,1.156,1.114,1.072,1.03,0.988,0.916,0.845,0.773,0.701,0.63,0.569,0.509,0.448,0.387,0.326,0.284,0.241,0.198,0.155,0.11]},"Aviation":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂e/RPK","cps":[118.7,117,115.4,113.8,109.2,107.4,105.7,104.2,102.8,101.5,100.3,99.2,98.1,97.2,96.2,95.4,94.6,93.8,93.1,92.4,91.8,91.2,90.7,90.1,89.6,89.1,88.1,87.1,86.2,85.3,84.43],"steps":[118.7,117,115.4,113.8,109.2,108.3,107.6,106.9,106.2,105.6,105,104.4,103.9,103.4,102.9,102.5,100.5,98.7,97,95.4,93.8,91.9,90.2,88.5,87,85.5,83.3,81.2,79.2,77.3,75.56],"nz":[118.7,117,115.4,113.8,109.2,105.8,102.6,99.6,96.8,94.1,91.6,89.2,86.9,84.7,82.7,80.7,76.7,72.7,68.8,65,61.2,57.2,53.2,49.3,45.6,41.9,37.4,33.1,28.8,24.7,20.75]},"Automotive":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂/vkm","cps":[134.8,132.2,129.7,127.2,124.2,119.9,115.9,112.1,108.5,105.1,101.9,98.8,95.9,93.1,90.4,87.8,85.4,83,80.8,78.7,76.6,75.3,74,72.8,71.7,70.5,69.8,69.2,68.5,67.9,67.29],"steps":[134.8,132.2,129.7,127.2,124.2,119.7,115.5,111.5,107.7,104,100.5,97.2,94,90.9,88,85.2,81.9,78.8,75.8,73,70.3,67.9,65.7,63.5,61.5,59.5,57.7,56.1,54.5,52.9,51.49],"nz":[134.8,132.2,129.7,127.2,124.2,115.7,107.6,99.9,92.6,85.5,78.7,72.2,66,60,54.2,48.7,42.8,37.1,31.6,26.4,21.3,18.5,15.8,13.1,10.6,8.1,6.9,5.9,4.8,3.8,2.81]},"CRE":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/m²","cps":[16.54,15.92,15.32,14.75,14.42,14.02,13.64,13.27,12.92,12.58,12.26,11.95,11.65,11.37,11.09,10.82,10.59,10.35,10.13,9.91,9.7,9.57,9.44,9.31,9.19,9.07,8.96,8.85,8.75,8.64,8.54],"steps":[16.54,15.92,15.32,14.75,14.42,14.04,13.67,13.31,12.96,12.63,12.3,11.99,11.68,11.39,11.1,10.82,10.48,10.16,9.84,9.54,9.24,9.02,8.8,8.59,8.39,8.19,8,7.81,7.62,7.44,7.27],"nz":[16.54,15.92,15.32,14.75,14.42,13.49,12.61,11.76,10.94,10.16,9.41,8.69,8,7.34,6.7,6.08,5.45,4.83,4.24,3.66,3.1,2.7,2.31,1.93,1.56,1.19,0.98,0.77,0.56,0.35,0.16]},"RRE":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/m²","cps":[9.79,9.61,9.42,9.24,9.05,8.83,8.62,8.42,8.23,8.04,7.86,7.68,7.51,7.35,7.19,7.03,6.9,6.78,6.66,6.54,6.43,6.35,6.27,6.19,6.11,6.04,5.97,5.9,5.84,5.78,5.72],"steps":[9.79,9.61,9.42,9.24,9.05,8.82,8.61,8.4,8.19,7.99,7.8,7.61,7.43,7.25,7.07,6.9,6.73,6.55,6.39,6.22,6.06,5.94,5.81,5.69,5.58,5.46,5.35,5.24,5.13,5.03,4.93],"nz":[9.79,9.61,9.42,9.24,9.05,8.49,7.96,7.44,6.94,6.46,5.99,5.53,5.09,4.66,4.25,3.85,3.41,3,2.59,2.19,1.81,1.56,1.31,1.07,0.84,0.61,0.51,0.4,0.31,0.21,0.12]},"Aluminium":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[2.391,2.335,2.279,2.225,2.222,2.203,2.185,2.167,2.15,2.134,2.118,2.103,2.088,2.074,2.06,2.047,2.032,2.017,2.003,1.989,1.976,1.962,1.948,1.934,1.921,1.908,1.895,1.883,1.872,1.86,1.849],"steps":[2.391,2.335,2.279,2.225,2.222,2.195,2.17,2.145,2.121,2.098,2.075,2.053,2.032,2.011,1.991,1.972,1.938,1.905,1.874,1.843,1.813,1.781,1.749,1.719,1.69,1.661,1.634,1.607,1.582,1.557,1.533],"nz":[2.39,2.33,2.28,2.22,2.22,2.147,2.075,2.005,1.939,1.874,1.812,1.752,1.694,1.638,1.584,1.532,1.405,1.281,1.16,1.041,0.925,0.812,0.701,0.591,0.483,0.378,0.315,0.253,0.193,0.133,0.074]},"Power":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/MWh","cps":[475.18,469.18,463.26,457.41,445.56,431.39,417.68,404.4,391.54,379.09,367.04,355.37,344.07,333.13,322.53,312.28,302.35,292.74,283.43,274.42,265.69,257.24,249.06,241.15,233.48,226.05,218.87,211.91,205.17,198.65,192.33],"steps":[475.18,469.18,463.26,457.41,445.56,423.96,403.41,383.86,365.25,347.55,330.7,314.68,299.42,284.91,271.1,257.96,245.46,233.56,222.24,211.47,201.22,191.46,182.18,173.35,164.95,156.96,149.35,142.11,135.22,128.67,122.43],"nz":[475.18,469.18,463.26,457.41,445.56,377.73,320.23,271.48,230.16,195.12,165.42,140.24,118.89,100.79,85.45,72.44,61.41,52.06,44.14,37.42,31.72,26.89,22.8,19.33,16.39,13.89,11.78,9.98,8.46,7.18,-3.87]}};
+/*GGEN_END*/
 
 // Reparte los datos generados en BANK_META + SECTORS conservando los metadatos
 // curados (metric, ieaRef, scenarios, relevantText) de cada sector/submétrica.
@@ -4231,13 +4467,49 @@ function getSectorData() {
   return sector;
 }
 
+// ─── EJE GEOGRÁFICO ───────────────────────────────────────────────────────────
+// Región de origen (sede) de cada banco — para el caso "estás hablando con un
+// banco en Alemania → enséñame qué hacen los bancos de su zona".
+const BANK_REGION = {
+  BBVA: 'Iberia', Santander: 'Iberia', CaixaBank: 'Iberia', Sabadell: 'Iberia',
+  SocGen: 'Francia', ING: 'Benelux',
+  Intesa: 'Italia', UniCredit: 'Italia',
+  Barclays: 'Reino Unido', StanChart: 'Reino Unido', NatWest: 'Reino Unido', HSBC: 'Reino Unido', Lloyds: 'Reino Unido',
+  Nordea: 'Nórdicos',
+  Commerzbank: 'DACH', UBS: 'DACH',
+  Citigroup: 'EE.UU.', JPMorgan: 'EE.UU.', MorganStanley: 'EE.UU.', Goldman: 'EE.UU.',
+  Isbank: 'Turquía', Akbank: 'Turquía',
+  Bancolombia: 'LatAm',
+};
+// Orden de presentación en el selector + bandera representativa.
+const REGION_ORDER = [
+  ['Iberia', '🇪🇸'], ['DACH', '🇩🇪'], ['Reino Unido', '🇬🇧'], ['Italia', '🇮🇹'],
+  ['Francia', '🇫🇷'], ['Benelux', '🇳🇱'], ['Nórdicos', '🇸🇪'], ['EE.UU.', '🇺🇸'],
+  ['Turquía', '🇹🇷'], ['LatAm', '🇨🇴'],
+];
+let currentRegion = ''; // '' = todas las regiones
+
+// ─── CAGR realizado ───────────────────────────────────────────────────────────
+// Ritmo anual compuesto base→último año reportado (fracción; p.ej. -0.082 = −8,2%/año).
+// Null cuando no es computable (sin base, valores no positivos, deltas de alineamiento…).
+function realizedCAGR(b) {
+  const lv = b.y2026 ?? b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
+  const ly = b.y2026 != null ? 2026 : b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
+  if (b.base == null || lv == null || !b.baseY || !ly || ly === b.baseY || b.base <= 0 || lv <= 0) return null;
+  return Math.pow(lv / b.base, 1 / (ly - b.baseY)) - 1;
+}
+
 // ─── KPIs ────────────────────────────────────────────────────────────────────
 function renderKPIs() {
   const sd = getSectorData();
   const allBanks = sd.banks;
-  const peers = allBanks.filter(b => b.name !== 'BBVA');
+  // Conjunto en alcance: si hay región activa, solo peers de esa zona (+ BBVA siempre).
+  const scopeBanks = allBanks.filter(b => !currentRegion || BANK_REGION[b.name] === currentRegion || b.name === 'BBVA');
+  const peers = scopeBanks.filter(b => b.name !== 'BBVA');
   const reporters = peers.filter(b => b.y2024 != null || b.y2025 != null || b.y2026 != null);
-  const totalBanks = Object.keys(BANK_META).length;
+  const totalBanks = currentRegion
+    ? Object.keys(BANK_REGION).filter(n => BANK_REGION[n] === currentRegion).length
+    : Object.keys(BANK_META).length;
 
   const _avg = arr => arr.length ? arr.reduce((a, v) => a + v, 0) / arr.length : null;
 
@@ -4248,19 +4520,19 @@ function renderKPIs() {
   const mLabelLow = mLabel === 'Delta' ? 'Delta más bajo' :
                     mLabel === 'Emisiones' ? 'Emisiones más bajas' : `${mLabel} más baja`;
 
-  // Sector averages (all banks with valid data)
-  const sIntVals = allBanks.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
-  const sObjVals = allBanks.filter(b => b.obj !== null).map(b => b.obj);
-  const sPctVals = allBanks.filter(b => b.pctYTD !== null).map(b => b.pctYTD);
+  // Sector/zone averages (banks in scope with valid data)
+  const sIntVals = scopeBanks.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
+  const sObjVals = scopeBanks.filter(b => b.obj !== null).map(b => b.obj);
+  const sCagrVals = scopeBanks.map(realizedCAGR).filter(v => v !== null);
   const sectorAvgInt = _avg(sIntVals);
   const sectorAvgObj = _avg(sObjVals);
-  const sectorAvgPct = _avg(sPctVals);
+  const sectorAvgCAGR = _avg(sCagrVals);
 
   // BBVA
   const bbva    = allBanks.find(b => b.name === 'BBVA');
   const bbvaInt = bbva ? (bbva.y2025 ?? bbva.y2024 ?? bbva.y2023 ?? null) : null;
   const bbvaObj = bbva ? (bbva.obj    ?? null) : null;
-  const bbvaPct = bbva ? (bbva.pctYTD ?? null) : null;
+  const bbvaCAGR = bbva ? realizedCAGR(bbva) : null;
 
   // Latest data year per bank / sector
   const latestBankYear = b => b.y2026 != null ? 2026 : b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
@@ -4274,8 +4546,11 @@ function renderKPIs() {
   }, null);
   const bestObj = peers.filter(b => b.obj !== null).reduce((acc, b) =>
     acc === null || b.obj < acc.v ? { name: b.name, v: b.obj } : acc, null);
-  const bestPct = peers.filter(b => b.pctYTD !== null).reduce((acc, b) =>
-    acc === null || b.pctYTD > acc.v ? { name: b.name, v: b.pctYTD } : acc, null);
+  // Mejor CAGR = ritmo de reducción más rápido (más negativo) entre los pares.
+  const bestCAGR = peers.reduce((acc, b) => {
+    const c = realizedCAGR(b);
+    return (c !== null && (acc === null || c < acc.v)) ? { name: b.name, v: c } : acc;
+  }, null);
 
   // ─── Render helpers ───────────────────────────────────────────────────────
   const fv = (v, d = 2) => (v !== null && v !== undefined) ? Number(v).toFixed(d) : '—';
@@ -4293,6 +4568,24 @@ function renderKPIs() {
     const arrow = bIsHigh ? '▲' : '▼';
     const pct   = Math.abs(((bv - sv) / Math.abs(sv)) * 100).toFixed(1);
     return `<span style="font-size:10.5px;font-weight:700;color:${color};margin-left:5px;white-space:nowrap;vertical-align:middle">${arrow}${pct}%</span>`;
+  };
+
+  // CAGR realizado: valor coloreado (verde = reduciendo, rojo = aumentando) + unidad.
+  const cagrEl = (c) => {
+    if (c === null || c === undefined) return valEl(null) + unitEl('%/año');
+    const pct = c * 100;
+    const color = pct < 0 ? '#1A7F4B' : pct > 0 ? '#D93025' : 'var(--text-primary)';
+    const txt = (pct > 0 ? '+' : '') + pct.toFixed(1);
+    return `<span style="font-size:20px;font-weight:600;font-family:var(--mono);color:${color};line-height:1">${txt}</span>` + unitEl('%/año');
+  };
+  // Comparativa CAGR BBVA vs media de zona, en puntos porcentuales (pp).
+  const cagrDelta = (bv, sv) => {
+    if (bv === null || sv === null || bv === undefined || sv === undefined) return '';
+    const diffpp = (bv - sv) * 100;
+    const good = bv < sv; // reducir más rápido (más negativo) es mejor
+    const color = good ? '#1A7F4B' : '#D93025';
+    const arrow = bv < sv ? '▼' : '▲';
+    return `<span style="font-size:10.5px;font-weight:700;color:${color};margin-left:5px;white-space:nowrap;vertical-align:middle">${arrow}${Math.abs(diffpp).toFixed(1)}pp</span>`;
   };
 
   const logo = name => name
@@ -4335,17 +4628,17 @@ function renderKPIs() {
     <div class="kpi-card" style="display:flex;flex-direction:column;justify-content:center;gap:10px">
       <div class="kpi-label">Bancos reportando</div>
       <div class="kpi-value" style="font-size:28px">${reporters.length}<span style="font-size:14px;font-weight:400;color:var(--text-tertiary);margin-left:4px;font-family:var(--font)">/ ${totalBanks}</span></div>
-      <div class="kpi-sub">con datos en ${currentSector}</div>
+      <div class="kpi-sub">con datos en ${currentSector}${currentRegion ? ' · ' + currentRegion : ''}</div>
     </div>
 
     <div class="kpi-card">
-      ${cardHead(headLabel('Sector') + yearChip(sectorDataYear))}
+      ${cardHead(headLabel(currentRegion ? 'Zona · ' + currentRegion : 'Sector') + yearChip(sectorDataYear))}
       <div style="display:flex;flex-direction:column;gap:10px">
         ${kpiRow(`${mLabel} actual (media)`, valEl(sectorAvgInt) + unitEl(sd.metric))}
         ${hr}
         ${kpiRow('Objetivo 2030 (media)', valEl(sectorAvgObj) + unitEl(sd.metric))}
         ${hr}
-        ${kpiRow('Reducción vs base (media)', valEl(sectorAvgPct, 1) + unitEl('%'))}
+        ${kpiRow('CAGR medio (real)', cagrEl(sectorAvgCAGR))}
       </div>
     </div>
 
@@ -4356,7 +4649,7 @@ function renderKPIs() {
         ${hr}
         ${kpiRow('Objetivo 2030', valEl(bbvaObj) + unitEl(sd.metric) + delta(bbvaObj, sectorAvgObj))}
         ${hr}
-        ${kpiRow('Reducción vs base', valEl(bbvaPct, 1) + unitEl('%') + delta(bbvaPct, sectorAvgPct, true))}
+        ${kpiRow(currentRegion ? 'CAGR real (vs zona)' : 'CAGR real (vs sector)', cagrEl(bbvaCAGR) + cagrDelta(bbvaCAGR, sectorAvgCAGR))}
       </div>
     </div>
 
@@ -4373,9 +4666,9 @@ function renderKPIs() {
           bestObj ? logoBig(bestObj.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestObj.name}</span>` : '—'
         )}
         ${hr}
-        ${kpiRowInline('Mayor reducción (%)',
-          valEl(bestPct ? bestPct.v : null, 1) + unitEl('%'),
-          bestPct ? logoBig(bestPct.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestPct.name}</span>` : '—'
+        ${kpiRowInline('Mejor CAGR (real)',
+          cagrEl(bestCAGR ? bestCAGR.v : null),
+          bestCAGR ? logoBig(bestCAGR.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestCAGR.name}</span>` : '—'
         )}
       </div>
     </div>
@@ -4772,6 +5065,18 @@ function drawChart() {
               const v = ctx.raw;
               if (v === null) return null;
               return `${ctx.dataset.label}: ${Number(v).toFixed(2)} ${getSectorData().metric}`;
+            },
+            // CAGR realizado desde el año base hasta el año señalado (útil para banqueros).
+            afterLabel: ctx => {
+              const v = ctx.raw;
+              if (v == null) return;
+              const name = ctx.dataset.label.replace(/ target$/, '');
+              const b = getSectorData().banks.find(x => x.name === name);
+              if (!b || b.base == null || !b.baseY || b.base <= 0 || v <= 0) return;
+              const year = Number(ctx.label);
+              if (!year || year === b.baseY) return;
+              const cagr = (Math.pow(v / b.base, 1 / (year - b.baseY)) - 1) * 100;
+              return `CAGR desde ${b.baseY}: ${cagr > 0 ? '+' : ''}${cagr.toFixed(1)}%/año`;
             }
           },
           filter: item => item.raw !== null && item.dataset.order !== 99
@@ -4852,6 +5157,8 @@ function renderRelevant() {
 const COL_DEFS = {
   bank:     { label: 'Bank', sortFn: b => b.name },
   country:  { label: 'Country', sortFn: b => BANK_META[b.name]?.flag || '' },
+  region:   { label: 'Zona (sede)', sortFn: b => BANK_REGION[b.name] || 'z' },
+  geoTarget:{ label: 'Cobertura objetivo', sortFn: b => b.geo || 'z' },
   baseline: { label: 'Base Year', sortFn: b => b.baseY || 0 },
   baseInt:  { label: 'Base Year Int.', sortFn: b => b.base ?? 999 },
   y2022:    { label: '2022', sortFn: b => b.y2022 ?? 999 },
@@ -4908,6 +5215,8 @@ function renderTable() {
     const cells = activeCols.map(id => {
       if (id === 'bank') return `<td><div class="bank-cell"><img class="bank-logo" src="${getFavicon(b.name)}" onerror="this.style.display='none'"><span class="bank-name">${dispName(b.name)}${b.seg ? ` <span style="color:var(--text-tertiary);font-weight:400;font-size:10px">(${b.seg})</span>` : ''}${isBBVA ? '<span class="bbva-badge">CIB</span>' : ''}</span></div></td>`;
       if (id === 'country') return `<td><span class="country-flag">${meta.flag||'🌐'}</span></td>`;
+      if (id === 'region') return `<td><span class="metric-tag">${BANK_REGION[b.name] || '—'}</span></td>`;
+      if (id === 'geoTarget') return `<td><span class="metric-tag">${b.geo || '—'}</span></td>`;
       if (id === 'baseline') return `<td><span class="metric-tag">${b.baseY || '—'}</span></td>`;
       if (id === 'baseInt') return `<td>${fmt(b.base)}</td>`;
       if (id === 'y2022') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2022)}</td>`;
@@ -4958,6 +5267,11 @@ function toggleSort(col) {
 
 // Sets b.show on the active sector's banks for a filter (no rendering)
 function applyFilterVisibility(f, sd) {
+  // El eje geográfico tiene prioridad: si hay una zona activa, solo sus bancos (+ BBVA).
+  if (currentRegion) {
+    sd.banks.forEach(b => { b.show = BANK_REGION[b.name] === currentRegion || b.name === 'BBVA'; });
+    return;
+  }
   if (f === 'european') {
     sd.banks.forEach(b => { b.show = !!(BANK_META[b.name]?.european) || b.name === 'BBVA'; });
   } else if (f === 'top5') {
@@ -4995,6 +5309,25 @@ function setFilter(f) {
   renderTable();
 }
 
+// Eje geográfico — filtra el set de pares a la zona de origen seleccionada.
+function setRegion(r) {
+  currentRegion = r || '';
+  document.querySelectorAll('select.region-select').forEach(el => { if (el.value !== currentRegion) el.value = currentRegion; el.classList.toggle('region-on', !!currentRegion); });
+  const sd = getSectorData();
+  applyFilterVisibility(currentFilter, sd);
+  if (chartInst) {
+    sd.banks.forEach(b => {
+      chartInst.data.datasets.forEach((ds, i) => {
+        if (ds.label === b.name || ds.label === `${b.name} target`) chartInst.setDatasetVisibility(i, b.show);
+      });
+    });
+    chartInst.update();
+  }
+  renderKPIs();
+  renderToggles();
+  renderTable();
+}
+
 function setSubMetric(m, btn) {
   currentSubMetric = m;
   document.querySelectorAll('.submetric-tab').forEach(b => b.classList.remove('active'));
@@ -5008,7 +5341,7 @@ function setSubMetric(m, btn) {
 // ─── COLUMN MODAL ─────────────────────────────────────────────────────────────
 function openColModal() {
   const el = document.getElementById('colOptions');
-  const ALL_COL_ORDER = ['bank','country','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','pctReduction','scope','metod','cagr'];
+  const ALL_COL_ORDER = ['bank','country','region','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','pctReduction','scope','metod','geoTarget','cagr'];
   el.innerHTML = `
     <div style="font-size:11px;color:var(--text-tertiary);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Selecciona las columnas visibles</div>
     ${ALL_COL_ORDER.map(id => {
@@ -5027,7 +5360,7 @@ function onColToggle() {}
 function closeColModal() { document.getElementById('colModal').classList.remove('open'); }
 
 function applyColConfig() {
-  const ALL_COL_ORDER = ['bank','country','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','pctReduction','scope','metod','cagr'];
+  const ALL_COL_ORDER = ['bank','country','region','baseline','baseInt','y2022','y2023','y2024','y2025','obj','pctYTD','pctReduction','scope','metod','geoTarget','cagr'];
   activeCols = ALL_COL_ORDER.filter(id => {
     const el = document.getElementById(`col_${id}`);
     return el && el.checked;
@@ -5077,7 +5410,219 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(`screen-${id}`).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (typeof event !== 'undefined' && event && event.currentTarget) event.currentTarget.classList.add('active');
+  if (id === 'scenarios') renderScenarioScreen();
+}
+
+// ─── CLIMATE SCENARIOS SCREEN ─────────────────────────────────────────────────
+const SCN_STYLE = {
+  nz:    { label: 'Net Zero 2050',    tag: 'NZE',   color: '#2E6FB7', light: '#7FB0E6' },
+  steps: { label: 'Stated Policies',  tag: 'STEPS', color: '#5B9BD5', light: '#A9CCF0' },
+  cps:   { label: 'Current Policies', tag: 'CPS',   color: '#8A97A6', light: '#C2CCD6' },
+};
+const SCN_SECTOR_PREF = ['Power', 'Cement', 'Steel', 'Automotive', 'Aviation'];
+let scnSector = null;
+let scnInstance = null;
+// Filtros de la gráfica: bloques visibles + horizonte temporal.
+let scnBlocks = { global: true, bbva: true, real: true };
+let scnHorizon = 2050;
+
+// Sectores con sendas propias de BBVA disponibles (data/bbva_pathways.csv → PATHWAYS).
+function scnAvailableSectors() {
+  const all = (typeof PATHWAYS !== 'undefined') ? Object.keys(PATHWAYS) : [];
+  return [...SCN_SECTOR_PREF.filter(s => all.includes(s)), ...all.filter(s => !SCN_SECTOR_PREF.includes(s))];
+}
+
+// Entrada BBVA (real reportado + objetivo) del sector. Aviation usa la submétrica RPK (pkm).
+function scnBBVABank(secKey) {
+  const S = SECTORS[secKey]; if (!S) return null;
+  let banks;
+  if (S.hasSubMetrics) {
+    const sm = secKey === 'Aviation' ? 'RPK' : S.defaultSubMetric;
+    banks = (S.subMetrics[sm] || S.subMetrics[S.defaultSubMetric] || {}).banks;
+  } else banks = S.banks;
+  return (banks || []).find(b => b.name === 'BBVA') || null;
+}
+
+function bbvaTargetVal(b) {
+  if (!b) return null;
+  if (b.obj != null) return b.obj;
+  if (b.objLow != null && b.objHigh != null) return (b.objLow + b.objHigh) / 2;
+  return null;
+}
+
+// Valor real reportado de BBVA en un año (prioriza la base en su año base).
+function scnRealVal(b, y) {
+  if (y === b.baseY && b.base != null) return b.base;
+  if (y === 2022) return b.y2022 ?? null;
+  if (y === 2023) return b.y2023 ?? null;
+  if (y === 2024) return b.y2024 ?? null;
+  if (y === 2025) return b.y2025 ?? null;
+  if (y === 2026) return b.y2026 ?? null;
+  return null;
+}
+
+// Veredicto del objetivo 2030 de BBVA frente a sus propias sendas en 2030.
+function scnVerdict(end, tgt) {
+  if (tgt == null) return null;
+  if (end.nz != null && tgt <= end.nz * 1.02) return { short: '≈ Net Zero', txt: 'El objetivo 2030 sigue el ritmo de la senda Net Zero', color: '#1A7F4B', bg: '#E3F4EA' };
+  if (end.steps != null && tgt <= end.steps) return { short: 'Entre NZE y STEPS', txt: 'Más ambicioso que Stated Policies, sin llegar a Net Zero', color: '#15803D', bg: '#E8F6EC' };
+  if (end.cps != null && tgt <= end.cps) return { short: 'Entre STEPS y CPS', txt: 'Entre las políticas anunciadas y las vigentes', color: '#B45309', bg: '#FDF3E3' };
+  return { short: 'Por encima de CPS', txt: 'Por encima de todas las sendas de políticas', color: '#D93025', bg: '#FCE8E6' };
+}
+
+function setScnSector(s) { scnSector = s; renderScenarioScreen(); }
+
+// Mostrar/ocultar un bloque (global / sendas BBVA / real BBVA) en bloque.
+function toggleScnBlock(b, btn) {
+  scnBlocks[b] = !scnBlocks[b];
+  if (btn) btn.classList.toggle('off', !scnBlocks[b]);
+  renderScenarioScreen();
+}
+// Horizonte temporal del eje X (2030 o 2050).
+function setScnHorizon(yr, btn) {
+  scnHorizon = yr;
+  document.querySelectorAll('#scnYearTabs .filter-tab').forEach(el => el.classList.toggle('active', +el.dataset.year === yr));
+  renderScenarioScreen();
+}
+
+function renderScenarioScreen() {
+  if (typeof PATHWAYS === 'undefined') return;
+  const sectors = scnAvailableSectors();
+  if (!sectors.length) return;
+  if (!scnSector || !sectors.includes(scnSector)) scnSector = sectors[0];
+  document.getElementById('scnSectorPills').innerHTML = sectors.map(s =>
+    `<div class="scn-pill${s === scnSector ? ' active' : ''}" onclick="setScnSector('${s.replace(/'/g, "\\'")}')">${s}</div>`
+  ).join('');
+
+  const P = PATHWAYS[scnSector];
+  const years = P.years, i2030 = years.indexOf(2030), unit = P.unit;
+  const end = { nz: P.nz?.[i2030] ?? null, steps: P.steps?.[i2030] ?? null, cps: P.cps?.[i2030] ?? null };
+  const bbva = scnBBVABank(scnSector);
+  const tgt = bbvaTargetVal(bbva);
+  const fmtv = v => v == null ? '—' : (Math.abs(v) >= 100 ? String(Math.round(v)) : Number(v).toFixed(2));
+
+  const G = (typeof GLOBALS !== 'undefined') ? GLOBALS[scnSector] : null;
+  const gNZ2030 = (G && G.nz) ? G.nz[G.years.indexOf(2030)] : null;
+
+  // Último valor real reportado de BBVA (con su año).
+  let realLatest = null;
+  if (bbva) for (let i = years.length - 1; i >= 0; i--) { const rv = scnRealVal(bbva, years[i]); if (rv != null) { realLatest = { v: rv, y: years[i] }; break; } }
+
+  const v = scnVerdict(end, tgt);
+  // Helpers de tarjeta
+  const yearChip = t => `<span style="margin-left:auto;font-size:10px;background:var(--gray-bg);border:1px solid var(--border);border-radius:10px;padding:1px 7px;color:var(--text-tertiary);font-weight:500">${t}</span>`;
+  const cHead = inner => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${inner}</div>`;
+  const hLbl = t => `<span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)">${t}</span>`;
+  const bigVal = (val, u) => `<div style="display:flex;align-items:baseline;gap:3px"><span style="font-size:26px;font-weight:600;font-family:var(--mono);color:var(--text-primary)">${val}</span><span style="font-size:11px;color:var(--text-secondary)">${u}</span></div>`;
+  const subTxt = t => `<div style="font-size:11px;color:var(--text-tertiary);margin-top:6px;line-height:1.4">${t}</div>`;
+
+  // 1 · BBVA hoy
+  const cardHoy = `<div class="kpi-card">${cHead(hLbl('BBVA · Valor actual') + (realLatest ? yearChip(realLatest.y) : ''))}${bigVal(realLatest ? fmtv(realLatest.v) : '—', unit)}${subTxt(realLatest ? 'último dato reportado' : 'sin dato reciente')}</div>`;
+
+  // 2 · Objetivo 2030 BBVA (accent) + reducción vs hoy
+  let redTxt = 'objetivo publicado';
+  if (realLatest && tgt != null) {
+    const r = (realLatest.v - tgt) / Math.abs(realLatest.v) * 100;
+    redTxt = r >= 0 ? `−${r.toFixed(0)}% que el valor actual` : `ya ${Math.abs(r).toFixed(0)}% por debajo del objetivo`;
+  }
+  const cardObj = `<div class="kpi-card accent">${cHead(`<img src="${getFavicon('BBVA')}" style="width:16px;height:16px;border-radius:3px;object-fit:contain;background:#fff;padding:1px" onerror="this.style.display='none'">` + hLbl('BBVA · Objetivo 2030'))}${bigVal(fmtv(tgt), unit)}${subTxt(redTxt)}</div>`;
+
+  // 3 · Ambición del objetivo (veredicto frente a las sendas de BBVA)
+  const cardAmb = `<div class="kpi-card">${cHead(hLbl('Ambición del objetivo'))}<div style="margin-top:2px">${v ? `<span class="scn-verdict" style="font-size:13.5px;padding:5px 11px;color:${v.color};background:${v.bg}">${v.short}</span>` : '<span style="font-size:12px;color:var(--text-tertiary)">—</span>'}</div>${subTxt(v ? v.txt : 'Sin objetivo BBVA en este sector')}</div>`;
+
+  // 4 · Referencia Net Zero global 2030 + posición de BBVA
+  let gapGtxt = 'referencia WEO2025';
+  if (tgt != null && gNZ2030 != null) {
+    const g = (tgt - gNZ2030) / Math.abs(gNZ2030) * 100;
+    gapGtxt = g <= 0 ? `objetivo BBVA ${Math.abs(g).toFixed(0)}% por debajo` : `objetivo BBVA ${g.toFixed(0)}% por encima`;
+  }
+  const cardGlobal = `<div class="kpi-card">${cHead(hLbl('Net Zero global · 2030'))}${bigVal(gNZ2030 != null ? fmtv(gNZ2030) : '—', unit)}${subTxt(gapGtxt)}</div>`;
+
+  document.getElementById('scnCards').innerHTML = cardHoy + cardObj + cardAmb + cardGlobal;
+
+  document.getElementById('scnLegend').innerHTML = `
+    <p style="margin:0 0 10px">Tres niveles de ambición (WEO2025), del más exigente al menos: <strong style="color:${SCN_STYLE.nz.light}">NZE</strong> (cero neto 2050 / 1,5 °C) › <strong style="color:${SCN_STYLE.steps.light}">STEPS</strong> (políticas anunciadas) › <strong style="color:${SCN_STYLE.cps.light}">CPS</strong> (políticas en vigor).</p>
+    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(91,155,213,0.25);border-top:2px solid ${SCN_STYLE.nz.color};border-bottom:2px solid ${SCN_STYLE.steps.color};vertical-align:middle"></span> <strong style="color:#2E6FB7">Sendas de BBVA</strong> — banda NZE–STEPS (CPS punteado). Ancladas a la base de BBVA con el ritmo de cada escenario.</p>
+    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(150,160,175,0.20);border-top:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;vertical-align:middle"></span> <strong style="color:#7A8794">Escenarios globales</strong> — banda global WEO2025 (común a todos los bancos), como referencia.</p>
+    <p style="margin:0;opacity:.9"><span style="display:inline-block;width:22px;border-top:3px solid #072146;vertical-align:middle"></span> <strong style="color:#072146">Real / objetivo BBVA</strong> — sólida = reportado; discontinua = objetivo 2030. Cuanto más abajo, más descarbonizado.</p>`;
+
+  document.getElementById('scnChartTitle').textContent = `${scnSector} — Sendas de BBVA vs escenarios globales`;
+  document.getElementById('scnChartSub').textContent = `${unit} · BBVA (azul) vs global WEO2025 (gris) · real + objetivo BBVA · horizonte ${scnHorizon}`;
+  drawScenarioChart(P, G, bbva, tgt);
+}
+
+function drawScenarioChart(P, G, bbva, tgt) {
+  const canvas = document.getElementById('scnChart');
+  if (scnInstance) scnInstance.destroy();
+  const years = P.years.filter(y => y <= scnHorizon);   // horizonte 2030 / 2050
+  const datasets = [];
+  // El orden del array define la profundidad (lo último se dibuja encima); no usamos
+  // 'order' para no interferir con la resolución de fill:'+1'.
+
+  // Alinea un array (BBVA o global) a los años visibles del eje, mapeando por año.
+  const pAt = (arr) => arr ? years.map(y => { const i = P.years.indexOf(y); return i >= 0 ? arr[i] : null; }) : null;
+  const gAt = (scen) => (G && G[scen]) ? years.map(y => { const i = G.years.indexOf(y); return i >= 0 ? G[scen][i] : null; }) : null;
+
+  // ── Banda GLOBAL (gris, al fondo) — referencia WEO2025 común a todos los bancos ──
+  if (G && scnBlocks.global) {
+    const gS = gAt('steps'), gN = gAt('nz'), gC = gAt('cps');
+    if (gS && gN) {
+      datasets.push({ label: 'Global STEPS', data: gS, borderColor: '#9AA7B4', borderWidth: 1, backgroundColor: 'rgba(150,160,175,0.12)', fill: '+1', pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+      datasets.push({ label: 'Global NZE', data: gN, borderColor: '#9AA7B4', borderWidth: 1, backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+    }
+    if (gC) datasets.push({ label: 'Global CPS', data: gC, borderColor: '#B8C2CC', borderWidth: 1, borderDash: [3, 3], backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+  }
+
+  // ── Banda BBVA (azul) — sendas propias (banda STEPS–NZE + CPS punteado) ──
+  if (scnBlocks.bbva) {
+    datasets.push({ label: 'STEPS BBVA', data: pAt(P.steps), borderColor: SCN_STYLE.steps.color, borderWidth: 1.5, backgroundColor: 'rgba(91,155,213,0.16)', fill: '+1', pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+    datasets.push({ label: 'NZE BBVA', data: pAt(P.nz), borderColor: SCN_STYLE.nz.color, borderWidth: 1.5, backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+    if (P.cps) datasets.push({ label: 'CPS BBVA', data: pAt(P.cps), borderColor: SCN_STYLE.cps.color, borderWidth: 1.5, borderDash: [6, 4], backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+  }
+
+  // ── BBVA real + objetivo (azul marino, encima de todo) ──
+  if (bbva && scnBlocks.real) {
+    const real = years.map(y => scnRealVal(bbva, y));
+    datasets.push({ label: 'BBVA (real reportado)', data: real, borderColor: '#072146', backgroundColor: '#072146', borderWidth: 3, pointRadius: real.map(x => x == null ? 0 : 4), pointBackgroundColor: '#072146', tension: .25, spanGaps: true });
+    if (tgt != null) {
+      let lastY = null, lastV = null;
+      for (let i = 0; i < years.length; i++) if (real[i] != null) { lastY = years[i]; lastV = real[i]; }
+      if (lastY != null) datasets.push({ label: 'BBVA objetivo 2030', data: years.map(y => y === lastY ? lastV : (y === 2030 ? tgt : null)), borderColor: '#072146', backgroundColor: '#072146', borderWidth: 2, borderDash: [3, 3], pointRadius: years.map(y => y === 2030 ? 5 : 0), pointStyle: 'rectRot', pointBackgroundColor: '#072146', tension: 0, spanGaps: true });
+    }
+  }
+
+  // Firma = sector + nº de líneas. Si coincide con el gráfico actual (p. ej. solo
+  // cambió el horizonte), actualizamos en sitio para que Chart.js ANIME el cambio
+  // (los puntos se reparten a lo ancho → el eje se estira/encoge). Si cambia el
+  // sector o el nº de bloques visibles, recreamos limpio.
+  const sig = scnSector + '|' + datasets.length;
+  if (scnInstance && scnInstance._scnSig === sig) {
+    scnInstance.data.labels = years;
+    datasets.forEach((d, i) => Object.assign(scnInstance.data.datasets[i], d));
+    scnInstance.update();
+    return;
+  }
+  if (scnInstance) scnInstance.destroy();
+  scnInstance = new Chart(canvas, {
+    type: 'line',
+    data: { labels: years, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: { duration: 750, easing: 'easeInOutCubic' },
+      layout: { padding: { right: 10 } },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
+        tooltip: { callbacks: { label: c => c.parsed.y == null ? null : `${c.dataset.label}: ${c.parsed.y} ${P.unit}` } },
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 16, autoSkip: true } },
+        y: { min: 0, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' }, title: { display: true, text: P.unit, font: { size: 11 }, color: '#8FA0B4' } },
+      },
+    },
+  });
+  scnInstance._scnSig = sig;
 }
 
 // ─── YOY MODULE ───────────────────────────────────────────────────────────────
