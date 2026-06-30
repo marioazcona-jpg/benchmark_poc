@@ -5,7 +5,8 @@
       "name": "benchmark",
       "runtimeExecutable": "node",
       "runtimeArgs": ["tools/serve.mjs"],
-      "port": 4321
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }

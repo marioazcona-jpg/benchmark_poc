@@ -11,7 +11,14 @@
       "Bash(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\")",
       "Bash(Measure-Object -Line)",
       "Bash(Select-Object Lines)",
-      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\"\\).Count; \\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\" | Select-Object -Last 3\\))"
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\"\\).Count; \\(Get-Content \"c:\\\\Users\\\\EM2024007112\\\\Desktop\\\\BBVA\\\\Proyecto 1 - Benchmark\\\\index.html\" | Select-Object -Last 3\\))",
+      "Bash(node -e ' *)",
+      "Bash(node tools/build_data.mjs)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cd \"C:/Users/EM2024007112/Desktop/BBVA/Proyecto 1 - Benchmark/.claude/worktrees/confident-sanderson-73f7b0\" && cp \"C:/Users/EM2024007112/Downloads/scenarios_timeseries_wide.csv\" data/bbva_pathways.csv && echo \"copied:\" && ls -la data/bbva_pathways.csv && echo \"=== GEN_END location ===\" && grep -n 'GEN_END\\\\|GEN_START' index.html)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
