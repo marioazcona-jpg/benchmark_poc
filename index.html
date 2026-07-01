@@ -111,6 +111,9 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .add-bank-btn { font-size: 11px; color: var(--bbva-blue); border: 1px dashed var(--bbva-blue); background: transparent; padding: 4px 9px; border-radius: 20px; cursor: pointer; font-family: var(--font); font-weight: 500; transition: all .15s; }
 .add-bank-btn:hover { background: #EEF4FA; }
 .chart-wrap { position: relative; flex: 1; min-height: 340px; }
+/* Altura fija para la gráfica de escenarios: evita que Chart.js colapse el canvas
+   a 150px al hacer update() en sitio (transición de horizonte 2030<->2050). */
+.scn-wrap { flex: 0 0 auto; height: 360px; min-height: 360px; }
 
 /* RELEVANT DATA */
 .relevant-card { background: var(--bbva-cib); border-radius: var(--radius); padding: 18px 18px; box-shadow: var(--shadow-md); color: #fff; display: flex; flex-direction: column; }
@@ -159,6 +162,11 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
 .bank-cell { display: flex; align-items: center; gap: 8px; }
 .bank-logo { width: 20px; height: 20px; border-radius: 4px; object-fit: contain; background: #fff; border: 1px solid var(--border); padding: 2px; flex-shrink: 0; }
 .bank-name { font-weight: 500; font-size: 12px; color: var(--text-primary); }
+.bank-links { display: inline-flex; gap: 3px; margin-left: 7px; vertical-align: middle; }
+.bank-link { font-size: 8.5px; font-weight: 700; letter-spacing: .02em; color: var(--text-tertiary); background: var(--gray-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 4px; text-decoration: none; line-height: 1.5; white-space: nowrap; transition: all .15s; }
+.bank-link:hover { color: #fff; background: var(--bbva-blue); border-color: var(--bbva-blue); }
+.bank-header-links { margin-top: 7px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 10px; color: var(--text-tertiary); }
+.bank-header-links .bank-links { margin-left: 1px; }
 .bbva-row .bank-name { color: var(--bbva-blue); font-weight: 600; }
 .bbva-badge { font-size: 9px; background: var(--bbva-blue); color: #fff; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
 .country-flag { font-size: 14px; }
@@ -599,7 +607,7 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
               </div>
             </div>
           </div>
-          <div class="chart-wrap"><canvas id="scnChart"></canvas></div>
+          <div class="chart-wrap scn-wrap"><canvas id="scnChart"></canvas></div>
         </div>
         <div class="relevant-card">
           <div class="relevant-title">¿Qué son estos escenarios?</div>
@@ -4442,6 +4450,55 @@ function getFavicon(bank) {
   return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=32` : '';
 }
 
+// Enlaces a informes públicos por banco (anual / sostenibilidad / otros).
+const BANK_LINKS = {
+  Santander:     { annual: 'https://www.santander.com/es/accionistas-e-inversores/informacion-economico-financiera/informe-anual' },
+  CaixaBank:     { annual: 'https://www.caixabank.com/es/accionistas-inversores/informacion-economico-financiera/cuentas-anuales-semestrales.html' },
+  Sabadell:      { sustainability: 'https://www.grupbancsabadell.com/corp/es/sostenibilidad/informes.html' },
+  SocGen:        { annual: 'https://investors.societegenerale.com/en/financial-non-financial-information/non-financial-information/esg-publications' },
+  ING:           { annual: 'https://ing.com/investors/financial-performance/annual-reports', sustainability: 'https://ing.com/sustainability/our-progress/sustainability-publications' },
+  Intesa:        { annual: 'https://group.intesasanpaolo.com/en/investor-relations/financial-reports/2025', sustainability: 'https://group.intesasanpaolo.com/en/sustainability/sustainability-reporting/climate-report' },
+  Barclays:      { annual: 'https://home.barclays/investor-relations/reports-and-events/annual-reports/' },
+  HSBC:          { annual: 'https://www.hsbc.com/investors/results-and-announcements/annual-report', sustainability: 'https://www.hsbc.com/who-we-are/esg-and-responsible-business/esg-reporting-centre?tab=tab-1b3e227c-0' },
+  StanChart:     { annual: 'https://www.sc.com/en/investors/financial-results/annual-report/', sustainability: 'https://www.sc.com/en/about/sustainability/sustainability-library/' },
+  NatWest:       { annual: 'https://investors.natwestgroup.com/annual-report', sustainability: 'https://www.natwestgroup.com/sustainability/environment-and-climate/our-approach-to-climate-change.html' },
+  Nordea:        { annual: 'https://www.nordea.com/en/investors/group-annual-reports' },
+  Citigroup:     { annual: 'https://www.citigroup.com/global/investors/annual-reports-and-proxy-statements', sustainability: 'https://www.citigroup.com/global/our-impact/sustainability', other: 'https://www.citigroup.com/rcs/citigpa/storage/public/Net-Zero-Metrics-Methodology.pdf' },
+  Bancolombia:   { annual: 'https://www.grupobancolombia.com/relacion-inversionistas/informacion-financiera/resultados-anuales' },
+  JPMorgan:      { annual: 'https://www.jpmorganchase.com/ir/annual-report', sustainability: 'https://www.jpmorganchase.com/about/governance/sustainability' },
+  Lloyds:        { annual: 'https://www.lloydsbankinggroup.com/investors/annual-report.html', sustainability: 'https://www.lloydsbankinggroup.com/sustainability.html' },
+  UniCredit:     { annual: 'https://www.unicreditgroup.eu/en/investors/annual-report.html' },
+  MorganStanley: { annual: 'https://www.morganstanley.com/about-us-ir/annual-reports', sustainability: 'https://www.morganstanley.com/about-us/sustainability-reports-research' },
+  Goldman:       { annual: 'https://www.goldmansachs.com/investor-relations/financials/annual-reports', sustainability: 'https://www.goldmansachs.com/investor-relations/corporate-governance/sustainability-reporting/historical-reports' },
+  Commerzbank:   { annual: 'https://investor-relations.commerzbank.com/financial-reports', sustainability: 'https://www.commerzbank.de/sustainability/reports-ratings/reports-publications/sustainability-reports/sustainability-reports/', other: 'https://www.commerzbank.de/sustainability/reports-ratings/reports-publications/esg-framework/' },
+  UBS:           { annual: 'https://www.ubs.com/global/en/investor-relations/financial-information/annual-reporting.html' },
+  Isbank:        { sustainability: 'https://www.isbank.com.tr/en/about-us/our-reports', other: 'https://www.isbank.com.tr/en/about-us/climate-transition-strategy' },
+  Akbank:        { annual: 'https://www.akbankinvestorrelations.com/en/publications/year-list/Annual-reports/54/0/0', sustainability: 'https://www.akbankinvestorrelations.com/en/sustainability/year-list/Sustainability-reports/60/0/0', other: 'https://www.akbankinvestorrelations.com/en/sustainability/detail/Net-Zero-Strategy/731/2156/0' },
+  YapiKredi:     { sustainability: 'https://www.yapikrediinvestorrelations.com/en/financial-information/financial-information-reports-year-document-list/Sustainability-Reports/51/0/0' },
+};
+
+// Resuelve la clave de BANK_LINKS desde una clave cuantitativa o un id del
+// cualitativo (minúsculas), con algún alias puntual.
+const BANK_LINK_LC = Object.fromEntries(Object.keys(BANK_LINKS).map(k => [k.toLowerCase(), k]));
+const BANK_LINK_ALIAS = { citi: 'Citigroup' };
+function resolveLinkKey(name) {
+  if (BANK_LINKS[name]) return name;
+  const lc = String(name || '').toLowerCase();
+  return BANK_LINK_ALIAS[lc] || BANK_LINK_LC[lc] || null;
+}
+
+// Mini-enlaces a informes junto al nombre del banco.
+function bankLinksHtml(name) {
+  const L = BANK_LINKS[resolveLinkKey(name)];
+  if (!L) return '';
+  const a = (url, label, txt) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="bank-link" title="${label}" onclick="event.stopPropagation()">${txt}</a>`;
+  const out = [];
+  if (L.annual) out.push(a(L.annual, 'Informe anual', 'Anual'));
+  if (L.sustainability) out.push(a(L.sustainability, 'Informe de sostenibilidad', 'ESG'));
+  if (L.other) out.push(a(L.other, 'Otro informe (metodología / estrategia net zero)', '+'));
+  return out.length ? `<span class="bank-links">${out.join('')}</span>` : '';
+}
+
 function fmt(v, dec=2) {
   if (v === null || v === undefined) return '<span class="intensity-val empty">—</span>';
   return `<span class="intensity-val">${Number(v).toFixed(dec)}</span>`;
@@ -5213,7 +5270,7 @@ function renderTable() {
     const meta = BANK_META[b.name] || {};
     const isBBVA = b.name === 'BBVA';
     const cells = activeCols.map(id => {
-      if (id === 'bank') return `<td><div class="bank-cell"><img class="bank-logo" src="${getFavicon(b.name)}" onerror="this.style.display='none'"><span class="bank-name">${dispName(b.name)}${b.seg ? ` <span style="color:var(--text-tertiary);font-weight:400;font-size:10px">(${b.seg})</span>` : ''}${isBBVA ? '<span class="bbva-badge">CIB</span>' : ''}</span></div></td>`;
+      if (id === 'bank') return `<td><div class="bank-cell"><img class="bank-logo" src="${getFavicon(b.name)}" onerror="this.style.display='none'"><span class="bank-name">${dispName(b.name)}${b.seg ? ` <span style="color:var(--text-tertiary);font-weight:400;font-size:10px">(${b.seg})</span>` : ''}${isBBVA ? '<span class="bbva-badge">CIB</span>' : ''}</span>${bankLinksHtml(b.name)}</div></td>`;
       if (id === 'country') return `<td><span class="country-flag">${meta.flag||'🌐'}</span></td>`;
       if (id === 'region') return `<td><span class="metric-tag">${BANK_REGION[b.name] || '—'}</span></td>`;
       if (id === 'geoTarget') return `<td><span class="metric-tag">${b.geo || '—'}</span></td>`;
@@ -5592,24 +5649,16 @@ function drawScenarioChart(P, G, bbva, tgt) {
     }
   }
 
-  // Firma = sector + nº de líneas. Si coincide con el gráfico actual (p. ej. solo
-  // cambió el horizonte), actualizamos en sitio para que Chart.js ANIME el cambio
-  // (los puntos se reparten a lo ancho → el eje se estira/encoge). Si cambia el
-  // sector o el nº de bloques visibles, recreamos limpio.
-  const sig = scnSector + '|' + datasets.length;
-  if (scnInstance && scnInstance._scnSig === sig) {
-    scnInstance.data.labels = years;
-    datasets.forEach((d, i) => Object.assign(scnInstance.data.datasets[i], d));
-    scnInstance.update();
-    return;
-  }
+  // Recreamos el gráfico en cada cambio (horizonte / bloques / sector). La
+  // actualización en sitio rompía el dimensionado del canvas (Chart.js lo colapsaba
+  // a 150px y perdía la referencia). La animación de dibujado da la transición.
   if (scnInstance) scnInstance.destroy();
   scnInstance = new Chart(canvas, {
     type: 'line',
     data: { labels: years, datasets },
     options: {
       responsive: true, maintainAspectRatio: false,
-      animation: { duration: 750, easing: 'easeInOutCubic' },
+      animation: { duration: 650, easing: 'easeInOutCubic' },
       layout: { padding: { right: 10 } },
       interaction: { mode: 'index', intersect: false },
       plugins: {
@@ -5622,7 +5671,6 @@ function drawScenarioChart(P, G, bbva, tgt) {
       },
     },
   });
-  scnInstance._scnSig = sig;
 }
 
 // ─── YOY MODULE ───────────────────────────────────────────────────────────────
@@ -5772,6 +5820,7 @@ function renderSingleBank(id, container) {
         <span class="bank-header-flag">${bank?.flag || ''}</span>
         <span>${changes.length} cambios detectados · 2024 → 2025</span>
       </div>
+      ${bankLinksHtml(id) ? `<div class="bank-header-links"><span>Informes:</span>${bankLinksHtml(id)}</div>` : ''}
     </div>
     <div class="bank-header-stats">
       ${dC ? `<div class="bstat d">▼ ${dC}</div>` : ''}
@@ -5880,7 +5929,10 @@ function renderCompareGrid(ids, container) {
     <div class="compare-sector-col">Sector</div>`;
   banks.forEach(b => html += `<div class="compare-bank-col">
     <div class="compare-bank-logo">${logoImg(b.id, 18)}</div>
-    <div class="compare-bank-label">${b.name}</div>
+    <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+      <div class="compare-bank-label">${b.name}</div>
+      ${bankLinksHtml(b.id)}
+    </div>
   </div>`);
   html += `</div>`;
   YOY_SECTORS.forEach(s => {

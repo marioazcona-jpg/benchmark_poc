@@ -18,7 +18,8 @@
       "Bash(cd \"C:/Users/EM2024007112/Desktop/BBVA/Proyecto 1 - Benchmark/.claude/worktrees/confident-sanderson-73f7b0\" && cp \"C:/Users/EM2024007112/Downloads/scenarios_timeseries_wide.csv\" data/bbva_pathways.csv && echo \"copied:\" && ls -la data/bbva_pathways.csv && echo \"=== GEN_END location ===\" && grep -n 'GEN_END\\\\|GEN_START' index.html)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git fetch *)"
     ]
   }
 }
