@@ -110,7 +110,7 @@ const DOMAINS = {
   morganstanley: 'morganstanley.com', bancolombia: 'bancolombia.com', goldman: 'goldmansachs.com',
   ubs: 'ubs.com', isbank: 'isbank.com.tr', bbva: 'bbva.com',
 };
-const ORDER = ['santander', 'ing', 'hsbc', 'bnp', 'jpmorgan', 'citi', 'barclays', 'natwest', 'socgen', 'deutsche', 'unicredit', 'sabadell', 'intesa', 'nordea', 'caixabank', 'stanchart', 'lloyds', 'commerzbank', 'morganstanley', 'goldman', 'ubs', 'bancolombia', 'akbank', 'isbank', 'bbva'];
+const ORDER = ['bbva', 'santander', 'ing', 'hsbc', 'bnp', 'jpmorgan', 'citi', 'barclays', 'natwest', 'socgen', 'deutsche', 'unicredit', 'sabadell', 'intesa', 'nordea', 'caixabank', 'stanchart', 'lloyds', 'commerzbank', 'morganstanley', 'goldman', 'ubs', 'bancolombia', 'akbank', 'isbank'];
 
 // ── Parse CAMBIOS → YOY_DATA ──────────────────────────────────────────────
 const cam = parseCSV(read('data/comp_cambios.csv')).slice(1).filter(r => r.some(c => (c || '').trim()));
