@@ -21,7 +21,9 @@
       "Bash(git push *)",
       "Bash(git fetch *)",
       "Bash(node \"C:/Users/EM2024~1/AppData/Local/Temp/claude/C--Users-EM2024007112-Desktop-BBVA-Proyecto-1---Benchmark--claude-worktrees-confident-sanderson-73f7b0/a99d800e-6ddc-4384-8c62-bb9ad236e8b2/scratchpad/append_bbva_bnp.mjs\")",
-      "Bash(node tools/build_comparator.mjs)"
+      "Bash(node tools/build_comparator.mjs)",
+      "Bash(awk -F',' 'NR>1 {print $3}' data/comp_analisis.csv)",
+      "Bash(node \"C:/Users/EM2024~1/AppData/Local/Temp/claude/C--Users-EM2024007112-Desktop-BBVA-Proyecto-1---Benchmark--claude-worktrees-confident-sanderson-73f7b0/a99d800e-6ddc-4384-8c62-bb9ad236e8b2/scratchpad/append_bbva_analisis.mjs\")"
     ]
   }
 }
