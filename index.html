@@ -314,6 +314,8 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
 .detail-text { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
 .detail-refs { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 .ref-chip { font-size: 10px; font-family: var(--mono); background: var(--gray-bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; color: var(--text-tertiary); }
+a.ref-chip.link { text-decoration: none; color: var(--bbva-blue); border-color: rgba(0,68,129,0.35); background: var(--blue-bg); cursor: pointer; transition: all .15s; }
+a.ref-chip.link:hover { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
 
 .bank-sector-group { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 10px; box-shadow: var(--shadow); }
 .bank-sector-group:hover { box-shadow: var(--shadow-md); }
@@ -599,6 +601,12 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
                 <button class="filter-tab scn-block" data-block="global" onclick="toggleScnBlock('global', this)" title="Mostrar/ocultar la banda de escenarios globales"><span class="scn-dot" style="background:#9AA7B4"></span>Global</button>
                 <button class="filter-tab scn-block" data-block="bbva" onclick="toggleScnBlock('bbva', this)" title="Mostrar/ocultar las sendas propias de BBVA"><span class="scn-dot" style="background:#2E6FB7"></span>Sendas BBVA</button>
                 <button class="filter-tab scn-block" data-block="real" onclick="toggleScnBlock('real', this)" title="Mostrar/ocultar el valor real y el objetivo de BBVA"><span class="scn-dot" style="background:#072146"></span>Real BBVA</button>
+              </div>
+              <div style="width:1px;height:18px;background:var(--border)"></div>
+              <div class="filter-tabs" id="scnScenTabs">
+                <button class="filter-tab scn-block" data-scen="nz" onclick="toggleScnScen('nz', this)" title="Mostrar/ocultar el escenario Net Zero 2050 (Global y Sendas BBVA)"><span class="scn-dot" style="background:#2E6FB7"></span>NZE</button>
+                <button class="filter-tab scn-block" data-scen="steps" onclick="toggleScnScen('steps', this)" title="Mostrar/ocultar el escenario Stated Policies (Global y Sendas BBVA)"><span class="scn-dot" style="background:#5B9BD5"></span>STEPS</button>
+                <button class="filter-tab scn-block" data-scen="cps" onclick="toggleScnScen('cps', this)" title="Mostrar/ocultar el escenario Current Policies (Global y Sendas BBVA)"><span class="scn-dot" style="background:#8A97A6"></span>CPS</button>
               </div>
               <div style="width:1px;height:18px;background:var(--border)"></div>
               <div class="filter-tabs" id="scnYearTabs">
@@ -4562,6 +4570,18 @@ function realizedCAGR(b) {
   return Math.pow(lv / b.base, 1 / (ly - b.baseY)) - 1;
 }
 
+// ─── CAGR objetivo ────────────────────────────────────────────────────────────
+// Ritmo anual comprometido baseline→objetivo (fracción). Aísla la ambición del
+// objetivo del rendimiento real. Usa el año del objetivo del banco (2030 si no
+// consta). Null cuando no es computable; los phase-out (obj ≤ 0) se excluyen
+// porque el CAGR hacia cero no está definido de forma útil (−100 %/año).
+function targetCAGR(b) {
+  const obj = b.obj ?? ((b.objLow != null && b.objHigh != null) ? (b.objLow + b.objHigh) / 2 : null);
+  const endY = b.objY ?? 2030;
+  if (b.base == null || obj == null || !b.baseY || endY <= b.baseY || b.base <= 0 || obj <= 0) return null;
+  return Math.pow(obj / b.base, 1 / (endY - b.baseY)) - 1;
+}
+
 // ─── KPIs ────────────────────────────────────────────────────────────────────
 function renderKPIs() {
   const sd = getSectorData();
@@ -4586,7 +4606,7 @@ function renderKPIs() {
   // Sector/zone averages (banks in scope with valid data)
   const sIntVals = scopeBanks.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
   const sObjVals = scopeBanks.filter(b => b.obj !== null).map(b => b.obj);
-  const sCagrVals = scopeBanks.map(realizedCAGR).filter(v => v !== null);
+  const sCagrVals = scopeBanks.map(targetCAGR).filter(v => v !== null);
   const sectorAvgInt = _avg(sIntVals);
   const sectorAvgObj = _avg(sObjVals);
   const sectorAvgCAGR = _avg(sCagrVals);
@@ -4595,7 +4615,7 @@ function renderKPIs() {
   const bbva    = allBanks.find(b => b.name === 'BBVA');
   const bbvaInt = bbva ? (bbva.y2025 ?? bbva.y2024 ?? bbva.y2023 ?? null) : null;
   const bbvaObj = bbva ? (bbva.obj    ?? null) : null;
-  const bbvaCAGR = bbva ? realizedCAGR(bbva) : null;
+  const bbvaCAGR = bbva ? targetCAGR(bbva) : null;
 
   // Latest data year per bank / sector
   const latestBankYear = b => b.y2026 != null ? 2026 : b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : null;
@@ -4609,9 +4629,9 @@ function renderKPIs() {
   }, null);
   const bestObj = peers.filter(b => b.obj !== null).reduce((acc, b) =>
     acc === null || b.obj < acc.v ? { name: b.name, v: b.obj } : acc, null);
-  // Mejor CAGR = ritmo de reducción más rápido (más negativo) entre los pares.
+  // Mejor CAGR objetivo = compromiso de reducción más rápido (más negativo) entre los pares.
   const bestCAGR = peers.reduce((acc, b) => {
-    const c = realizedCAGR(b);
+    const c = targetCAGR(b);
     return (c !== null && (acc === null || c < acc.v)) ? { name: b.name, v: c } : acc;
   }, null);
 
@@ -4701,7 +4721,7 @@ function renderKPIs() {
         ${hr}
         ${kpiRow('Objetivo 2030 (media)', valEl(sectorAvgObj) + unitEl(sd.metric))}
         ${hr}
-        ${kpiRow('CAGR medio (real)', cagrEl(sectorAvgCAGR))}
+        ${kpiRow('CAGR medio (base→2030)', cagrEl(sectorAvgCAGR))}
       </div>
     </div>
 
@@ -4712,7 +4732,7 @@ function renderKPIs() {
         ${hr}
         ${kpiRow('Objetivo 2030', valEl(bbvaObj) + unitEl(sd.metric) + delta(bbvaObj, sectorAvgObj))}
         ${hr}
-        ${kpiRow(currentRegion ? 'CAGR real (vs zona)' : 'CAGR real (vs sector)', cagrEl(bbvaCAGR) + cagrDelta(bbvaCAGR, sectorAvgCAGR))}
+        ${kpiRow(currentRegion ? 'CAGR base→2030 (vs zona)' : 'CAGR base→2030 (vs sector)', cagrEl(bbvaCAGR) + cagrDelta(bbvaCAGR, sectorAvgCAGR))}
       </div>
     </div>
 
@@ -4729,7 +4749,7 @@ function renderKPIs() {
           bestObj ? logoBig(bestObj.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestObj.name}</span>` : '—'
         )}
         ${hr}
-        ${kpiRowInline('Mejor CAGR (real)',
+        ${kpiRowInline('Mejor CAGR (base→2030)',
           cagrEl(bestCAGR ? bestCAGR.v : null),
           bestCAGR ? logoBig(bestCAGR.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${bestCAGR.name}</span>` : '—'
         )}
@@ -5486,8 +5506,9 @@ const SCN_STYLE = {
 const SCN_SECTOR_PREF = ['Power', 'Cement', 'Steel', 'Automotive', 'Aviation'];
 let scnSector = null;
 let scnInstance = null;
-// Filtros de la gráfica: bloques visibles + horizonte temporal.
+// Filtros de la gráfica: bloques visibles + escenarios visibles + horizonte temporal.
 let scnBlocks = { global: true, bbva: true, real: true };
+let scnScens = { nz: true, steps: true, cps: true };
 let scnHorizon = 2050;
 
 // Sectores con sendas propias de BBVA disponibles (data/bbva_pathways.csv → PATHWAYS).
@@ -5540,6 +5561,14 @@ function setScnSector(s) { scnSector = s; renderScenarioScreen(); }
 function toggleScnBlock(b, btn) {
   scnBlocks[b] = !scnBlocks[b];
   if (btn) btn.classList.toggle('off', !scnBlocks[b]);
+  renderScenarioScreen();
+}
+// Mostrar/ocultar un escenario (NZE / STEPS / CPS) en los bloques Global y
+// Sendas BBVA. Siempre queda al menos un escenario seleccionado.
+function toggleScnScen(s, btn) {
+  if (scnScens[s] && Object.values(scnScens).filter(Boolean).length === 1) return;
+  scnScens[s] = !scnScens[s];
+  if (btn) btn.classList.toggle('off', !scnScens[s]);
   renderScenarioScreen();
 }
 // Horizonte temporal del eje X (2030 o 2050).
@@ -5605,9 +5634,9 @@ function renderScenarioScreen() {
   document.getElementById('scnCards').innerHTML = cardHoy + cardObj + cardAmb + cardGlobal;
 
   document.getElementById('scnLegend').innerHTML = `
-    <p style="margin:0 0 10px">Tres niveles de ambición (WEO2025), del más exigente al menos: <strong style="color:${SCN_STYLE.nz.light}">NZE</strong> (cero neto 2050 / 1,5 °C) › <strong style="color:${SCN_STYLE.steps.light}">STEPS</strong> (políticas anunciadas) › <strong style="color:${SCN_STYLE.cps.light}">CPS</strong> (políticas en vigor).</p>
-    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(91,155,213,0.25);border-top:2px solid ${SCN_STYLE.nz.color};border-bottom:2px solid ${SCN_STYLE.steps.color};vertical-align:middle"></span> <strong style="color:#2E6FB7">Sendas de BBVA</strong> — banda NZE–STEPS (CPS punteado). Ancladas a la base de BBVA con el ritmo de cada escenario.</p>
-    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(150,160,175,0.20);border-top:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;vertical-align:middle"></span> <strong style="color:#7A8794">Escenarios globales</strong> — banda global WEO2025 (común a todos los bancos), como referencia.</p>
+    <p style="margin:0 0 10px">Tres niveles de ambición (WEO2025), del más exigente al menos: <strong style="color:${SCN_STYLE.nz.light}">NZE</strong> (cero neto 2050 / 1,5 °C) › <strong style="color:${SCN_STYLE.steps.light}">STEPS</strong> (políticas anunciadas) › <strong style="color:${SCN_STYLE.cps.light}">CPS</strong> (políticas en vigor). Con el selector NZE/STEPS/CPS eliges cuáles ver: uno = línea, dos = banda entre ambos, tres = banda NZE–STEPS + CPS aparte.</p>
+    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(91,155,213,0.25);border-top:2px dashed ${SCN_STYLE.nz.color};border-bottom:2px dashed ${SCN_STYLE.steps.color};vertical-align:middle"></span> <strong style="color:#2E6FB7">Sendas de BBVA</strong> — escenarios seleccionados (líneas discontinuas), anclados a la base de BBVA con el ritmo de cada escenario.</p>
+    <p style="margin:0 0 8px"><span style="display:inline-block;width:22px;height:8px;background:rgba(150,160,175,0.20);border-top:2px dashed #9AA7B4;border-bottom:2px dashed #9AA7B4;vertical-align:middle"></span> <strong style="color:#7A8794">Escenarios globales</strong> — banda global WEO2025 (común a todos los bancos), como referencia.</p>
     <p style="margin:0;opacity:.9"><span style="display:inline-block;width:22px;border-top:3px solid #072146;vertical-align:middle"></span> <strong style="color:#072146">Real / objetivo BBVA</strong> — sólida = reportado; discontinua = objetivo 2030. Cuanto más abajo, más descarbonizado.</p>`;
 
   document.getElementById('scnChartTitle').textContent = `${scnSector} — Sendas de BBVA vs escenarios globales`;
@@ -5627,21 +5656,52 @@ function drawScenarioChart(P, G, bbva, tgt) {
   const pAt = (arr) => arr ? years.map(y => { const i = P.years.indexOf(y); return i >= 0 ? arr[i] : null; }) : null;
   const gAt = (scen) => (G && G[scen]) ? years.map(y => { const i = G.years.indexOf(y); return i >= 0 ? G[scen][i] : null; }) : null;
 
+  // Línea de escenario: siempre discontinua (son escenarios, no datos reales).
+  // 'bg' activa el relleno de banda hacia el siguiente dataset del array (fill:'+1').
+  const scnLine = (label, data, color, width, bg) => ({
+    label, data, borderColor: color, borderWidth: width, borderDash: [5, 4],
+    backgroundColor: bg || 'transparent', fill: bg ? '+1' : false,
+    pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false,
+  });
+
+  // Bloque de escenarios (global o BBVA) según la selección NZE/STEPS/CPS:
+  // 1 seleccionado → línea punteada · 2 → banda entre ambos · 3 → banda
+  // NZE–STEPS + CPS aparte. Orden cps→steps→nz (de menos a más ambicioso).
+  const pushScenBlock = (get, colors, fillBg, labelOf, width) => {
+    const avail = ['cps', 'steps', 'nz'].filter(k => scnScens[k] && get(k));
+    if (!avail.length) return;
+    if (avail.length === 3) {
+      datasets.push(scnLine(labelOf('cps'), get('cps'), colors.cps, width));
+      datasets.push(scnLine(labelOf('steps'), get('steps'), colors.steps, width, fillBg));
+      datasets.push(scnLine(labelOf('nz'), get('nz'), colors.nz, width));
+    } else if (avail.length === 2) {
+      datasets.push(scnLine(labelOf(avail[0]), get(avail[0]), colors[avail[0]], width, fillBg));
+      datasets.push(scnLine(labelOf(avail[1]), get(avail[1]), colors[avail[1]], width));
+    } else {
+      datasets.push(scnLine(labelOf(avail[0]), get(avail[0]), colors[avail[0]], width));
+    }
+  };
+
   // ── Banda GLOBAL (gris, al fondo) — referencia WEO2025 común a todos los bancos ──
   if (G && scnBlocks.global) {
-    const gS = gAt('steps'), gN = gAt('nz'), gC = gAt('cps');
-    if (gS && gN) {
-      datasets.push({ label: 'Global STEPS', data: gS, borderColor: '#9AA7B4', borderWidth: 1, backgroundColor: 'rgba(150,160,175,0.12)', fill: '+1', pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
-      datasets.push({ label: 'Global NZE', data: gN, borderColor: '#9AA7B4', borderWidth: 1, backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
-    }
-    if (gC) datasets.push({ label: 'Global CPS', data: gC, borderColor: '#B8C2CC', borderWidth: 1, borderDash: [3, 3], backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+    pushScenBlock(
+      k => gAt(k),
+      { nz: '#9AA7B4', steps: '#9AA7B4', cps: '#B8C2CC' },
+      'rgba(150,160,175,0.12)',
+      k => `Global ${SCN_STYLE[k].tag}`,
+      1
+    );
   }
 
-  // ── Banda BBVA (azul) — sendas propias (banda STEPS–NZE + CPS punteado) ──
+  // ── Banda BBVA (azul) — sendas propias según los escenarios seleccionados ──
   if (scnBlocks.bbva) {
-    datasets.push({ label: 'STEPS BBVA', data: pAt(P.steps), borderColor: SCN_STYLE.steps.color, borderWidth: 1.5, backgroundColor: 'rgba(91,155,213,0.16)', fill: '+1', pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
-    datasets.push({ label: 'NZE BBVA', data: pAt(P.nz), borderColor: SCN_STYLE.nz.color, borderWidth: 1.5, backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
-    if (P.cps) datasets.push({ label: 'CPS BBVA', data: pAt(P.cps), borderColor: SCN_STYLE.cps.color, borderWidth: 1.5, borderDash: [6, 4], backgroundColor: 'transparent', fill: false, pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false });
+    pushScenBlock(
+      k => P[k] ? pAt(P[k]) : null,
+      { nz: SCN_STYLE.nz.color, steps: SCN_STYLE.steps.color, cps: SCN_STYLE.cps.color },
+      'rgba(91,155,213,0.16)',
+      k => `${SCN_STYLE[k].tag} BBVA`,
+      1.5
+    );
   }
 
   // ── BBVA real + objetivo (azul marino, encima de todo) ──
@@ -6032,8 +6092,8 @@ function selectSector(s) {
             <div class="detail-label">Descripción completa</div>
             <div class="detail-text">${c.descripcion}</div>
             <div class="detail-refs">
-              ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
-              ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+              ${refChip(c.banco, 2024, c.ref2024)}
+              ${refChip(c.banco, 2025, c.ref2025)}
             </div>
           </div>` : ''}
         </div>`;
@@ -6049,6 +6109,25 @@ function selectSector(s) {
     </div>`);
   }
   document.getElementById('sector-content').innerHTML = html;
+}
+
+// ─── REF CHIP ────────────────────────────────────────────────────────────────
+// Chip de referencia a informe ("Inf. 2024 · pag 155"). Para BBVA enlaza al PDF
+// del informe anual del año, con #page=N si la referencia trae número de página
+// (la página del PDF puede diferir de la impresa en uno o dos folios). Para el
+// resto de bancos queda como texto, ya que no hay PDF público por año.
+const BBVA_REPORT_PDF = Object.fromEntries(
+  ((BANK_LINKS.BBVA || {}).custom || []).filter(x => /^\d{4}$/.test(x.label)).map(x => [x.label, x.url])
+);
+function refChip(bankId, year, ref) {
+  if (!ref || ref === '—' || String(ref).trim() === '-') return '';
+  const txt = `Inf. ${year} · ${ref}`;
+  const url = String(bankId || '').toLowerCase() === 'bbva' ? BBVA_REPORT_PDF[year] : null;
+  if (!url) return `<span class="ref-chip">${txt}</span>`;
+  const m = String(ref).match(/p[áa]g\w*\.?\s*(\d+)/i);
+  const href = m ? `${url}#page=${m[1]}` : url;
+  const title = `Abrir Informe Anual ${year} de BBVA (PDF)${m ? ' · página ' + m[1] : ''}`;
+  return `<a class="ref-chip link" href="${href}" target="_blank" rel="noopener noreferrer" title="${title}" onclick="event.stopPropagation()">${txt} ↗</a>`;
 }
 
 // ─── CHANGE CARD ─────────────────────────────────────────────────────────────
@@ -6072,12 +6151,12 @@ function changeCard(sectorLabel, bank, c, uid) {
       <div class="detail-label">Descripción completa</div>
       <div class="detail-text">${c.descripcion}</div>
       <div class="detail-refs">
-        ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
-        ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+        ${refChip(c.banco, 2024, c.ref2024)}
+        ${refChip(c.banco, 2025, c.ref2025)}
       </div>
     </div>` : (c.ref2024 !== '—' || c.ref2025 !== '—' ? `<div style="padding:0 16px 10px 54px"><div class="detail-refs">
-      ${c.ref2024 && c.ref2024 !== '—' ? `<span class="ref-chip">Inf. 2024 · ${c.ref2024}</span>` : ''}
-      ${c.ref2025 && c.ref2025 !== '—' ? `<span class="ref-chip">Inf. 2025 · ${c.ref2025}</span>` : ''}
+      ${refChip(c.banco, 2024, c.ref2024)}
+      ${refChip(c.banco, 2025, c.ref2025)}
     </div></div>` : '')}
   </div>`;
 }
