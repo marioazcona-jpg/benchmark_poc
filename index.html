@@ -140,6 +140,27 @@ body { font-family: var(--font); background: var(--bg); color: var(--text-primar
 .scn-pill:hover { border-color: var(--bbva-blue); }
 .scn-pill.active { background: var(--bbva-blue); color: #fff; border-color: var(--bbva-blue); }
 .scn-verdict { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+/* Comparativa temporal senda NZ 2021 vs actual (bloque desmontable) */
+.scn-cmp-toggle { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; font-family: var(--font); transition: all .15s; text-align: left; }
+.scn-cmp-toggle:hover { border-color: var(--bbva-blue); background: #EEF4FA; }
+.scn-cmp-title { font-size: 13px; font-weight: 700; color: var(--bbva-blue); }
+.scn-cmp-hint { font-size: 11px; color: var(--text-secondary); margin-left: auto; }
+.scn-cmp-chev { font-size: 13px; color: var(--text-secondary); transition: transform .2s; }
+.scn-cmp.open .scn-cmp-chev { transform: rotate(180deg); }
+/* Tramos narrativos (t1/t2/t3): tabs + panel con callout de comparativa */
+.scn-tramo-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.scn-tramo-tab { text-align: left; padding: 12px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-family: var(--font); transition: all .15s; }
+.scn-tramo-tab:hover { border-color: var(--bbva-blue); background: #EEF4FA; }
+.scn-tramo-tab.active { border-color: var(--bbva-blue); background: #EEF4FA; box-shadow: inset 0 0 0 1px var(--bbva-blue); }
+.scn-tramo-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--bbva-blue); background: var(--blue-bg); border-radius: 20px; padding: 2px 9px; margin-bottom: 7px; }
+.scn-tramo-tab.active .scn-tramo-badge { background: var(--bbva-blue); color: #fff; }
+.scn-tramo-tt { font-size: 13px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+.scn-tramo-panel { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+.scn-tramo-drivers-label, .scn-cmp-callout-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+.scn-tramo-drivers { font-size: 13px; line-height: 1.6; color: var(--text-primary); }
+.scn-cmp-callout { margin-top: 16px; background: var(--blue-bg); border-left: 3px solid var(--bbva-blue); border-radius: 8px; padding: 13px 16px; }
+.scn-cmp-callout-label { color: var(--bbva-blue); display: flex; align-items: center; gap: 6px; }
+.scn-cmp-callout-body { font-size: 13px; line-height: 1.6; color: var(--text-primary); }
 .submetric-selector { display:flex; gap:4px; margin-top:8px; }
 .submetric-tab { padding:4px 11px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-family:var(--font); transition:all .15s; letter-spacing:.02em; text-transform:uppercase; }
 .submetric-tab.active { background:var(--bbva-blue); color:#fff; border-color:var(--bbva-blue); }
@@ -621,6 +642,37 @@ a.ref-chip.link:hover { background: var(--bbva-blue); color: #fff; border-color:
           <div class="relevant-title">¿Qué son estos escenarios?</div>
           <div class="relevant-text" id="scnLegend"></div>
           <div class="relevant-footer">Fuente: IEA World Energy Outlook · sendas sectoriales NZE/STEPS/CPS</div>
+        </div>
+      </div>
+
+      <!-- ── COMPARATIVA TEMPORAL (bloque desmontable): senda NZ BBVA WEO2021 vs
+           actual. Ejercicio de análisis separado y temporal: para retirarlo,
+           eliminar este bloque y las funciones/estado scnCmp* del script. ── -->
+      <div class="scn-cmp" id="scnCmpWrap">
+        <button class="scn-cmp-toggle" id="scnCmpToggle" onclick="toggleScnCmp()" aria-expanded="false" aria-controls="scnCmpBody">
+          <span class="scn-cmp-title">Comparativa histórica — senda Net Zero de BBVA: WEO2021 vs actual</span>
+          <span class="scn-cmp-hint">análisis temporal · la senda WEO2021 ha sido la referencia hasta esta actualización</span>
+          <span class="scn-cmp-chev">▾</span>
+        </button>
+        <div id="scnCmpBody" style="display:none">
+          <div class="mid-row" style="margin-top:14px;margin-bottom:14px">
+            <div class="chart-card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title" id="scnCmpTitle">—</div>
+                  <div class="card-subtitle" id="scnCmpSub"></div>
+                </div>
+              </div>
+              <div class="chart-wrap scn-wrap"><canvas id="scnCmpChart"></canvas></div>
+            </div>
+            <div class="relevant-card">
+              <div class="relevant-title" id="scnCmpIntroTitle">—</div>
+              <div class="relevant-text" id="scnCmpIntro"></div>
+              <div class="relevant-footer">Sendas propias de BBVA · NZ WEO2021 vs WEO2025 · comparativa temporal</div>
+            </div>
+          </div>
+          <div class="scn-tramo-tabs" id="scnCmpTramoTabs"></div>
+          <div class="scn-tramo-panel" id="scnCmpTramoPanel"></div>
         </div>
       </div>
     </div>
@@ -4367,13 +4419,18 @@ const GEN = {
 
 // Sendas propias de BBVA (WEO2025) — generadas desde data/bbva_pathways.csv.
 /*PGEN_START*/
-const PATHWAYS = {"Cement":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[0.699,0.704,0.709,0.715,0.717,0.715,0.714,0.712,0.711,0.709,0.707,0.706,0.704,0.703,0.701,0.7,0.698,0.697,0.695,0.694,0.693,0.691,0.69,0.689,0.687,0.686,0.685,0.684,0.682,0.681,0.68],"steps":[0.699,0.704,0.709,0.715,0.717,0.715,0.713,0.711,0.709,0.707,0.705,0.703,0.7,0.698,0.696,0.695,0.693,0.691,0.689,0.687,0.685,0.681,0.677,0.673,0.669,0.665,0.66,0.655,0.65,0.645,0.64],"nz":[0.699,0.704,0.709,0.715,0.717,0.697,0.677,0.657,0.637,0.617,0.597,0.577,0.556,0.536,0.515,0.495,0.452,0.408,0.364,0.319,0.274,0.245,0.216,0.186,0.157,0.127,0.105,0.084,0.062,0.039,0.017]},"Steel":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[1.272,1.261,1.25,1.24,1.248,1.238,1.227,1.217,1.207,1.198,1.188,1.179,1.17,1.161,1.152,1.143,1.134,1.125,1.116,1.108,1.099,1.091,1.082,1.074,1.066,1.058,1.049,1.041,1.033,1.025,1.017],"steps":[1.272,1.261,1.25,1.24,1.248,1.23,1.212,1.195,1.178,1.161,1.144,1.128,1.112,1.097,1.081,1.066,1.053,1.039,1.026,1.013,1,0.985,0.971,0.957,0.943,0.929,0.913,0.897,0.881,0.866,0.851],"nz":[1.272,1.261,1.25,1.24,1.248,1.21,1.173,1.135,1.098,1.061,1.025,0.988,0.952,0.916,0.88,0.844,0.783,0.722,0.661,0.599,0.538,0.486,0.435,0.383,0.331,0.279,0.242,0.206,0.169,0.133,0.096]},"Aviation":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂e/RPK","cps":[null,null,102.68,101.27,97.11,95.52,94.06,92.71,91.47,90.32,89.25,88.25,87.32,86.44,85.62,84.85,84.15,83.48,82.84,82.24,81.66,81.14,80.65,80.17,79.72,79.29,78.39,77.53,76.69,75.89,75.11],"steps":[null,null,102.68,101.27,97.11,96.38,95.7,95.07,94.48,93.92,93.4,92.91,92.44,92,91.58,91.19,89.45,87.82,86.28,84.83,83.47,81.8,80.23,78.76,77.37,76.06,74.07,72.2,70.44,68.79,67.22],"nz":[null,null,102.68,101.27,97.11,94.09,91.26,88.6,86.08,83.71,81.46,79.33,77.3,75.38,73.55,71.81,68.22,64.69,61.22,57.82,54.47,50.85,47.32,43.89,40.55,37.3,33.3,29.43,25.66,22.01,18.46]},"Automotive":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂/vkm","cps":[199.97,196.164,192.433,188.773,184.245,177.939,171.985,166.354,161.02,155.961,151.155,146.585,142.232,138.083,134.123,130.339,126.674,123.192,119.879,116.723,113.714,111.75,109.865,108.055,106.315,104.641,103.618,102.628,101.669,100.74,99.84],"steps":[199.97,196.16,192.43,188.77,184.24,177.65,171.38,165.41,159.73,154.3,149.12,144.17,139.43,134.88,130.53,126.35,121.53,116.92,112.53,108.33,104.31,100.8,97.45,94.26,91.2,88.28,85.68,83.2,80.83,78.56,76.39],"nz":[199.97,196.16,192.43,188.77,184.24,171.69,159.71,148.26,137.32,126.83,116.79,107.16,97.91,89.02,80.48,72.26,63.46,55.02,46.91,39.12,31.63,27.47,23.42,19.49,15.67,11.94,10.29,8.69,7.14,5.63,4.17]},"Power":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/MWh","cps":[227.87,224.996,222.155,219.351,213.668,206.875,200.297,193.928,187.762,181.792,176.012,170.415,164.997,159.751,154.671,149.753,144.992,140.382,135.918,131.597,127.412,123.361,119.439,115.641,111.964,108.404,104.957,101.62,98.389,95.261,92.232],"steps":[227.87,224.996,222.155,219.351,213.668,203.312,193.457,184.08,175.158,166.668,158.59,150.903,143.588,136.629,130.006,123.705,117.709,112.003,106.575,101.409,96.494,91.816,87.366,83.131,79.102,75.268,71.62,68.148,64.845,61.702,58.711],"nz":[227.87,224.996,222.155,219.351,213.668,181.142,153.567,130.19,110.372,93.57,79.326,67.25,57.013,48.334,40.976,34.739,29.45,24.967,21.167,17.944,15.213,12.897,10.934,9.269,7.858,6.662,5.648,4.788,4.059,3.441,-1.856]}};
+const PATHWAYS = {"Cement":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[0.699,0.704,0.709,0.715,0.717,0.715,0.714,0.712,0.711,0.709,0.707,0.706,0.704,0.703,0.701,0.7,0.698,0.697,0.695,0.694,0.693,0.691,0.69,0.689,0.687,0.686,0.685,0.684,0.682,0.681,0.68],"steps":[0.699,0.704,0.709,0.715,0.717,0.715,0.713,0.711,0.709,0.707,0.705,0.703,0.7,0.698,0.696,0.695,0.693,0.691,0.689,0.687,0.685,0.681,0.677,0.673,0.669,0.665,0.66,0.655,0.65,0.645,0.64],"nz":[0.699,0.704,0.709,0.715,0.717,0.697,0.677,0.657,0.637,0.617,0.597,0.577,0.556,0.536,0.515,0.495,0.452,0.408,0.364,0.319,0.274,0.245,0.216,0.186,0.157,0.127,0.105,0.084,0.062,0.039,0.017],"nz2021":[0.699,0.681,0.662,0.643,0.624,0.606,0.581,0.557,0.533,0.509,0.484,0.466,0.449,0.431,0.413,0.395,0.384,0.373,0.362,0.351,0.34,0.33,0.321,0.311,0.302,0.292,0.283,0.275,0.266,0.257,0.248]},"Steel":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[1.272,1.261,1.25,1.24,1.248,1.238,1.227,1.217,1.207,1.198,1.188,1.179,1.17,1.161,1.152,1.143,1.134,1.125,1.116,1.108,1.099,1.091,1.082,1.074,1.066,1.058,1.049,1.041,1.033,1.025,1.017],"steps":[1.272,1.261,1.25,1.24,1.248,1.23,1.212,1.195,1.178,1.161,1.144,1.128,1.112,1.097,1.081,1.066,1.053,1.039,1.026,1.013,1,0.985,0.971,0.957,0.943,0.929,0.913,0.897,0.881,0.866,0.851],"nz":[1.272,1.261,1.25,1.24,1.248,1.21,1.173,1.135,1.098,1.061,1.025,0.988,0.952,0.916,0.88,0.844,0.783,0.722,0.661,0.599,0.538,0.486,0.435,0.383,0.331,0.279,0.242,0.206,0.169,0.133,0.096],"nz2021":[1.272,1.226,1.181,1.135,1.09,1.044,0.969,0.894,0.819,0.743,0.668,0.614,0.56,0.505,0.451,0.397,0.364,0.332,0.299,0.267,0.234,0.213,0.192,0.171,0.151,0.13,0.117,0.104,0.091,0.079,0.066]},"Aviation":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂e/RPK","cps":[null,null,102.68,101.27,97.11,95.52,94.06,92.71,91.47,90.32,89.25,88.25,87.32,86.44,85.62,84.85,84.15,83.48,82.84,82.24,81.66,81.14,80.65,80.17,79.72,79.29,78.39,77.53,76.69,75.89,75.11],"steps":[null,null,102.68,101.27,97.11,96.38,95.7,95.07,94.48,93.92,93.4,92.91,92.44,92,91.58,91.19,89.45,87.82,86.28,84.83,83.47,81.8,80.23,78.76,77.37,76.06,74.07,72.2,70.44,68.79,67.22],"nz":[null,null,102.68,101.27,97.11,94.09,91.26,88.6,86.08,83.71,81.46,79.33,77.3,75.38,73.55,71.81,68.22,64.69,61.22,57.82,54.47,50.85,47.32,43.89,40.55,37.3,33.3,29.43,25.66,22.01,18.46],"nz2021":[null,null,102.68,98.88,95.08,91.27,86.87,82.47,78.05,73.65,69.25,67.26,65.28,63.28,61.3,59.31,56.24,53.17,50.12,47.05,43.98,37.78,31.59,25.39,19.2,12.99,10.4,7.8,5.19,2.6,0]},"Automotive":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂/vkm","cps":[199.97,196.164,192.433,188.773,184.245,177.939,171.985,166.354,161.02,155.961,151.155,146.585,142.232,138.083,134.123,130.339,126.674,123.192,119.879,116.723,113.714,111.75,109.865,108.055,106.315,104.641,103.618,102.628,101.669,100.74,99.84],"steps":[199.97,196.16,192.43,188.77,184.24,177.65,171.38,165.41,159.73,154.3,149.12,144.17,139.43,134.88,130.53,126.35,121.53,116.92,112.53,108.33,104.31,100.8,97.45,94.26,91.2,88.28,85.68,83.2,80.83,78.56,76.39],"nz":[199.97,196.16,192.43,188.77,184.24,171.69,159.71,148.26,137.32,126.83,116.79,107.16,97.91,89.02,80.48,72.26,63.46,55.02,46.91,39.12,31.63,27.47,23.42,19.49,15.67,11.94,10.29,8.69,7.14,5.63,4.17],"nz2021":[199.97,187.84,176.44,165.73,155.67,146.22,137.35,129,121.17,113.81,106.89,93.99,82.63,72.66,63.87,56.15,49.35,43.38,38.13,33.5,29.44,23.8,19.23,15.53,12.53,10.11,8.14,6.55,5.27,4.22,3.37]},"Power":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/MWh","cps":[227.87,224.996,222.155,219.351,213.668,206.875,200.297,193.928,187.762,181.792,176.012,170.415,164.997,159.751,154.671,149.753,144.992,140.382,135.918,131.597,127.412,123.361,119.439,115.641,111.964,108.404,104.957,101.62,98.389,95.261,92.232],"steps":[227.87,224.996,222.155,219.351,213.668,203.312,193.457,184.08,175.158,166.668,158.59,150.903,143.588,136.629,130.006,123.705,117.709,112.003,106.575,101.409,96.494,91.816,87.366,83.131,79.102,75.268,71.62,68.148,64.845,61.702,58.711],"nz":[227.87,224.996,222.155,219.351,213.668,181.142,153.567,130.19,110.372,93.57,79.326,67.25,57.013,48.334,40.976,34.739,29.45,24.967,21.167,17.944,15.213,12.897,10.934,9.269,7.858,6.662,5.648,4.788,4.059,3.441,-1.856],"nz2021":[227.87,212.12,196.37,180.62,164.87,149.12,133.37,117.62,101.87,86.12,70.37,63.08,55.78,48.48,41.18,33.89,26.59,19.29,11.99,4.7,0,0,0,0,0,0,0,0,0,0,0]}};
 /*PGEN_END*/
 
 // Escenarios globales WEO2025 (comunes a todos los bancos) — desde data/weo2025_global.csv.
 /*GGEN_START*/
 const GLOBALS = {"Cement":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[0.574,0.578,0.582,0.586,0.588,0.587,0.586,0.584,0.583,0.582,0.58,0.579,0.578,0.577,0.575,0.574,0.573,0.572,0.57,0.569,0.568,0.567,0.566,0.565,0.564,0.563,0.562,0.561,0.56,0.559,0.558],"steps":[0.574,0.578,0.582,0.586,0.588,0.586,0.585,0.583,0.581,0.58,0.578,0.576,0.575,0.573,0.571,0.57,0.568,0.567,0.565,0.563,0.562,0.559,0.555,0.552,0.549,0.546,0.542,0.537,0.533,0.529,0.52],"nz":[0.574,0.578,0.582,0.586,0.588,0.572,0.556,0.539,0.523,0.506,0.49,0.473,0.456,0.439,0.423,0.406,0.371,0.335,0.299,0.262,0.225,0.201,0.177,0.153,0.128,0.104,0.086,0.069,0.051,0.032,0.01]},"Steel":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[1.488,1.476,1.463,1.451,1.461,1.448,1.436,1.425,1.413,1.402,1.391,1.38,1.369,1.358,1.348,1.338,1.327,1.317,1.307,1.296,1.287,1.277,1.267,1.257,1.247,1.238,1.228,1.219,1.209,1.2,1.19],"steps":[1.488,1.476,1.463,1.451,1.461,1.439,1.419,1.398,1.378,1.359,1.339,1.32,1.302,1.284,1.266,1.248,1.232,1.216,1.201,1.186,1.171,1.153,1.136,1.12,1.103,1.087,1.068,1.049,1.031,1.013,1],"nz":[1.488,1.476,1.463,1.451,1.461,1.416,1.372,1.329,1.285,1.242,1.199,1.156,1.114,1.072,1.03,0.988,0.916,0.845,0.773,0.701,0.63,0.569,0.509,0.448,0.387,0.326,0.284,0.241,0.198,0.155,0.11]},"Aviation":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂e/RPK","cps":[118.7,117,115.4,113.8,109.2,107.4,105.7,104.2,102.8,101.5,100.3,99.2,98.1,97.2,96.2,95.4,94.6,93.8,93.1,92.4,91.8,91.2,90.7,90.1,89.6,89.1,88.1,87.1,86.2,85.3,84.43],"steps":[118.7,117,115.4,113.8,109.2,108.3,107.6,106.9,106.2,105.6,105,104.4,103.9,103.4,102.9,102.5,100.5,98.7,97,95.4,93.8,91.9,90.2,88.5,87,85.5,83.3,81.2,79.2,77.3,75.56],"nz":[118.7,117,115.4,113.8,109.2,105.8,102.6,99.6,96.8,94.1,91.6,89.2,86.9,84.7,82.7,80.7,76.7,72.7,68.8,65,61.2,57.2,53.2,49.3,45.6,41.9,37.4,33.1,28.8,24.7,20.75]},"Automotive":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"gCO₂/vkm","cps":[134.8,132.2,129.7,127.2,124.2,119.9,115.9,112.1,108.5,105.1,101.9,98.8,95.9,93.1,90.4,87.8,85.4,83,80.8,78.7,76.6,75.3,74,72.8,71.7,70.5,69.8,69.2,68.5,67.9,67.29],"steps":[134.8,132.2,129.7,127.2,124.2,119.7,115.5,111.5,107.7,104,100.5,97.2,94,90.9,88,85.2,81.9,78.8,75.8,73,70.3,67.9,65.7,63.5,61.5,59.5,57.7,56.1,54.5,52.9,51.49],"nz":[134.8,132.2,129.7,127.2,124.2,115.7,107.6,99.9,92.6,85.5,78.7,72.2,66,60,54.2,48.7,42.8,37.1,31.6,26.4,21.3,18.5,15.8,13.1,10.6,8.1,6.9,5.9,4.8,3.8,2.81]},"CRE":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/m²","cps":[16.54,15.92,15.32,14.75,14.42,14.02,13.64,13.27,12.92,12.58,12.26,11.95,11.65,11.37,11.09,10.82,10.59,10.35,10.13,9.91,9.7,9.57,9.44,9.31,9.19,9.07,8.96,8.85,8.75,8.64,8.54],"steps":[16.54,15.92,15.32,14.75,14.42,14.04,13.67,13.31,12.96,12.63,12.3,11.99,11.68,11.39,11.1,10.82,10.48,10.16,9.84,9.54,9.24,9.02,8.8,8.59,8.39,8.19,8,7.81,7.62,7.44,7.27],"nz":[16.54,15.92,15.32,14.75,14.42,13.49,12.61,11.76,10.94,10.16,9.41,8.69,8,7.34,6.7,6.08,5.45,4.83,4.24,3.66,3.1,2.7,2.31,1.93,1.56,1.19,0.98,0.77,0.56,0.35,0.16]},"RRE":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/m²","cps":[9.79,9.61,9.42,9.24,9.05,8.83,8.62,8.42,8.23,8.04,7.86,7.68,7.51,7.35,7.19,7.03,6.9,6.78,6.66,6.54,6.43,6.35,6.27,6.19,6.11,6.04,5.97,5.9,5.84,5.78,5.72],"steps":[9.79,9.61,9.42,9.24,9.05,8.82,8.61,8.4,8.19,7.99,7.8,7.61,7.43,7.25,7.07,6.9,6.73,6.55,6.39,6.22,6.06,5.94,5.81,5.69,5.58,5.46,5.35,5.24,5.13,5.03,4.93],"nz":[9.79,9.61,9.42,9.24,9.05,8.49,7.96,7.44,6.94,6.46,5.99,5.53,5.09,4.66,4.25,3.85,3.41,3,2.59,2.19,1.81,1.56,1.31,1.07,0.84,0.61,0.51,0.4,0.31,0.21,0.12]},"Aluminium":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"tCO₂e/t","cps":[2.391,2.335,2.279,2.225,2.222,2.203,2.185,2.167,2.15,2.134,2.118,2.103,2.088,2.074,2.06,2.047,2.032,2.017,2.003,1.989,1.976,1.962,1.948,1.934,1.921,1.908,1.895,1.883,1.872,1.86,1.849],"steps":[2.391,2.335,2.279,2.225,2.222,2.195,2.17,2.145,2.121,2.098,2.075,2.053,2.032,2.011,1.991,1.972,1.938,1.905,1.874,1.843,1.813,1.781,1.749,1.719,1.69,1.661,1.634,1.607,1.582,1.557,1.533],"nz":[2.39,2.33,2.28,2.22,2.22,2.147,2.075,2.005,1.939,1.874,1.812,1.752,1.694,1.638,1.584,1.532,1.405,1.281,1.16,1.041,0.925,0.812,0.701,0.591,0.483,0.378,0.315,0.253,0.193,0.133,0.074]},"Power":{"years":[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050],"unit":"kgCO₂e/MWh","cps":[475.18,469.18,463.26,457.41,445.56,431.39,417.68,404.4,391.54,379.09,367.04,355.37,344.07,333.13,322.53,312.28,302.35,292.74,283.43,274.42,265.69,257.24,249.06,241.15,233.48,226.05,218.87,211.91,205.17,198.65,192.33],"steps":[475.18,469.18,463.26,457.41,445.56,423.96,403.41,383.86,365.25,347.55,330.7,314.68,299.42,284.91,271.1,257.96,245.46,233.56,222.24,211.47,201.22,191.46,182.18,173.35,164.95,156.96,149.35,142.11,135.22,128.67,122.43],"nz":[475.18,469.18,463.26,457.41,445.56,377.73,320.23,271.48,230.16,195.12,165.42,140.24,118.89,100.79,85.45,72.44,61.41,52.06,44.14,37.42,31.72,26.89,22.8,19.33,16.39,13.89,11.78,9.98,8.46,7.18,-3.87]}};
 /*GGEN_END*/
+
+// Narrativas por sector (intro + 3 tramos) — desde data/sector_narratives.json.
+/*NGEN_START*/
+const NARRATIVES = {"Cement":{"sector_label":"Cemento","intro":"El cemento es considerado un sector hard-to-abate debido a que aproximadamente dos tercios de sus emisiones provienen de la propia reacción química inevitable de la calcinación del clínker, no del uso de combustibles. Por esta razón, la electrificación directa tiene un impacto muy limitado y la palanca definitiva a largo plazo debe ser la Captura y Almacenamiento de Carbono (CCUS). A corto y medio plazo, las reducciones estructurales se logran mediante la eficiencia de materiales, los combustibles alternativos y, sobre todo, la sustitución del clínker, una medida operativa que puede reducir la intensidad energética por tonelada hasta ocho veces en comparación con la producción convencional.","tramos":[{"id":"t1","range":"Actualidad-2030","title":"Eficiencia de materiales y sustitución de clínker","drivers":"El driver inmediato no es tecnológico, sino operativo. Se prioriza la reducción del ratio clínker/cemento, sustituyéndolo por materiales cementicios suplementarios (como cenizas volantes, escorias o arcillas calcinadas) que no emiten CO₂ en su producción. Paralelamente, se aplican mejoras drásticas en la eficiencia energética de los hornos (pasando a combustibles alternativos como biomasa residual o residuos no reciclables) y se optimiza el uso del cemento en la construcción para reducir la demanda global.","comparativa_nz2021_vs_nz2025":"Tramo entre 2021 y 2024: la curva WEO2021 asumía que se comenzaría a reducir la intensidad de emisiones del cemento de forma inmediata y lineal desde 2021. Sin embargo, la curva WEO2025 refleja los datos reales consolidados por la AIE: en estos años la industria no ha logrado descarbonizarse a la velocidad requerida y las emisiones se han mantenido planas o al alza. El escenario 2025 asume este retraso como punto de partida."},{"id":"t2","range":"2030-2040","title":"Despliegue de CCUS e hidrógeno","drivers":"Dado que más del 60% de las emisiones del cemento son \"emisiones de proceso\" (químicas inevitables), el driver tecnológico fundamental en esta década es el escalado comercial de la Captura, Uso y Almacenamiento de Carbono (CCUS). Los proyectos piloto actuales deben convertirse en instalaciones a gran escala. Además, se introduce el hidrógeno de bajas emisiones y la electrificación avanzada para alcanzar las altísimas temperaturas que requieren los hornos de calcinación.","comparativa_nz2021_vs_nz2025":"Pendiente más pronunciada en WEO2025 a partir de 2035: al no haber actuado con la rapidez prevista en los primeros años de la década, se ha agotado una mayor proporción del presupuesto de carbono global disponible para no superar los 1,5 °C. En consecuencia, el modelo de la AIE indica que las emisiones deben reducirse de manera mucho más drástica y acelerada a partir de 2030 para compensar la falta de acción previa."},{"id":"t3","range":"2040-2050","title":"Adopción masiva de CCUS y cementos alternativos","drivers":"El driver definitivo para el tramo final hacia el Net Zero es la generalización absoluta del CCUS en prácticamente todas las plantas de cemento activas del mundo, capturando más del 90% de sus emisiones residuales. Esto se complementa con la maduración y estandarización a nivel global de nuevos cementos alternativos con químicas completamente diferentes (que absorben CO₂ durante su curado o que no liberan carbono durante su fabricación).","comparativa_nz2021_vs_nz2025":"Caída desde 2040 a 2050 (WEO2025) frente a una pendiente más suave (WEO2021): en el escenario NZ del WEO2021, el modelo preveía reducciones más suaves y repartidas. Sin embargo, la curva del WEO2025 reconoce la dificultad de descarbonizar el cemento a corto plazo, asumiendo que la intensidad de emisiones se mantendrá alta hasta que la Captura de Carbono (CCUS) madure. Es a partir de 2035 cuando la curva WEO2025 se desploma y cruza a la de 2021, reflejando el momento exacto en el que el modelo de la AIE asume que el CCUS se enchufa a escala industrial masiva. Además, la curva de 2025 exige llegar casi a 0 kg CO2/t en 2050 (tasas de captura superiores al 95%), mientras que en 2021 se permitían mayores emisiones residuales."}]},"Steel":{"sector_label":"Acero","intro":"El acero es uno de los sectores más difíciles de descarbonizar pues sus emisiones tienen una doble naturaleza: energética (el uso intensivo de carbón como combustible) y de proceso (el carbón actúa también como agente reductor químico en los altos hornos, función que no puede sustituirse simplemente cambiando de combustible). Representa en torno al 7% de las emisiones globales de CO2, y aproximadamente el 70% de la producción mundial se realiza hoy mediante la ruta de alto horno (BF-BOF), que es la más intensiva en carbono. La transición del sector depende de una combinación de tres grandes palancas que entran en juego en momentos distintos: el mayor uso de chatarra, el despliegue de tecnologías de producción primaria limpias (DRI con hidrógeno), y el CCUS como red de seguridad para emisiones difíciles de eliminar por otras vías.","tramos":[{"id":"t1","range":"Actualidad-2030","title":"Aprovechamiento de la chatarra","drivers":"El driver dominante en este tramo no es tecnológico sino estructural: aprovechar al máximo la chatarra disponible. La producción secundaria de acero a partir de chatarra en hornos de arco eléctrico (EAF) emite menos de un tercio que la producción primaria por alto horno, sin necesidad de innovación. En el NZE, la cuota de altos hornos cae unos 10 puntos porcentuales antes de 2030 por cierre de plantas existentes, mientras la producción a partir de chatarra crece más de 5 puntos gracias a la mayor disponibilidad de este material. En paralelo, la eficiencia material —construir con menos acero sin perder prestaciones— actúa como palanca de demanda para compensar el crecimiento. Las tecnologías innovadoras de producción primaria limpia (DRI con hidrógeno, CCUS) deben alcanzar escala comercial antes de 2030, pero su contribución real a las emisiones en este tramo es todavía marginal.","comparativa_nz2021_vs_nz2025":"Actualidad-2030: la caída pronunciada de la curva WEO2021 en este tramo refleja que el NZE2021 asumía un despliegue comercial temprano de plantas H2-DRI y un cierre masivo de altos hornos ya antes de 2030. La realidad ha sido muy distinta: la capacidad de producción de acero de bajas emisiones lista para operar en 2030 se mantiene en torno a 10 Mt, sin cambios respecto a 2024, muy por debajo de lo proyectado en 2021. Las plantas de H2-DRI de primera generación operando con 100% de mezcla de hidrógeno cuestan entre un 50% y un 140% más que los altos hornos convencionales según la región, lo que ha frenado significativamente las decisiones de inversión. La curva WEO2025 arranca por tanto de una posición más alta y cae con menor pendiente."},{"id":"t2","range":"2030-2040","title":"Despliegue a gran escala del hierro reducido directo con hidrógeno (H2-DRI)","drivers":"El foco se desplaza hacia el despliegue a gran escala del hierro reducido directo con hidrógeno (H2-DRI) acoplado a horno de arco eléctrico, que emerge como la ruta preferida de producción primaria baja en emisiones en las regiones con acceso a hidrógeno renovable asequible. La electrificación del sector se acelera con fuerza, sustituyendo carbón tanto en la producción secundaria como en los procesos auxiliares. En paralelo, los altos hornos que no pueden cerrarse de forma anticipada empiezan a equiparse con CCUS, especialmente en economías emergentes con flotas de plantas más jóvenes. La disponibilidad y calidad de la chatarra sigue siendo la principal restricción para seguir ampliando la ruta secundaria.","comparativa_nz2021_vs_nz2025":"2030-2040: el NZE2021 proyectaba que el hidrógeno verde sería suficientemente económico y disponible a escala para alimentar una oleada de plantas DRI en este período. El NZE2025 revisa ese supuesto a la baja: el hidrógeno limpio y el CCUS siguen siendo imprescindibles, pero su papel en las reducciones de emisiones entre 2030 y 2050 es menor que en la versión de 2021, especialmente en el corto plazo, al haber sido más lento su desarrollo tecnológico y de mercado de lo anticipado. Esto explica que la curva WEO2025 se mantenga claramente por encima de la de 2021 durante toda esta década."},{"id":"t3","range":"2040-2050","title":"Hidrógeno a escala industrial","drivers":"En el tramo final se consolidan las rutas limpias de producción primaria. El hidrógeno limpio se convierte en insumo estructural del sector, con plantas H2-DRI operando a escala industrial en múltiples regiones. La electrólisis directa de mineral de hierro (electrowinning) empieza a contribuir como tecnología complementaria. El carbón residual que aún se use queda prácticamente en su totalidad asociado a instalaciones con CCUS. Hacia 2050, la IEA proyecta que la chatarra cubrirá cerca del 48% de los inputs metálicos de la producción de acero global, mientras que la producción primaria se realiza mayoritariamente por rutas de bajas emisiones. El acero es uno de los últimos sectores industriales en completar su transición, y aún mantiene un pequeño volumen de emisiones residuales que requieren compensación mediante eliminación de carbono.","comparativa_nz2021_vs_nz2025":"2040-2050: ambas curvas convergen hacia cero, pero la curva WEO2025 tiene que descender con una pendiente mucho más pronunciada en este tramo final para compensar el ritmo más lento de los períodos anteriores. El NZE2025 asume que hacia 2050 la chatarra cubrirá cerca del 48% de los inputs de producción, que el H2-DRI operará a escala industrial, y que el carbón residual estará prácticamente en su totalidad asociado a CCUS, pero la mayor parte de ese esfuerzo recae ahora sobre este último período en lugar de distribuirse de forma más homogénea como preveía el NZE2021."}]},"Aviation":{"sector_label":"Aviación","intro":"La aviación es uno de los subsectores del transporte hard-to-abate debido a las estrictas limitaciones de peso y volumen, que exigen una altísima densidad energética. Esto hace que la electrificación directa mediante baterías o el uso de hidrógeno gaseoso solo sean viables para vuelos muy cortos o aviones pequeños. Por ello, el modelo Net Zero establece que la palanca absoluta para reducir las emisiones, especialmente en los vuelos de larga distancia, es la adopción masiva de Combustibles de Aviación Sostenibles (SAF). La transición exigirá escalar rápidamente los SAF basados en bioenergía avanzada y, a largo plazo, desplegar industrialmente combustibles sintéticos o e-fuels (producidos a partir de hidrógeno limpio y CO₂ capturado).","tramos":[{"id":"t1","range":"Actualidad-2030","title":"Eficiencia de flotas y despegue inicial de los SAF biológicos","drivers":"Las reducciones tempranas no provienen de tecnologías disruptivas, sino de mejoras operativas, optimización de rutas y la renovación de flotas por aviones convencionales más eficientes. El driver de transición es la introducción de mezclas obligatorias de Combustibles de Aviación Sostenibles (SAF) de primera generación y avanzados, producidos principalmente a partir de residuos, aceites usados y biomasa.","comparativa_nz2021_vs_nz2025":"Actualidad-2030: el NZE2021 se elaboró con la demanda de vuelos en mínimos post-COVID, asumiendo una recuperación lenta. El NZE2025 parte de un nivel de emisiones mucho más alto: en 2024 el tráfico aéreo ya había recuperado el 90% de sus niveles pre-COVID. Esto explica que la curva WEO2025 arranque por encima de la de 2021. Además, el NZE2021 preveía un escalado del SAF más agresivo en este período: en la práctica, en 2024 el SAF apenas representa el 0,3% del combustible de aviación consumido globalmente, muy por debajo de lo que la versión de 2021 anticipaba para este tramo."},{"id":"t2","range":"2030-2040","title":"Escalado de combustibles sintéticos (e-fuels) y aviación regional limpia","drivers":"Los biocombustibles alcanzan su límite práctico por la disponibilidad de biomasa sostenible. Por ello, el driver tecnológico clave de esta década es el despliegue comercial de los combustibles sintéticos (e-fuels o Power-to-Liquid), creados combinando hidrógeno de bajas emisiones con CO₂ capturado. El sector aeronáutico verá el despegue de los SAF sintéticos y la entrada en servicio, hacia finales de la década, de las primeras aeronaves comerciales de hidrógeno y sistemas híbrido-eléctricos para trayectos de corta distancia.","comparativa_nz2021_vs_nz2025":"2030-2040: es donde la brecha entre curvas es más visible. El NZE2021 asignaba un papel protagonista al hidrógeno y a los e-fuels ya en este período, mientras que el NZE2025 reconoce que esas tecnologías llegan más tarde y en menor volumen de lo previsto. El SAF sigue siendo el driver central, pero con una rampa de penetración más moderada que la proyectada en 2021. El resultado es que las emisiones en este tramo son materialmente más altas en el NZE2025, y el grueso del esfuerzo de reducción se desplaza hacia la segunda mitad del período."},{"id":"t3","range":"2040-2050","title":"Dominio del e-fuel para larga distancia y cero emisiones netas","drivers":"La palanca definitiva para cerrar la curva. Los combustibles sintéticos de aviación se convierten en la norma a nivel mundial para cubrir los vuelos internacionales de larga distancia, que son los responsables de la inmensa mayoría de las emisiones del sector. La aviación regional y de corto radio queda cubierta casi en su totalidad por aviones de hidrógeno y eléctricos, consolidando la descarbonización total del sector.","comparativa_nz2021_vs_nz2025":"2040-2050: ambos escenarios convergen en cero emisiones netas en 2050, pero el NZE2025 requiere un ritmo de descenso mucho más pronunciado en este último tramo para compensar el retraso acumulado. El NZE2025 asume que el SAF cubre cerca del 80% de la energía del sector hacia 2050, pero con una mayor dependencia de eliminación de CO2 residual mediante tecnologías de carbono negativo (BECCS, DAC), dado que el sector mantiene algunas emisiones residuales que no pueden eliminarse solo con combustibles alternativos."}]},"Automotive":{"sector_label":"Automoción","intro":"A diferencia de otros sectores industriales, la descarbonización de los turismos tiene una solución tecnológica ya disponible y con costes en rápido descenso: el vehículo eléctrico. La transición depende menos de innovación pendiente y más de la velocidad de adopción, del apoyo regulatorio y del despliegue de infraestructura de carga. El driver principal es la electrificación masiva de la flota, respaldada por la descarbonización paralela del sistema eléctrico, sin la cual el beneficio de la electrificación sería parcial.","tramos":[{"id":"t1","range":"Actualidad-2030","title":"La electrificación y los biocombustibles","drivers":"En el NZE2025, las ventas de vehículos eléctricos deben alcanzar el 60% de los coches nuevos globalmente en 2030, con cerca de 380 millones de vehículos eléctricos acumulados en stock a finales de esa década. China lidera ya con una cuota de ventas EV próxima al 80%, Europa se encamina hacia el 60% apoyada en los estándares de CO2 de la UE, y los mercados emergentes de Asia y Latinoamérica aceleran su adopción. La infraestructura de recarga pública necesita crecer casi nueve veces hasta 2030 para acompañar este ritmo de ventas. Los biocombustibles actúan como palanca complementaria para el stock de vehículos de combustión interna que seguirá circulando durante la transición.","comparativa_nz2021_vs_nz2025":"Actualidad-2030: la IEA anticipa en su último EV Outlook que la cuota de ventas EV en EEUU alcanzará en torno al 20% en 2030, menos de la mitad de lo que proyectaba el año anterior. El NZE2021 asumía un apoyo regulatorio federal en EEUU robusto y sostenido, que no se ha materializado: el WEO2025 estima un 30% menos de capacidad renovable instalada y un 60% menos de vehículos eléctricos en circulación en EEUU en 2035 en el escenario de políticas actuales respecto a las proyecciones del año anterior. El retroceso de incentivos fiscales, la eliminación de estándares de eficiencia y la incertidumbre arancelaria han frenado significativamente la adopción en el mercado que el NZE2021 consideraba clave para alcanzar los hitos de 2030."},{"id":"t2","range":"2030-2040","title":"Electrificación como driver dominante","drivers":"Las ventas de coches nuevos de combustión interna quedan prácticamente eliminadas en economías avanzadas hacia 2035, y el stock de vehículos eléctricos en circulación sustituye de forma masiva la demanda de petróleo del sector. Los camiones y vehículos de transporte pesado —la segunda fuente de consumo de petróleo en transporte— inician también su electrificación a escala, con paridad de coste total de propiedad frente al diésel esperada en Europa y EEUU antes de 2030, lo que acelera su adopción en este tramo. La integración vehículo-red (V2G) empieza a aportar flexibilidad al sistema eléctrico.","comparativa_nz2021_vs_nz2025":"2030-2040: la divergencia en este tramo refleja que la renovación del stock global de vehículos es más lenta de lo previsto en 2021. Un parque de coches de combustión más grande al llegar a 2030 implica mayor inercia en las emisiones durante los años siguientes, pues los vehículos tienen vidas útiles largas. La electrificación y los biocombustibles son las palancas principales para descarbonizar el transporte por carretera hasta 2030, y desde ese punto la electrificación se convierte en el driver dominante, con la electricidad representando tres cuartas partes del consumo energético del transporte por carretera en 2050. En el NZE2025, ese punto de inflexión llega algo más tarde que en la versión de 2021."},{"id":"t3","range":"2040-2050","title":"Electrificación e hidrógeno","drivers":"En el tramo final, la electricidad representa las tres cuartas partes del consumo energético del transporte por carretera global. Las emisiones residuales que permanecen provienen principalmente del stock de vehículos de combustión interna más antiguos aún en circulación en mercados emergentes, y del transporte pesado de larga distancia donde la electrificación directa tiene más restricciones. El hidrógeno cubre nichos específicos de transporte de muy larga distancia, complementando la electrificación directa.","comparativa_nz2021_vs_nz2025":"2040-2050: ambas curvas convergen hacia emisiones casi nulas en 2050, pero la pendiente de descenso en este tramo final es más pronunciada en el NZE2025 para compensar el retraso acumulado. La renovación acelerada del parque en economías emergentes, la electrificación del transporte pesado y la eliminación del stock residual de vehículos de combustión son las palancas que deben absorber el esfuerzo aplazado de los períodos anteriores."}]},"Power":{"sector_label":"Power","intro":"El sector eléctrico es el pilar y gran facilitador de toda la transición global. Su descarbonización rápida es un requisito indispensable para que la electrificación de otros sectores (transporte, industria y edificación) se traduzca en una reducción real de emisiones. El escenario Net Zero exige que el sector eléctrico sea el primero en alcanzar la neutralidad (en 2040 a nivel mundial). El motor inmediato es un despliegue de renovables sin precedentes. Sin embargo, a largo plazo el desafío estructural cambia: el reto principal deja de ser la generación de energía limpia para centrarse en la gestión y firmeza del sistema, lo que requiere inversiones masivas en redes, almacenamiento y fuentes despachables de bajas emisiones.","tramos":[{"id":"t1","range":"Actualidad-2030","title":"Triplicar renovables y fin del nuevo carbón","drivers":"La palanca absoluta en esta década es el cumplimiento del objetivo global de la COP28: triplicar la capacidad renovable instalada, impulsada casi en su totalidad por la energía solar fotovoltaica y eólica. En paralelo, el modelo exige la paralización inmediata de cualquier aprobación o financiación para nuevas centrales de carbón sin captura de carbono, junto con el inicio del retiro de las plantas fósiles más ineficientes.","comparativa_nz2021_vs_nz2025":"El impacto de la crisis energética y el carbón (2021-2024): la curva WEO2021 proyectaba un inicio de descarbonización inmediato. Sin embargo, la curva WEO2025 asume la realidad de los últimos años: las emisiones del sector eléctrico repuntaron a máximos históricos. Esto se debió al efecto rebote post-pandemia y, sobre todo, a la crisis geopolítica del gas, que obligó a muchas regiones a reactivar y quemar más carbón a corto plazo para garantizar el suministro."},{"id":"t2","range":"2030-2040","title":"Cero neto en economías avanzadas y explosión de la flexibilidad","drivers":"Las economías desarrolladas logran un sistema eléctrico de cero emisiones netas hacia 2035. Al estar dominado por fuentes intermitentes, el driver crítico es la flexibilidad de la red. Esto se logra mediante una expansión masiva de las infraestructuras de transmisión y distribución (añadiendo y sustituyendo millones de kilómetros de red al año) y una adopción exponencial del almacenamiento en baterías para compensar la retirada progresiva del gas natural.","comparativa_nz2021_vs_nz2025":"Desplome acelerado y el efecto \"triplicar renovables\" (2024-2035): para compensar el aumento inicial y mantener vivo el objetivo de 1,5 °C, el modelo de la AIE exige que la curva WEO2025 caiga ahora casi en picado. Esta pendiente extremadamente pronunciada se sustenta en el objetivo de la COP28 de triplicar la capacidad renovable global para 2030. La AIE confía este desplome vertiginoso a la masiva y rápida adopción de la energía solar fotovoltaica, impulsada por su drástica caída de costes."},{"id":"t3","range":"2040-2050","title":"Sistema Net Zero global y emisiones negativas","drivers":"El sistema eléctrico mundial completa su descarbonización y pasa a generar emisiones netas negativas. Aunque las renovables dominan abrumadoramente el mix de generación, la estabilidad y firmeza final de la red se asegura complementando el sistema con energía nuclear (que cuadruplica su ritmo de despliegue histórico), capacidad hidroeléctrica, generación térmica basada en hidrógeno y el uso de Bioenergía con Captura de Carbono (BECCS).","comparativa_nz2021_vs_nz2025":"Diferenciación en el tramo 2035-2040: la diferencia estructural clave radica en la gestión de la demanda y la flexibilidad hacia 2050. Mientras que el WEO2021 proyectaba un sector eléctrico con cero emisiones para 2040, el WEO2025 extiende el periodo de emisiones residuales hasta 2050. Este cambio responde a una revisión al alza en la demanda eléctrica, impulsada por el auge de la Inteligencia Artificial (centros de datos) y la electrificación del transporte. Ante este incremento, la descarbonización de la última milla se vuelve más compleja, exigiendo mantener plantas de gas operativas por más tiempo para garantizar la estabilidad de la red y compensar la intermitencia de las renovables."}]}};
+/*NGEN_END*/
 
 // Reparte los datos generados en BANK_META + SECTORS conservando los metadatos
 // curados (metric, ieaRef, scenarios, relevantText) de cada sector/submétrica.
@@ -4406,6 +4463,43 @@ for (const [sec, def] of Object.entries(GEN.sectors)) {
     delete S.banks;
   } else {
     S.banks = def.banks;
+  }
+}
+
+// ── Escenarios WEO2025 en el cuantitativo ────────────────────────────────────
+// Para los sectores mostrados en Climate Scenarios, los escenarios y la
+// referencia IEA 2030 del cuantitativo se sustituyen por las sendas globales
+// WEO2025 (GLOBALS) — la misma fuente que esa pantalla, más actualizada que
+// los escenarios curados. El resto de sectores conserva sus escenarios curados.
+{
+  const WEO_KEY = { current: 'cps', stated: 'steps', nze: 'nz' };
+  const WEO_LABEL = { current: 'Current Policies', stated: 'Stated Policies', nze: 'Net Zero 2050' };
+  // sector GLOBALS → objeto de escenarios del cuantitativo (submétrica si aplica)
+  const WEO_TARGETS = {
+    Power:      SECTORS['Power'],
+    Cement:     SECTORS['Cement'],
+    Automotive: SECTORS['Automotive'],
+    Steel:      SECTORS['Steel']?.subMetrics?.['Intensidad'],
+    Aviation:   SECTORS['Aviation']?.subMetrics?.['RPK'],
+  };
+  for (const [gk, m] of Object.entries(WEO_TARGETS)) {
+    const g = GLOBALS[gk];
+    if (!g || !m) continue;
+    const at = (arr, yr) => { const i = g.years.indexOf(yr); return i >= 0 ? arr[i] : null; };
+    const scenarios = {};
+    for (const [k, wk] of Object.entries(WEO_KEY)) {
+      if (!g[wk]) continue;
+      scenarios[k] = {
+        label: m.scenarios?.[k]?.label || WEO_LABEL[k],
+        v2024: at(g[wk], 2024),
+        end: at(g[wk], m.ieaYear || 2030),
+        years: g.years,
+        values: g[wk],
+      };
+    }
+    m.scenarios = scenarios;
+    if (scenarios.nze && scenarios.nze.end != null) m.ieaRef = +scenarios.nze.end.toFixed(2);
+    m.scenarioSource = 'IEA WEO2025';
   }
 }
 
@@ -4872,7 +4966,8 @@ function drawChart() {
           const on = activeScenarios.has(k);
           return `<button class="filter-tab${on ? ' active' : ''}" style="font-size:11px;padding:4px 10px"
             onclick="toggleScenario('${k}',this)">${sd.scenarios[k].label}</button>`;
-        }).join('');
+        }).join('') +
+        (sd.scenarioSource ? `<span style="font-size:10px;font-weight:600;color:var(--text-secondary);background:var(--gray-bg);border:1px solid rgba(90,107,128,0.25);border-radius:10px;padding:3px 8px;margin-left:2px;letter-spacing:.03em;cursor:default" title="Escenarios sectoriales globales ${sd.scenarioSource} — misma fuente que la pantalla Climate Scenarios">WEO2025</span>` : '');
     } else {
       _scSel.style.display = 'none';
       if (_div) _div.style.display = 'none';
@@ -4885,10 +4980,12 @@ function drawChart() {
 
   // ── Datasets de escenarios ──────────────────────────────────────────────────
   if (sd.scenarios) {
-    // Línea plana hasta 2024, luego interpolación lineal hasta 2030
-    const scData = (v24, v30) => YEARS.map(y => {
-      if (y <= 2024) return parseFloat(v24.toFixed(4));
-      return parseFloat(_lerp(v24, v30, (y - 2024) / 6).toFixed(4));
+    // Serie anual WEO2025 si existe (sectores de Climate Scenarios); si no,
+    // línea plana hasta 2024 y luego interpolación lineal hasta 2030.
+    const scData = (sc) => YEARS.map(y => {
+      if (sc.years) { const i = sc.years.indexOf(y); return i >= 0 ? sc.values[i] : null; }
+      if (y <= 2024) return parseFloat(sc.v2024.toFixed(4));
+      return parseFloat(_lerp(sc.v2024, sc.end, (y - 2024) / 6).toFixed(4));
     });
     // Escenarios activos para este sector, ordenados por valor 2030 desc
     const activeSc = ['current', 'stated', 'nze']
@@ -4900,7 +4997,7 @@ function drawChart() {
       const sc = sd.scenarios[activeSc[0]];
       datasets.push({
         label: sc.label,
-        data: scData(sc.v2024, sc.end),
+        data: scData(sc),
         borderColor: 'rgba(91,155,213,0.7)',
         borderWidth: 1.5,
         backgroundColor: 'transparent',
@@ -4918,7 +5015,7 @@ function drawChart() {
       const topSc = sd.scenarios[bandTopKey];
       datasets.push({
         label: topSc.label,
-        data: scData(topSc.v2024, topSc.end),
+        data: scData(topSc),
         borderColor: 'rgba(91,155,213,0.35)',
         borderWidth: 1,
         backgroundColor: 'rgba(91,155,213,0.13)',
@@ -4929,7 +5026,7 @@ function drawChart() {
       const botSc = sd.scenarios[bandBotKey];
       datasets.push({
         label: botSc.label,
-        data: scData(botSc.v2024, botSc.end),
+        data: scData(botSc),
         borderColor: 'rgba(91,155,213,0.35)',
         borderWidth: 1,
         backgroundColor: 'transparent',
@@ -4941,7 +5038,7 @@ function drawChart() {
         const graySc = sd.scenarios[grayKey];
         datasets.push({
           label: graySc.label,
-          data: scData(graySc.v2024, graySc.end),
+          data: scData(graySc),
           borderColor: 'rgba(160,160,160,0.55)',
           borderWidth: 1.2,
           borderDash: [5, 3],
@@ -5083,7 +5180,7 @@ function drawChart() {
         ctx.stroke();
         ctx.font = 'italic 8px "DM Sans", sans-serif';
         ctx.fillStyle = 'rgba(70,120,200,0.35)';
-        ctx.fillText('IEA scenarios', rx + 8, (pT + pB) / 2 + 4);
+        ctx.fillText(sd.scenarioSource ? 'IEA WEO2025' : 'IEA scenarios', rx + 8, (pT + pB) / 2 + 4);
       }
 
       // Posiciones de etiquetas con anti-colisión (mínimo 26px entre ellas)
@@ -5188,7 +5285,7 @@ function renderRelevant() {
   const heroMeta = document.getElementById('sectorHeroMeta');
   if (heroMeta) {
     const rCount = sd.banks.filter(b => b.name !== 'BBVA' && (b.y2024 !== null || b.y2025 !== null)).length;
-    heroMeta.textContent = `${sd.metric} · Referencia IEA 2030: ${sd.ieaRef} · ${rCount} peers reportando`;
+    heroMeta.textContent = `${sd.metric} · Referencia IEA 2030${sd.scenarioSource ? ' (WEO2025)' : ''}: ${sd.ieaRef} · ${rCount} peers reportando`;
   }
 
   // Dynamic analytical snapshot — no bank count (already in KPI)
@@ -5419,6 +5516,7 @@ function setSubMetric(m, btn) {
   renderToggles();
   drawChart();
   renderTable();
+  renderRelevant();
 }
 
 // ─── COLUMN MODAL ─────────────────────────────────────────────────────────────
@@ -5642,6 +5740,72 @@ function renderScenarioScreen() {
   document.getElementById('scnChartTitle').textContent = `${scnSector} — Sendas de BBVA vs escenarios globales`;
   document.getElementById('scnChartSub').textContent = `${unit} · BBVA (azul) vs global WEO2025 (gris) · real + objetivo BBVA · horizonte ${scnHorizon}`;
   drawScenarioChart(P, G, bbva, tgt);
+  renderScnCompare();
+}
+
+// ── Hover por SERIE (compartido por la gráfica principal y la comparativa):
+// atenúa las series no señaladas, muestra todos los nodos anuales de la activa
+// y devuelve el handler onHover a enchufar en las opciones del gráfico. ──
+function scnSeriesHover(datasets) {
+  let hoverDS = -1;
+  const _dim = (c) => {
+    if (typeof c !== 'string') return c;
+    if (c[0] === '#') {
+      const h = c.length === 4 ? c.slice(1).split('').map(x => x + x).join('') : c.slice(1);
+      return `rgba(${parseInt(h.slice(0, 2), 16)},${parseInt(h.slice(2, 4), 16)},${parseInt(h.slice(4, 6), 16)},0.18)`;
+    }
+    return c.replace(/rgba?\(([^)]+)\)/, (_, inner) => {
+      const p = inner.split(',').map(s => s.trim());
+      return `rgba(${p[0]},${p[1]},${p[2]},0.12)`;
+    });
+  };
+  datasets.forEach(ds => {
+    const bc = ds.borderColor, bw = ds.borderWidth, bg = ds.backgroundColor;
+    ds.borderColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? bc : _dim(bc);
+    ds.borderWidth = c => (c.datasetIndex === hoverDS) ? bw + 1 : bw;
+    if (bg && bg !== 'transparent') ds.backgroundColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? bg : _dim(bg);
+    if (typeof ds.pointBackgroundColor === 'string') {
+      const pc = ds.pointBackgroundColor;
+      ds.pointBackgroundColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? pc : _dim(pc);
+    }
+    // La serie señalada muestra TODOS sus nodos anuales; el resto ninguno.
+    // pointHoverRadius idéntico al radio normal: sin estilo "activo" propio de
+    // Chart.js, no quedan puntos residuales al mover el ratón entre líneas.
+    if (typeof ds.pointRadius === 'number') {
+      const pr = ds.pointRadius;
+      ds.pointRadius = c => (c.datasetIndex === hoverDS ? 2.5 : pr);
+      ds.pointHoverRadius = c => (c.datasetIndex === hoverDS ? 2.5 : pr);
+    }
+  });
+  return (e, els, chart) => {
+    const idx = els.length ? els[0].datasetIndex : -1;
+    if (idx !== hoverDS) { hoverDS = idx; chart.update('none'); }
+  };
+}
+
+// Callbacks de tooltip por serie: nombre de la línea como título, y detalle
+// del punto señalado (valor y reducción acumulada de esa serie).
+function scnSeriesTooltip(unit, years) {
+  return {
+    title: items => items.length ? items[0].dataset.label : '',
+    label: c => {
+      const v = c.parsed.y;
+      if (v == null) return null;
+      const fv = Math.abs(v) >= 100 ? Math.round(v) : +v.toFixed(2);
+      return `${c.label}: ${fv} ${unit}`;
+    },
+    afterLabel: c => {
+      const v = c.parsed.y;
+      if (v == null) return;
+      const data = c.dataset.data;
+      let fi = 0;
+      while (fi < data.length && data[fi] == null) fi++;
+      if (fi < c.dataIndex && data[fi] > 0) {
+        const t = (v / data[fi] - 1) * 100;
+        return `Acumulado desde ${years[fi]}: ${t > 0 ? '+' : ''}${t.toFixed(0)}%`;
+      }
+    },
+  };
 }
 
 function drawScenarioChart(P, G, bbva, tgt) {
@@ -5661,7 +5825,9 @@ function drawScenarioChart(P, G, bbva, tgt) {
   const scnLine = (label, data, color, width, bg) => ({
     label, data, borderColor: color, borderWidth: width, borderDash: [5, 4],
     backgroundColor: bg || 'transparent', fill: bg ? '+1' : false,
-    pointRadius: 0, pointHitRadius: 0, tension: 0, spanGaps: false,
+    pointRadius: 0, pointHitRadius: 6,
+    pointBackgroundColor: color, pointBorderColor: color,
+    tension: 0, spanGaps: false,
   });
 
   // Bloque de escenarios (global o BBVA) según la selección NZE/STEPS/CPS:
@@ -5715,6 +5881,9 @@ function drawScenarioChart(P, G, bbva, tgt) {
     }
   }
 
+  // Hover por serie compartido (atenuación + nodos de la línea activa).
+  const onScnHover = scnSeriesHover(datasets);
+
   // Recreamos el gráfico en cada cambio (horizonte / bloques / sector). La
   // actualización en sitio rompía el dimensionado del canvas (Chart.js lo colapsaba
   // a 150px y perdía la referencia). La animación de dibujado da la transición.
@@ -5726,14 +5895,158 @@ function drawScenarioChart(P, G, bbva, tgt) {
       responsive: true, maintainAspectRatio: false,
       animation: { duration: 650, easing: 'easeInOutCubic' },
       layout: { padding: { right: 10 } },
-      interaction: { mode: 'index', intersect: false },
+      interaction: { mode: 'nearest', axis: 'xy', intersect: false },
+      onHover: onScnHover,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
-        tooltip: { callbacks: { label: c => c.parsed.y == null ? null : `${c.dataset.label}: ${c.parsed.y} ${P.unit}` } },
+        tooltip: { callbacks: scnSeriesTooltip(P.unit, years) },
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 16, autoSkip: true } },
         y: { min: 0, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' }, title: { display: true, text: P.unit, font: { size: 11 }, color: '#8FA0B4' } },
+      },
+    },
+  });
+}
+
+// ─── COMPARATIVA TEMPORAL: rebasing WEO2021 → WEO2025 (bloque desmontable) ────
+// Ejercicio de análisis separado y temporal (la senda WEO2021 fue la referencia
+// operativa hasta esta actualización). Corredor STEPS–NZ WEO2025 + CPS + NZ2025 +
+// NZ2021, con separadores en 2030/2040 y narrativa por tramos (NARRATIVES).
+// Para retirarlo: borrar este bloque, el HTML #scnCmpWrap, el CSS .scn-cmp-*/
+// .scn-tramo-*, la llamada renderScnCompare() de renderScenarioScreen y los
+// literales scenarios_full.csv/sector_narratives.json del build (NGEN).
+let scnCmpOpen = false;
+let scnCmpInstance = null;
+let scnCmpTramo = 0;                    // tramo activo (0=t1, 1=t2, 2=t3)
+let scnCmpLastSector = null;           // para resetear el tramo al cambiar de sector
+const SCN_CMP_YEARS = [2020, 2030, 2040, 2050];   // límites de los 3 tramos
+const SCN_CMP_GREEN = '#1A7F4B';        // NZ WEO2025 (objetivo vigente)
+const SCN_CMP_BLUE  = '#2E6FB7';        // NZ WEO2021 (referencia anterior)
+
+function toggleScnCmp() {
+  scnCmpOpen = !scnCmpOpen;
+  document.getElementById('scnCmpWrap').classList.toggle('open', scnCmpOpen);
+  document.getElementById('scnCmpBody').style.display = scnCmpOpen ? '' : 'none';
+  document.getElementById('scnCmpToggle').setAttribute('aria-expanded', String(scnCmpOpen));
+  if (scnCmpOpen) renderScnCompare();
+}
+
+// Selección de tramo (desde tab o desde click en el chart): repinta panel y chart.
+function setScnCmpTramo(i) {
+  scnCmpTramo = i;
+  renderScnCmpTramos();
+  if (scnCmpInstance) scnCmpInstance.update('none');
+}
+
+// Panel de tramos: tabs (title + range) + cuerpo (drivers + callout comparativa).
+function renderScnCmpTramos() {
+  const N = (typeof NARRATIVES !== 'undefined') ? NARRATIVES[scnSector] : null;
+  const tabsEl = document.getElementById('scnCmpTramoTabs');
+  const panelEl = document.getElementById('scnCmpTramoPanel');
+  if (!N || !N.tramos) { tabsEl.innerHTML = ''; panelEl.innerHTML = ''; return; }
+  if (scnCmpTramo >= N.tramos.length) scnCmpTramo = 0;
+  tabsEl.innerHTML = N.tramos.map((t, i) =>
+    `<button class="scn-tramo-tab${i === scnCmpTramo ? ' active' : ''}" onclick="setScnCmpTramo(${i})">
+       <span class="scn-tramo-badge">${t.range}</span>
+       <span class="scn-tramo-tt">${t.title}</span>
+     </button>`).join('');
+  const t = N.tramos[scnCmpTramo];
+  panelEl.innerHTML =
+    `<div class="scn-tramo-drivers-label">Drivers del tramo</div>
+     <div class="scn-tramo-drivers">${t.drivers}</div>
+     <div class="scn-cmp-callout">
+       <div class="scn-cmp-callout-label">⇄ Por qué divergen NZ 2021 vs NZ 2025</div>
+       <div class="scn-cmp-callout-body">${t.comparativa_nz2021_vs_nz2025}</div>
+     </div>`;
+}
+
+// Plugin: separadores verticales en 2030/2040 + sombreado del tramo activo.
+const scnCmpSegPlugin = {
+  id: 'scnCmpSeg',
+  beforeDatasetsDraw(chart) {
+    const { ctx, chartArea: ca, scales: { x } } = chart;
+    const xAt = yr => x.getPixelForValue(yr);
+    // Sombreado del tramo activo (entre sus dos años límite, recortado al área).
+    const y0 = SCN_CMP_YEARS[scnCmpTramo], y1 = SCN_CMP_YEARS[scnCmpTramo + 1];
+    const px0 = Math.max(ca.left, xAt(y0)), px1 = Math.min(ca.right, xAt(y1));
+    if (px1 > px0) { ctx.save(); ctx.fillStyle = 'rgba(0,68,129,0.05)'; ctx.fillRect(px0, ca.top, px1 - px0, ca.bottom - ca.top); ctx.restore(); }
+    // Separadores en 2030 y 2040.
+    ctx.save();
+    ctx.strokeStyle = 'rgba(90,107,128,0.35)'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+    [2030, 2040].forEach(yr => {
+      const px = xAt(yr);
+      if (px < ca.left || px > ca.right) return;
+      ctx.beginPath(); ctx.moveTo(px, ca.top); ctx.lineTo(px, ca.bottom); ctx.stroke();
+      ctx.setLineDash([]); ctx.fillStyle = 'rgba(90,107,128,0.7)'; ctx.font = '600 9px "DM Mono", monospace'; ctx.textAlign = 'center';
+      ctx.fillText(String(yr), px, ca.top - 3);
+      ctx.setLineDash([4, 4]);
+    });
+    ctx.restore();
+  }
+};
+
+function renderScnCompare() {
+  if (!scnCmpOpen || typeof PATHWAYS === 'undefined' || !scnSector) return;
+  const P = PATHWAYS[scnSector];
+  const canvas = document.getElementById('scnCmpChart');
+  if (!P || !canvas) return;
+  const N = (typeof NARRATIVES !== 'undefined') ? NARRATIVES[scnSector] : null;
+  if (scnSector !== scnCmpLastSector) { scnCmpTramo = 0; scnCmpLastSector = scnSector; }
+
+  document.getElementById('scnCmpTitle').textContent = `${scnSector} — corredor de descarbonización WEO2025 vs Net Zero WEO2021`;
+  document.getElementById('scnCmpSub').textContent = `${P.unit} · banda STEPS–NZ 2025 · CPS · NZ 2025 (verde) vs NZ 2021 (azul discontinua) · 2020–2050`;
+  document.getElementById('scnCmpIntroTitle').textContent = N ? `${N.sector_label} — contexto del sector` : 'Contexto del sector';
+  document.getElementById('scnCmpIntro').innerHTML = N ? N.intro : '';
+  renderScnCmpTramos();
+
+  // Eje 2020–2050 completo (independiente del horizonte del gráfico principal).
+  const years = P.years.slice();
+  const at = arr => arr ? years.map(y => { const i = P.years.indexOf(y); return i >= 0 ? arr[i] : null; }) : null;
+  const line = (label, data, color, width, dash, bg) => ({
+    label, data, borderColor: color, borderWidth: width, borderDash: dash || [],
+    backgroundColor: bg || 'transparent', fill: bg ? '+1' : false,
+    pointRadius: 0, pointHitRadius: 6, pointBackgroundColor: color, pointBorderColor: color,
+    tension: 0, spanGaps: false,
+  });
+
+  // Orden para la banda (fill:'+1' rellena STEPS→NZ2025, contiguos en el array).
+  const datasets = [];
+  if (P.steps) datasets.push(line('STEPS 2025', at(P.steps), 'rgba(26,127,75,0.35)', 1, [], 'rgba(26,127,75,0.10)'));
+  if (P.nz)    datasets.push(line('NZ 2025 (vigente)', at(P.nz), SCN_CMP_GREEN, 2));
+  if (P.cps)   datasets.push(line('CPS 2025', at(P.cps), 'rgba(90,107,128,0.7)', 1.3));
+  if (P.nz2021) datasets.push(line('NZ 2021 (anterior)', at(P.nz2021), SCN_CMP_BLUE, 2, [6, 4]));
+  const bbva = scnBBVABank(scnSector);
+  if (bbva) {
+    const real = years.map(y => scnRealVal(bbva, y));
+    if (real.some(v => v != null)) datasets.push({ label: 'BBVA (real reportado)', data: real, borderColor: '#072146', backgroundColor: '#072146', borderWidth: 2.5, pointRadius: real.map(x => x == null ? 0 : 3.5), pointBackgroundColor: '#072146', tension: .25, spanGaps: true });
+  }
+
+  const onScnHover = scnSeriesHover(datasets);
+  if (scnCmpInstance) scnCmpInstance.destroy();
+  scnCmpInstance = new Chart(canvas, {
+    type: 'line',
+    data: { labels: years, datasets },
+    plugins: [scnCmpSegPlugin],
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: { duration: 650, easing: 'easeInOutCubic' },
+      layout: { padding: { right: 10, top: 12 } },
+      interaction: { mode: 'nearest', axis: 'xy', intersect: false },
+      onHover: onScnHover,
+      // Click en el gráfico → selecciona el tramo del año pulsado.
+      onClick: (e, els, chart) => {
+        const yr = chart.scales.x.getValueForPixel(e.x);
+        let i = 0; if (yr >= 2040) i = 2; else if (yr >= 2030) i = 1;
+        setScnCmpTramo(i);
+      },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
+        tooltip: { callbacks: scnSeriesTooltip(P.unit, years) },
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 16, autoSkip: true } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11, family: 'DM Mono' }, color: '#8FA0B4' }, title: { display: true, text: P.unit, font: { size: 11 }, color: '#8FA0B4' } },
       },
     },
   });

@@ -467,40 +467,51 @@ if (si >= 0 && ei > si) {
 }
 
 // ---------------------------------------------------------------------------
-// SENDAS PROPIAS DE BBVA (data/bbva_pathways.csv) → literal PATHWAYS (PGEN)
-// Sendas de BBVA derivadas de los escenarios globales WEO2025, ancladas al valor
-// base de la entidad. Se ignora la columna WEO2021 (solo se usó para comparar).
+// SENDAS/ESCENARIOS DE BBVA (data/scenarios_full.csv) → literal PATHWAYS (PGEN)
+// FUENTE ÚNICA DE VERDAD de los escenarios (reemplaza al antiguo bbva_pathways.csv).
+// Formato long: sector,scenario,vintage,metric,unit,year,value. Escenarios por
+// sector: CPS/STEPS/NZ del WEO2025 + NZ del WEO2021 (senda histórica → 'nz2021',
+// usada en la comparativa temporal de Climate Scenarios).
 // Unidades convertidas a las del dashboard (Cement/Steel kg→t).
+// 'oil_gas' (absoluto, Mt CO2, sin narrativa) se EXCLUYE del selector de escenarios.
 // ---------------------------------------------------------------------------
 const PW_SECTOR = {
-  Cement:   { key: 'Cement',     factor: 0.001, unit: 'tCO₂e/t' },
-  Steel:    { key: 'Steel',      factor: 0.001, unit: 'tCO₂e/t' },
-  Aviation: { key: 'Aviation',   factor: 1,     unit: 'gCO₂e/RPK' },
-  Autos:    { key: 'Automotive', factor: 1,     unit: 'gCO₂/vkm' },
-  Power:    { key: 'Power',       factor: 1,     unit: 'kgCO₂e/MWh' },
+  cement:   { key: 'Cement',     factor: 0.001, unit: 'tCO₂e/t' },
+  steel:    { key: 'Steel',      factor: 0.001, unit: 'tCO₂e/t' },
+  aviation: { key: 'Aviation',   factor: 1,     unit: 'gCO₂e/RPK' },
+  autos:    { key: 'Automotive', factor: 1,     unit: 'gCO₂/vkm' },
+  power:    { key: 'Power',       factor: 1,     unit: 'kgCO₂e/MWh' },
 };
-const PW_SCEN = { 'BBVA CPS WEO2025': 'cps', 'BBVA STEPS WEO2025': 'steps', 'BBVA NZ WEO2025': 'nz' };
+const PW_SCEN = { CPS_WEO2025: 'cps', STEPS_WEO2025: 'steps', NZ_WEO2025: 'nz', NZ_WEO2021: 'nz2021' };
+const PW_YEARS = Array.from({ length: 2050 - 2020 + 1 }, (_, i) => 2020 + i);
 
 const PATHWAYS = {};
 const pwReport = [];
 try {
-  const pwRows = parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'bbva_pathways.csv'), 'utf8'));
-  const yearCols = pwRows[0].slice(3).map(y => parseInt(y)).filter(Boolean);
-  for (const r of pwRows.slice(1)) {
+  const rows = parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'scenarios_full.csv'), 'utf8'));
+  const head = rows[0].map(h => (h || '').trim());
+  const ci = { sector: head.indexOf('sector'), scen: head.indexOf('scenario'), year: head.indexOf('year'), val: head.indexOf('value') };
+  // Acumula (sector→scenario→year→value) para reordenar a serie anual continua.
+  const acc = {};
+  for (const r of rows.slice(1)) {
     if (!r.some(c => (c || '').trim())) continue;
-    const secDef = PW_SECTOR[(r[0] || '').trim()];
-    const scen = PW_SCEN[(r[1] || '').trim()];
-    if (!secDef || !scen) continue; // ignora WEO2021 y sectores no mapeados
-    const obj = (PATHWAYS[secDef.key] ||= { years: yearCols, unit: secDef.unit });
-    obj[scen] = yearCols.map((_, i) => {
-      const raw = parseNum(r[3 + i]);
-      return raw == null ? null : Math.round(raw * secDef.factor * 1000) / 1000;
-    });
+    const secDef = PW_SECTOR[(r[ci.sector] || '').trim()];
+    const scen = PW_SCEN[(r[ci.scen] || '').trim()];
+    if (!secDef || !scen) continue; // ignora oil_gas y escenarios no mapeados
+    const yr = parseInt(r[ci.year]);
+    const raw = parseNum(r[ci.val]);
+    ((acc[secDef.key] ||= {})[scen] ||= {})[yr] = raw == null ? null : Math.round(raw * secDef.factor * 1000) / 1000;
+  }
+  for (const [sector, scens] of Object.entries(acc)) {
+    const obj = (PATHWAYS[sector] = { years: PW_YEARS, unit: Object.values(PW_SECTOR).find(s => s.key === sector).unit });
+    for (const [scen, byYear] of Object.entries(scens)) {
+      obj[scen] = PW_YEARS.map(y => (y in byYear ? byYear[y] : null));
+    }
   }
   for (const [k, v] of Object.entries(PATHWAYS))
     pwReport.push(`${k}{${Object.keys(v).filter(x => x !== 'years' && x !== 'unit').join(',')}}`);
 } catch (e) {
-  console.log('!! No se pudo leer data/bbva_pathways.csv: ' + e.message);
+  console.log('!! No se pudo leer data/scenarios_full.csv: ' + e.message);
 }
 
 const pwLiteral = 'const PATHWAYS = ' + JSON.stringify(PATHWAYS) + ';';
@@ -513,6 +524,38 @@ const pwLiteral = 'const PATHWAYS = ' + JSON.stringify(PATHWAYS) + ';';
     console.log('PATHWAYS inyectado (' + pwLiteral.length + ' chars) — ' + (pwReport.join(' · ') || 'sin datos'));
   } else {
     console.log('!! marcadores PGEN_START/END no encontrados en index.html');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// NARRATIVAS POR SECTOR (data/sector_narratives.json) → literal NARRATIVES (NGEN)
+// intro + 3 tramos (drivers + comparativa NZ2021 vs NZ2025). Se reindexan a las
+// claves de sector del dashboard (autos→Automotive, resto capitalizado).
+// ---------------------------------------------------------------------------
+const NARR_KEY = { cement: 'Cement', steel: 'Steel', aviation: 'Aviation', autos: 'Automotive', power: 'Power' };
+const NARRATIVES = {};
+const nReport = [];
+try {
+  const raw = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'sector_narratives.json'), 'utf8'));
+  for (const [sec, obj] of Object.entries(raw)) {
+    const key = NARR_KEY[sec];
+    if (!key) continue; // oil_gas u otros sin narrativa
+    NARRATIVES[key] = obj;
+    nReport.push(`${key}(${(obj.tramos || []).length} tramos)`);
+  }
+} catch (e) {
+  console.log('!! No se pudo leer data/sector_narratives.json: ' + e.message);
+}
+const nLiteral = 'const NARRATIVES = ' + JSON.stringify(NARRATIVES) + ';';
+{
+  const NS = '/*NGEN_START*/', NE = '/*NGEN_END*/';
+  const nsi = html.indexOf(NS), nei = html.indexOf(NE);
+  if (nsi >= 0 && nei > nsi) {
+    html = html.slice(0, nsi + NS.length) + '\n' + nLiteral + '\n' + html.slice(nei);
+    fs.writeFileSync(htmlPath, html);
+    console.log('NARRATIVES inyectado (' + nLiteral.length + ' chars) — ' + (nReport.join(' · ') || 'sin datos'));
+  } else {
+    console.log('!! marcadores NGEN_START/END no encontrados en index.html');
   }
 }
 

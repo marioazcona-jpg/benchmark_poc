@@ -1,0 +1,137 @@
+{
+  "cement": {
+    "sector_label": "Cemento",
+    "intro": "El cemento es considerado un sector hard-to-abate debido a que aproximadamente dos tercios de sus emisiones provienen de la propia reacción química inevitable de la calcinación del clínker, no del uso de combustibles. Por esta razón, la electrificación directa tiene un impacto muy limitado y la palanca definitiva a largo plazo debe ser la Captura y Almacenamiento de Carbono (CCUS). A corto y medio plazo, las reducciones estructurales se logran mediante la eficiencia de materiales, los combustibles alternativos y, sobre todo, la sustitución del clínker, una medida operativa que puede reducir la intensidad energética por tonelada hasta ocho veces en comparación con la producción convencional.",
+    "tramos": [
+      {
+        "id": "t1",
+        "range": "Actualidad-2030",
+        "title": "Eficiencia de materiales y sustitución de clínker",
+        "drivers": "El driver inmediato no es tecnológico, sino operativo. Se prioriza la reducción del ratio clínker/cemento, sustituyéndolo por materiales cementicios suplementarios (como cenizas volantes, escorias o arcillas calcinadas) que no emiten CO₂ en su producción. Paralelamente, se aplican mejoras drásticas en la eficiencia energética de los hornos (pasando a combustibles alternativos como biomasa residual o residuos no reciclables) y se optimiza el uso del cemento en la construcción para reducir la demanda global.",
+        "comparativa_nz2021_vs_nz2025": "Tramo entre 2021 y 2024: la curva WEO2021 asumía que se comenzaría a reducir la intensidad de emisiones del cemento de forma inmediata y lineal desde 2021. Sin embargo, la curva WEO2025 refleja los datos reales consolidados por la AIE: en estos años la industria no ha logrado descarbonizarse a la velocidad requerida y las emisiones se han mantenido planas o al alza. El escenario 2025 asume este retraso como punto de partida."
+      },
+      {
+        "id": "t2",
+        "range": "2030-2040",
+        "title": "Despliegue de CCUS e hidrógeno",
+        "drivers": "Dado que más del 60% de las emisiones del cemento son \"emisiones de proceso\" (químicas inevitables), el driver tecnológico fundamental en esta década es el escalado comercial de la Captura, Uso y Almacenamiento de Carbono (CCUS). Los proyectos piloto actuales deben convertirse en instalaciones a gran escala. Además, se introduce el hidrógeno de bajas emisiones y la electrificación avanzada para alcanzar las altísimas temperaturas que requieren los hornos de calcinación.",
+        "comparativa_nz2021_vs_nz2025": "Pendiente más pronunciada en WEO2025 a partir de 2035: al no haber actuado con la rapidez prevista en los primeros años de la década, se ha agotado una mayor proporción del presupuesto de carbono global disponible para no superar los 1,5 °C. En consecuencia, el modelo de la AIE indica que las emisiones deben reducirse de manera mucho más drástica y acelerada a partir de 2030 para compensar la falta de acción previa."
+      },
+      {
+        "id": "t3",
+        "range": "2040-2050",
+        "title": "Adopción masiva de CCUS y cementos alternativos",
+        "drivers": "El driver definitivo para el tramo final hacia el Net Zero es la generalización absoluta del CCUS en prácticamente todas las plantas de cemento activas del mundo, capturando más del 90% de sus emisiones residuales. Esto se complementa con la maduración y estandarización a nivel global de nuevos cementos alternativos con químicas completamente diferentes (que absorben CO₂ durante su curado o que no liberan carbono durante su fabricación).",
+        "comparativa_nz2021_vs_nz2025": "Caída desde 2040 a 2050 (WEO2025) frente a una pendiente más suave (WEO2021): en el escenario NZ del WEO2021, el modelo preveía reducciones más suaves y repartidas. Sin embargo, la curva del WEO2025 reconoce la dificultad de descarbonizar el cemento a corto plazo, asumiendo que la intensidad de emisiones se mantendrá alta hasta que la Captura de Carbono (CCUS) madure. Es a partir de 2035 cuando la curva WEO2025 se desploma y cruza a la de 2021, reflejando el momento exacto en el que el modelo de la AIE asume que el CCUS se enchufa a escala industrial masiva. Además, la curva de 2025 exige llegar casi a 0 kg CO2/t en 2050 (tasas de captura superiores al 95%), mientras que en 2021 se permitían mayores emisiones residuales."
+      }
+    ]
+  },
+  "steel": {
+    "sector_label": "Acero",
+    "intro": "El acero es uno de los sectores más difíciles de descarbonizar pues sus emisiones tienen una doble naturaleza: energética (el uso intensivo de carbón como combustible) y de proceso (el carbón actúa también como agente reductor químico en los altos hornos, función que no puede sustituirse simplemente cambiando de combustible). Representa en torno al 7% de las emisiones globales de CO2, y aproximadamente el 70% de la producción mundial se realiza hoy mediante la ruta de alto horno (BF-BOF), que es la más intensiva en carbono. La transición del sector depende de una combinación de tres grandes palancas que entran en juego en momentos distintos: el mayor uso de chatarra, el despliegue de tecnologías de producción primaria limpias (DRI con hidrógeno), y el CCUS como red de seguridad para emisiones difíciles de eliminar por otras vías.",
+    "tramos": [
+      {
+        "id": "t1",
+        "range": "Actualidad-2030",
+        "title": "Aprovechamiento de la chatarra",
+        "drivers": "El driver dominante en este tramo no es tecnológico sino estructural: aprovechar al máximo la chatarra disponible. La producción secundaria de acero a partir de chatarra en hornos de arco eléctrico (EAF) emite menos de un tercio que la producción primaria por alto horno, sin necesidad de innovación. En el NZE, la cuota de altos hornos cae unos 10 puntos porcentuales antes de 2030 por cierre de plantas existentes, mientras la producción a partir de chatarra crece más de 5 puntos gracias a la mayor disponibilidad de este material. En paralelo, la eficiencia material —construir con menos acero sin perder prestaciones— actúa como palanca de demanda para compensar el crecimiento. Las tecnologías innovadoras de producción primaria limpia (DRI con hidrógeno, CCUS) deben alcanzar escala comercial antes de 2030, pero su contribución real a las emisiones en este tramo es todavía marginal.",
+        "comparativa_nz2021_vs_nz2025": "Actualidad-2030: la caída pronunciada de la curva WEO2021 en este tramo refleja que el NZE2021 asumía un despliegue comercial temprano de plantas H2-DRI y un cierre masivo de altos hornos ya antes de 2030. La realidad ha sido muy distinta: la capacidad de producción de acero de bajas emisiones lista para operar en 2030 se mantiene en torno a 10 Mt, sin cambios respecto a 2024, muy por debajo de lo proyectado en 2021. Las plantas de H2-DRI de primera generación operando con 100% de mezcla de hidrógeno cuestan entre un 50% y un 140% más que los altos hornos convencionales según la región, lo que ha frenado significativamente las decisiones de inversión. La curva WEO2025 arranca por tanto de una posición más alta y cae con menor pendiente."
+      },
+      {
+        "id": "t2",
+        "range": "2030-2040",
+        "title": "Despliegue a gran escala del hierro reducido directo con hidrógeno (H2-DRI)",
+        "drivers": "El foco se desplaza hacia el despliegue a gran escala del hierro reducido directo con hidrógeno (H2-DRI) acoplado a horno de arco eléctrico, que emerge como la ruta preferida de producción primaria baja en emisiones en las regiones con acceso a hidrógeno renovable asequible. La electrificación del sector se acelera con fuerza, sustituyendo carbón tanto en la producción secundaria como en los procesos auxiliares. En paralelo, los altos hornos que no pueden cerrarse de forma anticipada empiezan a equiparse con CCUS, especialmente en economías emergentes con flotas de plantas más jóvenes. La disponibilidad y calidad de la chatarra sigue siendo la principal restricción para seguir ampliando la ruta secundaria.",
+        "comparativa_nz2021_vs_nz2025": "2030-2040: el NZE2021 proyectaba que el hidrógeno verde sería suficientemente económico y disponible a escala para alimentar una oleada de plantas DRI en este período. El NZE2025 revisa ese supuesto a la baja: el hidrógeno limpio y el CCUS siguen siendo imprescindibles, pero su papel en las reducciones de emisiones entre 2030 y 2050 es menor que en la versión de 2021, especialmente en el corto plazo, al haber sido más lento su desarrollo tecnológico y de mercado de lo anticipado. Esto explica que la curva WEO2025 se mantenga claramente por encima de la de 2021 durante toda esta década."
+      },
+      {
+        "id": "t3",
+        "range": "2040-2050",
+        "title": "Hidrógeno a escala industrial",
+        "drivers": "En el tramo final se consolidan las rutas limpias de producción primaria. El hidrógeno limpio se convierte en insumo estructural del sector, con plantas H2-DRI operando a escala industrial en múltiples regiones. La electrólisis directa de mineral de hierro (electrowinning) empieza a contribuir como tecnología complementaria. El carbón residual que aún se use queda prácticamente en su totalidad asociado a instalaciones con CCUS. Hacia 2050, la IEA proyecta que la chatarra cubrirá cerca del 48% de los inputs metálicos de la producción de acero global, mientras que la producción primaria se realiza mayoritariamente por rutas de bajas emisiones. El acero es uno de los últimos sectores industriales en completar su transición, y aún mantiene un pequeño volumen de emisiones residuales que requieren compensación mediante eliminación de carbono.",
+        "comparativa_nz2021_vs_nz2025": "2040-2050: ambas curvas convergen hacia cero, pero la curva WEO2025 tiene que descender con una pendiente mucho más pronunciada en este tramo final para compensar el ritmo más lento de los períodos anteriores. El NZE2025 asume que hacia 2050 la chatarra cubrirá cerca del 48% de los inputs de producción, que el H2-DRI operará a escala industrial, y que el carbón residual estará prácticamente en su totalidad asociado a CCUS, pero la mayor parte de ese esfuerzo recae ahora sobre este último período en lugar de distribuirse de forma más homogénea como preveía el NZE2021."
+      }
+    ]
+  },
+  "aviation": {
+    "sector_label": "Aviación",
+    "intro": "La aviación es uno de los subsectores del transporte hard-to-abate debido a las estrictas limitaciones de peso y volumen, que exigen una altísima densidad energética. Esto hace que la electrificación directa mediante baterías o el uso de hidrógeno gaseoso solo sean viables para vuelos muy cortos o aviones pequeños. Por ello, el modelo Net Zero establece que la palanca absoluta para reducir las emisiones, especialmente en los vuelos de larga distancia, es la adopción masiva de Combustibles de Aviación Sostenibles (SAF). La transición exigirá escalar rápidamente los SAF basados en bioenergía avanzada y, a largo plazo, desplegar industrialmente combustibles sintéticos o e-fuels (producidos a partir de hidrógeno limpio y CO₂ capturado).",
+    "tramos": [
+      {
+        "id": "t1",
+        "range": "Actualidad-2030",
+        "title": "Eficiencia de flotas y despegue inicial de los SAF biológicos",
+        "drivers": "Las reducciones tempranas no provienen de tecnologías disruptivas, sino de mejoras operativas, optimización de rutas y la renovación de flotas por aviones convencionales más eficientes. El driver de transición es la introducción de mezclas obligatorias de Combustibles de Aviación Sostenibles (SAF) de primera generación y avanzados, producidos principalmente a partir de residuos, aceites usados y biomasa.",
+        "comparativa_nz2021_vs_nz2025": "Actualidad-2030: el NZE2021 se elaboró con la demanda de vuelos en mínimos post-COVID, asumiendo una recuperación lenta. El NZE2025 parte de un nivel de emisiones mucho más alto: en 2024 el tráfico aéreo ya había recuperado el 90% de sus niveles pre-COVID. Esto explica que la curva WEO2025 arranque por encima de la de 2021. Además, el NZE2021 preveía un escalado del SAF más agresivo en este período: en la práctica, en 2024 el SAF apenas representa el 0,3% del combustible de aviación consumido globalmente, muy por debajo de lo que la versión de 2021 anticipaba para este tramo."
+      },
+      {
+        "id": "t2",
+        "range": "2030-2040",
+        "title": "Escalado de combustibles sintéticos (e-fuels) y aviación regional limpia",
+        "drivers": "Los biocombustibles alcanzan su límite práctico por la disponibilidad de biomasa sostenible. Por ello, el driver tecnológico clave de esta década es el despliegue comercial de los combustibles sintéticos (e-fuels o Power-to-Liquid), creados combinando hidrógeno de bajas emisiones con CO₂ capturado. El sector aeronáutico verá el despegue de los SAF sintéticos y la entrada en servicio, hacia finales de la década, de las primeras aeronaves comerciales de hidrógeno y sistemas híbrido-eléctricos para trayectos de corta distancia.",
+        "comparativa_nz2021_vs_nz2025": "2030-2040: es donde la brecha entre curvas es más visible. El NZE2021 asignaba un papel protagonista al hidrógeno y a los e-fuels ya en este período, mientras que el NZE2025 reconoce que esas tecnologías llegan más tarde y en menor volumen de lo previsto. El SAF sigue siendo el driver central, pero con una rampa de penetración más moderada que la proyectada en 2021. El resultado es que las emisiones en este tramo son materialmente más altas en el NZE2025, y el grueso del esfuerzo de reducción se desplaza hacia la segunda mitad del período."
+      },
+      {
+        "id": "t3",
+        "range": "2040-2050",
+        "title": "Dominio del e-fuel para larga distancia y cero emisiones netas",
+        "drivers": "La palanca definitiva para cerrar la curva. Los combustibles sintéticos de aviación se convierten en la norma a nivel mundial para cubrir los vuelos internacionales de larga distancia, que son los responsables de la inmensa mayoría de las emisiones del sector. La aviación regional y de corto radio queda cubierta casi en su totalidad por aviones de hidrógeno y eléctricos, consolidando la descarbonización total del sector.",
+        "comparativa_nz2021_vs_nz2025": "2040-2050: ambos escenarios convergen en cero emisiones netas en 2050, pero el NZE2025 requiere un ritmo de descenso mucho más pronunciado en este último tramo para compensar el retraso acumulado. El NZE2025 asume que el SAF cubre cerca del 80% de la energía del sector hacia 2050, pero con una mayor dependencia de eliminación de CO2 residual mediante tecnologías de carbono negativo (BECCS, DAC), dado que el sector mantiene algunas emisiones residuales que no pueden eliminarse solo con combustibles alternativos."
+      }
+    ]
+  },
+  "autos": {
+    "sector_label": "Automoción",
+    "intro": "A diferencia de otros sectores industriales, la descarbonización de los turismos tiene una solución tecnológica ya disponible y con costes en rápido descenso: el vehículo eléctrico. La transición depende menos de innovación pendiente y más de la velocidad de adopción, del apoyo regulatorio y del despliegue de infraestructura de carga. El driver principal es la electrificación masiva de la flota, respaldada por la descarbonización paralela del sistema eléctrico, sin la cual el beneficio de la electrificación sería parcial.",
+    "tramos": [
+      {
+        "id": "t1",
+        "range": "Actualidad-2030",
+        "title": "La electrificación y los biocombustibles",
+        "drivers": "En el NZE2025, las ventas de vehículos eléctricos deben alcanzar el 60% de los coches nuevos globalmente en 2030, con cerca de 380 millones de vehículos eléctricos acumulados en stock a finales de esa década. China lidera ya con una cuota de ventas EV próxima al 80%, Europa se encamina hacia el 60% apoyada en los estándares de CO2 de la UE, y los mercados emergentes de Asia y Latinoamérica aceleran su adopción. La infraestructura de recarga pública necesita crecer casi nueve veces hasta 2030 para acompañar este ritmo de ventas. Los biocombustibles actúan como palanca complementaria para el stock de vehículos de combustión interna que seguirá circulando durante la transición.",
+        "comparativa_nz2021_vs_nz2025": "Actualidad-2030: la IEA anticipa en su último EV Outlook que la cuota de ventas EV en EEUU alcanzará en torno al 20% en 2030, menos de la mitad de lo que proyectaba el año anterior. El NZE2021 asumía un apoyo regulatorio federal en EEUU robusto y sostenido, que no se ha materializado: el WEO2025 estima un 30% menos de capacidad renovable instalada y un 60% menos de vehículos eléctricos en circulación en EEUU en 2035 en el escenario de políticas actuales respecto a las proyecciones del año anterior. El retroceso de incentivos fiscales, la eliminación de estándares de eficiencia y la incertidumbre arancelaria han frenado significativamente la adopción en el mercado que el NZE2021 consideraba clave para alcanzar los hitos de 2030."
+      },
+      {
+        "id": "t2",
+        "range": "2030-2040",
+        "title": "Electrificación como driver dominante",
+        "drivers": "Las ventas de coches nuevos de combustión interna quedan prácticamente eliminadas en economías avanzadas hacia 2035, y el stock de vehículos eléctricos en circulación sustituye de forma masiva la demanda de petróleo del sector. Los camiones y vehículos de transporte pesado —la segunda fuente de consumo de petróleo en transporte— inician también su electrificación a escala, con paridad de coste total de propiedad frente al diésel esperada en Europa y EEUU antes de 2030, lo que acelera su adopción en este tramo. La integración vehículo-red (V2G) empieza a aportar flexibilidad al sistema eléctrico.",
+        "comparativa_nz2021_vs_nz2025": "2030-2040: la divergencia en este tramo refleja que la renovación del stock global de vehículos es más lenta de lo previsto en 2021. Un parque de coches de combustión más grande al llegar a 2030 implica mayor inercia en las emisiones durante los años siguientes, pues los vehículos tienen vidas útiles largas. La electrificación y los biocombustibles son las palancas principales para descarbonizar el transporte por carretera hasta 2030, y desde ese punto la electrificación se convierte en el driver dominante, con la electricidad representando tres cuartas partes del consumo energético del transporte por carretera en 2050. En el NZE2025, ese punto de inflexión llega algo más tarde que en la versión de 2021."
+      },
+      {
+        "id": "t3",
+        "range": "2040-2050",
+        "title": "Electrificación e hidrógeno",
+        "drivers": "En el tramo final, la electricidad representa las tres cuartas partes del consumo energético del transporte por carretera global. Las emisiones residuales que permanecen provienen principalmente del stock de vehículos de combustión interna más antiguos aún en circulación en mercados emergentes, y del transporte pesado de larga distancia donde la electrificación directa tiene más restricciones. El hidrógeno cubre nichos específicos de transporte de muy larga distancia, complementando la electrificación directa.",
+        "comparativa_nz2021_vs_nz2025": "2040-2050: ambas curvas convergen hacia emisiones casi nulas en 2050, pero la pendiente de descenso en este tramo final es más pronunciada en el NZE2025 para compensar el retraso acumulado. La renovación acelerada del parque en economías emergentes, la electrificación del transporte pesado y la eliminación del stock residual de vehículos de combustión son las palancas que deben absorber el esfuerzo aplazado de los períodos anteriores."
+      }
+    ]
+  },
+  "power": {
+    "sector_label": "Power",
+    "intro": "El sector eléctrico es el pilar y gran facilitador de toda la transición global. Su descarbonización rápida es un requisito indispensable para que la electrificación de otros sectores (transporte, industria y edificación) se traduzca en una reducción real de emisiones. El escenario Net Zero exige que el sector eléctrico sea el primero en alcanzar la neutralidad (en 2040 a nivel mundial). El motor inmediato es un despliegue de renovables sin precedentes. Sin embargo, a largo plazo el desafío estructural cambia: el reto principal deja de ser la generación de energía limpia para centrarse en la gestión y firmeza del sistema, lo que requiere inversiones masivas en redes, almacenamiento y fuentes despachables de bajas emisiones.",
+    "tramos": [
+      {
+        "id": "t1",
+        "range": "Actualidad-2030",
+        "title": "Triplicar renovables y fin del nuevo carbón",
+        "drivers": "La palanca absoluta en esta década es el cumplimiento del objetivo global de la COP28: triplicar la capacidad renovable instalada, impulsada casi en su totalidad por la energía solar fotovoltaica y eólica. En paralelo, el modelo exige la paralización inmediata de cualquier aprobación o financiación para nuevas centrales de carbón sin captura de carbono, junto con el inicio del retiro de las plantas fósiles más ineficientes.",
+        "comparativa_nz2021_vs_nz2025": "El impacto de la crisis energética y el carbón (2021-2024): la curva WEO2021 proyectaba un inicio de descarbonización inmediato. Sin embargo, la curva WEO2025 asume la realidad de los últimos años: las emisiones del sector eléctrico repuntaron a máximos históricos. Esto se debió al efecto rebote post-pandemia y, sobre todo, a la crisis geopolítica del gas, que obligó a muchas regiones a reactivar y quemar más carbón a corto plazo para garantizar el suministro."
+      },
+      {
+        "id": "t2",
+        "range": "2030-2040",
+        "title": "Cero neto en economías avanzadas y explosión de la flexibilidad",
+        "drivers": "Las economías desarrolladas logran un sistema eléctrico de cero emisiones netas hacia 2035. Al estar dominado por fuentes intermitentes, el driver crítico es la flexibilidad de la red. Esto se logra mediante una expansión masiva de las infraestructuras de transmisión y distribución (añadiendo y sustituyendo millones de kilómetros de red al año) y una adopción exponencial del almacenamiento en baterías para compensar la retirada progresiva del gas natural.",
+        "comparativa_nz2021_vs_nz2025": "Desplome acelerado y el efecto \"triplicar renovables\" (2024-2035): para compensar el aumento inicial y mantener vivo el objetivo de 1,5 °C, el modelo de la AIE exige que la curva WEO2025 caiga ahora casi en picado. Esta pendiente extremadamente pronunciada se sustenta en el objetivo de la COP28 de triplicar la capacidad renovable global para 2030. La AIE confía este desplome vertiginoso a la masiva y rápida adopción de la energía solar fotovoltaica, impulsada por su drástica caída de costes."
+      },
+      {
+        "id": "t3",
+        "range": "2040-2050",
+        "title": "Sistema Net Zero global y emisiones negativas",
+        "drivers": "El sistema eléctrico mundial completa su descarbonización y pasa a generar emisiones netas negativas. Aunque las renovables dominan abrumadoramente el mix de generación, la estabilidad y firmeza final de la red se asegura complementando el sistema con energía nuclear (que cuadruplica su ritmo de despliegue histórico), capacidad hidroeléctrica, generación térmica basada en hidrógeno y el uso de Bioenergía con Captura de Carbono (BECCS).",
+        "comparativa_nz2021_vs_nz2025": "Diferenciación en el tramo 2035-2040: la diferencia estructural clave radica en la gestión de la demanda y la flexibilidad hacia 2050. Mientras que el WEO2021 proyectaba un sector eléctrico con cero emisiones para 2040, el WEO2025 extiende el periodo de emisiones residuales hasta 2050. Este cambio responde a una revisión al alza en la demanda eléctrica, impulsada por el auge de la Inteligencia Artificial (centros de datos) y la electrificación del transporte. Ante este incremento, la descarbonización de la última milla se vuelve más compleja, exigiendo mantener plantas de gas operativas por más tiempo para garantizar la estabilidad de la red y compensar la intermitencia de las renovables."
+      }
+    ]
+  }
+}
