@@ -650,7 +650,7 @@ a.ref-chip.link:hover { background: var(--bbva-blue); color: #fff; border-color:
            eliminar este bloque y las funciones/estado scnCmp* del script. ── -->
       <div class="scn-cmp" id="scnCmpWrap">
         <button class="scn-cmp-toggle" id="scnCmpToggle" onclick="toggleScnCmp()" aria-expanded="false" aria-controls="scnCmpBody">
-          <span class="scn-cmp-title">Comparativa histórica — senda Net Zero de BBVA: WEO2021 vs actual</span>
+          <span class="scn-cmp-title">Comparativa histórica — senda Net Zero de BBVA: WEO2021 vs WEO2025</span>
           <span class="scn-cmp-hint">análisis temporal · la senda WEO2021 ha sido la referencia hasta esta actualización</span>
           <span class="scn-cmp-chev">▾</span>
         </button>
@@ -5747,7 +5747,8 @@ function renderScenarioScreen() {
 // atenúa las series no señaladas, muestra todos los nodos anuales de la activa
 // y devuelve el handler onHover a enchufar en las opciones del gráfico. ──
 function scnSeriesHover(datasets) {
-  let hoverDS = -1;
+  // El índice señalado se guarda en chart.$hoverDS (accesible por plugins).
+  const H = c => (c.chart && c.chart.$hoverDS != null ? c.chart.$hoverDS : -1);
   const _dim = (c) => {
     if (typeof c !== 'string') return c;
     if (c[0] === '#') {
@@ -5761,27 +5762,63 @@ function scnSeriesHover(datasets) {
   };
   datasets.forEach(ds => {
     const bc = ds.borderColor, bw = ds.borderWidth, bg = ds.backgroundColor;
-    ds.borderColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? bc : _dim(bc);
-    ds.borderWidth = c => (c.datasetIndex === hoverDS) ? bw + 1 : bw;
-    if (bg && bg !== 'transparent') ds.backgroundColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? bg : _dim(bg);
+    ds.$baseColor = typeof bc === 'string' ? bc : '#072146';   // color real para las etiquetas
+    ds.borderColor = c => { const h = H(c); return (h === -1 || c.datasetIndex === h) ? bc : _dim(bc); };
+    ds.borderWidth = c => (c.datasetIndex === H(c)) ? bw + 1 : bw;
+    if (bg && bg !== 'transparent') ds.backgroundColor = c => { const h = H(c); return (h === -1 || c.datasetIndex === h) ? bg : _dim(bg); };
     if (typeof ds.pointBackgroundColor === 'string') {
       const pc = ds.pointBackgroundColor;
-      ds.pointBackgroundColor = c => (hoverDS === -1 || c.datasetIndex === hoverDS) ? pc : _dim(pc);
+      ds.pointBackgroundColor = c => { const h = H(c); return (h === -1 || c.datasetIndex === h) ? pc : _dim(pc); };
     }
     // La serie señalada muestra TODOS sus nodos anuales; el resto ninguno.
     // pointHoverRadius idéntico al radio normal: sin estilo "activo" propio de
     // Chart.js, no quedan puntos residuales al mover el ratón entre líneas.
     if (typeof ds.pointRadius === 'number') {
       const pr = ds.pointRadius;
-      ds.pointRadius = c => (c.datasetIndex === hoverDS ? 2.5 : pr);
-      ds.pointHoverRadius = c => (c.datasetIndex === hoverDS ? 2.5 : pr);
+      ds.pointRadius = c => (c.datasetIndex === H(c) ? 2.5 : pr);
+      ds.pointHoverRadius = c => (c.datasetIndex === H(c) ? 2.5 : pr);
     }
   });
   return (e, els, chart) => {
     const idx = els.length ? els[0].datasetIndex : -1;
-    if (idx !== hoverDS) { hoverDS = idx; chart.update('none'); }
+    if (idx !== chart.$hoverDS) { chart.$hoverDS = idx; chart.update('none'); }
   };
 }
+
+// Plugin: al iluminarse una serie (hover), rotula el valor numérico en cada
+// nodo anual de ESA serie (pequeñas etiquetas, sin sobrecargar la gráfica). El
+// tooltip completo del punto señalado se mantiene aparte.
+const scnValuesPlugin = {
+  id: 'scnSeriesValues',
+  afterDatasetsDraw(chart) {
+    const hv = chart.$hoverDS;
+    if (hv == null || hv < 0 || !chart.isDatasetVisible(hv)) return;
+    const ds = chart.data.datasets[hv];
+    const meta = chart.getDatasetMeta(hv);
+    if (!meta || !meta.data) return;
+    const { ctx, chartArea } = chart;
+    const color = ds.$baseColor || '#072146';
+    const fmt = v => Math.abs(v) >= 100 ? String(Math.round(v)) : (Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2));
+    ctx.save();
+    ctx.font = '600 8px "DM Mono", monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.lineJoin = 'round';
+    let lastX = -Infinity;
+    meta.data.forEach((pt, i) => {
+      const v = ds.data[i];
+      if (v == null || pt.skip) return;
+      if (pt.x - lastX < 17) return;   // evita amontonar etiquetas contiguas
+      lastX = pt.x;
+      let y = pt.y - 7;
+      if (y < chartArea.top + 9) y = pt.y + 15;   // si arriba no cabe, debajo del nodo
+      const txt = fmt(v);
+      ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,0.92)';
+      ctx.strokeText(txt, pt.x, y);
+      ctx.fillStyle = color;
+      ctx.fillText(txt, pt.x, y);
+    });
+    ctx.restore();
+  }
+};
 
 // Callbacks de tooltip por serie: nombre de la línea como título, y detalle
 // del punto señalado (valor y reducción acumulada de esa serie).
@@ -5891,10 +5928,11 @@ function drawScenarioChart(P, G, bbva, tgt) {
   scnInstance = new Chart(canvas, {
     type: 'line',
     data: { labels: years, datasets },
+    plugins: [scnValuesPlugin],
     options: {
       responsive: true, maintainAspectRatio: false,
       animation: { duration: 650, easing: 'easeInOutCubic' },
-      layout: { padding: { right: 10 } },
+      layout: { padding: { right: 10, top: 10 } },
       interaction: { mode: 'nearest', axis: 'xy', intersect: false },
       onHover: onScnHover,
       plugins: {
@@ -5994,8 +6032,8 @@ function renderScnCompare() {
   const N = (typeof NARRATIVES !== 'undefined') ? NARRATIVES[scnSector] : null;
   if (scnSector !== scnCmpLastSector) { scnCmpTramo = 0; scnCmpLastSector = scnSector; }
 
-  document.getElementById('scnCmpTitle').textContent = `${scnSector} — corredor de descarbonización WEO2025 vs Net Zero WEO2021`;
-  document.getElementById('scnCmpSub').textContent = `${P.unit} · banda STEPS–NZ 2025 · CPS · NZ 2025 (verde) vs NZ 2021 (azul discontinua) · 2020–2050`;
+  document.getElementById('scnCmpTitle').textContent = `${scnSector} — senda Net Zero de BBVA: WEO2021 vs WEO2025`;
+  document.getElementById('scnCmpSub').textContent = `${P.unit} · NZ 2025 (verde) vs NZ 2021 (azul discontinua) · real BBVA · 2020–2050`;
   document.getElementById('scnCmpIntroTitle').textContent = N ? `${N.sector_label} — contexto del sector` : 'Contexto del sector';
   document.getElementById('scnCmpIntro').innerHTML = N ? N.intro : '';
   renderScnCmpTramos();
@@ -6010,11 +6048,9 @@ function renderScnCompare() {
     tension: 0, spanGaps: false,
   });
 
-  // Orden para la banda (fill:'+1' rellena STEPS→NZ2025, contiguos en el array).
+  // Solo las dos trayectorias Net Zero (2025 vigente vs 2021 anterior).
   const datasets = [];
-  if (P.steps) datasets.push(line('STEPS 2025', at(P.steps), 'rgba(26,127,75,0.35)', 1, [], 'rgba(26,127,75,0.10)'));
-  if (P.nz)    datasets.push(line('NZ 2025 (vigente)', at(P.nz), SCN_CMP_GREEN, 2));
-  if (P.cps)   datasets.push(line('CPS 2025', at(P.cps), 'rgba(90,107,128,0.7)', 1.3));
+  if (P.nz)     datasets.push(line('NZ 2025 (vigente)', at(P.nz), SCN_CMP_GREEN, 2));
   if (P.nz2021) datasets.push(line('NZ 2021 (anterior)', at(P.nz2021), SCN_CMP_BLUE, 2, [6, 4]));
   const bbva = scnBBVABank(scnSector);
   if (bbva) {
