@@ -514,6 +514,58 @@ try {
   console.log('!! No se pudo leer data/scenarios_full.csv: ' + e.message);
 }
 
+// ---------------------------------------------------------------------------
+// OIL & GAS (data/og_scenarios.csv) → se fusiona en PATHWAYS['Oil & Gas'] (senda
+// BBVA + real, escala BBVA ~Mt) y GLOBALS['Oil & Gas'] (mundial, escala ~Gt).
+// Formato long propio: scenario,vintage,scope,year,value,unit,source. Absoluto
+// Mt CO2. WEO2025 → CPS/STEPS/NZE; WEO2023 NZE → senda anterior de la comparativa
+// (se guarda en 'nz2021' con cmpPrevVintage='WEO2023'). Solo la serie combinada
+// 'Global O&G (A.4)' (no el desglose Oil/Gas). Global y BBVA están a ~1000x de
+// escala, por eso NO se superponen: la pantalla muestra BBVA y el global aparte.
+// ---------------------------------------------------------------------------
+const OG_YEARS = Array.from({ length: 2050 - 2021 + 1 }, (_, i) => 2021 + i);
+function loadOG() {
+  try {
+    const rows = parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'og_scenarios.csv'), 'utf8'));
+    const head = rows[0].map(h => (h || '').trim());
+    const ci = { scen: head.indexOf('scenario'), vint: head.indexOf('vintage'), scope: head.indexOf('scope'), year: head.indexOf('year'), val: head.indexOf('value') };
+    const acc = { bbva: {}, global: {} };
+    for (const r of rows.slice(1)) {
+      if (!r.some(c => (c || '').trim())) continue;
+      const scope = (r[ci.scope] || '').trim();
+      const vint = (r[ci.vint] || '').trim();
+      const scen = (r[ci.scen] || '').trim();
+      let group = null;
+      if (scope === 'BBVA O&G') group = 'bbva';
+      else if (scope === 'Global O&G (A.4)') group = 'global';
+      else continue; // ignora Global Oil (A.4) / Global Gas (A.4)
+      let key = null;
+      if (vint === 'WEO2025') key = scen === 'CPS' ? 'cps' : scen === 'STEPS' ? 'steps' : scen === 'NZE' ? 'nz' : null;
+      else if (vint === 'WEO2023' && scen === 'NZE') key = 'nz2021';
+      if (!key) continue;
+      const yr = parseInt(r[ci.year]);
+      const v = parseNum(r[ci.val]);
+      ((acc[group][key] ||= {}))[yr] = v == null ? null : Math.round(v * 1000) / 1000;
+    }
+    const toSeries = byYear => OG_YEARS.map(y => (y in byYear ? byYear[y] : null));
+    const build = g => {
+      const o = { years: OG_YEARS, unit: 'Mt CO₂' };
+      for (const [k, byYear] of Object.entries(acc[g])) o[k] = toSeries(byYear);
+      return o;
+    };
+    const bbva = build('bbva'); bbva.cmpPrevVintage = 'WEO2023';
+    return { bbva, global: build('global') };
+  } catch (e) {
+    console.log('!! No se pudo leer data/og_scenarios.csv: ' + e.message);
+    return null;
+  }
+}
+const OG = loadOG();
+if (OG) {
+  PATHWAYS['Oil & Gas'] = OG.bbva;
+  pwReport.push(`Oil & Gas{${Object.keys(OG.bbva).filter(x => x !== 'years' && x !== 'unit' && x !== 'cmpPrevVintage').join(',')}}`);
+}
+
 const pwLiteral = 'const PATHWAYS = ' + JSON.stringify(PATHWAYS) + ';';
 {
   const PS = '/*PGEN_START*/', PE = '/*PGEN_END*/';
@@ -596,6 +648,11 @@ try {
     gwReport.push(`${k}{${Object.keys(v).filter(x => x !== 'years' && x !== 'unit').join(',')}}`);
 } catch (e) {
   console.log('!! No se pudo leer data/weo2025_global.csv: ' + e.message);
+}
+// O&G mundial (escala ~Gt, absoluto) — se muestra APARTE del corredor BBVA.
+if (typeof OG !== 'undefined' && OG) {
+  GLOBALS['Oil & Gas'] = OG.global;
+  gwReport.push(`Oil & Gas{${Object.keys(OG.global).filter(x => x !== 'years' && x !== 'unit').join(',')}}`);
 }
 
 const gwLiteral = 'const GLOBALS = ' + JSON.stringify(GLOBALS) + ';';

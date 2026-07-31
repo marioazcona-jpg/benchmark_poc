@@ -1,0 +1,481 @@
+scenario,vintage,scope,year,value,unit,source
+CPS,WEO2025,Global Oil (A.4),2021,11257,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2021,10804,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2021,22061,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2022,11559,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2022,10700,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2022,22259,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2023,12056,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2023,10864,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2023,22920,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2024,12124,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2024,11113,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2024,23237,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2025,12082.363636,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2025,11287.454545,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2025,23369.818182,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2026,12040.727273,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2026,11461.909091,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2026,23502.636364,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2027,11999.090909,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2027,11636.363636,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2027,23635.454545,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2028,11957.454545,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2028,11810.818182,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2028,23768.272727,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2029,11915.818182,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2029,11985.272727,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2029,23901.090909,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2030,11874.181818,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2030,12159.727273,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2030,24033.909091,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2031,11832.545455,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2031,12334.181818,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2031,24166.727273,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2032,11790.909091,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2032,12508.636364,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2032,24299.545455,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2033,11749.272727,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2033,12683.090909,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2033,24432.363636,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2034,11707.636364,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2034,12857.545455,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2034,24565.181818,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2035,11666,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2035,13032,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2035,24698,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2036,11661.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2036,13123.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2036,24785.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2037,11657.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2037,13215.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2037,24872.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2038,11652.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2038,13306.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2038,24959.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2039,11648.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2039,13398.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2039,25046.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2040,11644,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2040,13490,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2040,25134,Mt CO2,reported
+CPS,WEO2025,Global Oil (A.4),2041,11681,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2041,13586.7,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2041,25267.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2042,11718,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2042,13683.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2042,25401.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2043,11755,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2043,13780.1,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2043,25535.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2044,11792,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2044,13876.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2044,25669.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2045,11829,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2045,13973.5,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2045,25803,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2046,11866,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2046,14070.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2046,25936.8,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2047,11903,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2047,14166.9,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2047,26070.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2048,11940,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2048,14263.6,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2048,26204.4,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2049,11977,Mt CO2,interp_lineal
+CPS,WEO2025,Global Gas (A.4),2049,14360.3,Mt CO2,interp_lineal
+CPS,WEO2025,Global O&G (A.4),2049,26338.2,Mt CO2,interp_lineal
+CPS,WEO2025,Global Oil (A.4),2050,12014,Mt CO2,reported
+CPS,WEO2025,Global Gas (A.4),2050,14457,Mt CO2,reported
+CPS,WEO2025,Global O&G (A.4),2050,26472,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2021,14,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2022,14.244471,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2023,14.493211,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2024,14.746294,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2025,14.828289,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2026,14.91074,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2027,14.993649,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2028,15.077019,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2029,15.160853,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2030,15.245153,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2031,15.329922,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2032,15.415162,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2033,15.500876,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2034,15.587067,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2035,15.673736,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2036,15.728617,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2037,15.78369,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2038,15.838956,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2039,15.894415,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2040,15.950068,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2041,16.03299,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2042,16.116344,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2043,16.20013,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2044,16.284352,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2045,16.369012,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2046,16.454112,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2047,16.539654,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2048,16.625642,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2049,16.712076,Mt CO2,reported
+CPS,WEO2025,BBVA O&G,2050,16.798959,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2021,11257,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2021,10804,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2021,22061,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2022,11559,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2022,10700,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2022,22259,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2023,12056,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2023,10864,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2023,22920,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2024,12124,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2024,11113,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2024,23237,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2025,12024.545455,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2025,11217.090909,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2025,23241.636364,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2026,11925.090909,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2026,11321.181818,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2026,23246.272727,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2027,11825.636364,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2027,11425.272727,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2027,23250.909091,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2028,11726.181818,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2028,11529.363636,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2028,23255.545455,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2029,11626.727273,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2029,11633.454545,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2029,23260.181818,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2030,11527.272727,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2030,11737.545455,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2030,23264.818182,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2031,11427.818182,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2031,11841.636364,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2031,23269.454545,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2032,11328.363636,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2032,11945.727273,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2032,23274.090909,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2033,11228.909091,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2033,12049.818182,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2033,23278.727273,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2034,11129.454545,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2034,12153.909091,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2034,23283.363636,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2035,11030,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2035,12258,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2035,23288,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2036,10936.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2036,12221.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2036,23157.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2037,10842.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2037,12185.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2037,23027.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2038,10748.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2038,12148.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2038,22896.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2039,10654.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2039,12112.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2039,22766.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2040,10561,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2040,12076,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2040,22636,Mt CO2,reported
+STEPS,WEO2025,Global Oil (A.4),2041,10509.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2041,12033.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2041,22542.7,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2042,10458.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2042,11991.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2042,22449.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2043,10407.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2043,11949.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2043,22356.1,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2044,10356.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2044,11907.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2044,22262.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2045,10305,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2045,11865,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2045,22169.5,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2046,10253.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2046,11822.8,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2046,22076.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2047,10202.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2047,11780.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2047,21982.9,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2048,10151.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2048,11738.4,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2048,21889.6,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2049,10100.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Gas (A.4),2049,11696.2,Mt CO2,interp_lineal
+STEPS,WEO2025,Global O&G (A.4),2049,21796.3,Mt CO2,interp_lineal
+STEPS,WEO2025,Global Oil (A.4),2050,10049,Mt CO2,reported
+STEPS,WEO2025,Global Gas (A.4),2050,11654,Mt CO2,reported
+STEPS,WEO2025,Global O&G (A.4),2050,21703,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2021,14,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2022,14.244471,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2023,14.493211,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2024,14.746294,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2025,14.749251,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2026,14.752208,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2027,14.755166,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2028,14.758124,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2029,14.761083,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2030,14.764043,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2031,14.767003,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2032,14.769964,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2033,14.772925,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2034,14.775887,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2035,14.77885,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2036,14.695173,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2037,14.61197,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2038,14.529238,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2039,14.446974,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2040,14.365177,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2041,14.304798,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2042,14.244673,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2043,14.184801,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2044,14.125181,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2045,14.065811,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2046,14.006691,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2047,13.947819,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2048,13.889195,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2049,13.830817,Mt CO2,reported
+STEPS,WEO2025,BBVA O&G,2050,13.772685,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2021,11257,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2021,10804,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2021,22061,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2022,11559,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2022,10700,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2022,22259,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2023,12056,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2023,10864,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2023,22920,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2024,12124,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2024,11113,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2024,23237,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2025,11633.36364,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2025,10608.09091,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2025,22241.45455,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2026,11142.72727,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2026,10103.18182,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2026,21245.90909,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2027,10652.09091,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2027,9598.272727,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2027,20250.36364,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2028,10161.45455,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2028,9093.363636,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2028,19254.81818,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2029,9670.818182,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2029,8588.454545,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2029,18259.27273,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2030,9180.181818,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2030,8083.545455,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2030,17263.72727,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2031,8689.55,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2031,7578.636364,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2031,16268.18182,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2032,8198.91,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2032,7073.727273,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2032,15272.63636,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2033,7708.27,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2033,6568.818182,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2033,14277.09091,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2034,7217.636364,Mt CO2,interp_fuente
+NZE,WEO2025,Global Gas (A.4),2034,6063.909091,Mt CO2,interp_fuente
+NZE,WEO2025,Global O&G (A.4),2034,13281.54545,Mt CO2,interp_fuente
+NZE,WEO2025,Global Oil (A.4),2035,6727,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2035,5559,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2035,12286,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2036,6208.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2036,5035.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2036,11244.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2037,5690.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2037,4512.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2037,10202.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2038,5171.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2038,3989.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2038,9161.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2039,4653.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2039,3466.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2039,8119.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2040,4135,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2040,2943,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2040,7078,Mt CO2,reported
+NZE,WEO2025,Global Oil (A.4),2041,3837.1,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2041,2698.3,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2041,6535.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2042,3539.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2042,2453.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2042,5992.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2043,3241.3,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2043,2208.9,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2043,5450.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2044,2943.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2044,1964.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2044,4907.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2045,2645.5,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2045,1719.5,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2045,4365,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2046,2347.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2046,1474.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2046,3822.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2047,2049.7,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2047,1230.1,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2047,3279.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2048,1751.8,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2048,985.4,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2048,2737.2,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2049,1453.9,Mt CO2,interp_lineal
+NZE,WEO2025,Global Gas (A.4),2049,740.7,Mt CO2,interp_lineal
+NZE,WEO2025,Global O&G (A.4),2049,2194.6,Mt CO2,interp_lineal
+NZE,WEO2025,Global Oil (A.4),2050,1156,Mt CO2,reported
+NZE,WEO2025,Global Gas (A.4),2050,496,Mt CO2,reported
+NZE,WEO2025,Global O&G (A.4),2050,1652,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2021,14,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2022,14.244471,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2023,14.493211,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2024,14.746294,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2025,13.916244,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2026,13.132916,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2027,12.39368,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2028,11.696056,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2029,11.037699,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2030,10.416401,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2031,9.830075,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2032,9.276752,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2033,8.754575,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2034,8.261791,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2035,7.796745,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2036,6.982539,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2037,6.253359,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2038,5.600327,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2039,5.01549,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2040,4.491727,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2041,3.8835,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2042,3.357634,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2043,2.902975,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2044,2.509881,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2045,2.170017,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2046,1.876174,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2047,1.62212,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2048,1.402468,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2049,1.212559,Mt CO2,reported
+NZE,WEO2025,BBVA O&G,2050,1.048366,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2021,11257,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2021,10804,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2021,22061,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2022,11559,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2022,10700,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2022,22259,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2023,11119.75,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2023,10434.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2023,21554.25,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2024,10680.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2024,10169,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2024,20849.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2025,10241.25,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2025,9903.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2025,20144.75,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2026,9802,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2026,9638,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2026,19440,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2027,9362.75,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2027,9372.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2027,18735.25,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2028,8923.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2028,9107,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2028,18030.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2029,8484.25,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2029,8841.5,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2029,17325.75,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2030,8045,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2030,8576,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2030,16621,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2031,7510,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2031,7806.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2031,15316.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2032,6975,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2032,7036.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2032,14011.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2033,6440,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2033,6267.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2033,12707.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2034,5905,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2034,5497.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2034,11402.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2035,5370,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2035,4728,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2035,10098,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2036,4944.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2036,4259.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2036,9203.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2037,4518.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2037,3790.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2037,8309.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2038,4093.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2038,3321.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2038,7414.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2039,3667.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2039,2852.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2039,6520.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2040,3242,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2040,2384,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2040,5626,Mt CO2,reported
+NZE,WEO2023,Global Oil (A.4),2041,3000.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2041,2189.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2041,5189.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2042,2758.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2042,1994.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2042,4752.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2043,2516.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2043,1799.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2043,4316.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2044,2274.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2044,1604.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2044,3879.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2045,2033,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2045,1410,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2045,3443,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2046,1791.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2046,1215.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2046,3006.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2047,1549.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2047,1020.4,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2047,2569.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2048,1307.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2048,825.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2048,2133.2,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2049,1065.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global Gas (A.4),2049,630.8,Mt CO2,interp_lineal
+NZE,WEO2023,Global O&G (A.4),2049,1696.6,Mt CO2,interp_lineal
+NZE,WEO2023,Global Oil (A.4),2050,824,Mt CO2,reported
+NZE,WEO2023,Global Gas (A.4),2050,436,Mt CO2,reported
+NZE,WEO2023,Global O&G (A.4),2050,1260,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2021,12.132638,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2022,11.737963,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2023,11.34341,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2024,10.948735,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2025,10.554182,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2026,10.159507,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2027,9.764954,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2028,9.3704,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2029,8.975725,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2030,8.581172,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2031,8.014942,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2032,7.448833,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2033,6.882603,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2034,6.316494,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2035,5.750385,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2036,5.184155,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2037,4.618046,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2038,4.051816,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2039,3.485707,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2040,2.919477,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2041,2.701938,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2042,2.4844,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2043,2.266862,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2044,2.049324,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2045,1.831786,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2046,1.614247,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2047,1.396709,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2048,1.179171,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2049,0.961754,Mt CO2,reported
+NZE,WEO2023,BBVA O&G,2050,0.744216,Mt CO2,reported
