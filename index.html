@@ -6800,24 +6800,19 @@ const REPORT_PDF = {
 function refChip(bankId, year, ref) {
   // Colapsa saltos de línea del CSV ("pag 59\npag 68" → "pag 59 pag 68").
   const clean = String(ref ?? '').replace(/\s+/g, ' ').trim();
-  if (!clean || clean === '—' || clean === '-') return '';
-  const txt = `Inf. ${year} · ${clean}`;
+  if (!clean || clean === '—' || clean === '-') return '';   // sin referencia → sin chip
+  // Las páginas concretas se OCULTAN globalmente (la mayoría eran incorrectas). El
+  // número sigue en el CSV (Ref2024/Ref2025) por si se reactivan más adelante; aquí
+  // el chip solo muestra "Inf. {año}" y, si hay PDF público, enlaza a la portada del
+  // informe (sin #page=). La presencia de referencia decide si aparece el chip.
+  const txt = `Inf. ${year}`;
   const id = String(bankId || '').toLowerCase();
   const url = (REPORT_PDF[id] || {})[year];
   // Sin PDF público del banco/año → queda como texto sin enlace.
   if (!url) return `<span class="ref-chip">${txt}</span>`;
-  // Los separadores entre páginas no son consistentes ("61,65", "59 pag 68",
-  // "pag102", anotaciones "(validacion SBTi)"): se extraen todos los números y
-  // se enlaza a la PRIMERA página, literal y sin offsets; el texto conserva la
-  // lista completa. Si la referencia NO trae número de página (página no segura),
-  // el enlace SIGUE activo pero abre el PDF en su primera página (sin #page=).
-  const pages = clean.match(/\d+/g);
   const bankName = (typeof YOY_BANKS !== 'undefined' && (YOY_BANKS.find(b => b.id === id) || {}).name) || bankId;
-  const href = pages ? `${url}#page=${pages[0]}` : url;
-  const title = pages
-    ? `Abrir informe ${year} de ${bankName} (PDF) · página ${pages[0]}`
-    : `Abrir informe ${year} de ${bankName} (PDF)`;
-  return `<a class="ref-chip link" href="${href}" target="_blank" rel="noopener noreferrer" title="${title}" onclick="event.stopPropagation()">${txt} ↗</a>`;
+  const title = `Abrir informe ${year} de ${bankName} (PDF)`;
+  return `<a class="ref-chip link" href="${url}" target="_blank" rel="noopener noreferrer" title="${title}" onclick="event.stopPropagation()">${txt} ↗</a>`;
 }
 
 // ─── CHANGE CARD ─────────────────────────────────────────────────────────────
