@@ -5977,7 +5977,7 @@ function renderScnOgGlobal(G) {
       onHover: onScnHover,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 10, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 10 } },
-        tooltip: { callbacks: scnSeriesTooltip('Gt CO₂', years) },
+        tooltip: scnSeriesTooltip('Gt CO₂', years),
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 9, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 12, autoSkip: true } },
@@ -6102,6 +6102,7 @@ function scnSeriesTooltip(unit, years) {
       item.$coincid = same.length > 1 ? same.map(o => o.dataset.label) : null;
       return true;
     },
+    callbacks: {
     title: items => {
       if (!items.length) return '';
       const it = items[0];
@@ -6129,6 +6130,7 @@ function scnSeriesTooltip(unit, years) {
         const t = (v / refVal - 1) * 100;
         return `Acumulado desde ${refYear}: ${t > 0 ? '+' : ''}${t.toFixed(0)}%`;
       }
+    },
     },
   };
 }
@@ -6230,7 +6232,7 @@ function drawScenarioChart(P, G, bbva, tgt) {
       onHover: onScnHover,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
-        tooltip: { callbacks: scnSeriesTooltip(P.unit, years) },
+        tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 16, autoSkip: true } },
@@ -6390,7 +6392,7 @@ function renderScnCompare() {
       },
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
-        tooltip: { callbacks: scnSeriesTooltip(P.unit, years) },
+        tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: 'DM Mono' }, color: '#8FA0B4', maxTicksLimit: 16, autoSkip: true } },
