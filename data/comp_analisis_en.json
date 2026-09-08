@@ -211,5 +211,143 @@
         "body": "In a significant reinforcement of its exclusion commitments, the 2025 report's roadmap formally announced the target of fully exiting any entity operating thermal-coal facilities by 2030, successfully building on the cessation of direct financing for UK coal power already achieved at the end of 2023."
       }
     ]
+  },
+  "ing": {
+    "intro": "Across the years assessed, ING shows a favourable and highly active evolution towards decarbonizing its portfolios, achieving consistent methodological reductions in emissions intensity in the heaviest sectors of its balance sheet (such as Power and real estate). However, the institution continues to face the difficult reality of hard-to-abate sectors (aviation, automotive and cement), where emissions intensity has seen slight upticks linked to variations in credit drawdowns and the limited availability of technological alternatives at scale.",
+    "points": [
+      {
+        "title": "SBTi validation of targets",
+        "body": "A corporate turning point, reported in 2025, has been the validation of the bank's climate targets (Terra approach) by the Science Based Targets initiative (SBTi), aligned with a 1.5°C scenario."
+      },
+      {
+        "title": "Substantial change of scope in Upstream Oil & Gas",
+        "body": "To align with the requirements of the SBTi-validated methodological framework, the bank has transitioned from setting its targets and measuring its exposures based on outstanding balances to relying strictly on committed loan limits."
+      },
+      {
+        "title": "Methodological update in Commercial Real Estate",
+        "body": "A material restatement of emissions has been implemented, replacing \"Well-to-Wheel\" emission factors with \"Tank-to-Wheel\" ones, which has retrospectively altered its baseline and changed the actual measurement of its trajectory."
+      },
+      {
+        "title": "Change in the Steel sector's measurement metric",
+        "body": "The bank has replaced its previous \"Alignment score\" with a stricter percentage-deviation system based on the latest updates to the Sustainable STEEL Principles standard."
+      },
+      {
+        "title": "New sectors for Terra",
+        "body": "The bank's climate-tracking methodology is beginning to branch out into complex areas of the real economy, formally announcing the addition and active development of transition plans for aluminium and agriculture (dairy)."
+      }
+    ]
+  },
+  "socgen": {
+    "intro": "Societe Generale shows notable progress in its decarbonization pathway, achieving its 2030 targets early in the Power and Shipping sectors. However, significant challenges are observed in hard-to-abate sectors such as steel, where the portfolio has lost its alignment status, along with methodological adjustments in Oil & Gas and Aluminium driven by changes of data provider to refine measurement.",
+    "points": [
+      {
+        "title": "Early achievement of targets in Power and Shipping",
+        "body": "The bank has comfortably beaten its 2030 targets in two key sectors: in Power, emissions intensity fell to 85 gCO2/kWh (versus the 125 gCO2/kWh target), and in Shipping the alignment score improved to +7.9% (beating the +15% target)."
+      },
+      {
+        "title": "Misalignment in the Steel sector",
+        "body": "The steel portfolio's alignment score has worsened, moving from an aligned level of -0.61 to a non-aligned level of +0.16. The bank attributes this deviation to the fact that its portfolio's decarbonization depends on the progress of green-steel projects, whose European context is currently less favourable."
+      },
+      {
+        "title": "Methodological and baseline adjustments in Oil & Gas and Aluminium",
+        "body": "Methodological changes have occurred due to the rotation of data providers and corrections to client data. This has caused the Oil & Gas absolute-emissions baseline to be adjusted downward (from 29.6 to 24.8 MtCO2eq) and the reported intensity in Aluminium to show an apparent increase (from 6.9 to 7.6 tCO2/t) that does not reflect a real deterioration of the portfolio but rather a change in measurement."
+      },
+      {
+        "title": "Tightening of the Thermal Coal sectoral policy",
+        "body": "In March 2025, the bank updated its sectoral policy for thermal coal, broadening the definition of \"coal developers\" and tightening exclusion thresholds for power producers that have not made a public phase-down commitment, while also clarifying exemptions for energy-transition operations."
+      }
+    ]
+  },
+  "deutsche": {
+    "intro": "Deutsche Bank has shown solid progress in reducing physical intensities across most of its target sectors, such as Power and Automotive. However, it faces pressures and upward volatility in specific sectors such as Coal and Cement. Changes in data-consolidation criteria and the removal of contingent commitments have notably altered the corporate financed-emissions ledger.",
+    "points": [
+      {
+        "title": "Exclusion of contingent commitments and restructuring of emissions",
+        "body": "In the 2025 report, the bank introduced a high-impact structural methodological change by fully excluding the commitment to issue contingents from the corporate portfolio's boundary. This optimization retroactively changed the data for year-end 2024, reducing reported financed emissions by 5.8 MtCO2e/y for Scopes 1 and 2, and by a severe 81.4 MtCO2e/y for Scope 3."
+      },
+      {
+        "title": "Increase in financed emissions in the Coal sector",
+        "body": "Despite global fossil-fuel reduction commitments, absolute Scope 3 financed emissions in coal mining rose from 4.6 MtCO2/y to 5.3 MtCO2/y between the two reports. This 16% setback is attributed to short-term financing lending activity directed at a single client."
+      },
+      {
+        "title": "Downward methodological recalibration of the Power baseline",
+        "body": "The bank applied a deep reconfiguration in the power sector by more precisely integrating small generating entities and subtracting contingent commitments. As a direct result, the 2021 base-year physical intensity was adjusted downward from 396 kgCO2e/MWh to 367 kgCO2e/MWh, and the interim target set for 2030 became stricter, falling from 124 kgCO2e/MWh to 114 kgCO2e/MWh."
+      },
+      {
+        "title": "Expansion of Scope 3 and inclusion of facilitated emissions",
+        "body": "In order to increase transparency in its capital-markets activities, Deutsche Bank expanded in its 2025 report the category-15 metrics by incorporating facilitated emissions under the December 2023 standard PCAF methodology. To mitigate the volatility inherent to transaction-structuring volume, the bank began disclosing 5-year moving averages, reporting total facilitated emissions of 8.5 MtCO2/y (Scope 1 and 2) and 118.1 MtCO2/y (Scope 3) for 2024."
+      },
+      {
+        "title": "Persistence of deviations in the Cement sector",
+        "body": "The cement sector continues to stand out as a critical area with serious technological mitigation challenges. Reported physical intensities stood at 749 kgCO2e/t of cement in the 2025 report, representing a persistent 11% upward deviation versus the recalculated 2022 baseline values (678 kgCO2e/t), due to the portfolio's small size, which limits active rebalancing management."
+      }
+    ]
+  },
+  "unicredit": {
+    "intro": "UniCredit shows a positive consolidation in integrating its climate commitments into the group's risk-management processes and financial planning. The bank has achieved consistent reductions in the intensity and emissions levels of its active portfolio, positioning itself below the interim targets set for 2030 in several key sectors.",
+    "points": [
+      {
+        "title": "Inclusion of corporate bonds and baseline recalculation",
+        "body": "In the 2025 report, UniCredit implemented a highly significant methodological change by incorporating bond securities into the measurement scope for the Power Generation and Oil & Gas sectors. This caused a retroactive recalculation of the 2021 baselines, altering previous comparative values versus those reported in the 2024 report."
+      },
+      {
+        "title": "Mandatory transparency via EPC in the real estate sector",
+        "body": "With the aim of improving quality and reducing the high volume of estimated data in its Real Estate portfolios, UniCredit announced in its 2025 report that collecting actual Energy Performance Certificates (EPC) is now mandatory for new Commercial and Residential Real Estate transactions, representing a step forward in transparency versus the 2024 report."
+      },
+      {
+        "title": "Future commitments and policy development for Agriculture",
+        "body": "UniCredit substantially changed its approach to the agriculture sector in the 2025 report by detailing concrete plans to structure internal sustainable-practice guidelines, an employee training programme focused on the sector for 2026, and the creation of a formal sectoral policy, going beyond the initial passive-monitoring stance in the 2024 report."
+      }
+    ]
+  },
+  "intesa": {
+    "intro": "The bank's evolution in its decarbonization process during 2024 and 2025 shows a steady effort to refine its methodologies and align with more up-to-date scenarios, notably including the recent validation of its targets by SBTi. A general downward trend is observed in most physical intensities and absolute emissions, strongly conditioned by readjustments in portfolio exposure volume.",
+    "points": [
+      {
+        "title": "Widespread renewal of reference scenarios",
+        "body": "The bank systematically updated the International Energy Agency's benchmarks (from the 2023/2024 versions to 2025) for the Power, Oil & Gas, Cement, Steel and Automotive sectors."
+      },
+      {
+        "title": "Achievement of the coal phase-out",
+        "body": "In 2025, the bank achieved its target of zero exposure to coal-mining counterparties (keeping only a residual doubtful amount), bringing financed emissions from 0.1 Mt CO2e to 0.0 Mt CO2e."
+      },
+      {
+        "title": "Sharp reduction in the aluminium sector",
+        "body": "Physical intensity fell sharply from 4.38 tCO2e/t in 2024 to 3.03 tCO2e/t in 2025, while absolute emissions moved from 0.4 to 0.1 Mt CO2e, driven by a notable halving of the sector's financial exposure."
+      },
+      {
+        "title": "Upward volatility in steel intensity and agricultural emissions",
+        "body": "Despite portfolio amounts remaining stable, iron and steel's physical intensity rose from 0.82 to 0.90 tCO2/t, while absolute agriculture emissions rose from 0.7 to 0.9 Mt CO2e."
+      },
+      {
+        "title": "Innovation in steel-sector metrics",
+        "body": "A novel dedicated-financing approach was introduced in 2025 for the steel sector, isolating and accounting differently for specific technology-transition transactions versus general corporate lending."
+      }
+    ]
+  },
+  "nordea": {
+    "intro": "Nordea shows continued progress in its net-zero decarbonization strategy, achieving real reductions in key sectors such as Power, Oil & Gas and Shipping. However, the period analyzed stands out for a thorough methodological and data-quality review that has triggered massive baseline recalculations across multiple portfolios, redefining starting points and making direct comparability of intensity metrics against the previous year harder.",
+    "points": [
+      {
+        "title": "Methodological recalculation in Agriculture",
+        "body": "The baseline adjustment drastically lowers the initial metric from 758 tCO2e/EURm to 363 tCO2e/EURm, turning the sector's trajectory from a continued reduction into a slight 1.4% increase."
+      },
+      {
+        "title": "Sharp fall in Oil & Gas",
+        "body": "Actual absolute emissions have plunged to 0.01 MtCO2e from the previous 0.7 MtCO2e, consolidating an impressive 99.6% reduction through the systematic exit of clients and portfolio rebalancing."
+      },
+      {
+        "title": "Downward correction in Residential Real Estate",
+        "body": "The 2019 baseline intensity was significantly adjusted from 17.4 kgCO2e/m2 to 12.2 kgCO2e/m2 as a direct consequence of improvements in data sources and EPC certificates."
+      },
+      {
+        "title": "Strong non-organic fall in Commercial Real Estate",
+        "body": "Reported emissions intensity fell drastically from 28 kgCO2e/m2 to 13 kgCO2e/m2, achieving substantial improvements in the metric thanks to updated EPC data, despite a real increase in credit exposure."
+      },
+      {
+        "title": "Accelerated fall in Power",
+        "body": "The sector's absolute emissions fell by more than half, from 797,501 tCO2e to 361,603 tCO2e, in a context where credit-portfolio volume experienced clear growth."
+      }
+    ]
   }
 }
