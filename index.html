@@ -5489,7 +5489,11 @@ function renderRelevant() {
   const heroMeta = document.getElementById('sectorHeroMeta');
   if (heroMeta) {
     const rCount = sd.banks.filter(b => b.name !== 'BBVA' && (b.y2024 !== null || b.y2025 !== null)).length;
-    heroMeta.textContent = `${metricLabel(sd.metric)} · ${L('Referencia IEA 2030', 'IEA 2030 reference')}${sd.scenarioSource ? ' (WEO2025)' : ''}: ${sd.ieaRef} · ${rCount} ${L('peers reportando', 'peers reporting')}`;
+    // La referencia IEA solo se muestra si existe (Oil & Gas, Coal, Agriculture no la tienen).
+    const ieaPart = Number.isFinite(parseFloat(sd.ieaRef))
+      ? `${L('Referencia IEA 2030', 'IEA 2030 reference')}${sd.scenarioSource ? ' (WEO2025)' : ''}: ${sd.ieaRef} · `
+      : '';
+    heroMeta.textContent = `${metricLabel(sd.metric)} · ${ieaPart}${rCount} ${L('peers reportando', 'peers reporting')}`;
   }
 
   // Dynamic analytical snapshot — no bank count (already in KPI)
@@ -5505,13 +5509,21 @@ function renderRelevant() {
   let avgLine = '';
   if (sAvg !== null) {
     const ieaVal = parseFloat(sd.ieaRef);
-    const gap = ((sAvg - ieaVal) / Math.abs(ieaVal) * 100).toFixed(1);
-    const gapStr = sAvg > ieaVal
-      ? L(`<strong>${gap}% por encima</strong> del objetivo`, `<strong>${gap}% above</strong> target`)
-      : L(`<strong>${Math.abs(gap)}% por debajo</strong> del objetivo`, `<strong>${Math.abs(gap)}% below</strong> target`);
-    avgLine = L(
-      `Media del sector: <strong>${Number(sAvg).toFixed(2)} ${sd.metric}</strong> vs objetivo IEA 2030 de <strong>${sd.ieaRef} ${sd.metric}</strong> (${gapStr}).`,
-      `Sector average: <strong>${Number(sAvg).toFixed(2)} ${metricLabel(sd.metric)}</strong> vs IEA 2030 target of <strong>${sd.ieaRef} ${metricLabel(sd.metric)}</strong> (${gapStr}).`);
+    if (Number.isFinite(ieaVal)) {
+      const gap = ((sAvg - ieaVal) / Math.abs(ieaVal) * 100).toFixed(1);
+      const gapStr = sAvg > ieaVal
+        ? L(`<strong>${gap}% por encima</strong> del objetivo`, `<strong>${gap}% above</strong> target`)
+        : L(`<strong>${Math.abs(gap)}% por debajo</strong> del objetivo`, `<strong>${Math.abs(gap)}% below</strong> target`);
+      avgLine = L(
+        `Media del sector: <strong>${Number(sAvg).toFixed(2)} ${sd.metric}</strong> vs objetivo IEA 2030 de <strong>${sd.ieaRef} ${sd.metric}</strong> (${gapStr}).`,
+        `Sector average: <strong>${Number(sAvg).toFixed(2)} ${metricLabel(sd.metric)}</strong> vs IEA 2030 target of <strong>${sd.ieaRef} ${metricLabel(sd.metric)}</strong> (${gapStr}).`);
+    } else {
+      // Sin referencia IEA de intensidad (Oil & Gas, Coal, Agriculture): solo la
+      // media del sector, sin comparación contra objetivo (evita "null"/"NaN%").
+      avgLine = L(
+        `Media del sector: <strong>${Number(sAvg).toFixed(2)} ${sd.metric}</strong>.`,
+        `Sector average: <strong>${Number(sAvg).toFixed(2)} ${metricLabel(sd.metric)}</strong>.`);
+    }
   }
 
   let bbvaLine = '';
