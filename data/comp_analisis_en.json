@@ -90,5 +90,126 @@
         "body": "In cross-checking the reports, a retroactive change has been identified in the intensity figure for financial year 2022 for the power sector, moving from the 116 kgCO2e/MWh reported in 2024 to 118 kgCO2e/MWh in 2025, suggesting internal recalculations that affect the public traceability of the metric."
       }
     ]
+  },
+  "hsbc": {
+    "intro": "HSBC's evolution in 2025 reflects a deep restructuring of its reporting strategy, prioritizing flexibility through target ranges and the use of updated data. This move improves technical accuracy but makes it harder to directly trace the bank's historical commitments.",
+    "points": [
+      {
+        "title": "Methodological changes affecting comparability",
+        "body": "All fixed reduction targets have been replaced with \"target ranges,\" allowing the bank to absorb deviations from the macroeconomic scenario."
+      },
+      {
+        "title": "Cross-sector update of climate scenarios",
+        "body": "The exclusive use of the IEA NZE 2021 scenario has been abandoned in favour of an approach based on the IEA NZE and APS 2024 scenarios."
+      },
+      {
+        "title": "Base-year changes",
+        "body": "Baselines have been updated from 2019 to 2023 in five of the seven key sectors, resetting the accumulated-progress counter."
+      },
+      {
+        "title": "Sectors removed",
+        "body": "The aluminium sector has been removed from the alignment-target framework due to its limited weight on the balance sheet."
+      },
+      {
+        "title": "Metric change in Aviation",
+        "body": "The shift from passenger-kilometres (RPK) to revenue tonne-kilometres (RTK) represents a fundamental adjustment to comprehensively cover airlines that carry cargo."
+      }
+    ]
+  },
+  "barclays": {
+    "intro": "The bank's overall evolution in its decarbonization strategy shows mixed results, alternating refinements to its measurement methodologies with real setbacks in key sectors of its portfolio. While adjustments aimed at more accurately reflecting baselines and alignment with stricter climate scenarios are evident, the rise in absolute emissions in heavy industry and fossil-fuel sectors represents a direct challenge to its path to net zero.",
+    "points": [
+      {
+        "title": "Methodological adjustment in real estate and power portfolios",
+        "body": "Baseline intensities have been recalculated in the Power, Commercial Real Estate and Residential Real Estate sectors, directly affecting the historical comparability of the reported data."
+      },
+      {
+        "title": "Consolidation of climate scenarios",
+        "body": "Removal of the IEA SDS reference scenario for the Power sector, now relying exclusively on the more ambitious IEA NZE 2050 scenario."
+      },
+      {
+        "title": "Extreme volatility in the cement industry",
+        "body": "Sharp year-on-year increase in the sector's absolute financed emissions, which practically double, moving from 0.8 MtCO2e to 1.5 MtCO2e."
+      },
+      {
+        "title": "Deterioration in the energy transition",
+        "body": "Clear worsening in the Oil & Gas (Upstream Energy) pathway, where the cumulative reduction falls from -45% to -41% due to a rise in the volume of absolute emissions."
+      }
+    ]
+  },
+  "natwest": {
+    "intro": "NatWest has shown an evolution towards greater technical sophistication and financial ambition, integrating climate risks more structurally into its risk policies through the creation of unified sectoral frameworks. However, the recurring change in measurement methodologies and the adoption of stricter reference scenarios between 2024 and 2025 make it harder to linearly trace real progress in critical sectors such as power and steel.",
+    "points": [
+      {
+        "title": "Abandonment of external validation",
+        "body": "The bank has withdrawn its SBTi-validated targets, opting for a framework of its own design not validated by that initiative."
+      },
+      {
+        "title": "Leap in financial ambition",
+        "body": "The climate and transition financing target has doubled, moving from a £100 billion commitment for 2025 to a new £200 billion target by the end of 2030."
+      },
+      {
+        "title": "Lack of comparability in the Power sector",
+        "body": "The shift towards \"portfolio-level activity-based targets\" in power generation has invalidated a direct comparison with previous years' data."
+      },
+      {
+        "title": "Formalization of the Oil & Gas target",
+        "body": "The bank has moved from qualitative monitoring to setting a quantitative physical-intensity reduction target of 13% for 2030, also setting 2023 as the new reference base year."
+      },
+      {
+        "title": "Tightening of industrial scenarios",
+        "body": "The alignment pathway for the steel sector has become more demanding by migrating from the IEA SDS scenario to IEA Net Zero Emissions (NZE) 2050, contributing to a fall in reported physical intensity from 1.48 tCO2e/t to 1.41 tCO2e/t."
+      }
+    ]
+  },
+  "stanchart": {
+    "intro": "Standard Chartered's decarbonization pathway has evolved from the launch of its roadmap in 2021, initially focused on key sectors such as power and transport, to completing in 2024–2025 the setting of science-based targets for all 12 NZBA sectors with the addition of Agriculture. In 2025, the bank completed its Scope 1 and 2 operational neutrality commitment and has begun refining its financed-emissions metrics, incorporating methane intensities and adjusting Scope 3 methodologies to better reflect the reality of its clients in transition.",
+    "points": [
+      {
+        "title": "Achievement of Net Zero Operational Emissions",
+        "body": "The 2025 report confirms that the bank reached its net-zero target for Scopes 1 and 2 in 2025, following a 96% reduction from the 2018 baseline."
+      },
+      {
+        "title": "New Facilitated Emissions Target",
+        "body": "Addition in the 2025 report of the first target for facilitated emissions (capital markets), focused on Oil & Gas with a 26.9% reduction target for 2030."
+      },
+      {
+        "title": "Critical Increase in Aluminium",
+        "body": "The aluminium sector's intensity jumped 105% in the 2025 report due to short-term lending operations to highly intensive primary producers."
+      },
+      {
+        "title": "Readjustment of the Agriculture Target",
+        "body": "The 2025 report raises both the baseline and the target temperature range (ITR) of the sector following an update to CDP's external scoring factors."
+      },
+      {
+        "title": "Methodological Change in Oil & Gas Scope 3",
+        "body": "The 2025 report restricts the Scope 3 calculation solely to upstream production activities, which has forced restatements of the previous year's data."
+      }
+    ]
+  },
+  "lloyds": {
+    "intro": "Lloyds Banking Group demonstrates methodological maturity in its climate-transition strategy, deepening its systemic approach and nature (biodiversity) integration. Substantial progress is evident, with a 36% fall in absolute financed emissions and a swift, proactive recalibration of its heaviest portfolios to strictly align with new UK national policies.",
+    "points": [
+      {
+        "title": "Methodological transition to the Seventh Carbon Budget",
+        "body": "The bank updated its financed-emissions target-setting models for the residential mortgages, commercial real estate, agriculture, passenger transport and automotive portfolios in the 2025 report to align with the new requirements of the CCC's Seventh Carbon Budget, changing the technical baseline underpinned by the Sixth Budget during 2024."
+      },
+      {
+        "title": "Tightening of sustainable-automotive financing criteria",
+        "body": "From January 2025, the group tightened the eligibility criteria for its sustainable-vehicle financing target, excluding plug-in hybrid vehicles to focus solely on pure electrics, representing a material change of scope versus that reported in the 2024 report."
+      },
+      {
+        "title": "Pioneering integration of TNFD LEAP pilots",
+        "body": "To strengthen the analysis of nature-related risks and dependencies (biodiversity), the bank completed in 2025 a pilot proof-of-concept aligned with the TNFD LEAP framework focused on its Real Estate and Agricultural lending portfolios, an analytical advance not present in the 2024 report's planning."
+      },
+      {
+        "title": "36% fall in absolute financed emissions and record green mortgages",
+        "body": "The group reported a highly positive year-on-year performance, reducing its consolidated financed emissions to 18.6 MtCO2e (a 36% fall versus 2018) per the 2025 report, driven by extraordinary growth in its sustainable-mortgage portfolio (EPC A and B) which scaled to £18.5 billion in 2025, up from £11.4 billion accumulated the previous year."
+      },
+      {
+        "title": "Definitive timeline for exiting corporate thermal coal",
+        "body": "In a significant reinforcement of its exclusion commitments, the 2025 report's roadmap formally announced the target of fully exiting any entity operating thermal-coal facilities by 2030, successfully building on the cessation of direct financing for UK coal power already achieved at the end of 2023."
+      }
+    ]
   }
 }

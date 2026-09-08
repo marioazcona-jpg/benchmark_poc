@@ -214,5 +214,275 @@
       "resumen": "No significant changes; the Agriculture sector has no quantitative climate target set",
       "descripcion": "In both corporate documents the institution refrains from establishing a quantitative metric due to a lack of methodological maturity, opting to keep its qualitative goal unchanged, focused on increasing sector knowledge and dialogue."
     }
+  ],
+  "hsbc": [
+    {
+      "resumen": "HSBC adjusted its 2030 emission-reduction targets and updated the 2019 baseline.",
+      "descripcion": "The absolute emissions-reduction target for 2030 has moved from a fixed -34% target to a target range of -14% to -30%, now based on the IEA's APS and NZE 2024 scenarios replacing NZE 2021. The baseline value (2019) has been recalculated from 42.6 Mt CO2e to 46.2 Mt CO2e, an 8% increase due to the inclusion of short-term lending and improved identification of project financing.\nReported financed emissions moved from 23.2 Mt CO2e in the 2024 annual report to 28.9 Mt CO2e in the 2025 annual report, for the year 2023."
+    },
+    {
+      "resumen": "The bank updated its base year to 2023, renewed its climate scenarios and integrated sustainable financing, adjusting its 2030 emissions-intensity targets.",
+      "descripcion": "The bank has updated the base year from 2019, with an intensity of 513.4 tCO2e/GWh, to 2023 with 295 tCO2e/GWh, to reflect improvements in data availability and methodologies.\nThe bank has replaced the IEA NZE 2021 scenario with the IEA NZE and APS 2024 scenarios.\nThe bank has incorporated consideration of \"use of proceeds\" financing and financing for purely \"green\" clients, which has driven recalculations in this sector.\nThe 2030 intensity target changed from a fixed target of 138 tCO2e/GWh to a range of 195–270 tCO2e/GWh."
+    },
+    {
+      "resumen": "The aluminium sector was split out from the group, the reference year was updated to 2023, and the 2030 emissions-intensity targets were adjusted.",
+      "descripcion": "The aluminium sector has been split out from the group, moving from \"Iron, steel and aluminium\" exclusively to \"Iron and steel\" due to its low materiality. The reference year moved from 2019 to 2023, with an adjusted baseline of 1.73 tCO2e/t steel. The 2030 intensity target changed from 1.05 tCO2e/t metal to a range of 1.29–1.52 tCO2e/t steel."
+    },
+    {
+      "resumen": "The base year was updated to 2023 and the 2030 intensity target was adjusted, replacing the fixed target with a range of values.",
+      "descripcion": "The base year was updated from 2019 to 2023 with a value of 152.8 tCO2e/mn vkm. The 2030 intensity target moved from a fixed target of 66 tCO2e/mn vkm to a range of 65.5–95.3 tCO2e/mn vkm."
+    },
+    {
+      "resumen": "Transition to a less demanding target range and a change of base year.",
+      "descripcion": "The single-value target of 0.46 tCO2e/t of cement was turned into a range of 0.47–0.56 tCO2e/t for 2030, setting 2023 as the new base year at 0.59 tCO2e/t and recording a slight intensity increase in 2024 to 0.61 tCO2e/t."
+    },
+    {
+      "resumen": "This sector is not reported",
+      "descripcion": "Neither report covers the \"Shipping\" sector."
+    },
+    {
+      "resumen": "The aluminium sector has been removed from the alignment-target framework due to its low representativeness on the balance sheet.",
+      "descripcion": "The aluminium sector has been removed from the alignment-target framework due to its limited weight on the balance sheet. It previously formed part of the \"Iron, steel and aluminium\" group."
+    },
+    {
+      "resumen": "The 2020 base year was recalculated to 3.4 Mt CO2e, and a 94% reduction in financed emissions was recorded by 2024 due to lower lending activity.",
+      "descripcion": "The reference emissions value for base year 2020 has been recalculated from 4.7 Mt CO2e to 3.4 Mt CO2e due to a refinement of scope and the exclusions framework.\nFinanced emissions fell drastically from 1.44 Mt CO2e at year-end 2022 to 0.22 Mt CO2e in 2024, an 94% drop versus the new base year due to lower financing of specific projects and low levels of loan drawdown."
+    },
+    {
+      "resumen": "The requested information is not available in the current records.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "The information is not available in the reports consulted.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "The information is not available in the reports consulted.",
+      "descripcion": "Not reported in either report."
+    }
+  ],
+  "barclays": [
+    {
+      "resumen": "The absolute-emissions reduction worsened from -45% to -41% due to higher client credit drawdowns and enterprise-value volatility.",
+      "descripcion": "The cumulative absolute-emissions reduction versus the base year has worsened, moving from -45% at 41.1 MtCO2e to -41% at 43.7 MtCO2e, an increase attributed to higher use of credit lines by clients and the volatility of enterprise value (EVIC) in the calculation."
+    },
+    {
+      "resumen": "The bank unified its methodology under the IEA NZE 2050 scenario and updated the base-year physical intensity from 311 to 316 kgCO2e/MWh.",
+      "descripcion": "The bank has removed the previously used IEA SDS scenario, keeping only the IEA NZE 2050 scenario for this sector. The base-year (2020) physical intensity has been recalculated from 311 kgCO2e/MWh to 316 kgCO2e/MWh."
+    },
+    {
+      "resumen": "No relevant changes are reported in the content analyzed.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "No relevant changes are reported in the content analyzed.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "The sector's financed emissions rose from 0.8 to 1.5 MtCO2e due to the addition of a new client and the small portfolio's high sensitivity to credit variations.",
+      "descripcion": "The sector's absolute financed emissions have almost doubled, rising from 0.8 MtCO2e to 1.5 MtCO2e, due to the addition of a new client and the disproportionate impact any credit variation has on a portfolio made up of very few clients."
+    },
+    {
+      "resumen": "No relevant variations are recorded in the content.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "Indicates that no relevant changes have occurred in the corresponding period or category.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "No relevant changes are reported in the information provided.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "A downward adjustment has been made to the base-year (2023) physical emissions intensity.",
+      "descripcion": "The base-year (2023) physical intensity has been recalculated downwards, moving from 30.0 kgCO2e/m2 to 26.3 kgCO2e/m2."
+    },
+    {
+      "resumen": "The base-year (2023) physical intensity for the UK mortgage portfolio was reduced due to improved data quality and a methodological review.",
+      "descripcion": "The base-year (2023) physical intensity for the UK mortgage portfolio has been reduced following a methodological review, from 32.1 kgCO2e/m2 to 27.9 kgCO2e/m2, due to improved data quality."
+    },
+    {
+      "resumen": "The requested information is not available in the current records.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "No significant changes are presented in the document analyzed.",
+      "descripcion": "No significant changes."
+    }
+  ],
+  "natwest": [
+    {
+      "resumen": "The base year and the 2030 target have been readjusted",
+      "descripcion": "Substantial changes have been introduced to the oil and gas sector's climate management. First, a new 2030 target has been set: a 13% reduction in the physical emissions intensity of production-financing activities. This change comes together with a metric update, setting 2023 as the new base year at 69.8 tCO₂e/TJ (versus the 2024 report, which set the base at 2019 at 4.1 tCO₂e/TJ with a 76% reduction target).\n\nStructurally, this sector's positions have been grouped together with power generation and coal under the \"E&S Energy Supply Sectors RAC\" framework. Likewise, the reporting scope for Scope 3 financed emissions has been broadened, moving from covering only upstream clients to covering the entire sector. Lastly, a new mandatory oversight forum has been created for all financing above £50 million, focused on closely assessing ESG ratings and clients' transition planning."
+    },
+    {
+      "resumen": "The reporting methodology moved towards portfolio-level activity-based targets, integrating the power sector into the new E&S Energy Supply Sectors RAC framework.",
+      "descripcion": "The reporting methodology has evolved from sector-only targets to \"portfolio-level activity-based targets,\" with the report noting that the current charts should not be directly compared with the previous year's. The sector has been integrated into the new \"E&S Energy Supply Sectors RAC\" framework."
+    },
+    {
+      "resumen": "NatWest withdrew its SBTi-validated climate targets for iron and steel in favour of its own methodological framework.",
+      "descripcion": "NatWest had SBTi-validated targets for iron and steel with emissions of 0.1 MtCO2e, which have disappeared in the 2025 target update. The bank has withdrawn its SBTi-validated targets, opting for a framework of its own design not validated by that initiative."
+    },
+    {
+      "resumen": "Road transport was reclassified under the Mobility pillar, and manufacturing emissions intensity fell in 2024.",
+      "descripcion": "Road transport has been reclassified under the strategic \"Mobility\" pillar, with a renewed focus on supporting the electrification of clients' fleets. Manufacturing emissions intensity fell from 230.5 gCO2e/v-km in 2023 to 185.9 gCO2e/v-km in 2024."
+    },
+    {
+      "resumen": "The bank excluded the cement sector, previously SBTi-validated, from its new activity-based target framework.",
+      "descripcion": "The bank reported SBTi-validated targets for cement with emissions of 0.03 MtCO2e, but this sector was excluded from the new activity-based target framework."
+    },
+    {
+      "resumen": "The bank set a new 19% reduction target for 2030 in the aviation sector, based on a 2023 baseline.",
+      "descripcion": "The bank had no aviation targets in 2024 and added a 19% reduction target for 2030 with a 2023 baseline for aircraft operators and lessors. The reported physical intensity is 907.6 tCO2e/Mn RTK."
+    },
+    {
+      "resumen": "The bank removed the sector from its activity-based target reporting and folded the aluminium target into the hard-to-abate industries dashboard.",
+      "descripcion": "The bank reported emissions of 0.002 MtCO2e with SBTi-validated targets, but the sector has been removed from activity-based target reporting. The aluminium target has been folded into the \"Hard-to-Abate Industries\" dashboard, whereas it was previously reported as an independent monitoring metric."
+    },
+    {
+      "resumen": "The bank implemented Annual Efficiency Ratio reporting for vessels and adhered to the IMO's decarbonization pathway with a 2030 alignment target.",
+      "descripcion": "Reporting of the \"Annual Efficiency Ratio\" (AER) metric has been introduced for the first time for the vessel-financing portfolio, replacing the previous year's qualitative monitoring. The bank has formalized its adherence to the International Maritime Organization's (IMO) strengthened 2023 decarbonization pathway, setting a portfolio alignment target for 2030."
+    },
+    {
+      "resumen": "CRE portfolio coverage was expanded to logistics and warehousing, achieving a reduction in emissions intensity to 29 kgCO2e/m2 and adding energy-certification targets.",
+      "descripcion": "CRE portfolio coverage has been expanded to include logistics and warehousing assets, increasing the total volume of measured assets by 12%. Emissions intensity moved from 32 kgCO2e/m2 to 29 kgCO2e/m2 due to grid improvements and a shift towards more efficient buildings.\nThe target has evolved from a measurement based solely on operational carbon intensity to a dual target that includes the percentage of assets with A-to-C energy performance certificates (EPC)."
+    },
+    {
+      "resumen": "The bank updated its 2030 emissions-reduction target and recorded an increase in the proportion of mortgages with efficient energy certification.",
+      "descripcion": "The bank replaced its 49% reduction target for 2030 with a 2019 baseline with a 26% target for 2030 with a 2023 baseline. The percentage of mortgages with EPC C or above rose from 46.3% to 48.8% in 2025."
+    },
+    {
+      "resumen": "The exit from UK coal clients was completed in October 2024, keeping the global exit target for 2030",
+      "descripcion": "The commitment to exit clients with coal production in the UK, related infrastructure and thermal generation has been completed with a deadline of 1 October 2024, while keeping the total global exit target for 2030."
+    },
+    {
+      "resumen": "The agriculture sector now prioritizes decarbonization potential, setting a 9% reduction target for 2030 with a 2023 baseline.",
+      "descripcion": "The approach to agriculture has moved from a general emissions measurement to a prioritization of \"decarbonization potential and impact.\"\nThe 2030 reduction target has been set at 9% with a 2023 baseline, removing the previous 26% target with a 2019 baseline."
+    }
+  ],
+  "stanchart": [
+    {
+      "resumen": "The 2025 report changes the upstream Scope 3 emissions methodology, restates the 2024 figure, and reports 7.2 MtCO2e for 2025.",
+      "descripcion": "The 2025 report reveals a change in the proxy approach used to determine the sector's emissions; it now only counts Scope 3 emissions from upstream production activities (including diversified and integrated counterparties), based on improvements in data quality. Due to the methodological change, the 2025 report restates the 2024 absolute financed-emissions figure, moving from 9.4 MtCO2e to 8.76 MtCO2e."
+    },
+    {
+      "resumen": "Power-sector emissions intensity fell from 0.43 to 0.39 tCO2/MWh between 2024 and 2025 due to lower coal exposure and increased renewable-energy financing.",
+      "descripcion": "Intensity fell from 0.43 tCO2/MWh in the 2024 report to 0.39 tCO2/MWh in the 2025 report.\nThe bank attributes this improvement to reduced exposure to thermal-coal power generation as balances mature, and to increased financing of renewable-energy and lower-intensity gas projects."
+    },
+    {
+      "resumen": "Emissions intensity fell from 1.87 to 1.75 tCO2/t due to a higher proportion of clients using electric-arc furnaces with scrap.",
+      "descripcion": "The 2024 report reported 1.87 tCO2/t (2023 data). The 2025 report reports 1.75 tCO2/t (2024 data). This is due to a greater portfolio weight of clients using scrap (electric-arc furnaces) versus those using iron ore in blast furnaces."
+    },
+    {
+      "resumen": "Reported emissions fell from 157 gCO2/Vkm in the 2024 report to 145 gCO2/Vkm in the 2025 report.",
+      "descripcion": "The 2024 report reported 157 gCO2/Vkm (2023 data). The 2025 report reports 145 gCO2/Vkm (2024 data)."
+    },
+    {
+      "resumen": "The 2025 report projects a short-term slowdown in the decarbonization pathway due to looser environmental policies and the continued relevance of combustion engines.",
+      "descripcion": "The 2025 report notes \"headwinds\" from the loosening of decarbonization policies and manufacturers' acknowledgment that internal-combustion-engine production will remain significant, which could flatten the short-term decarbonization pathway."
+    },
+    {
+      "resumen": "Emissions intensity fell from 0.62 to 0.60 tCO2/t due to energy optimization at financed clients' plants and increased use of clinker substitutes.",
+      "descripcion": "The 2024 report reported 0.62 tCO2/t (2023 data). The 2025 report reports a decrease to 0.60 tCO2/t (2024 data). This is due to increased lending to clients with lower production intensities thanks to improved energy efficiency at their plants and greater use of clinker substitutes."
+    },
+    {
+      "resumen": "Emissions intensity fell to 771 gCO2e/RTK in 2025, moving below the 2030 target.",
+      "descripcion": "Intensity fell from 782 gCO2e/RTK in the 2024 report to 771 gCO2e/RTK in the 2025 report, moving below the 2030 target (773)."
+    },
+    {
+      "resumen": "The 2025 report presents, for the first time, the breakdown of Scope 1, 2 and 3 emissions for the sector.",
+      "descripcion": "The 2025 report breaks down, for the first time, the sector's Scope 1 and 2 (1.0 MtCO2e) and Scope 3 (0.2 MtCO2e) emissions."
+    },
+    {
+      "resumen": "The alignment delta showed a substantial improvement, moving from +3.2% in 2024 to -0.9% in 2025.",
+      "descripcion": "The alignment delta improved significantly, moving from the +3.2% reported in the 2024 report to -0.9% in the 2025 report. This places the metric very close to the zero-value target set for 2030."
+    },
+    {
+      "resumen": "The 2025 report details, for the first time, the shipping sector's Scope 1, 2 and 3 emissions, totalling 3.0 MtCO2e.",
+      "descripcion": "The 2025 report breaks down and reports, for the first time, Scope 1, 2 and 3 emissions for the shipping sector (Scope 1, 2: 0.5 MtCO2e; Scope 3: 2.5 MtCO2e)."
+    },
+    {
+      "resumen": "Emissions intensity fell between the 2024 and 2025 reports.",
+      "descripcion": "Intensity fell from 58 kgCO2e/m^2 in the 2024 report to 53 kgCO2e/m^2 in the 2025 report."
+    },
+    {
+      "resumen": "The 2025 report reports a portfolio adjustment favouring low-grid-intensity European locations over ASEAN markets.",
+      "descripcion": "The 2025 report mentions a change in the portfolio's location mix, with greater exposure to buildings in European countries (with lower-intensity power grids) and less weight in ASEAN markets with higher intensities."
+    },
+    {
+      "resumen": "Emissions fell from 36.0 to 34.2 kgCO2e/m^2 due to grid decarbonization in key Asian markets.",
+      "descripcion": "The 2024 report reported 36.0 kgCO2e/m^2. The 2025 report reports 34.2 kgCO2e/m^2. This reflects the onset of grid decarbonization in Hong Kong, South Korea, Singapore and Taiwan."
+    },
+    {
+      "resumen": "A reduction in absolute emissions was recorded, moving from 1.2 MtCO2e in the 2024 report to 1.1 MtCO2e in the 2025 report.",
+      "descripcion": "Absolute emissions fell from 1.2 MtCO2e in the 2024 report to 1.1 MtCO2e in the 2025 report."
+    },
+    {
+      "resumen": "A 105% increase in emissions intensity (6.75 tCO2e/t) was recorded due to short-term loans to high-emission aluminium producers.",
+      "descripcion": "The 2024 report reported 3.28 tCO2e/t. The 2025 report reports a drastic 105% increase, reaching 6.75 tCO2e/t. The bank explains that this increase was mainly due to a rise in short-term lending to primary aluminium producers with high emission intensities, maturing in 2025."
+    },
+    {
+      "resumen": "The portfolio's ITR was revised upwards due to an update to CDP's scoring methodology.",
+      "descripcion": "The 2025 report revised the portfolio's Implied Temperature Rise (ITR) due to an update to CDP's methodology for default temperature scores, which rose from 3.1°C to 3.4°C."
+    },
+    {
+      "resumen": "The 2025 report adjusts the 2023 baseline to 2.96°C and raises the 2030 target range to 2.4–2.6°C following the CDP revision.",
+      "descripcion": "Due to the CDP revision, the 2025 report restates the 2023 baseline from 2.72°C to 2.96°C, and raises the 2030 target range from 2.2–2.4°C (in the 2024 report) to 2.4–2.6°C."
+    },
+    {
+      "resumen": "The 2025 report records an ITR of 2.33°C, a 21% decrease compared with the new baseline.",
+      "descripcion": "The 2025 report reports a current ITR of 2.33°C (2024 data), a 21% reduction versus the new baseline."
+    }
+  ],
+  "lloyds": [
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The bank maintains its restrictive policy of not approving direct financing for new (\"greenfield\") oil and gas field developments, originally approved post-2021, with no unforeseen conceptual or numerical changes recorded between the two years."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The power sector remains integrated within the portfolio's overall decarbonization strategy, with no methodological changes or extraordinary quantitative variations explicitly reported between the two periods."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The steel sector is not included within the organization's sectoral financed-emissions decarbonization targets in the corresponding sustainability reports."
+    },
+    {
+      "resumen": "Methodological tightening of the target to exclude hybrid vehicles",
+      "descripcion": "The institution strengthened its environmental criteria in the 2025 report by restricting the methodology of its £10 billion motor-financing target for 2027 to cover exclusively pure electric vehicles (EV), unlike the 2024 report, where the previous cumulative £8 billion target jointly included electric and plug-in hybrid vehicles."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The cement sector has no specific sectoral targets or independently reported emissions-intensity metrics from the institution in either of the two years analyzed."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The aviation sector continues to be listed as part of the sectoral commitments made under the Net-Zero Banking Alliance (NZBA), with no detailed changes to its targets or mismatches in its baseline estimation data."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "Activities and portfolios associated with international shipping are not the subject of structured numerical or qualitative reporting within the sectoral decarbonization sections analyzed."
+    },
+    {
+      "resumen": "Emissions targets updated to the UK's Seventh Carbon Budget",
+      "descripcion": "The bank methodologically reconfigured the sectoral financed-emissions targets for the commercial real estate sector in the 2025 report, adopting the parameters of the Climate Change Committee's (CCC) Seventh Carbon Budget, replacing the Sixth Carbon Budget used as the reference guide in the 2024 report."
+    },
+    {
+      "resumen": "Climate recalibration of mortgages and strong growth in cumulative sustainable balances",
+      "descripcion": "The targets for the residential housing portfolio were updated in the 2025 report according to the UK's new Seventh Carbon Budget guidelines versus the Sixth in the 2024 report, reporting an increase in cumulative financing for EPC A- and B-rated energy-efficient properties, which rose from £11.4 billion in the previous document to £18.5 billion in the current period."
+    },
+    {
+      "resumen": "Consolidation of the full exit timeline for 2030",
+      "descripcion": "The financial group reinforced the transparency of its decarbonization strategy by projecting a definitive exit from all entities operating thermal-coal plants by 2030 in the 2025 report, complementing the milestone of excluding direct financing for UK thermal-coal power generation achieved at the end of 2023 per the 2024 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "Aluminium does not appear among the individually assessed industrial categories or portfolios in the financial group's published energy-transition strategies."
+    },
+    {
+      "resumen": "Alignment of sectoral targets with the UK's Seventh Carbon Budget",
+      "descripcion": "The financed-emissions target for the agriculture sector was reformulated in the 2025 report to absorb the guidelines of the UK's Seventh Carbon Budget issued by the CCC, breaking from the Sixth Budget framework used as the technical baseline in the 2024 report."
+    }
   ]
 }
