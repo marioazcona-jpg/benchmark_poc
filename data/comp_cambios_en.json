@@ -1,0 +1,52 @@
+{
+  "bbva": [
+    {
+      "resumen": "Methodological discrepancy in the baseline due to scope expansion",
+      "descripcion": "The base-year 2023 absolute-emissions figure has been restated, changing from 3.2 MtCO2e in the 2024 report to 3.8 MtCO2e in the 2025 one due to the inclusion of 'midstream' activities, which has a detrimental impact on comparability as no proportional readjustment of the final target percentage was disclosed."
+    },
+    {
+      "resumen": "Baseline scenario update and improved ambition",
+      "descripcion": "Emissions intensity fell sharply from 145 kgCO2e/MWh reported in 2024 to 122 kgCO2e/MWh in 2025, a positive change driven by the adoption of the International Energy Agency's updated NZE 2023 scenario, which strengthens the pathway to 2030."
+    },
+    {
+      "resumen": "Sharp, unjustified increase in emissions intensity",
+      "descripcion": "An atypical spike is identified in the portfolio's physical intensity, rising from 1.25 tCO2e/t of steel in the 2024 report to 1.40 tCO2e/t in the 2025 report, moving the bank severely away from its reduction pathway without any explicit justification for this deviation."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The physical intensity metric (gCO2/km) evolves normally along the expected pathway, showing no sharp variations or scope changes between 2024 and 2025 that are significant for the analysis."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The portfolio's evolution confirms a stable decarbonization pathway aligned with the current target, with no methodological changes, sharp increases or quantitative inconsistencies between the 2024 and 2025 publications."
+    },
+    {
+      "resumen": "Addition of commitments for the air-cargo segment",
+      "descripcion": "Whereas the 2024 report's measurement was limited exclusively to commercial passenger airlines, the 2025 report strengthens the scope by officially integrating cargo transport and consolidating a new joint reduction target of 18% for 2030."
+    },
+    {
+      "resumen": "Transition to the Poseidon Principles v4",
+      "descripcion": "The measurement methodology changes drastically, abandoning the standard AER indicator from the 2024 report to adopt in 2025 the new Poseidon Principles v4 alignment trajectory, which makes a direct comparison of the shipping portfolio's scores between the two reporting cycles impossible."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The institution does not report decarbonization targets, reference scenarios or intensity metrics for this commercial real estate sector in either of the two annual reports analyzed."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The institution does not report decarbonization targets, reference scenarios or intensity metrics for this residential mortgage sector in either of the two annual reports analyzed."
+    },
+    {
+      "resumen": "Brought forward the global 'phase-out' deadline",
+      "descripcion": "The bank increases its climate ambition by bringing forward its commitment to fully eliminate its thermal-coal exposure globally, moving from the 2040 target set in the 2024 report to a new deadline set at 2038 in the 2025 report."
+    },
+    {
+      "resumen": "First target set for the sector",
+      "descripcion": "The sector is added as a new metric in the 2025 report, setting a foundational intensity-reduction target of 25% for 2030, and therefore lacks a quantitative comparison as it was not included in the 2024 report's scope."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The institution does not report decarbonization targets, reference scenarios or intensity metrics for the primary-sector portfolio in either of the two annual reports analyzed."
+    }
+  ]
+}
