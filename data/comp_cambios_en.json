@@ -48,5 +48,171 @@
       "resumen": "Not reported in either report",
       "descripcion": "The institution does not report decarbonization targets, reference scenarios or intensity metrics for the primary-sector portfolio in either of the two annual reports analyzed."
     }
+  ],
+  "santander": [
+    {
+      "resumen": "Santander changed its target in the oil and gas sector from an absolute-emissions cap to an intensity metric",
+      "descripcion": "The target changes from a single absolute-emissions value (16.98 MtCO2e in the 2024 report) to an intensity range of 2.31–3.03 tCO2e/TJ in the 2025 report."
+    },
+    {
+      "resumen": "Exclusion of Scope 3 emissions from the alignment target, lowering climate stringency by ignoring the impact of fossil-fuel end use.",
+      "descripcion": "The alignment target in the 2025 report now focuses exclusively on Scopes 1 and 2, whereas the 2024 report included Scopes 1, 2 and 3 in its absolute-reduction target.\nThe bank argues that clients have greater operational control over Scopes 1 and 2, and that Scope 3 emissions are now monitored through the new \"Primary Energy Index\" due to their strong dependence on global demand."
+    },
+    {
+      "resumen": "Methodological update of the base year to 2023",
+      "descripcion": "The base year is reported to have been updated to 2023 in the 2025 report, replacing the 2019 base year used in the 2024 report."
+    },
+    {
+      "resumen": "Metric change towards a target range that reflects the different regional and regulatory transition speeds, replacing the single fixed-value target for 2030",
+      "descripcion": "The 2030 target has moved from a fixed value of 0.11 tCO2e/MWh to a target range of 102–124 kgCO2e/MWh to reflect the different regional and regulatory transition speeds, also changing the unit to kg instead of tonnes (t)."
+    },
+    {
+      "resumen": "Strong improvement in the portfolio's physical performance with a significant drop in physical emissions intensity, driven mainly by reduced exposure to intensive clients and the financing of renewable projects",
+      "descripcion": "Physical emissions intensity fell significantly from 0.15 tCO2e/MWh in 2023 to 88 kgCO2e/MWh (0.088 tCO2e/MWh) in 2024, driven by reduced exposure to carbon-intensive clients and increased financing of renewable projects still under construction."
+    },
+    {
+      "resumen": "Accounting discrepancy in the reported 2023 exposure data",
+      "descripcion": "A discrepancy is observed in the exposure figures (drawn balance in billions of euros) for financial year 2023 between the published reports: the 2024 report states EUR 10.75 billion, while the 2025 report states EUR 12.79 billion for the same period. Santander provides no justification for the change."
+    },
+    {
+      "resumen": "Relaxation of the 2030 target, moving from a fixed target to a more permissive range, granting more room to finance less efficient steel operations.",
+      "descripcion": "The 2030 target is reported to have been updated in the 2025 report to a range of 1.17–1.28, replacing the single value of 1.07 recorded in the 2024 report."
+    },
+    {
+      "resumen": "Methodological update shifting the reference base year for portfolio measurement to 2023.",
+      "descripcion": "The base year has been updated to 2023 for the 2025 report, replacing the 2019 base year used in the 2024 report."
+    },
+    {
+      "resumen": "Notable year-on-year increase in physical emissions intensity, justified by the bank as a change in portfolio composition caused by the run-off of low-emission clients",
+      "descripcion": "Intensity rose from the 1.38 tCO2e/tS reported for 2023 (2024 report, p. 48) to 1.51 tCO2e/tS for 2024 (2025 report, p. 61) due to a change in portfolio composition from the run-off of low-emission client profiles."
+    },
+    {
+      "resumen": "Shift to ranges for the manufacturing and lending portfolios",
+      "descripcion": "The 2030 targets have been loosened, moving from fixed targets of 103 gCO2/vkm in manufacturing and 75–89 gCO2e/vkm in European lending to ranges of 80–98 gCO2/vkm and 70–109 gCO2e/vkm respectively, thus reflecting the different regional transition scenarios and the volatility of the electric-car market."
+    },
+    {
+      "resumen": "Easing of transition stringency by adopting a mixed scenario (NZE2050 + APS)",
+      "descripcion": "The bank has replaced the IEA Net Zero 2050 scenario for both subsectors with the combined IEA NZE2050 and APS scenarios."
+    },
+    {
+      "resumen": "The sector has no active reporting of metrics, targets or exposure in either of the two years analyzed.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "Withdrawal of the formal 2030 reduction target due to technological and market barriers, downgrading the exposure to a mere \"monitoring\" portfolio.",
+      "descripcion": "Sector reclassification (removed as a target) — The aviation sector has moved from having a defined 2030 alignment target of 61.71 gCO2e/RPK to being classified solely as a monitoring portfolio with no set target, a decision justified by its lower alignment materiality and its strong dependence on external factors such as sustainable fuels (SAF) and slow technological progress."
+    },
+    {
+      "resumen": "The sector has no active reporting of metrics, targets or exposure in either of the two years analyzed.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "Expansion of the climate-risk consolidation scope by integrating the commercial-property and mortgage data of the Portugal subsidiary.",
+      "descripcion": "The financed-emissions analysis of the commercial real estate sector has been expanded by adding the Portugal portfolio to the Spain and UK metrics reported the previous year (2024 report, p. 49; 2025 report, p. 61)."
+    },
+    {
+      "resumen": "Sharp drop in coal-linked financing",
+      "descripcion": "The exposure reported at year-end 2024 is EUR 4.2 billion in the 2025 report, whereas for the same 2024 year-end the 2024 report stated EUR 4.8 billion.\nThe 2025 exposure value is added, standing at EUR 2.3 billion."
+    },
+    {
+      "resumen": "The sector has no active reporting of metrics, targets or exposure in either of the two years analyzed.",
+      "descripcion": "Not reported in either report."
+    },
+    {
+      "resumen": "Refinement in the measurement of the Brazil portfolio, narrowing the risk analysis to the most material subsectors: soy, maize and beef cattle.",
+      "descripcion": "The measurement of financed emissions in Brazil's agricultural portfolio has been refined to specifically include only soy, maize and beef cattle, which has meant recalculating the base emissions reported in 2023 from 9.83 MtCO2e to 8.41 MtCO2e to ensure comparability."
+    }
+  ],
+  "sabadell": [
+    {
+      "resumen": "Absolute emissions rose to 5,277 Kt CO2e due to new credit drawdowns, although they remain within the established limits.",
+      "descripcion": "Absolute emissions spiked to 5,277 Kt CO2e, breaking the previous year's downward trend (4,820 Kt CO2e), an increase the bank attributes to new credit drawdowns in sector companies, though it stresses that they remain below the limit pathway."
+    },
+    {
+      "resumen": "Carbon intensity fell to 40 Kg CO2e/MWh, beating the 2030 target thanks to the push in renewables and improvements in the corporate portfolio.",
+      "descripcion": "Physical intensity fell sharply to 40 Kg CO2e/MWh, dropping below the 45–85 target range set for 2030 — an acceleration the bank explains by the strong contribution of renewable-energy project finance, the improvement in corporate clients' intensity and the natural maturities/repayments of the portfolio, versus the 63 Kg CO2e/MWh reported the previous year."
+    },
+    {
+      "resumen": "No relevant changes were reported in the period.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "Physical intensity fell from 220 to 183 gCO2e/vkm due to greater credit exposure to companies aligned with the 2030 decarbonization targets.",
+      "descripcion": "Physical intensity recorded a pronounced fall, moving from 220 gCO2e/vkm to 183 gCO2e/vkm, a substantial improvement the institution attributes to the rise in credit exposure to corporate groups whose intensities are already aligned with the 2030 decarbonization pathway."
+    },
+    {
+      "resumen": "No relevant changes were reported in the indicated period.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "No relevant changes were recorded in the reported period.",
+      "descripcion": "No significant changes."
+    },
+    {
+      "resumen": "Physical intensity rose 9.8% due to changes in the client-portfolio composition, exceeding base-year levels.",
+      "descripcion": "Physical intensity underwent an atypical 9.8% increase, rising to 708 Kg CO2e/tn versus 645 Kg CO2e/tn in the base year, a deviation the bank attributes to changes in the composition of a highly concentrated client portfolio; it is a monitoring metric that was not detailed in the previous report."
+    },
+    {
+      "resumen": "The Alignment Delta metric rose to +28% due to a time lag from using 2023 vessel data for the 2024 estimates.",
+      "descripcion": "The Alignment Delta metric worsened, rising to +28% compared with the +25% of the base year, an upward deviation the bank explains by a time lag in the data: as it did not have updated vessel figures for 2024, it had to use 2023 vessel data to estimate the 2024 delta."
+    },
+    {
+      "resumen": "Drawn risk increased to EUR 1.7 million due to variations in a factoring line maturing before 2030.",
+      "descripcion": "Drawn risk spiked to EUR 1.7 million, in sharp contrast with the reduction to EUR 0.1 million the previous year, attributed to fluctuations in the drawdown of a factoring line maturing before 2030."
+    },
+    {
+      "resumen": "No material variations are identified in the information analyzed.",
+      "descripcion": "No significant changes."
+    }
+  ],
+  "caixabank": [
+    {
+      "resumen": "Accelerated fall, beating the 2030 target",
+      "descripcion": "Although the 2030 reduction target remains unchanged, the 2025 report consolidates a drop in absolute emissions to 4.9 MtCO2e versus the 5.6 MtCO2e previously published in 2024, comfortably beating the final 6.99 MtCO2e milestone ahead of schedule due to the volatility of drawn exposure."
+    },
+    {
+      "resumen": "Discrepancy in a historical figure and early achievement of the target",
+      "descripcion": "A methodological alteration is evident, changing the 2022 figure from 116 kgCO2e/MWh (2024 report) to 118 kgCO2e/MWh (2025 report), while a strong improvement is reported as it fell in 2025 to 79 kgCO2e/MWh, thus beating the final target of 95 kgCO2e/MWh set for 2030."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The sector keeps its reduction target of between 10% and 20% for 2030 in both reports, reflecting a favourable evolution of the metric towards 991 kgCO2e/t in 2025 with no discrepancies detected in the previously reported historical values."
+    },
+    {
+      "resumen": "Reporting discrepancy and severe setback in the metric",
+      "descripcion": "The 2025 document retroactively changes the 2023 figure to 148 gCO2/vkm, in contrast with the 146 gCO2/vkm stated in 2024, and reports a serious worsening in 2025 as it climbs to 163.9 gCO2/vkm, exceeding even its base year due to the impact of the loosening of European automotive-sector targets."
+    },
+    {
+      "resumen": "Cement sector monitoring plan",
+      "descripcion": "Both reports identically confirm the decision not to set decarbonization targets for this portfolio due to its low materiality, keeping it under a strict monitoring plan with no significant methodological or numerical changes."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The 30% reduction target for 2030 and the scope over airlines are maintained in both years, evidencing a favourable and consistent decarbonization pathway with no anomalous numerical changes or alterations to its base year."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The characteristics of the 0% convergence target for 2030 of the Alignment Delta metric remain unchanged between the 2024 and 2025 reports, following the publication timelines of the Poseidon Principles with no inconsistencies noted."
+    },
+    {
+      "resumen": "Worsening of the metric due to a proxy-data update",
+      "descripcion": "Even though the 2030 target remains intact, the 2025 report shows an intensity increase to 21 kgCO2e/m2 versus the 20.1 kgCO2e/m2 shown in 2024, exceeding its base year because of an update to the proxies used that negatively affects performance."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The metric approach and the 19% reduction target are consolidated in both reports with no discrepancies, reflecting a stabilization in 2025 after the decrease previously achieved thanks to the integration of actual energy-efficiency certificates."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The unmovable target of a full phase-out of thermal-coal financing by 2030 is confirmed, and although slight operational variations in exposure are seen, there are no methodological or strategic changes versus 2024."
+    },
+    {
+      "resumen": "No significant changes; the Aluminium sector has no climate target set",
+      "descripcion": "The most recent report ratifies the strategy set out in 2024 of postponing the setting of a climate target because its exposure does not reach the 1% materiality threshold, continuing with the monthly monitoring model unchanged."
+    },
+    {
+      "resumen": "No significant changes; the Agriculture sector has no quantitative climate target set",
+      "descripcion": "In both corporate documents the institution refrains from establishing a quantitative metric due to a lack of methodological maturity, opting to keep its qualitative goal unchanged, focused on increasing sector knowledge and dialogue."
+    }
   ]
 }
