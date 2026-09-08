@@ -349,5 +349,189 @@
         "body": "The sector's absolute emissions fell by more than half, from 797,501 tCO2e to 361,603 tCO2e, in a context where credit-portfolio volume experienced clear growth."
       }
     ]
+  },
+  "jpmorgan": {
+    "intro": "JPMorgan Chase shows a mixed trend in its climate strategy. While traditional heavy sectors such as power and oil show stable reductions in their intensities, key transition industries such as automotive and aluminium experience clear deterioration in their metrics.",
+    "points": [
+      {
+        "title": "Sharp setback in Automotive intensity due to market dynamics",
+        "body": "A weak setback is observed in automotive-sector emissions intensity, which rose from -23.3% to -20.3% versus the base year, which the bank attributes to a slowdown in global electric-vehicle adoption, representing a direct external impact on the bank's portfolio progress."
+      },
+      {
+        "title": "Increase in Aluminium emissions",
+        "body": "The aluminium portfolio recorded a severe worsening in carbon intensity, climbing from +2.2% in the previous report to +10.4% above the baseline due to the financing needs of emerging-market clients with highly carbon-intensive power grids."
+      },
+      {
+        "title": "Double methodological readjustment in Shipping",
+        "body": "For the second consecutive year, the institution revised the Shipping baseline (from 11.4 to 10.9 gCO2/t-nm), consequently reducing the ambition of the 2030 reduction target from -26% to -23%, which makes historical comparability of the sector harder."
+      },
+      {
+        "title": "Artificial-intelligence risk to Power targets",
+        "body": "Despite reducing power intensity by 27.5%, the bank added an explicit warning about how rising energy demand from AI-dedicated data centres will put the future achievement of sectoral climate targets at risk."
+      }
+    ]
+  },
+  "citi": {
+    "intro": "Citi shows an evolution towards regulatory formalization of its strategy, significantly expanding its sectoral coverage and integrating the impact of its capital-markets activities into its main targets.",
+    "points": [
+      {
+        "title": "Expansion of Target Scope",
+        "body": "Addition of four new sectors (Aluminium, Aviation, Cement and Shipping), completing the ten sectors envisaged in its net-zero strategy."
+      },
+      {
+        "title": "Integration of Facilitated Emissions",
+        "body": "Structural methodological change in Energy, Power and Automotive integrating capital-markets activities into the 2030 target, causing an upward adjustment of the Energy baseline from 143.8 to 168 M mt CO2e."
+      },
+      {
+        "title": "Deterioration in Automotive Intensity",
+        "body": "Significant increase in the sector's intensity, from 173 to 211 g CO2e/km between reports, justified by changes in the client-portfolio exposure."
+      },
+      {
+        "title": "Launch of the ESFR Ratio",
+        "body": "Implementation of the Energy Supply Financing Ratio metric with an initial result of 0.36, measuring low-emission financing versus fossil fuels."
+      }
+    ]
+  },
+  "commerzbank": {
+    "intro": "The overall evolution shows a clear setback in the climate ambition of fossil-fuel sectoral policies and a loosening of real estate targets towards 1.7°C pathways. Structurally, the bank's intensity metrics have worsened in the steel and automotive sectors due to increased financing to intensive clients, although the quality of its actual data has improved. Total financed-emissions volume has risen significantly by 24%, reflecting the group's growth strategy.",
+    "points": [
+      {
+        "title": "Postponement of the coal exit and removal of transition plans",
+        "body": "In the 2025 report, Commerzbank reveals a severe loss of ambition by postponing the definitive coal exit to 2038 in line with government policy plans. Additionally, the previous requirement obliging clients in this sector to submit a formal transformation plan before year-end 2025 has been fully removed, weakening the control mechanisms and impact of the loan portfolio."
+      },
+      {
+        "title": "Loosening of sectoral targets towards 1.7°C scenarios",
+        "body": "Due to the explicit acknowledgment that key sectors are not on track to limit warming to 1.5°C, the bank has created less strict complementary direction targets aligned to 1.7°C for aviation and commercial real estate. In the case of the residential mortgage portfolio, the original 57% reduction target was directly dropped as unrealistic, replaced by a 40% target."
+      },
+      {
+        "title": "24% increase in total financed-emissions volume",
+        "body": "The Scope 3 financed-emissions inventory (Category 15) rose notably, from approximately 74 Mt CO2eq in the 2024 report to 92.2 Mt CO2eq in the 2025 report. This gross increase is internally justified by the bank's commercial-expansion strategy (+15% in credit-line drawdowns) and by replacing estimated data with actual data reported directly by clients under the CSRD regulation."
+      },
+      {
+        "title": "Change to the taxonomy method and readjustment of the Green Asset Ratio",
+        "body": "Commerzbank adopted ahead of schedule the European Commission's simplified 2025 reporting criteria, causing a break in the comparability of EU metrics versus the previous year. By aligning the Green Asset Ratio (GAR) denominator to exclude portfolios that cannot be classified as sustainable (such as SMEs), the sustainable-asset-stock ratio showed an artificial jump from 3.33% reported in 2024 to 8.05% reflected in 2025."
+      },
+      {
+        "title": "Replacement of the €300bn target with the sustainable loan ratio",
+        "body": "At the start of 2025, the bank retired and replaced its historical target of mobilizing €300bn for sustainable financial products, which showed a cumulative progress of €237.4bn at year-end 2024 in the 2024 report. As described in the 2025 report, the new strategic tracking indicator is the \"sustainable loan ratio\", with a fixed target of permanently allocating more than 10% of new lending business to sustainable projects or models."
+      }
+    ]
+  },
+  "morganstanley": {
+    "intro": "Morgan Stanley has executed a radical strategic shift in the management of its lending portfolio towards decarbonization. Replacing financial-intensity metrics with physical-intensity ranges and updating the base year to 2022 reflects a search for direct alignment with the real performance of physical industry. Additionally, the expansion of covered sectors substantially increases the scope of control over the firm's financed emissions.",
+    "points": [
+      {
+        "title": "General methodological transition and invalidation of comparison with 2019",
+        "body": "In the 2024 report, the bank redefined its financed-emissions targets for the energy, power-generation and automotive sectors towards physical intensity (actual production units), fully discarding the previous framework based on the FELI metric (emissions per million committed) and resetting the base year from 2019 to 2022 across the board, which limits the temporal comparability of the historical trajectory previously reported in the 2023 report."
+      },
+      {
+        "title": "Addition of three new high-intensity sectors",
+        "body": "The 2024 report formalizes the expansion of corporate lending-portfolio decarbonization targets by including three new hard-to-abate sectors: aviation, chemicals and mining, assigning them physical-reduction targets for 2030 on a baseline set in 2022.\nMorgan Stanley opts not to set a specific intensity-reduction target for the coal sector in its metrics tables, managing this climate risk directly through exclusion criteria in its Environmental and Social Policy Statement (ESPS) and assessing the reduction of installed coal capacity as a transition indicator integrated within the Power and Mining portfolios."
+      },
+      {
+        "title": "Negative adjustment and downward revision of sustainable-finance progress",
+        "body": "The cumulative capital volume mobilized towards the one-trillion-dollar sustainable-finance target underwent a net decrease, moving from more than $820 billion reported in the 2023 report to more than $815 billion in the 2024 report, due to a $120 billion deduction driven by a thorough review of historical transactions that outweighed the $110 billion of organic progress achieved during 2024, as explained on page 9 of the 2024 report."
+      },
+      {
+        "title": "Update of the base year for operational emissions",
+        "body": "Morgan Stanley changed the base year for its operational-emissions inventory (corporate Scopes 1, 2 and 3), replacing the original 2012 reference year with 2023 in order to reflect a more representative baseline that incorporates recent acquisitions and is not distorted by the effects of the global pandemic, as justified on pages 36 and 62 of the 2024 report."
+      }
+    ]
+  },
+  "goldman": {
+    "intro": "The evolution of the bank's portfolio decarbonization shows a mixed trend dependent on origination volume, with its main weakness being its severely limited scope, reporting metrics for only 3 sectors (Power, Oil & Gas, Automotive). This lack of sectoral coverage, significantly below the reporting standard of its peer competitors, prevents an accurate assessment of the real alignment and climate ambition of its overall global portfolio.",
+    "points": [
+      {
+        "title": "Sharp spike in Automotive-sector intensity",
+        "body": "A weak setback is observed in automotive-sector emissions intensity, which rose from 112 gCO2e/km in 2022 to 149 gCO2e/km in 2023, which the bank attributes to lower underwriting activity with electric-vehicle battery manufacturers versus the previous year."
+      },
+      {
+        "title": "Slight setback in the Power-sector metric",
+        "body": "The power-generation sector experienced a slight setback on its decarbonization pathway, with emissions intensity rising from 259 kgCO2e/MWh in 2022 to 265 kgCO2e/MWh in 2023, though the figure still remains on track towards the 147–219 kgCO2e/MWh target range set for 2030."
+      },
+      {
+        "title": "Consolidation of improvements in Oil & Gas",
+        "body": "The bank has managed to hold steady the improvements in the Oil & Gas sector (Scopes 1 to 3), consolidating physical intensity at 67 gCO2e/MJ for both 2022 and 2023, representing a reduction versus the 72 gCO2e/MJ of the 2019 base year."
+      },
+      {
+        "title": "Sensitivity of metrics to underwriting activity",
+        "body": "The behaviour of the data, especially the sharp rise in Automotive emissions due to a lack of underwriting in the electric-vehicle business, indicates a methodological vulnerability where the metrics reflect the bank's financial-origination volume fluctuations more than actual decarbonization efforts in the underlying economy."
+      }
+    ]
+  },
+  "ubs": {
+    "intro": "UBS's overall evolution reveals mixed progress on its targets. A solid, continued reduction is observed in intensive sectors such as Power and methodologically favoured progress in Real Estate through solar integration; however, in hard-to-abate sectors such as steel and shipping, the bank shows setbacks in emissions intensity and a loss of documentary transparency. These movements reflect the challenge of managing exposure while consolidating portfolios following the absorption of Credit Suisse.",
+    "points": [
+      {
+        "title": "Setback in iron and steel emissions intensity",
+        "body": "The iron and steel portfolio saw its emissions intensity rise, moving from a 20% reduction in the 2024 report to just 14% in the 2025 report, a setback the institution attributes to a change in the internal composition of its portfolio due to reduced exposure to lower-intensity clients."
+      },
+      {
+        "title": "Addition of the agriculture sector to the emissions inventory and baseline recalculation.",
+        "body": "The 2025 report adds, for the first time, the measurement of financed emissions and includes agriculture within the overall emissions scope, recalculating 2023 data that had previously been omitted due to specialized data-provider constraints."
+      },
+      {
+        "title": "Methodological change due to inclusion of photovoltaic impact in Real Estate",
+        "body": "From 2024, the bank began integrating into its intensity calculations for the Swiss real estate sector the impact of rooftop photovoltaic systems installed on financed properties, altering the measurement of the carbon pathways reported versus the previous period. These practices alter the baselines presented in 2024 and prevent like-for-like comparability."
+      },
+      {
+        "title": "Omission of direct quantitative metrics in shipping",
+        "body": "The 2025 report does away with the direct publication of the table of climate deviations and alignment scores for the maritime portfolio under the Poseidon Principles that was transparently broken out in the previous year, limiting immediate comparability of the information within the main document."
+      },
+      {
+        "title": "New corporate definition and criteria for Transition Finance",
+        "body": "The 2025 report introduces a critical structural milestone: the bank has developed an explicit definition of \"transition finance\" and created specific criteria to assess the credibility of clients' transition plans. This strategic strengthening was not present in 2024 and seeks to support companies in carbon-intensive sectors in a structured way, not merely finance purely \"green\" assets."
+      },
+      {
+        "title": "Massive methodological change in Facilitated Emissions",
+        "body": "In the 2025 report, UBS expanded the scope of its facilitated-emissions (capital markets) measurement beyond carbon-intensive sectors to include all non-financial corporate sectors. This has entailed an enormous change of scope that has required an upward recalculation of the 2023 figures shown in the 2024 report."
+      }
+    ]
+  },
+  "bancolombia": {
+    "intro": "Bancolombia shows a formal strengthening of its sectoral decarbonization policies and the consolidation of its SBTi-validated targets. However, challenges are detected in maintaining the consistency of exposed historical data and the vulnerability of energy-intensity targets to external climate shocks.",
+    "points": [
+      {
+        "title": "Deviation in power-sector intensity targets due to El Niño.",
+        "body": "Power-sector emissions intensity reached 0.24 tCO2e/MWh in the 2025 report, significantly exceeding the 2024 target of 0.161 tCO2e/MWh due to the involuntary increase in thermal generation in Colombia triggered by the El Niño climate emergency."
+      },
+      {
+        "title": "Discrepancies in historical 2024 portfolio-exposure data",
+        "body": "Numerical variations were identified in the balances assigned to 2024 between the two reports, showing that the oil and gas sector rose from 1.11% to 1.65% and the cement sector fell from 0.29% to 0.16%."
+      },
+      {
+        "title": "Methodological refinement with a breakdown of the automotive industry",
+        "body": "The 2025 report introduced an explicit split for the automotive industry, assigning it 1.32% of portfolio exposure, which increases the transparency and specificity of the analysis versus the 2024 report, where the sector was diluted within the general transport aggregate."
+      },
+      {
+        "title": "Addition of just-transition criteria for thermal coal",
+        "body": "During 2025, the bank strengthened its ESG Risk Policy by adding principles and technical criteria to assess financing of climate-transition plans in the thermal-coal and coal-fired generation sectors, complementing the full-elimination target set for 2030."
+      }
+    ]
+  },
+  "akbank": {
+    "intro": "Akbank shows a positive evolution in its decarbonization strategy between the 2024 and 2025 reports: it keeps its five quantitative sectoral targets unchanged (energy -60%, cement -23.8%, steel -29%, commercial real estate -40.8%, residential -49.3%), all referenced to the 2021 base year and the IEA NZE2050 scenario, and substantially expands the scope of its portfolio assessments — moving from 122 to 516 companies assessed — thanks to the launch of the Green Transformation Score. However, visibility setbacks are detected in sectors such as aluminium, agriculture, transport and oil & gas, which disappear from the individual client-assessment system in 2025. Its exit from the NZBA in 2025 and the correction of an incorrect figure in the 2024 report are elements that deserve attention.",
+    "points": [
+      {
+        "title": "Correction of an incorrect PCAF Data Quality figure for Commercial Real Estate between reports",
+        "body": "The 2025 report expressly acknowledges that the PCAF Data Quality figure for Commercial Real Estate published in the 2024 report was incorrect: it reported 3.7 when it should have been 4.0. This discrepancy between reports affects the comparability of the portfolio's data quality and highlights weaknesses in the 2024 report's review process."
+      },
+      {
+        "title": "Exit from the Net Zero Banking Alliance (NZBA) in 2025",
+        "body": "The 2024 report highlighted joining the NZBA in 2024 as a key milestone. Akbank left the NZBA a year after joining, although it states it continues to follow the alliance's principles and align with GFANZ guidelines. This formal setback in collective net-zero commitments merits monitoring."
+      },
+      {
+        "title": "Launch of the Green Transformation Score: from 122 to 516 companies assessed",
+        "body": "The 2025 report details the launch of the Green Transformation Score as a tool for assessing clients' green-transformation performance, increasing the total number of companies assessed from 122 to 516, with particularly notable increases in steel (from 20 to 212 companies), real estate (from 0 to 112) and energy (from 0 to 80). This tool is already integrated into lending processes at Board level, representing a significant advance in portfolio governance."
+      },
+      {
+        "title": "Disappearance of individual assessments in aluminium, transport, agriculture and oil & gas",
+        "body": "The 2024 report reported individual client assessments for aluminium (11 companies), transport (14), agriculture (3) and oil & gas (10), carried out under NZBA principles. The 2025 report includes no companies assessed in these four sectors, as the Green Transformation Score focuses on 'target sectors'. This reduction in sectoral coverage represents a loss of visibility — albeit of a methodological nature — over relevant portfolio segments."
+      },
+      {
+        "title": "Expansion and detail of the coal exit commitment: three categories and six just-transition principles",
+        "body": "The 2025 report substantially expands the Coal Phase-Out framework versus the 2024 report: it structures the exit into three categories of activities — thermal power plants and thermal-coal mines, metallurgical-coal mines, and the entire coal value chain including heating coal — with different timelines and roadmaps, and incorporates six explicit just-transition principles (rights-based approach, participatory decision-making, supply chain, impact assessment, access to information, R&D). It also distinguishes for the first time between metallurgical and thermal coal, with direct relevance for the steel sector."
+      }
+    ]
   }
 }

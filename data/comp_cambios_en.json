@@ -796,5 +796,434 @@
       "resumen": "The 2021 base-year intensity data were recalculated, turning the previously reported reduction into a 1.4% year-on-year increase versus the adjusted value.",
       "descripcion": "The 2021 base-year intensity underwent a drastic recalculation, falling from 758 tCO2e/EURm to 363 tCO2e/EURm. This change has caused the current actual-intensity figure (368 tCO2e/EURm) to now show a 1.4% year-on-year increase versus the adjusted base year, instead of the previously reported reduction."
     }
+  ],
+  "bnp": [
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" },
+    { "resumen": "Information not available", "descripcion": "" }
+  ],
+  "jpmorgan": [
+    {
+      "resumen": "No significant changes",
+      "descripcion": "Energy-mix intensity fell from 24.1% (34.8 gCO2/MJ in the 2024 report) to 33.2% (30.6 gCO2/MJ in the 2025 report), while oil and gas operational intensity fell from 4.0% (4.7 gCO2/MJ) to 17.2% (4.0 gCO2/MJ) versus the 2019 base year, with no changes to the reduction targets set for 2030."
+    },
+    {
+      "resumen": "Addition of a qualitative warning about the impact of artificial intelligence on meeting the targets",
+      "descripcion": "The bank kept its target of a 69% reduction in the power sector's carbon intensity for 2030 versus the 2019 base year, achieving a 21.5% reduction (268.8 kgCO2/MWh) in the 2024 report and a 27.5% reduction (248.4 kgCO2/MWh) in the 2025 report, but introduced a new methodological consideration noting that growing energy demand from AI-driven data centres is expected to negatively affect its future ability to meet this target."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The iron and steel portfolio's carbon intensity progressed, recording a 1.5% reduction (1.390 tCO2e/t) versus the 1.412 tCO2e/t base year in the 2024 report, and reaching an 8.6% reduction (1.291 tCO2e/t) in the 2025 report, keeping the 30% reduction target set for 2030 unchanged."
+    },
+    {
+      "resumen": "Setback in carbon-intensity reduction due to the slowdown in electric-vehicle adoption",
+      "descripcion": "The automotive manufacturing portfolio's carbon intensity suffered a quantitative setback, moving from a 23.3% reduction (126.4 gCO2e/km) versus the 164.8 gCO2e/km baseline in the 2024 report to a smaller 20.3% reduction (131.3 gCO2e/km) in the 2025 report, as global challenges in the pace of electric-vehicle adoption affected the portfolio's performance."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The cement sector's carbon intensity showed no methodological changes, moving from a 0.7% reduction (634.6 kgCO2e/t) versus the 639.3 kgCO2e/t base year in the 2024 report to a 3.1% reduction (619.6 kgCO2e/t) in the 2025 report, under the same final target of 28% set for 2030."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The aviation portfolio's carbon intensity progressed from a 16.9% reduction (808.0 gCO2/RTK) versus the 972.6 gCO2/RTK base year in the 2024 report to a 20.1% reduction (777.3 gCO2/RTK) in the 2025 report, under the same 36% reduction target for 2030."
+    },
+    {
+      "resumen": "New baseline revision and downward adjustment to the 2030 target reduction percentage",
+      "descripcion": "The shipping carbon-intensity baseline was recalculated downward, from 11.4 gCO2/t-nm in the 2024 report to 10.9 gCO2/t-nm in the 2025 report, which changed the 2030 reduction target from an initial -26% to -23%, while reported intensity stood at an increase of 4.9% (11.9 gCO2/t-nm) and 5.7% (11.5 gCO2/t-nm) respectively."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The commercial real estate sector has no specific sectoral decarbonization targets or quantitative carbon-intensity metrics reported in either of the two sequential reports, being limited solely to its financial-exposure breakdown within the wholesale credit-risk heat maps."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The residential real estate sector lacks quantitative emissions-intensity metrics or decarbonization targets in both documents, appearing exclusively under catastrophe-modelling tools for the general assessment of physical risks in the consumer portfolio."
+    },
+    {
+      "resumen": "No significant changes regarding the sectoral exclusion for reputational and environmental risk",
+      "descripcion": "The coal sector remains without quantitative portfolio decarbonization targets in either report, as JPMorgan Chase structurally classifies it as a restricted activity under its risk-management framework, applying a strict policy under which it does not provide financial services to clients that derive the majority of their revenue from coal extraction, nor to those involved in mountaintop-removal mining or other practices that permanently damage the environment.\nThe policies applied and the evolution reflected in the 2024 and 2025 documents are detailed below:\nThe bank prohibits providing financial services to companies whose revenue is mostly derived from coal extraction, destructive practices such as mountaintop-removal mining, and the development or expansion of new mines and thermal-coal plants.\nThe bank's financial exposure to the sector fell from $198 to $136 million in the past year, and the new corporate methodology explicitly classifies coal as a \"High\" risk sector in terms of both transition and physical impact.\nAny client partially involved in the coal value chain (without reaching the full-exclusion thresholds) is automatically subject to a thorough, individualized risk assessment before receiving any type of commercial or financial support."
+    },
+    {
+      "resumen": "Significant increase in carbon intensity due to concentration in emerging markets",
+      "descripcion": "The aluminium sector's carbon intensity worsened notably, moving from a 2.2% increase (8.8 tCO2/t) versus the 8.6 tCO2/t base year in the 2024 report to a cumulative 10.4% increase (9.5 tCO2e/t) in the 2025 report, due to the concentration of financing among emerging-market clients whose operations depend on carbon-intensive power grids."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The agriculture sector has no decarbonization targets or emissions-intensity metric indicators in either of the two years analyzed, appearing solely in corporate commercial and industrial credit-risk heat maps."
+    }
+  ],
+  "citi": [
+    {
+      "resumen": "The 2024 report integrates financed and facilitated emissions, prompting the recalculation of the baseline and the 2030 targets, reflecting an evolution in total emissions despite increased capital-markets activity.",
+      "descripcion": "In the 2024 report, the target now integrates combined financed and facilitated emissions. The baseline was recalculated from 143.8 M mt CO2e (2023 report) to 168 M mt CO2e (2024 report) due to the inclusion of facilitated emissions in the target calculation. The 2030 target moves from 102.1 M mt CO2e (2023 report) to 119.3 M mt CO2e (2024 report).\nAdditionally, an evolution is seen from 89.3 M mt CO2e in 2022 (2023 report) to 91.1 M mt CO2e in 2024 (2024 report) due to an absolute reduction from financing and consolidation changes in the sector, which offset the rise in capital-markets activity."
+    },
+    {
+      "resumen": "The 2024 report integrates facilitated emissions into its physical-intensity metric, which fell to 246.5 kg CO2e/MWh due to improved client performance.",
+      "descripcion": "The 2024 report incorporates facilitated emissions into the physical-intensity metric. The 2023 report had updated the methodology by adding \"tax equity\" financing and IEA factors to cover a 7% data gap in the portfolio. Intensity fell from 280.2 kg CO2e/MWh (2023 report) to 246.5 kg CO2e/MWh (2024 report), attributed to a decrease in clients' emissions intensities."
+    },
+    {
+      "resumen": "The alignment score fell due to adjustments in portfolio financing between 2023 and 2024.",
+      "descripcion": "The alignment score worsened from 0.02 (2023 report) to 0.4 (2024 report) due to changes in portfolio financing."
+    },
+    {
+      "resumen": "Facilitated emissions are incorporated in the 2024 report, resulting in a rise in physical intensity from 173 to 211 g CO2e/km due to variations in portfolio exposure.",
+      "descripcion": "Facilitated emissions are included in the 2024 report for the physical-intensity metric. Intensity rose sharply from 173 g CO2e/km (2023 report) to 211 g CO2e/km (2024 report) due to changes in portfolio exposure."
+    },
+    {
+      "resumen": "Emissions intensity fell from 48 to 36.6 kg CO2e/m^2 thanks to energy efficiency and grid decarbonization in the US, with the report's scope expanded to include data centres.",
+      "descripcion": "Intensity improved from 48 kg CO2e/m^2 (2023 report) to 36.6 kg CO2e/m^2 (2024 report) due to greater energy efficiency and power-grid decarbonization in the US.\nThe 2024 report identifies data centres as a new asset type to be assessed against specific decarbonization pathways, broadening the scope."
+    },
+    {
+      "resumen": "Reduction in financial exposure and carbon emissions in the sector due to the implementation of the ESRM policy.",
+      "descripcion": "Exposure fell from $348 million (2023 report) to $327 million (2024 report). Emissions fell from 4 M mt CO2e (2023 report) to 0.97 M mt CO2e (2024 report) due to the application of the ESRM policy to reduce exposure to the sector."
+    },
+    {
+      "resumen": "The aluminium, aviation, cement and shipping sectors were added during 2024.",
+      "descripcion": "New sectors added in 2024: Aluminium, Aviation, Cement and Shipping."
+    },
+    {
+      "resumen": "Addition of a new sector in 2024 alongside the aluminium, cement and shipping industries.",
+      "descripcion": "New sector added in 2024 alongside Aluminium, Cement and Shipping."
+    },
+    {
+      "resumen": "A new sector was added in 2024 together with aluminium, aviation and shipping.",
+      "descripcion": "New sector added in 2024 alongside Aluminium, Aviation and Shipping."
+    },
+    {
+      "resumen": "Citi added a new sector in 2024, joining the aluminium, aviation and cement industries.",
+      "descripcion": "New sector added in 2024 alongside Aluminium, Aviation and Cement."
+    }
+  ],
+  "commerzbank": [
+    {
+      "resumen": "Loosening of gas exclusion criteria and specific tightening on oil transport",
+      "descripcion": "The fossil-fuel policy removed the expansion of gas transport infrastructure as an exclusion criterion but tightened restrictions on the oil sector to include transport projects such as new pipelines, moving from a stance of generalized strict scrutiny in the 2024 report to a more flexible, specific segmentation described in the 2025 report."
+    },
+    {
+      "resumen": "Removal of gas power plant expansion as an exclusion criterion in sectoral policy",
+      "descripcion": "The bank amended its fossil-fuel guidance, removing restrictions on the expansion of gas power plants that in the 2024 report were critically assessed case by case, now permitting this type of financing as detailed in the 2025 report to align with current energy-supply security needs."
+    },
+    {
+      "resumen": "Change summary: Sharp increase in the iron and steel sector's physical emissions intensity",
+      "descripcion": "The sector's emissions intensity rose notably from 1.3 t CO2eq/t steel reported in the 2024 report to 1.6 t CO2eq/t steel in the 2025 report due to the short-term impact of financing drawdowns for the transformation of large corporate clients."
+    },
+    {
+      "resumen": "Increase in emissions intensity due to the financing-portfolio composition",
+      "descripcion": "The automotive portfolio's physical emissions intensity rose from 148.5 g CO2eq/pkm reported in the 2024 report to 166.2 g CO2eq/pkm in the 2025 report due to a higher volume of financing directed at clients with high-intensity emissions profiles."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The sector's physical emissions intensity remained stagnant at 0.7 t CO2eq/t cement in both the 2024 and 2025 reports, with the bank confirming the difficulties of decarbonizing this portfolio due to the high intensity of existing corporate clients."
+    },
+    {
+      "resumen": "Adoption of a less strict 1.7°C scenario target and recalculation of the base year",
+      "descripcion": "The bank recalculated the 2021 base value from 795.9 g CO2eq/tkm reported in the 2024 report to 784.9 g CO2eq/tkm and introduced a less ambitious complementary direction target of 1.7°C (646 g CO2eq/tkm) on pages 105 and 108 of the 2025 report, as the sector is not on the pathway required to meet the 1.5°C scenario."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The shipping sector has no sectoral targets or quantitative decarbonization pathways reported in either the 2024 or the 2025 report."
+    },
+    {
+      "resumen": "Introduction of complementary 1.7°C direction targets due to delays in sectoral decarbonization",
+      "descripcion": "In addition to recording a change in residential use from 35.6 kg CO2eq/m² in the 2024 report to 33.5 kg CO2eq/m² in the 2025 report due to the integration of energy-certificate data, the bank added new 1.7°C direction targets for 2030, acknowledging that the sector is off the original 1.5°C pathway."
+    },
+    {
+      "resumen": "Reduction in climate ambition with the removal of the portfolio from SBTi revalidation and adoption of a less strict target",
+      "descripcion": "The bank reduced emissions intensity from 44.3 kg CO2eq/m² on page 99 of the 2024 report to 41.3 kg CO2eq/m² in the 2025 report, but replaced the original 57% reduction target (19.8 kg CO2eq/m²) with a less strict 40% direction target (27.4 kg CO2eq/m²) after declaring the portfolio unrealistic for SBTi criteria."
+    },
+    {
+      "resumen": "Postponement of the coal phase-out and removal of the requirement for transformation plans",
+      "descripcion": "The bank postponed the deadline for the progressive coal phase-out to 2038 and fully withdrew the requirement for clients to submit transformation plans before year-end 2025, changing the strict criteria originally set out in the 2024 report as announced in the 2025 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The aluminium sector has no assigned decarbonization targets or metrics in either the 2024 or the 2025 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The agriculture sector has no quantitative decarbonization targets in either the 2024 or the 2025 report due to the bank's low portfolio exposure in this area."
+    }
+  ],
+  "morganstanley": [
+    {
+      "resumen": "Split of the energy sector into end-use and operational categories together with the adoption of physical intensity.",
+      "descripcion": "The bank restructured its targets for the energy sector, replacing its previous target of a 29% reduction in financed-emissions intensity (FELI) versus the 2019 baseline in the 2023 report with two physical-intensity indicators named \"Energy-End Use\" (a reduction of between 10% and 19% in gCO2e/MJ) and \"Energy-Operational\" (a reduction of between 12% and 20% in gCO2e/MJ), setting a new baseline for 2022 in the 2024 report."
+    },
+    {
+      "resumen": "Comprehensive methodological change from credit intensity to physical intensity and readjustment of the base year.",
+      "descripcion": "Morgan Stanley fully changed the metric for its 2030 sectoral targets, moving from a 58% reduction in corporate-lending financed-emissions intensity (FELI) calculated versus the 2019 baseline in the 2023 report to a reduction range of 45% to 60% in physical intensity expressed in kgCO2e/MWh with a base year readjusted to 2022 in the 2024 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The steel sector is not reported with decarbonization targets or specific financed-emissions metrics in the corporate inventories of either document."
+    },
+    {
+      "resumen": "Replacement of financial intensity with physical intensity per vehicle-kilometre.",
+      "descripcion": "Morgan Stanley replaced its target for the automobile-manufacturing sector, which required a 35% reduction in credit intensity (FELI) versus the 2019 baseline per the 2023 report, with a reduction range of 29% to 45% in physical intensity calculated in gCO2e/vehicle km with a base year changed to 2022 in the 2024 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The cement sector has no quantitative sectoral decarbonization targets or a breakdown of financed-emissions metrics in the official tables of either of the two reports analyzed."
+    },
+    {
+      "resumen": "Addition of aviation as a new sector with a decarbonization target for 2030.",
+      "descripcion": "The aviation sector was newly added in the 2024 report, setting a physical-intensity reduction range of 13% to 24% measured in gCO2e/RTK on a 2022 base year, having not previously appeared with financed-emissions targets in the 2023 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The shipping sector is not included with specific reduction targets or quantitative metrics in the financed-emissions portfolios of either consecutive report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The commercial real estate sector has no sectoral decarbonization targets or specific financed-emissions metrics reported in either of the two reports analyzed."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The residential real estate sector has no sectoral decarbonization targets or specific financed-emissions metrics reported in either of the two reports analyzed."
+    },
+    {
+      "resumen": "Managed through exclusion policies (ESPS) and cross-cutting metrics with no independent quantitative target",
+      "descripcion": "Although the coal sector has no independent quantitative targets within the financed-emissions tables of either report, the bank specifies that its exposure is restrictively managed through its Environmental and Social Policy Statement (ESPS) and is assessed cross-sectorally by measuring coal phase-down within the Power and Mining sectors' transition plans."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The aluminium sector has no sectoral decarbonization targets or specific financed-emissions metrics reported in either of the two reports analyzed."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The agriculture sector has no sectoral decarbonization targets or specific financed-emissions metrics reported in either of the two reports analyzed."
+    }
+  ],
+  "goldman": [
+    {
+      "resumen": "Physical intensity remained stable in the early years and showed a moderate reduction that has stayed constant between 2022 and 2023.",
+      "descripcion": "The metric covers Scopes 1 to 3. The 2019 baseline and the 2021 figure stood at 72 gCO2e/MJ. In the 2025 report, reported intensity fell to 67 gCO2e/MJ for both 2022 and 2023. The sectoral target for 2030 is 56–60 gCO2e/MJ."
+    },
+    {
+      "resumen": "Portfolio emissions intensity fell significantly versus the base year, though it rose slightly between 2022 and 2023",
+      "descripcion": "In the 2023 report, reported physical intensity (for 2021) was 296 kgCO2e/MWh versus a 2019 baseline of 417 kgCO2e/MWh. In the 2025 report, intensity stands at 259 kgCO2e/MWh for 2022 and rises slightly to 265 kgCO2e/MWh in 2023. The 2030 target is to reach 147–219 kgCO2e/MWh."
+    },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    {
+      "resumen": "Notable spike in intensity in 2023.",
+      "descripcion": "In 2021, intensity fell to 119 gCO2e/km from a 2019 baseline of 152 gCO2e/km. In 2022 it continued falling to 112 gCO2e/km, but in 2023 it rose to 149 gCO2e/km. The report notes that this increase was mainly due to a decrease in underwriting activity with electric-vehicle battery manufacturers in 2023, following significantly higher activity in 2022."
+    },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" },
+    { "resumen": "Sector not reported in either report", "descripcion": "-" }
+  ],
+  "ubs": [
+    {
+      "resumen": "No significant changes to the absolute decarbonization target for fossil fuels.",
+      "descripcion": "The 2030 absolute financed-emissions reduction target remains set at 70% in both reports, showing a cumulative reduction of 80% (12.9 million metric tonnes of CO2e) at year-end 2023 in the 2024 report versus 83% (10.9 million metric tonnes of CO2e) at year-end 2024 reported in the 2025 report."
+    },
+    {
+      "resumen": "No significant changes to the targets set for the power-generation sector.",
+      "descripcion": "The 2030 emissions-intensity reduction target remains unchanged at 60% in both reports, with an improvement in the cumulative reduction from 33% (227 kg CO2e/MWh) at year-end 2023 per the 2024 report to 55% (152 kg CO2e/MWh) at year-end 2024 per the 2025 report."
+    },
+    {
+      "resumen": "Setback in emissions-intensity reduction metrics in the iron and steel sector.",
+      "descripcion": "The financed-emissions intensity reduction fell back from 20% (1.41 tonnes of CO2/tonne of steel) at year-end 2023 as reflected in the 2024 report to 14% (1.50 tonnes of CO2/tonne of steel) at year-end 2024 as reflected in the 2025 report due to a change in the portfolio composition towards clients with higher carbon intensity."
+    },
+    {
+      "resumen": "No significant changes as no decarbonization targets are reported for this sector.",
+      "descripcion": "The bank does not set specific decarbonization targets for the automotive sector in either period, limiting itself to including its Scope 3 emissions as part of the overall financed emissions not covered by targets."
+    },
+    {
+      "resumen": "No significant changes to the cement sector's emissions-intensity targets.",
+      "descripcion": "The 2030 decarbonization target remains unchanged at a 24% reduction, recording an emissions-intensity decrease of 3% (0.62 tonnes of CO2/tonne of cementitious material) at year-end 2023 in the 2024 report compared with 4% (0.61 tonnes of CO2/tonne of cementitious material) at year-end 2024 stated in the 2025 report."
+    },
+    {
+      "resumen": "No significant changes due to the absence of sectoral decarbonization targets.",
+      "descripcion": "No credit-emissions reduction targets are reported for the aviation sector in either consecutive annual report, with only facilitated-emissions reporting maintained in the capital-markets business under the air-transport heading."
+    },
+    {
+      "resumen": "Opacity from removing the detailed climate-alignment table for the maritime portfolio.",
+      "descripcion": "The 2025 report removes the direct disclosure of the table with deviation percentages versus the Poseidon Principles pathways that the 2024 report detailed at 9.1% and 14.4% for 2023, replacing it with a general reference to an external report."
+    },
+    {
+      "resumen": "Addition of a new mitigation source and progress in intensity reduction.",
+      "descripcion": "The 2025 report introduces a methodology accounting for the impact of rooftop photovoltaic systems and shows that the portfolio's emissions-intensity reduction moved from 9% (28.5 kg CO2e/m2 ERA) at year-end 2023 in the 2024 report to 10% (28.0 kg CO2e/m2 ERA) at year-end 2024 in the 2025 report."
+    },
+    {
+      "resumen": "Inclusion of photovoltaic impact and acceleration in the decarbonization of the residential sector.",
+      "descripcion": "The emissions-intensity reduction progressed from 11% (34.4 kg CO2e/m2 ERA) at year-end 2023 per the 2024 report to 15% (33.0 kg CO2e/m2 ERA) at year-end 2024 per the 2025 report, also incorporating from 2024 the measurement of the impact of installed photovoltaic systems."
+    },
+    {
+      "resumen": "No significant changes to the sectoral target, as it is reported aggregated with fossil fuels.",
+      "descripcion": "Coal metrics and targets are presented integrated within the fossil-fuel category with an absolute 70% reduction target for 2030 in both reports; the 2024 report mentions a prior exposure reduction but without isolating independent numerical data in the 2025 lending dashboards."
+    },
+    {
+      "resumen": "No significant changes as no decarbonization targets have been set.",
+      "descripcion": "The aluminium sector has no lending-portfolio decarbonization targets in either year, appearing solely within the facilitated-emissions inventory for capital-markets transactions."
+    },
+    {
+      "resumen": "Addition of the agriculture sector's financed and facilitated emissions to the report.",
+      "descripcion": "The 2025 report includes for the first time the calculation and disclosure of financed emissions associated with the agriculture sector, retroactively updating the 2023 figures that had been explicitly excluded in the 2024 report due to a lack of availability of third-party data."
+    }
+  ],
+  "bancolombia": [
+    {
+      "resumen": "Upward revision of the exposure data reported for 2024.",
+      "descripcion": "Portfolio exposure for the oil and gas sector for 2024 was re-estimated, moving from the 1.11% stated in the 2024 report to 1.65% published in the 2025 report, with no explicit methodological explanation in the excerpt."
+    },
+    {
+      "resumen": "Missed interim emissions-intensity target in 2024 and discrepancy in portfolio exposure.",
+      "descripcion": "Power-generation sector emissions intensity stood at 0.24 tCO2e/MWh versus an interim 2024 target of 0.161 tCO2e/MWh due to the impact of the El Niño phenomenon, with a discrepancy also seen in 2024 portfolio exposure, moving from a 5.32% total (5.05% conventional and 0.27% coal) in the 2024 report to a 5.52% total (5.29% electricity and 0.23% coal-fired) in the 2025 report."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "Iron and steel-sector credit exposure remained fully stable, reporting an identical value of 0.13% for 2024 in both the 2024 and 2025 reports."
+    },
+    {
+      "resumen": "Explicit breakdown and separation of the automotive industry within the commercial portfolio.",
+      "descripcion": "The automotive sector was split out as an independent category in the 2025 report, reporting a 1.32% exposure for 2024, whereas in the 2024 report it was consolidated jointly under the general transport heading with a 2.23% weight."
+    },
+    {
+      "resumen": "Downward readjustment of portfolio exposure for 2024.",
+      "descripcion": "Commercial-portfolio exposure for the cement sector for 2024 changed, moving from 0.29% in the 2024 report to 0.16% in the 2025 report, a period in which the sectoral intensity target of 0.62 tCO2e/t was met."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The aviation sector has no specific targets or quantitative metrics reported in either of the two annual reports assessed."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The shipping sector has no specific targets or quantitative metrics reported in either of the two annual reports assessed."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The commercial real estate segment remains unchanged in its metrics, as the 2025 report clarifies on pages 233 and 234 that it is excluded from PCAF financed-emissions accounting, keeping the same commercial-asset management approach discussed on page 184 of the 2024 report."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The residential housing and construction sector maintains continuity in its green-funding strategies with no significant changes to its long-term decarbonization targets, linking loans to EDGE or LEED certifications as described in both the 2024 and the 2025 reports."
+    },
+    {
+      "resumen": "Addition of just-transition criteria for the thermal coal sector and mismatches in exposure.",
+      "descripcion": "The thermal-coal phase-down policy added transition-plan evaluation criteria and principles on page 204 of the 2025 report, while also recording variations in reported 2024 exposure, moving from 0.02% in mining and 0.27% in coal-fired electricity in the 2024 report to 0.04% in coal and 0.23% in coal-fired thermal in the 2025 report."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "The aluminium sector has no specific targets or quantitative metrics reported in either of the two annual reports assessed."
+    },
+    {
+      "resumen": "No significant changes",
+      "descripcion": "The agriculture and sustainable livestock sector continued under the same climate-risk-management guidelines, showing only a minor, non-critical variation in its 2024 portfolio exposure, moving from 0.26% on page 294 of the 2024 report to 0.28% on page 222 of the 2025 report."
+    }
+  ],
+  "akbank": [
+    {
+      "resumen": "Removal of individual client assessments and new exclusion of unconventional Oil & Gas in the Arctic",
+      "descripcion": "The 2024 report reports 10 Oil & Gas companies assessed under the Net Zero Banking Initiative priorities; the 2025 report indicates 0 companies assessed in Oil & Gas under the new Green Transformation Score system, as 2025 focused on 'target sectors'. Additionally, the 2025 report incorporates for the first time the explicit exclusion of financing unconventional oil and gas activities (exploration, production and transport) in the Arctic and oil-sands extraction, a restriction absent from the 2024 report."
+    },
+    {
+      "resumen": "No changes to targets; same quantitative target confirmed",
+      "descripcion": "The 2024 report sets the power-sector intensity-reduction target at -60% in kgCO₂e/MWh for 2030 versus the 2021 base year under the IEA NZE2050 scenario, identical to that published in the 2025 report. Both reports confirm PCAF as the calculation methodology and 2021 as the base year. No quantitative change."
+    },
+    {
+      "resumen": "No changes to the intensity-reduction target; very significant increase in companies assessed",
+      "descripcion": "The steel carbon-intensity reduction target remains identical in both reports: -29% in kgCO₂e/tonne-steel for 2030 vs. the 2021 base year under IEA NZE2050 (2024 report, p. 190–191; 2025 report, p. 224–225). The number of companies assessed rose from 20 in 2024 (p. 192–193) to 212 in 2025 (p. 228–229), the largest quantitative jump among all sectors."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "Akbank does not report in either report (2024 or 2025) specific decarbonization targets, metrics or data for the Automotive sector. The sector is not among the priority decarbonization sectors defined in Akbank's Net Zero strategy."
+    },
+    {
+      "resumen": "No changes to the intensity-reduction target; notable increase in companies assessed",
+      "descripcion": "The cement carbon-intensity reduction target remains identical in both reports: -23.8% in kgCO₂e/tonne-cement for 2030 vs. the 2021 base year under IEA NZE2050 (2024 report, p. 190–191; 2025 report, p. 224–225). The number of companies assessed rose from 15 in 2024 (p. 192–193) to 40 in 2025 (p. 228–229), reflecting the roll-out of the Green Transformation Score."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "Akbank does not report in either report (2024 or 2025) specific decarbonization targets, metrics or data for the Aviation sector. The sector is not among the priority decarbonization sectors defined in Akbank's Net Zero strategy."
+    },
+    {
+      "resumen": "Not reported in either report",
+      "descripcion": "Akbank does not report in either report (2024 or 2025) specific decarbonization targets, metrics or data for the Shipping sector. The sector is not among the priority decarbonization sectors defined in Akbank's Net Zero strategy."
+    },
+    {
+      "resumen": "No changes to the intensity-reduction target; CRE becomes assessed in 2025",
+      "descripcion": "The intensity-reduction target for service buildings (CRE) remains identical in both reports: -40.8% in kgCO₂e/m² for 2030 vs. the 2021 base year under IEA NZE2050. The 2024 report stated that no individual client assessment was carried out for CRE, on the understanding that its transformation would be driven by the power sector; the 2025 report already includes 112 Real Estate companies assessed in 2025 under the Green Transformation Score."
+    },
+    {
+      "resumen": "No changes to the intensity-reduction target; identical target confirmed",
+      "descripcion": "The intensity-reduction target for residential real estate remains identical in both reports: -49.3% in kgCO₂e/m² for 2030 vs. the 2021 base year under IEA NZE2050. No methodological, scope or reference-scenario changes are reported for this sector."
+    },
+    {
+      "resumen": "Consolidation and greater detail of the 2040 coal exit commitment with Just Transition",
+      "descripcion": "The 2024 report announces the commitment to exit coal by 2040 with 49 companies assessed and reports just-transition principles for the first time. The 2025 report substantially consolidates and expands this commitment: it details three categories of coal activities with different timelines and roadmaps (thermal power plants and thermal-coal mines; metallurgical-coal mines; the entire coal value chain), sets out 6 explicit just-transition principles, and assesses 72 companies in the sector (vs. 49 in 2024). The thresholds are unchanged (5% of revenue from coal as the classification criterion)."
+    },
+    {
+      "resumen": "Sector assessed in 2024 disappears from the assessment system in 2025",
+      "descripcion": "The 2024 report reports 11 aluminium companies assessed under the Net Zero Banking Initiative principles. The 2025 report indicates 0 companies assessed in aluminium, as 2025 focused exclusively on the Green Transformation Score's 'target sectors' (energy, coal, cement, steel and real estate). Akbank reports no quantitative emissions-reduction target for the aluminium sector in either report."
+    },
+    {
+      "resumen": "Sector assessed in 2024 disappears from the assessment system in 2025",
+      "descripcion": "The 2024 report reports 3 agriculture-sector companies assessed under the Net Zero Banking Initiative principles. The 2025 report indicates 0 companies assessed in agriculture, as 2025 focused exclusively on the Green Transformation Score's 'target sectors'. Akbank reports no quantitative emissions-reduction target for the agriculture sector in either report."
+    }
+  ],
+  "isbank": [
+    {
+      "resumen": "Addition of quantitative data on the 2023 baseline intensity and sectoral loan balance, confirming the 15% reduction target for 2030.",
+      "descripcion": "While the 2024 report sets the emissions-intensity reduction target at 15% for 2030 versus the 2023 base year under the TPI scenario for Scopes 1+2+3, the 2025 report provides greater transparency by publishing the baseline intensity of 58 kgCO2e/MJ in 2023 heading towards the 2030 target of 49 kgCO2e/MJ, detailing a loan balance of TL 22 billion in 2023 with a PCAF score of 2.52, and reconfirming the strict exclusion of new financing for upstream exploration and extraction projects."
+    },
+    {
+      "resumen": "Increased transparency through the first-time publication of baseline intensity, outstanding loan balance and 2021–2023 historical progress metrics, keeping the 61% reduction target for 2030.",
+      "descripcion": "While the 2024 report reports only the emissions-intensity reduction target of 61% for 2030 versus the 2021 base year under the IEA NZE 2050 scenario for Scopes 1+2, the 2025 report breaks down the baseline intensity of 617 kgCO2e/MWh in 2021 and its evolution to 543 kgCO2e/MWh in 2023 (a 12% reduction) heading towards the 241 kgCO2e/MWh target in 2030, also revealing an increase in the outstanding loan balance from TL 55.3 to 94 billion between 2021 and 2023 with a PCAF score of 3.24."
+    },
+    {
+      "resumen": "Addition of 2021 baseline intensity metrics, progress to 2023 and financed volume, keeping the 10% reduction target for 2030 unchanged.",
+      "descripcion": "While the 2024 report sets the emissions-intensity reduction target at 10% for 2030 based on the 2021 base year under the SBTi 1.5°C scenario for Scopes 1+2, the 2025 report specifies that the baseline intensity of 801 kgCO2e/t steel in 2021 fell 28% to 574 kgCO2e/t in 2023, with a 721 kgCO2e/t target for 2030, also showing loan-portfolio growth from TL 11.3 to 38.7 billion between 2021 and 2023 with a PCAF score of 2.71."
+    },
+    {
+      "resumen": "Quantitative breakdown of the emissions-intensity baseline and outstanding balance in road freight transport, keeping the 20% reduction target for 2030.",
+      "descripcion": "While the 2024 report sets the emissions-intensity reduction target at 20% for 2030 based on 2023 under the NGFS scenario for Scopes 1+2 in road freight transport, the 2025 report supplements this target by reporting a baseline intensity of 159 gCO2e/tkm in 2023 heading towards a value of 127 gCO2e/tkm in 2030, backed by an outstanding loan balance of TL 20.7 billion and a PCAF score of 3.81."
+    },
+    {
+      "resumen": "Publication of quantitative 2021–2023 historical intensity values and the sector's credit exposure, confirming the 21% reduction target for 2030.",
+      "descripcion": "While the 2024 report reports the emissions-intensity reduction target of 21% for 2030 versus the 2021 base year under the SBTi 1.5°C scenario for Scopes 1+2, the 2025 report adds the baseline intensity of 1,175 kgCO2e/t cement in 2021 and its 35% reduction to 763 kgCO2e/t in 2023 versus the 928 kgCO2e/t target for 2030, together with an expansion of the outstanding loan balance from TL 5.2 to 7.6 billion between 2021 and 2023 with a PCAF score of 1.75."
+    },
+    {
+      "resumen": "Not reported in either report.",
+      "descripcion": "Although air transport is identified within the sectors with high climate risk in the heat maps of both years, the bank does not publish sectoral decarbonization targets or intensity metrics for the aviation sector in either document."
+    },
+    {
+      "resumen": "Not reported in either report.",
+      "descripcion": "Although shipping appears classified as a high-climate-risk sector in the heat maps of both reports, the institution does not set decarbonization targets or intensity metrics for this sector in either report."
+    },
+    {
+      "resumen": "Quantitative transparency on the baseline intensity and loan volume of the unified real estate portfolio, keeping the 36% reduction target for 2030.",
+      "descripcion": "While the 2024 report sets the target of a 36% emissions-intensity reduction for 2030 based on 2023 under the IEA NZE 2050 scenario for the overall real estate portfolio (\"Real Estate\") without breaking out the commercial segment, the 2025 report provides the unified portfolio values, reporting a baseline intensity of 49 kgCO2e/m² in 2023 with a target of 31 kgCO2e/m² in 2030 for Scopes 1+2+3, together with a loan balance of TL 43.3 billion and a PCAF score of 3.41."
+    },
+    {
+      "resumen": "Reported under the consolidated Real Estate sector framework with a breakdown of baseline intensity and balance metrics, keeping the 36% reduction target for 2030.",
+      "descripcion": "While the 2024 report publishes the 36% intensity-reduction target for 2030 versus the 2023 base year, covering the entire real estate sector (\"Real Estate\") without residential differentiation, the 2025 report adds the consolidated quantitative information with a baseline intensity of 49 kgCO2e/m² in 2023 heading towards 31 kgCO2e/m² in 2030 for Scopes 1+2+3, with an outstanding financed balance of TL 43.3 billion and a PCAF score of 3.41."
+    },
+    {
+      "resumen": "Maintained without change: the policy of gradually phasing out coal financing by 2040 and the exclusion of new projects.",
+      "descripcion": "Both the 2024 report and the 2025 report confirm the same divestment strategy, which prohibits financing new thermal-coal plants (since 2020) and new coal mines (since 2021), keeping the firm target of a total phase-out of financing for coal-linked activities by 2040."
+    },
+    {
+      "resumen": "Quantitative definition of the 2023 baseline intensity and outstanding portfolio balance, confirming the 7% reduction target for 2030.",
+      "descripcion": "While the 2024 report sets the emissions-intensity reduction target at 7% for 2030 based on 2023 under the TPI scenario for Scopes 1+2, the 2025 report specifies the baseline intensity of 740 kgCO2e/t Al in 2023 heading towards 688 kgCO2e/t Al in 2030, reporting an outstanding loan balance of TL 2.2 billion with a PCAF score of 2.45."
+    },
+    {
+      "resumen": "Publication of quantitative baseline intensity metrics by crop type (wheat, maize and rice) and financed balance, keeping the 2030 reduction targets.",
+      "descripcion": "While the 2024 report sets the 2030 intensity-reduction targets versus the 2023 base year under SBTi 1.5°C for wheat (-14%), maize (-15%) and rice (-16%) in Scopes 1+2, the 2025 report reveals the 2023 baseline intensities of 607 kgCO2e/t for wheat (target 522 kgCO2e/t), 580 kgCO2e/t for maize (target 493 kgCO2e/t) and 976 kgCO2e/t for rice (target 820 kgCO2e/t), detailing an outstanding loan balance of TL 10.8 billion with a PCAF score of 3.56."
+    }
   ]
 }
