@@ -6696,8 +6696,8 @@ function renderCompareGrid(ids, container) {
           <div class="mini-text">${c.resumen}</div>
           ${hasDesc ? `<div class="mini-card-detail" id="mini-${uid}">${c.descripcion}
             <div class="mini-refs">
-              ${c.ref2024 && c.ref2024 !== '—' ? `<span class="mini-ref">2024·${c.ref2024}</span>` : ''}
-              ${c.ref2025 && c.ref2025 !== '—' ? `<span class="mini-ref">2025·${c.ref2025}</span>` : ''}
+              ${refChip(c.banco, 2024, c.ref2024)}
+              ${refChip(c.banco, 2025, c.ref2025)}
             </div>
           </div>` : ''}
         </div>`;
