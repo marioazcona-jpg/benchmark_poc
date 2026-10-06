@@ -26,6 +26,9 @@
   --amber: #B98409;
   --amber-bg: #FFF5E5;
   --red: #C30A0A;
+  /* Variación de cifras (bueno/malo): versiones medias, más visibles que los 'dark' del manual */
+  --pos: #1E8A3C;
+  --neg: #D9262B;
   --red-bg: #FFE9E5;
   --gray-bg: #F2F4F5;
   --font: 'Lato', sans-serif;
@@ -220,8 +223,8 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
 .intensity-val.empty { color: var(--text-tertiary); }
 .intensity-val.highlight { color: var(--bbva-blue); font-weight: 500; }
 .pct-val { font-family: var(--mono); font-size: 12px; }
-.pct-val.positive { color: var(--green); }
-.pct-val.negative { color: var(--red); }
+.pct-val.positive { color: var(--pos); }
+.pct-val.negative { color: var(--neg); }
 .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; font-size: 10px; font-weight: 600; white-space: nowrap; letter-spacing: .02em; border: 1px solid; }
 .status-pill.ahead { color: var(--green); border-color: rgba(2,71,0,0.35); background: rgba(2,71,0,0.05); }
 .status-pill.on-track { color: var(--amber); border-color: rgba(185,132,9,0.35); background: rgba(185,132,9,0.05); }
@@ -4956,7 +4959,7 @@ function renderKPIs() {
     if (bv === null || sv === null || sv === 0) return '';
     const bIsHigh = bv > sv;
     const good  = upGood ? bIsHigh : !bIsHigh;
-    const color = good ? '#024700' : '#C30A0A';
+    const color = good ? 'var(--pos)' : 'var(--neg)';
     const arrow = bIsHigh ? '▲' : '▼';
     const pct   = Math.abs(((bv - sv) / Math.abs(sv)) * 100).toFixed(1);
     return `<span style="font-size:10.5px;font-weight:700;color:${color};margin-left:5px;white-space:nowrap;vertical-align:middle">${arrow}${pct}%</span>`;
@@ -4966,7 +4969,7 @@ function renderKPIs() {
   const cagrEl = (c) => {
     if (c === null || c === undefined) return valEl(null) + unitEl(L('%/año', '%/yr'));
     const pct = c * 100;
-    const color = pct < 0 ? '#024700' : pct > 0 ? '#C30A0A' : 'var(--text-primary)';
+    const color = pct < 0 ? 'var(--pos)' : pct > 0 ? 'var(--neg)' : 'var(--text-primary)';
     const txt = (pct > 0 ? '+' : '') + pct.toFixed(1);
     return `<span style="font-size:20px;font-weight:600;font-family:var(--mono);color:${color};line-height:1">${txt}</span>` + unitEl(L('%/año', '%/yr'));
   };
@@ -4975,7 +4978,7 @@ function renderKPIs() {
     if (bv === null || sv === null || bv === undefined || sv === undefined) return '';
     const diffpp = (bv - sv) * 100;
     const good = bv < sv; // reducir más rápido (más negativo) es mejor
-    const color = good ? '#024700' : '#C30A0A';
+    const color = good ? 'var(--pos)' : 'var(--neg)';
     const arrow = bv < sv ? '▼' : '▲';
     return `<span style="font-size:10.5px;font-weight:700;color:${color};margin-left:5px;white-space:nowrap;vertical-align:middle">${arrow}${Math.abs(diffpp).toFixed(1)}pp</span>`;
   };
@@ -6003,7 +6006,7 @@ function renderScenarioScreen() {
   const yearChip = t => `<span style="margin-left:auto;font-size:10px;background:var(--gray-bg);border:1px solid var(--border);border-radius:10px;padding:1px 7px;color:var(--text-tertiary);font-weight:500">${t}</span>`;
   const cHead = inner => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${inner}</div>`;
   const hLbl = t => `<span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)">${t}</span>`;
-  const bigVal = (val, u) => `<div style="display:flex;align-items:baseline;gap:3px"><span style="font-size:26px;font-weight:600;font-family:var(--mono);color:var(--text-primary)">${val}</span><span style="font-size:11px;color:var(--text-secondary)">${u}</span></div>`;
+  const bigVal = (val, u, col) => `<div style="display:flex;align-items:baseline;gap:3px"><span style="font-size:26px;font-weight:600;font-family:var(--mono);color:${col || 'var(--text-primary)'}">${val}</span><span style="font-size:11px;color:var(--text-secondary)">${u}</span></div>`;
   const subTxt = t => `<div style="font-size:11px;color:var(--text-tertiary);margin-top:6px;line-height:1.4">${t}</div>`;
 
   // 1 · BBVA hoy
@@ -6025,14 +6028,14 @@ function renderScenarioScreen() {
   const cagrReal = (bbva && bbva.base > 0 && realLatest && realLatest.v > 0 && bbva.baseY && realLatest.y > bbva.baseY)
     ? (Math.pow(realLatest.v / bbva.base, 1 / (realLatest.y - bbva.baseY)) - 1) * 100 : null;
   const ambSub = cagrReal != null ? L(`CAGR real a ${realLatest.y}: ${_cagrFmt(cagrReal)} %/año`, `Actual CAGR to ${realLatest.y}: ${_cagrFmt(cagrReal)} %/yr`) : (v ? v.txt : L('Sin objetivo BBVA en este sector', 'No BBVA target in this sector'));
-  const cardAmb = `<div class="kpi-card">${cHead(hLbl(L('Ambición de BBVA', "BBVA's ambition")))}${cagrTgt != null ? bigVal(_cagrFmt(cagrTgt), L('%/año', '%/yr')) : '<div style="margin-top:2px"><span style="font-size:12px;color:var(--text-tertiary)">—</span></div>'}${subTxt(ambSub)}</div>`;
+  const cardAmb = `<div class="kpi-card">${cHead(hLbl(L('Ambición de BBVA', "BBVA's ambition")))}${cagrTgt != null ? bigVal(_cagrFmt(cagrTgt), L('%/año', '%/yr'), cagrTgt < 0 ? 'var(--pos)' : cagrTgt > 0 ? 'var(--neg)' : null) : '<div style="margin-top:2px"><span style="font-size:12px;color:var(--text-tertiary)">—</span></div>'}${subTxt(ambSub)}</div>`;
 
   // 4 · Referencia Net Zero global 2030 + posición de BBVA (datapoint + % coloreado)
   let gapGtxt = L('referencia WEO2025', 'WEO2025 reference');
   if (tgt != null && gNZ2030 != null) {
     const g = (tgt - gNZ2030) / Math.abs(gNZ2030) * 100;
     const below = g <= 0;                                  // por debajo de NZE = más ambicioso
-    const col = below ? '#024700' : '#C30A0A';            // verde / rojo
+    const col = below ? 'var(--pos)' : 'var(--neg)';            // verde / rojo
     const pct = `${g > 0 ? '+' : '−'}${Math.abs(g).toFixed(0)}%`;
     gapGtxt = L(`objetivo BBVA <strong style="color:var(--text-primary)">${fmtv(tgt)}</strong> · <span style="color:${col};font-weight:700">${pct}</span> <span style="opacity:.85">${below ? 'por debajo' : 'por encima'} de NZE</span>`,
                 `BBVA target <strong style="color:var(--text-primary)">${fmtv(tgt)}</strong> · <span style="color:${col};font-weight:700">${pct}</span> <span style="opacity:.85">${below ? 'below' : 'above'} NZE</span>`);
@@ -6115,7 +6118,7 @@ function scnSetBlockTabs(mode) {
 const _scnYearChip = t => `<span style="margin-left:auto;font-size:10px;background:var(--gray-bg);border:1px solid var(--border);border-radius:10px;padding:1px 7px;color:var(--text-tertiary);font-weight:500">${t}</span>`;
 const _scnCHead = inner => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${inner}</div>`;
 const _scnHLbl = t => `<span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)">${t}</span>`;
-const _scnBigVal = (val, u) => `<div style="display:flex;align-items:baseline;gap:3px"><span style="font-size:26px;font-weight:600;font-family:var(--mono);color:var(--text-primary)">${val}</span><span style="font-size:11px;color:var(--text-secondary)">${u}</span></div>`;
+const _scnBigVal = (val, u, col) => `<div style="display:flex;align-items:baseline;gap:3px"><span style="font-size:26px;font-weight:600;font-family:var(--mono);color:${col || 'var(--text-primary)'}">${val}</span><span style="font-size:11px;color:var(--text-secondary)">${u}</span></div>`;
 const _scnSubTxt = t => `<div style="font-size:11px;color:var(--text-tertiary);margin-top:6px;line-height:1.4">${t}</div>`;
 const _scnFmtv = v => v == null ? '—' : (Math.abs(v) >= 100 ? String(Math.round(v)) : Number(v).toFixed(2));
 
@@ -6186,7 +6189,7 @@ function renderScnOilGas() {
   const cagrRealOG = (bbva && bbva.base > 0 && realLatest && realLatest.v > 0 && bbva.baseY && realLatest.y > bbva.baseY)
     ? (Math.pow(realLatest.v / bbva.base, 1 / (realLatest.y - bbva.baseY)) - 1) * 100 : null;
   const ambSubOG = cagrRealOG != null ? L(`CAGR real a ${realLatest.y}: ${_cagrFmtOG(cagrRealOG)} %/año`, `Actual CAGR to ${realLatest.y}: ${_cagrFmtOG(cagrRealOG)} %/yr`) : (v ? v.txt : L('Sin objetivo BBVA en este sector', 'No BBVA target in this sector'));
-  const cardAmb = `<div class="kpi-card">${_scnCHead(_scnHLbl(L('Ambición de BBVA', "BBVA's ambition")))}${cagrTgtOG != null ? _scnBigVal(_cagrFmtOG(cagrTgtOG), L('%/año', '%/yr')) : '<div style="margin-top:2px"><span style="font-size:12px;color:var(--text-tertiary)">—</span></div>'}${_scnSubTxt(ambSubOG)}</div>`;
+  const cardAmb = `<div class="kpi-card">${_scnCHead(_scnHLbl(L('Ambición de BBVA', "BBVA's ambition")))}${cagrTgtOG != null ? _scnBigVal(_cagrFmtOG(cagrTgtOG), L('%/año', '%/yr'), cagrTgtOG < 0 ? 'var(--pos)' : cagrTgtOG > 0 ? 'var(--neg)' : null) : '<div style="margin-top:2px"><span style="font-size:12px;color:var(--text-tertiary)">—</span></div>'}${_scnSubTxt(ambSubOG)}</div>`;
   const gNZ2050 = (G && G.nz) ? G.nz[G.years.indexOf(2050)] : null;
   const cardGlobal = `<div class="kpi-card">${_scnCHead(_scnHLbl(L('Global mundial · NZE 2050', 'Worldwide global · NZE 2050')))}${_scnBigVal(gNZ2050 != null ? _scnFmtv(gNZ2050 / 1000) : '—', 'Gt CO₂')}${_scnSubTxt(L('emisiones mundiales O&G (escala aparte)', 'worldwide O&G emissions (separate scale)'))}</div>`;
   document.getElementById('scnCards').innerHTML = cardHoy + cardObj + cardAmb + cardGlobal;
