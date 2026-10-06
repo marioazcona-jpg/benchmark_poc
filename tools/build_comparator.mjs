@@ -151,6 +151,42 @@ for (const id of Object.keys(analysis)) {
   delete analysis[id]._ord;
 }
 
+// ── Fusión de traducciones EN (opcional) ──────────────────────────────────
+// data/comp_cambios_en.json  → { bankId: [ {resumen,descripcion,alerta}, ... ] }
+//   (array en el MISMO orden que los cambios de ese banco en el CSV)
+// data/comp_analisis_en.json → { bankId: { intro, points: [ {title,body}, ... ] } }
+// Añade campos _en a los objetos; si falta, el dashboard cae al español.
+function readJsonSafe(p) {
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8')); }
+  catch (e) { return null; }
+}
+const camEN = readJsonSafe('data/comp_cambios_en.json');
+const anaEN = readJsonSafe('data/comp_analisis_en.json');
+let enChangesApplied = 0, enAnalysisApplied = 0;
+if (camEN) {
+  const ctr = {};
+  for (const d of data) {
+    const arr = camEN[d.banco]; if (!Array.isArray(arr)) continue;
+    const i = (ctr[d.banco] = (ctr[d.banco] ?? -1) + 1);
+    const e = arr[i]; if (!e) continue;
+    if (e.resumen) { d.resumen_en = e.resumen; enChangesApplied++; }
+    if (e.descripcion) d.descripcion_en = e.descripcion;
+    if (e.alerta) d.alerta_en = e.alerta;
+  }
+}
+if (anaEN) {
+  for (const [id, a] of Object.entries(analysis)) {
+    const e = anaEN[id]; if (!e) continue;
+    if (e.intro) a.intro_en = e.intro;
+    if (Array.isArray(e.points)) a.points.forEach((p, j) => {
+      const pe = e.points[j]; if (!pe) return;
+      if (pe.title) p.title_en = pe.title;
+      if (pe.body) p.body_en = pe.body;
+    });
+    enAnalysisApplied++;
+  }
+}
+
 // ── YOY_BANKS (only banks with data) ──────────────────────────────────────
 const withData = new Set([...data.map(d => d.banco), ...Object.keys(analysis)]);
 const orderedIds = [...ORDER.filter(id => withData.has(id)), ...[...withData].filter(id => !ORDER.includes(id))];
@@ -183,6 +219,7 @@ fs.writeFileSync(HTML, html);
 
 // ── Report ────────────────────────────────────────────────────────────────
 console.log(`\nCAMBIOS: ${data.length} entradas · ANALISIS: ${Object.keys(analysis).length} bancos`);
+console.log(`EN aplicado: ${enChangesApplied} cambios · ${enAnalysisApplied} bancos con análisis`);
 console.log('Bancos en comparador:', banks.map(b => b.id).join(', '));
 console.log('Tipos usados:', [...tipos].sort().join(', '));
 const perBank = {}; for (const d of data) perBank[d.banco] = (perBank[d.banco] || 0) + 1;
