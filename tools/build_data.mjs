@@ -48,6 +48,9 @@ const BANK_KEY = {
   'Lloyds Banking Group plc': 'Lloyds', 'UniCredit S.p.A.': 'UniCredit',
   'Morgan Stanley': 'MorganStanley', 'The Goldman Sachs Group, Inc.': 'Goldman',
   'Commerzbank AG': 'Commerzbank', 'UBS Group AG': 'UBS',
+  'Crédit Agricole S.A.': 'CreditAgricole', 'Credit Agricole S.A.': 'CreditAgricole',
+  'Crédit Agricole': 'CreditAgricole', 'Credit Agricole': 'CreditAgricole',
+  'Groupe Crédit Agricole': 'CreditAgricole', 'Crédit Agricole Group': 'CreditAgricole',
 };
 const SECTOR_KEY = {
   'Power': 'Power', 'Oil & Gas': 'Oil & Gas', 'Steel': 'Steel',
@@ -256,7 +259,8 @@ for (let ri = 0; ri < data.length; ri++) {
   const r = data[ri];
   const csvLine = ri + 2; // 1-based incl header
   const bankRaw = (r[C.bank] || '').trim();
-  const bank = BANK_KEY[bankRaw];
+  // Crédit Agricole: acepta cualquier variante del nombre (con/sin tilde, S.A., Group…)
+  const bank = BANK_KEY[bankRaw] || (/cr[ée]dits+agricole/i.test(bankRaw) ? 'CreditAgricole' : undefined);
   const secNorm = (r[C.sectorNorm] || '').trim();
   const sector = SECTOR_KEY[secNorm];
   if (!bank) { excluded.push({ csvLine, why: 'banco desconocido: ' + bankRaw }); continue; }
@@ -406,12 +410,13 @@ const NEW_META = {
   Goldman:       { flag: '🇺🇸', color: '#6699CC', european: false, spanish: false, tier1: true,  mainPeer: false, label: 'Goldman Sachs' },
   Commerzbank:   { flag: '🇩🇪', color: '#C9A227', european: true,  spanish: false, tier1: true,  mainPeer: false, label: 'Commerzbank' },
   UBS:           { flag: '🇨🇭', color: '#E60000', european: false, spanish: false, tier1: true,  mainPeer: false, label: 'UBS' },
+  CreditAgricole:{ flag: '🇫🇷', color: '#009597', european: true,  spanish: false, tier1: true,  mainPeer: false, label: 'Crédit Agricole' },
 };
 
 const SELECTOR_DEFAULT = { 'Oil & Gas': 'Absolutas', Shipping: 'Alignment', Steel: 'Intensidad', Aluminium: 'Intensidad', Agriculture: 'Absolutas', Aviation: 'RTK' };
 const SUBMETRIC_LABEL = { 'Oil & Gas': 'MtCO₂e', Intensidad: 'gCO₂e/MJ', Score: 'SSP score', Alignment: 'Alignment Δ (%)', 'Int. económica': 'tCO₂e/€m', 'Int. física': 'físico' };
 
-const ORDER = ['BBVA', 'Sabadell', 'CaixaBank', 'Santander', 'SocGen', 'ING', 'Intesa', 'Barclays', 'StanChart', 'HSBC', 'Nordea', 'Bancolombia', 'Citigroup', 'JPMorgan', 'Lloyds', 'UniCredit', 'NatWest', 'Commerzbank', 'UBS', 'MorganStanley', 'Goldman', 'Isbank', 'Akbank'];
+const ORDER = ['BBVA', 'Sabadell', 'CaixaBank', 'Santander', 'SocGen', 'CreditAgricole', 'ING', 'Intesa', 'Barclays', 'StanChart', 'HSBC', 'Nordea', 'Bancolombia', 'Citigroup', 'JPMorgan', 'Lloyds', 'UniCredit', 'NatWest', 'Commerzbank', 'UBS', 'MorganStanley', 'Goldman', 'Isbank', 'Akbank'];
 const rank = (b) => { const i = ORDER.indexOf(b); return i < 0 ? 999 : i; };
 const PRIORITY = new Set(['BBVA', 'Santander', 'CaixaBank', 'Sabadell', 'SocGen', 'ING', 'Intesa']);
 const rnd = (v) => v == null ? null : Math.round(v * 1000) / 1000;

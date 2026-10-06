@@ -44,6 +44,8 @@ const BANK_MAP = {
   'jpmorgan': 'jpmorgan', 'jpmorgan chase': 'jpmorgan', 'jp morgan': 'jpmorgan',
   'morgan stanley': 'morganstanley', 'morgan chase': 'morganstanley',
   'bnp': 'bnp', 'bnp paribas': 'bnp',
+  'crédit agricole': 'creditagricole', 'credit agricole': 'creditagricole', 'crédit agricole sa': 'creditagricole',
+  'credit agricole sa': 'creditagricole', 'groupe crédit agricole': 'creditagricole', 'groupe credit agricole': 'creditagricole',
   'ubs': 'ubs',
   'goldman': 'goldman', 'goldman sachs': 'goldman',
   'isbank': 'isbank', 'işbank': 'isbank', 'türkiye iş bankası': 'isbank',
@@ -79,6 +81,7 @@ const META = {
   ing: { name: 'ING Group', abbr: 'IN', color: '#FF6200', flag: '🇳🇱', country: 'Países Bajos' },
   hsbc: { name: 'HSBC', abbr: 'HS', color: '#DB0011', flag: '🇬🇧', country: 'Reino Unido' },
   bnp: { name: 'BNP Paribas', abbr: 'BN', color: '#00965E', flag: '🇫🇷', country: 'Francia' },
+  creditagricole: { name: 'Crédit Agricole', abbr: 'CA', color: '#009597', flag: '🇫🇷', country: 'Francia' },
   jpmorgan: { name: 'JPMorgan', abbr: 'JP', color: '#003087', flag: '🇺🇸', country: 'Estados Unidos' },
   citi: { name: 'Citi', abbr: 'CI', color: '#003B70', flag: '🇺🇸', country: 'Estados Unidos' },
   barclays: { name: 'Barclays', abbr: 'BA', color: '#00AEEF', flag: '🇬🇧', country: 'Reino Unido' },
@@ -108,9 +111,9 @@ const DOMAINS = {
   intesa: 'intesasanpaolo.com', nordea: 'nordea.com', caixabank: 'caixabank.es', stanchart: 'sc.com',
   lloyds: 'lloydsbankinggroup.com', akbank: 'akbank.com', commerzbank: 'commerzbank.com',
   morganstanley: 'morganstanley.com', bancolombia: 'bancolombia.com', goldman: 'goldmansachs.com',
-  ubs: 'ubs.com', isbank: 'isbank.com.tr', bbva: 'bbva.com',
+  ubs: 'ubs.com', isbank: 'isbank.com.tr', bbva: 'bbva.com', creditagricole: 'credit-agricole.com',
 };
-const ORDER = ['bbva', 'santander', 'ing', 'hsbc', 'bnp', 'jpmorgan', 'citi', 'barclays', 'natwest', 'socgen', 'deutsche', 'unicredit', 'sabadell', 'intesa', 'nordea', 'caixabank', 'stanchart', 'lloyds', 'commerzbank', 'morganstanley', 'goldman', 'ubs', 'bancolombia', 'akbank', 'isbank'];
+const ORDER = ['bbva', 'santander', 'ing', 'hsbc', 'bnp', 'jpmorgan', 'citi', 'barclays', 'natwest', 'socgen', 'creditagricole', 'deutsche', 'unicredit', 'sabadell', 'intesa', 'nordea', 'caixabank', 'stanchart', 'lloyds', 'commerzbank', 'morganstanley', 'goldman', 'ubs', 'bancolombia', 'akbank', 'isbank'];
 
 // ── Parse CAMBIOS → YOY_DATA ──────────────────────────────────────────────
 const cam = parseCSV(read('data/comp_cambios.csv')).slice(1).filter(r => r.some(c => (c || '').trim()));
