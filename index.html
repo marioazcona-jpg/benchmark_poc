@@ -4852,7 +4852,7 @@ const regionLabel = r => (LANG === 'en' && REGION_EN[r]) ? REGION_EN[r] : r;
 // Unidad de métrica para mostrar. Solo "Exposición (€mn)" está en español; el
 // resto de unidades son neutras. La CLAVE cruda (sd.metric) no se toca, porque la
 // lógica de mLabel comprueba metric.includes('Exposición').
-const metricLabel = m => (LANG === 'en' && m === 'Exposición (€mn)') ? 'Exposure (€mn)' : m;
+const metricLabel = m => LANG !== 'en' ? m : (m === 'Exposición (€mn)' ? 'Exposure (€mn)' : String(m).replace('(0 = alineado)', '(0 = aligned)'));
 
 // Formato de número de eje según idioma (punto vs coma decimal).
 const decTick = v => Number(v).toLocaleString(LANG === 'en' ? 'en-US' : 'es-ES');
@@ -5518,7 +5518,17 @@ function renderRelevant() {
   let avgLine = '';
   if (sAvg !== null) {
     const ieaVal = parseFloat(sd.ieaRef);
-    if (Number.isFinite(ieaVal)) {
+    if (ieaVal === 0) {
+      // Métricas de alineamiento (score/delta) con objetivo 0: el % relativo no
+      // tiene sentido (división por 0) → diferencia absoluta en la propia unidad.
+      const d = Math.abs(sAvg).toFixed(2);
+      const gapStr = sAvg > 0
+        ? L(`<strong>${d} por encima</strong> del objetivo`, `<strong>${d} above</strong> target`)
+        : L(`<strong>${d} por debajo</strong> del objetivo`, `<strong>${d} below</strong> target`);
+      avgLine = L(
+        `Media del sector: <strong>${Number(sAvg).toFixed(2)} ${sd.metric}</strong> vs objetivo IEA 2030 de <strong>0</strong> (${gapStr}).`,
+        `Sector average: <strong>${Number(sAvg).toFixed(2)} ${metricLabel(sd.metric)}</strong> vs IEA 2030 target of <strong>0</strong> (${gapStr}).`);
+    } else if (Number.isFinite(ieaVal)) {
       const gap = ((sAvg - ieaVal) / Math.abs(ieaVal) * 100).toFixed(1);
       const gapStr = sAvg > ieaVal
         ? L(`<strong>${gap}% por encima</strong> del objetivo`, `<strong>${gap}% above</strong> target`)
@@ -5536,7 +5546,7 @@ function renderRelevant() {
   }
 
   let bbvaLine = '';
-  if (bbvaInt !== null && sAvg !== null) {
+  if (bbvaInt !== null && sAvg !== null && sAvg !== 0) {
     const diff = ((bbvaInt - sAvg) / Math.abs(sAvg) * 100).toFixed(1);
     const dir = bbvaInt < sAvg
       ? L(`<strong>${Math.abs(diff)}% inferior</strong> a la media`, `<strong>${Math.abs(diff)}% below</strong> the average`)
