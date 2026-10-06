@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Decarbonization Peers Benchmark — BBVA CIB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
@@ -28,7 +28,7 @@
   --red: #B91C1C;
   --red-bg: #FEE2E2;
   --gray-bg: #F1F5F9;
-  --font: 'DM Sans', sans-serif;
+  --font: 'Source Serif 4', Georgia, serif;
   --mono: 'DM Mono', monospace;
   --radius: 10px;
   --radius-sm: 6px;
@@ -479,8 +479,8 @@ a.ref-chip.link:hover { background: var(--bbva-blue); color: #fff; border-color:
 <nav class="nav">
   <div class="nav-logo">
     <svg width="108" height="44" viewBox="0 0 108 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="0" y="30" font-family="DM Sans, sans-serif" font-size="26" font-weight="700" fill="white" letter-spacing="-1">BBVA</text>
-      <text x="2" y="42" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.4)" letter-spacing="3.5">CIB</text>
+      <text x="0" y="30" font-family="'Source Serif 4', Georgia, serif" font-size="26" font-weight="700" fill="white" letter-spacing="-1">BBVA</text>
+      <text x="2" y="42" font-family="'Source Serif 4', Georgia, serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.4)" letter-spacing="3.5">CIB</text>
     </svg>
   </div>
   <div class="nav-label" data-i18n="navLabel">Navegación</div>
@@ -5358,7 +5358,7 @@ function drawChart() {
           ctx.beginPath(); ctx.moveTo(lX - 3, baseY); ctx.lineTo(lX - 3, lY + 3); ctx.stroke();
           ctx.setLineDash([]);
         }
-        ctx.font = '600 9.5px "DM Sans", sans-serif';
+        ctx.font = '600 9.5px "Source Serif 4", Georgia, serif';
         ctx.fillStyle = bm.color || '#999';
         ctx.textAlign = 'left';
         ctx.fillText(ds.label, lX, lY + 4);
@@ -5390,7 +5390,7 @@ function drawChart() {
         ctx.moveTo(rx, pT); ctx.lineTo(rx + 4, pT);
         ctx.lineTo(rx + 4, pB); ctx.lineTo(rx, pB);
         ctx.stroke();
-        ctx.font = 'italic 8px "DM Sans", sans-serif';
+        ctx.font = 'italic 8px "Source Serif 4", Georgia, serif';
         ctx.fillStyle = 'rgba(70,120,200,0.35)';
         ctx.fillText(sd.scenarioSource ? 'IEA WEO2025' : 'IEA scenarios', rx + 8, (pT + pB) / 2 + 4);
       }
@@ -5416,7 +5416,7 @@ function drawChart() {
           ctx.beginPath(); ctx.moveTo(rx + 3, pNat); ctx.lineTo(rx + 3, py); ctx.stroke();
           ctx.setLineDash([]);
         }
-        ctx.font = '600 9px "DM Sans", sans-serif';
+        ctx.font = '600 9px "Source Serif 4", Georgia, serif';
         ctx.fillStyle = cLabel;
         ctx.fillText(sc.label, rx + 8, py + 4);
         ctx.font = '500 8px "DM Mono", monospace';
@@ -6216,7 +6216,7 @@ function renderScnOgGlobal(G) {
       interaction: { mode: 'nearest', axis: 'xy', intersect: false },
       onHover: onScnHover,
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 10, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 10 } },
+        legend: { position: 'bottom', labels: { font: { size: 10, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 10 } },
         tooltip: scnSeriesTooltip('Gt CO₂', years),
       },
       scales: {
@@ -6471,7 +6471,7 @@ function drawScenarioChart(P, G, bbva, tgt) {
       interaction: { mode: 'nearest', axis: 'xy', intersect: false },
       onHover: onScnHover,
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
         tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
@@ -6634,7 +6634,7 @@ function renderScnCompare() {
         setScnCmpTramo(i);
       },
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 11, family: 'DM Sans' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
         tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
