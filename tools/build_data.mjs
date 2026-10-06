@@ -130,10 +130,14 @@ function normStatus(s) {
   const t = String(s || '').toLowerCase();
   if (!t.trim()) return null;
   if (/seguimiento|monitoring/.test(t)) return 'monitoring';
+  if (/above target/.test(t)) return 'misaligned';                       // "5% above baseline (above target)"
+  if (/below (the )?2030 target/.test(t)) return 'ahead of target';      // "below 2030 target (range)"
   if (/ahead|exceed|already below|target met|^aligned|\baligned\b|superior/.test(t)) return 'ahead of target';
   if (/misalign|no alineado|off track|worsen|behind|retroceso/.test(t)) return 'misaligned';
-  if (/on.?track|avance|on track/.test(t)) return 'on-track';
-  return 'on-track';
+  if (/on.?track|avance|within .*target|full exit/.test(t)) return 'on-track';
+  // No reconocido (p.ej. un % suelto "240,05%" o "(4)% from baseline"): sin
+  // estado, en vez de asumir "en trayectoria" e inflar el conteo del panel.
+  return null;
 }
 
 // Short disambiguating label when one bank has several rows in the same tab
