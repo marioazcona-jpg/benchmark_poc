@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Decarbonization Peers Benchmark — BBVA CIB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Source+Serif+4:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
@@ -28,7 +28,8 @@
   --red: #B91C1C;
   --red-bg: #FEE2E2;
   --gray-bg: #F1F5F9;
-  --font: 'Source Serif 4', Georgia, serif;
+  --font: 'Lato', sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
   --mono: 'DM Mono', monospace;
   --radius: 10px;
   --radius-sm: 6px;
@@ -266,7 +267,7 @@ td { padding: 12px 12px; vertical-align: middle; white-space: nowrap; }
 /* SECTOR HERO CUSTOM DROPDOWN */
 .sector-hero-dropdown { position: relative; }
 .sector-hero-trigger { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
-.sector-hero-trigger-label { color: #fff; font-size: 26px; font-weight: 700; font-family: var(--font); letter-spacing: -.02em; line-height: 1.1; }
+.sector-hero-trigger-label { color: #fff; font-size: 26px; font-weight: 700; font-family: var(--serif); letter-spacing: -.02em; line-height: 1.1; }
 .sector-hero-trigger-chevron { color: rgba(255,255,255,.45); flex-shrink: 0; transition: transform .18s; }
 .sector-hero-trigger:hover .sector-hero-trigger-label { opacity: .88; }
 .sector-hero-dropdown.open .sector-hero-trigger-chevron { transform: rotate(180deg); }
@@ -470,6 +471,10 @@ a.ref-chip.link:hover { background: var(--bbva-blue); color: #fff; border-color:
 .page-header-row .page-header { margin-bottom: 0; }
 .data-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; box-shadow: var(--shadow); }
 .data-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+/* Tipografía: Lato para texto plano; Source Serif 4 para titulares y elementos destacados */
+h1, h2, h3, .header-title, .page-header h1, .card-title, .modal-title, .placeholder-title,
+.scn-wip-title, .scn-cmp-title, .scn-og-ctx-title, .bank-header-name, .ap-title,
+.sector-acc-name, .bank-logo-name { font-family: var(--serif); }
 </style>
 </head>
 <body>
@@ -5358,7 +5363,7 @@ function drawChart() {
           ctx.beginPath(); ctx.moveTo(lX - 3, baseY); ctx.lineTo(lX - 3, lY + 3); ctx.stroke();
           ctx.setLineDash([]);
         }
-        ctx.font = '600 9.5px "Source Serif 4", Georgia, serif';
+        ctx.font = '600 9.5px "Lato", sans-serif';
         ctx.fillStyle = bm.color || '#999';
         ctx.textAlign = 'left';
         ctx.fillText(ds.label, lX, lY + 4);
@@ -5390,7 +5395,7 @@ function drawChart() {
         ctx.moveTo(rx, pT); ctx.lineTo(rx + 4, pT);
         ctx.lineTo(rx + 4, pB); ctx.lineTo(rx, pB);
         ctx.stroke();
-        ctx.font = 'italic 8px "Source Serif 4", Georgia, serif';
+        ctx.font = 'italic 8px "Lato", sans-serif';
         ctx.fillStyle = 'rgba(70,120,200,0.35)';
         ctx.fillText(sd.scenarioSource ? 'IEA WEO2025' : 'IEA scenarios', rx + 8, (pT + pB) / 2 + 4);
       }
@@ -5416,7 +5421,7 @@ function drawChart() {
           ctx.beginPath(); ctx.moveTo(rx + 3, pNat); ctx.lineTo(rx + 3, py); ctx.stroke();
           ctx.setLineDash([]);
         }
-        ctx.font = '600 9px "Source Serif 4", Georgia, serif';
+        ctx.font = '600 9px "Lato", sans-serif';
         ctx.fillStyle = cLabel;
         ctx.fillText(sc.label, rx + 8, py + 4);
         ctx.font = '500 8px "DM Mono", monospace';
@@ -6228,7 +6233,7 @@ function renderScnOgGlobal(G) {
       interaction: { mode: 'nearest', axis: 'xy', intersect: false },
       onHover: onScnHover,
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 10, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 10 } },
+        legend: { position: 'bottom', labels: { font: { size: 10, family: 'Lato' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 10 } },
         tooltip: scnSeriesTooltip('Gt CO₂', years),
       },
       scales: {
@@ -6483,7 +6488,7 @@ function drawScenarioChart(P, G, bbva, tgt) {
       interaction: { mode: 'nearest', axis: 'xy', intersect: false },
       onHover: onScnHover,
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Lato' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 14, filter: it => it.text.startsWith('BBVA ') } },
         tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
@@ -6646,7 +6651,7 @@ function renderScnCompare() {
         setScnCmpTramo(i);
       },
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Source Serif 4' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
+        legend: { position: 'bottom', labels: { font: { size: 11, family: 'Lato' }, usePointStyle: true, boxWidth: 6, boxHeight: 6, padding: 12 } },
         tooltip: scnSeriesTooltip(P.unit, years),
       },
       scales: {
