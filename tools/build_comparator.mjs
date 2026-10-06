@@ -99,7 +99,7 @@ const META = {
   goldman: { name: 'Goldman Sachs', abbr: 'GS', color: '#6699CC', flag: '🇺🇸', country: 'Estados Unidos' },
   ubs: { name: 'UBS', abbr: 'UB', color: '#E60000', flag: '🇨🇭', country: 'Suiza' },
   isbank: { name: 'İşbank', abbr: 'IB', color: '#0E4C92', flag: '🇹🇷', country: 'Turquía' },
-  bbva: { name: 'BBVA', abbr: 'BB', color: '#004481', flag: '🇪🇸', country: 'España' },
+  bbva: { name: 'BBVA', abbr: 'BB', color: '#001391', flag: '🇪🇸', country: 'España' },
 };
 const DOMAINS = {
   santander: 'santander.com', ing: 'ing.com', hsbc: 'hsbc.com', bnp: 'bnpparibas.com',
