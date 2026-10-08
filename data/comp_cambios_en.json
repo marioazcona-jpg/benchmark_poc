@@ -1284,5 +1284,55 @@
       "resumen": "Publication of quantitative baseline intensity metrics by crop type (wheat, maize and rice) and financed balance, keeping the 2030 reduction targets.",
       "descripcion": "While the 2024 report sets the 2030 intensity-reduction targets versus the 2023 base year under SBTi 1.5°C for wheat (-14%), maize (-15%) and rice (-16%) in Scopes 1+2, the 2025 report reveals the 2023 baseline intensities of 607 kgCO2e/t for wheat (target 522 kgCO2e/t), 580 kgCO2e/t for maize (target 493 kgCO2e/t) and 976 kgCO2e/t for rice (target 820 kgCO2e/t), detailing an outstanding loan balance of TL 10.8 billion with a PCAF score of 3.56."
     }
+  ],
+  "creditagricole": [
+    {
+      "resumen": "2030 absolute-emissions target met ahead of schedule",
+      "descripcion": "Absolute financed emissions in Oil & Gas fell from 7.2 MtCO2e (-70% versus the 2020 baseline of 24.3 MtCO2e) to 4.5 MtCO2e (-81%), beating the 2030 target of 6.1 MtCO2e (-75%) ahead of schedule."
+    },
+    {
+      "resumen": "Faster reduction in power-sector intensity",
+      "descripcion": "Power-sector emissions intensity fell from 160 gCO2e/kWh (-29% versus the 2020 baseline of 224 gCO2e/kWh) to 125 gCO2e/kWh (-44%), approaching the 2030 target of 95 gCO2e/kWh (-58%)."
+    },
+    {
+      "resumen": "Progress in reducing steel intensity",
+      "descripcion": "Steel emissions intensity fell from 1.82 tCO2e/t (-3% versus the 2020 baseline of 1.88 tCO2e/t) to 1.67 tCO2e/t (-11%), progressing towards the 2030 target of 1.40 tCO2e/t (-26%)."
+    },
+    {
+      "resumen": "Steady progress in reducing the intensity of the financed fleet",
+      "descripcion": "Average emissions intensity in the Automotive sector fell from 150.6 gCO2/km (-21% versus the 2020 baseline of 190 gCO2/km) to 145 gCO2/km (-24%), progressing towards the 2030 target of 95 gCO2/km (-50%)."
+    },
+    {
+      "resumen": "Reversal of the intensity rebound recorded in 2024",
+      "descripcion": "Cement emissions intensity moved from 693 kgCO2e/t in 2024 (+3% versus the 2020 baseline of 671 kgCO2e/t) to 638 kgCO2e/t in 2025 (-5%), returning to the pathway towards the 2030 target of 537 kgCO2e/t (-20%), although below the required linear pace."
+    },
+    {
+      "resumen": "Gradual intensity reduction supported by fleet renewal",
+      "descripcion": "Aviation emissions intensity fell from 866 gCO2e/RTK (-14% versus the 2019 baseline of 1,003 gCO2e/RTK) to 830 gCO2e/RTK (-17%), approaching the 2030 target of 750 gCO2e/RTK (-25%). Progress is supported by prioritising financing of 4th-generation aircraft."
+    },
+    {
+      "resumen": "Broadly stable metrics with a consolidated -16% improvement",
+      "descripcion": "Shipping intensity moved from 5.23 to 5.21 gCO2e/DWT.nm versus the 2020 baseline of 6.22, maintaining a -16% reduction towards the 2030 target of 3.98 gCO2e/DWT.nm (-36%). The latest published figure is for year-end 2024."
+    },
+    {
+      "resumen": "Continued reduction in commercial real estate intensity",
+      "descripcion": "Commercial Real Estate emissions intensity fell from 31.8 kgCO2e/m²/year (-13% versus the 2020 baseline of 36.4) to 29.6 kgCO2e/m²/year (-19%), progressing towards the 2030 target of 22 kgCO2e/m²/year (-40%)."
+    },
+    {
+      "resumen": "Explicit baseline and national reference pathway",
+      "descripcion": "The 2020 baseline of 22.4 kgCO2e/m² is made explicit, together with a best-efforts commitment to support the pathway towards the French national target of 12.4 kgCO2e/m²/year in 2030 (CRREM FR 2021 scenario)."
+    },
+    {
+      "resumen": "Thermal coal exit timeline unchanged",
+      "descripcion": "The Coal sector strategy remains unchanged, with a residual exposure of EUR 414 million, reaffirming the timeline for a full thermal-coal exit by 2030 in the EU/OECD and by 2040 in the rest of the world."
+    },
+    {
+      "resumen": "Not reported",
+      "descripcion": "The aluminium sector has no quantitative targets or specific decarbonization metrics in either the 2024 or the 2025 report."
+    },
+    {
+      "resumen": "Operational roll-out of the agri-food transition support framework",
+      "descripcion": "Regarding the conceptual inclusion of the Agriculture sector, the report details the operational roll-out of the decarbonization support framework, including the \"Ambitions Agri-Agro\" fund range with EUR 700 million at the end of 2025 and the Carbioz platform for agricultural carbon credits."
+    }
   ]
 }

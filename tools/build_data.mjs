@@ -176,7 +176,8 @@ function classify(sectorKey, unit, rawVal) {
 
   switch (sectorKey) {
     case 'Cement':
-      return { submetric: null, canonical: 'tCO₂e/t', factor: 1 };
+      // kgCO₂e/t → tCO₂e/t (p.ej. Crédit Agricole reporta 671 kgCO2e/t)
+      return { submetric: null, canonical: 'tCO₂e/t', factor: /^kg/i.test(lu) ? 1 / 1000 : 1 };
     case 'Power': {
       let f = 1;
       if (/t\s*co2.*\/?\s*mwh|tco2e?\/mwh|tco2\/mwh/i.test(lu)) f = 1000;       // t/MWh
@@ -211,7 +212,7 @@ function classify(sectorKey, unit, rawVal) {
     }
     case 'Shipping': {
       if (/delta|score|%|\bad\b|alineamiento|alignment/i.test(lu)) return { submetric: 'Alignment', canonical: 'Alignment Δ/score', factor: 1 };
-      if (/dwt-?nm|t-?nm|gt-?nm|tnm/i.test(lu)) return { submetric: 'Intensidad', canonical: 'gCO₂/dwt-nm', factor: 1 };
+      if (/dwt[-.\s]?nm|t[-.]?nm|gt[-.]?nm|tnm/i.test(lu)) return { submetric: 'Intensidad', canonical: 'gCO₂/dwt-nm', factor: 1 };
       return { submetric: 'Alignment', canonical: 'Alignment Δ/score', factor: 1 };
     }
     case 'CRE': case 'RRE': {

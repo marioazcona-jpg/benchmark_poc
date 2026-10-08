@@ -562,5 +562,26 @@
         "body": "In the 2024 report the bank committed to TL 300 billion in sustainable finance by 2026 and TL 100 billion for women entrepreneurs by 2028; these targets were met early, at the start of 2025, and consequently raised in the 2025 report to TL 650 billion and TL 250 billion respectively, extending the delivery horizon to 2028."
       }
     ]
+  },
+  "creditagricole": {
+    "intro": "Crédit Agricole shows progress on most of its 2030 decarbonization targets. Highlights are the early achievement of the Oil & Gas target and the correction of the Cement trajectory in 2025, although several sectors are only just keeping pace and Cement is still lagging.",
+    "points": [
+      {
+        "title": "2030 Oil & Gas target beaten ahead of schedule",
+        "body": "The bank achieved a -81% reduction in absolute financed Oil & Gas emissions in 2025, versus -70% in 2024, comfortably beating the -75% target set for 2030."
+      },
+      {
+        "title": "Reversal of the emissions trend in Cement",
+        "body": "After a +3% rebound in 2024 (693 kgCO2e/t), the bank brought the trajectory back on course with a -5% reduction in 2025 versus the 2020 baseline, heading back towards the 2030 target of 537 kgCO2e/t."
+      },
+      {
+        "title": "Tight or insufficient pace in several sectors",
+        "body": "On a linear 2020–2030 trajectory, half of the reduction should have been achieved by 2025. Cement is clearly lagging (-5% versus ~-10% expected), while Automotive (-24% vs -25%), Steel (-11% vs -13%) and Commercial Real Estate (-19% vs -20%) are only just keeping pace. In addition, Shipping only publishes data up to year-end 2024."
+      },
+      {
+        "title": "Operational roll-out and channelling of funds in agriculture",
+        "body": "The bank has put the operational framework for the Agriculture sector into practice, with EUR 700 million in the \"Ambitions Agri-Agro\" fund range at the end of 2025 and the sale of agricultural carbon credits through the Carbioz platform."
+      }
+    ]
   }
 }
