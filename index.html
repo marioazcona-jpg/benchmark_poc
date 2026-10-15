@@ -572,6 +572,8 @@ body { font-variant-numeric: tabular-nums; }
               <div class="submetric-selector" id="subMetricSelector" style="display:none"></div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
+              <div id="horizonSelector" style="display:flex;align-items:center;gap:6px"></div>
+              <div style="width:1px;height:18px;background:var(--border)"></div>
               <div id="scenarioSelector" style="display:none;align-items:center;gap:6px"></div>
               <div id="scenarioDivider" style="display:none;width:1px;height:18px;background:var(--border)"></div>
               <select class="region-select" onchange="setRegion(this.value)" data-i18n-title="regSelectTitle" title="Filtra los pares por su zona geográfica de origen (sede)">
@@ -1658,10 +1660,10 @@ const GEN = {
           "y2024": 248.4,
           "y2025": null,
           "y2026": null,
-          "obj": 105.3,
+          "obj": 72.4,
           "objLow": null,
           "objHigh": null,
-          "objY": 2030,
+          "objY": 2035,
           "status": null,
           "pctYTD": 27,
           "scope": "S1",
@@ -2020,10 +2022,10 @@ const GEN = {
             "y2024": 1.291,
             "y2025": null,
             "y2026": null,
-            "obj": 0.981,
+            "obj": 0.842,
             "objLow": null,
             "objHigh": null,
-            "objY": 2030,
+            "objY": 2035,
             "status": null,
             "pctYTD": 9,
             "scope": "S1+2",
@@ -2490,10 +2492,10 @@ const GEN = {
           "y2024": 131.3,
           "y2025": null,
           "y2026": null,
-          "obj": 86.1,
+          "obj": 57.7,
           "objLow": null,
           "objHigh": null,
-          "objY": 2030,
+          "objY": 2035,
           "status": null,
           "pctYTD": 20,
           "scope": "S1+2+3",
@@ -2854,10 +2856,10 @@ const GEN = {
             "y2024": 777.3,
             "y2025": null,
             "y2026": null,
-            "obj": 625,
+            "obj": 606.5,
             "objLow": null,
             "objHigh": null,
-            "objY": 2030,
+            "objY": 2035,
             "status": null,
             "pctYTD": 20,
             "scope": "S1",
@@ -4247,19 +4249,19 @@ const GEN = {
           {
             "name": "JPMorgan",
             "seg": null,
-            "base": 10.9,
+            "base": 11.95,
             "baseY": 2021,
             "y2022": null,
             "y2023": null,
             "y2024": 11.5,
             "y2025": null,
             "y2026": null,
-            "obj": 8.4,
+            "obj": 4.8,
             "objLow": null,
             "objHigh": null,
-            "objY": 2030,
+            "objY": 2035,
             "status": null,
-            "pctYTD": -6,
+            "pctYTD": 4,
             "scope": "S1",
             "metod": "Carbon Compass / PCAF",
             "geo": null,
@@ -4554,10 +4556,10 @@ const GEN = {
           "y2024": 0.62,
           "y2025": null,
           "y2026": null,
-          "obj": 0.46,
+          "obj": 0.399,
           "objLow": null,
           "objHigh": null,
-          "objY": 2030,
+          "objY": 2035,
           "status": null,
           "pctYTD": 3,
           "scope": "S1+2",
@@ -4764,7 +4766,7 @@ const GEN = {
           {
             "name": "JPMorgan",
             "seg": null,
-            "base": 8.6,
+            "base": 8.36,
             "baseY": 2021,
             "y2022": null,
             "y2023": null,
@@ -4776,7 +4778,7 @@ const GEN = {
             "objHigh": null,
             "objY": 2030,
             "status": null,
-            "pctYTD": -10,
+            "pctYTD": -14,
             "scope": "S1+2",
             "metod": "Carbon Compass / PCAF",
             "geo": null,
@@ -4904,6 +4906,42 @@ function dispName(name) { const m = BANK_META[name]; return (m && m.label) || na
 let currentSector = 'Cement';
 let currentFilter = 'top5';
 let activeScenarios = new Set(['stated', 'nze']);
+
+// ── Horizonte de la gráfica (2030 / 2035) ────────────────────────────────────
+// Por defecto 2030 (al cambiar de sector, filtro o zona se vuelve a 2030). Al
+// seleccionar a mano un banco con objetivo posterior a 2030 (p.ej. JPMorgan,
+// Carbon Compass oct-2026) pasa solo a 2035, y al quitarlo vuelve a 2030. El
+// usuario puede elegir cualquiera de los dos con el selector.
+let chartHorizonSel = 2030;
+let chartHorizonAuto = false;   // true si el 2035 lo activó la selección de un banco
+const tgtYear = b => b.objY ?? 2030;
+const hasTarget = b => b.obj != null || b.objLow != null;
+function needsLateHorizon(sd) { return sd.banks.some(b => b.show && hasTarget(b) && tgtYear(b) > 2030); }
+function chartHorizon() { return chartHorizonSel; }
+function resetChartHorizon() { chartHorizonSel = 2030; chartHorizonAuto = false; }
+function setChartHorizon(h) { chartHorizonSel = h; chartHorizonAuto = false; drawChart(); }
+// Valor de un escenario al final del eje: serie anual WEO2025 si existe; si no, su valor 2030.
+function scEndVal(sc, H) {
+  if (sc.years) { const i = sc.years.indexOf(H); if (i >= 0 && sc.values[i] != null) return sc.values[i]; }
+  return sc.end;
+}
+// Aplica la visibilidad de bancos (b.show) a la gráfica. `toggled` = banco que el
+// usuario acaba de (des)seleccionar: activa/desactiva la vista 2035 automática.
+// Si cambia el horizonte, redibuja entera.
+function refreshChartVisibility(sd, toggled = null) {
+  if (toggled && hasTarget(toggled) && tgtYear(toggled) > 2030) {
+    if (toggled.show) { chartHorizonSel = 2035; chartHorizonAuto = true; }
+    else if (chartHorizonAuto && !needsLateHorizon(sd)) resetChartHorizon();
+  }
+  if (!chartInst || chartInst.$horizon !== chartHorizon()) { drawChart(); return; }
+  sd.banks.forEach(b => {
+    chartInst.data.datasets.forEach((ds, i) => {
+      if (ds.label === b.name || ds.label === `${b.name} target`) chartInst.setDatasetVisibility(i, b.show);
+    });
+  });
+  chartInst.update();
+  renderChartSubtitle(sd, chartInst.$horizon);
+}
 
 function toggleScenario(key, btn) {
   if (activeScenarios.has(key)) {
@@ -5118,7 +5156,9 @@ function renderKPIs() {
 
   // Sector/zone averages (banks in scope with valid data)
   const sIntVals = scopeBanks.map(b => b.y2025 ?? b.y2024).filter(v => v !== null);
-  const sObjVals = scopeBanks.filter(b => b.obj !== null).map(b => b.obj);
+  // Los indicadores "Objetivo 2030" solo comparan objetivos a 2030 (JPMorgan fija los
+  // suyos a 2035). El CAGR sí admite cualquier año: targetCAGR usa el año del objetivo.
+  const sObjVals = scopeBanks.filter(b => b.obj !== null && tgtYear(b) === 2030).map(b => b.obj);
   const sCagrVals = scopeBanks.map(targetCAGR).filter(v => v !== null);
   const sectorAvgInt = _avg(sIntVals);
   const sectorAvgObj = _avg(sObjVals);
@@ -5140,7 +5180,7 @@ function renderKPIs() {
     const v = b.y2025 ?? b.y2024;
     return (v !== null && (acc === null || v < acc.v)) ? { name: b.name, v } : acc;
   }, null);
-  const bestObj = peers.filter(b => b.obj !== null).reduce((acc, b) =>
+  const bestObj = peers.filter(b => b.obj !== null && tgtYear(b) === 2030).reduce((acc, b) =>
     acc === null || b.obj < acc.v ? { name: b.name, v: b.obj } : acc, null);
   // Mejor CAGR objetivo = compromiso de reducción más rápido (más negativo) entre los pares.
   const bestCAGR = peers.reduce((acc, b) => {
@@ -5234,7 +5274,7 @@ function renderKPIs() {
         ${hr}
         ${kpiRow(L('Objetivo 2030 (media)', '2030 target (avg)'), valEl(sectorAvgObj) + unitEl(metricLabel(sd.metric)))}
         ${hr}
-        ${kpiRow(L('CAGR medio (base→2030)', 'Avg CAGR (base→2030)'), cagrEl(sectorAvgCAGR))}
+        ${kpiRow(L('CAGR medio (base→objetivo)', 'Avg CAGR (base→target)'), cagrEl(sectorAvgCAGR))}
       </div>
     </div>
 
@@ -5245,7 +5285,7 @@ function renderKPIs() {
         ${hr}
         ${kpiRow(L('Objetivo 2030', '2030 target'), valEl(bbvaObj) + unitEl(metricLabel(sd.metric)) + delta(bbvaObj, sectorAvgObj))}
         ${hr}
-        ${kpiRow(currentRegion ? L('CAGR base→2030 (vs zona)', 'CAGR base→2030 (vs region)') : L('CAGR base→2030 (vs sector)', 'CAGR base→2030 (vs sector)'), cagrEl(bbvaCAGR) + cagrDelta(bbvaCAGR, sectorAvgCAGR))}
+        ${kpiRow(currentRegion ? L('CAGR base→objetivo (vs zona)', 'CAGR base→target (vs region)') : L('CAGR base→objetivo (vs sector)', 'CAGR base→target (vs sector)'), cagrEl(bbvaCAGR) + cagrDelta(bbvaCAGR, sectorAvgCAGR))}
       </div>
     </div>
 
@@ -5262,7 +5302,7 @@ function renderKPIs() {
           bestObj ? logoBig(bestObj.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${dispName(bestObj.name)}</span>` : '—'
         )}
         ${hr}
-        ${kpiRowInline(L('Mejor CAGR (base→2030)', 'Best CAGR (base→2030)'),
+        ${kpiRowInline(L('Mejor CAGR (base→objetivo)', 'Best CAGR (base→target)'),
           cagrEl(bestCAGR ? bestCAGR.v : null),
           bestCAGR ? logoBig(bestCAGR.name) + `<span style="font-size:12px;color:var(--text-secondary);font-weight:500">${dispName(bestCAGR.name)}</span>` : '—'
         )}
@@ -5302,16 +5342,8 @@ function renderToggles() {
   allDiv.onclick = () => {
     const allOn = sd.banks.every(b => b.show);
     sd.banks.forEach(b => { b.show = !allOn || b.name === 'BBVA'; });
-    if (chartInst) {
-      sd.banks.forEach(b => {
-        chartInst.data.datasets.forEach((ds, i) => {
-          if (ds.label === b.name || ds.label === `${b.name} target`) {
-            chartInst.setDatasetVisibility(i, b.show);
-          }
-        });
-      });
-      chartInst.update();
-    }
+    resetChartHorizon();
+    refreshChartVisibility(sd);
     renderToggles();
     renderTable();
   };
@@ -5336,26 +5368,36 @@ function renderToggles() {
       div.style.borderColor = b.show ? bankColor : '';
       div.style.borderWidth = b.show ? '2px' : '';
       div.style.color     = b.show ? bankColor : '';
-      if (chartInst) {
-        chartInst.data.datasets.forEach((ds, i) => {
-          if (ds.label === b.name || ds.label === `${b.name} target`) {
-            chartInst.setDatasetVisibility(i, b.show);
-          }
-        });
-        chartInst.update();
-      }
+      refreshChartVisibility(sd, b);
       renderTable();
     };
     el.appendChild(div);
   });
 }
 
+// Leyenda bajo el título. En la vista 2030, avisa si hay bancos visibles cuyo
+// objetivo es posterior (no se dibuja: no hay valor a 2030 publicado).
+function renderChartSubtitle(sd, H) {
+  const late = H < 2035 ? sd.banks.filter(b => b.show && hasTarget(b) && tgtYear(b) > H) : [];
+  const note = late.length
+    ? `&ensp;·&ensp;<span style="color:var(--text-tertiary)">${L(`Objetivo a ${tgtYear(late[0])} de ${late.map(b => dispName(b.name)).join(', ')}: ver vista ${tgtYear(late[0])}`, `${late.map(b => dispName(b.name)).join(', ')} ${tgtYear(late[0])} target: see ${tgtYear(late[0])} view`)}</span>`
+    : '';
+  document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>${L('Valores reportados', 'Reported values')}</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>${L('Senda proyectada al objetivo', 'Pathway projected to target')}</span>${note}`;
+}
+
 function drawChart() {
   const sd = getSectorData();
   const canvas = document.getElementById('trajChart');
   if (chartInst) chartInst.destroy();
+  // Horizonte efectivo y eje X (2020 → 2030 | 2035)
+  const H = chartHorizon(sd);
+  const YRS = Array.from({ length: H - 2020 + 1 }, (_, i) => 2020 + i);
   document.getElementById('chartTitle').textContent = `${currentSector} — ${L('Trayectoria de Intensidad de Emisiones', 'Emissions Intensity Pathway')}`;
-  document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>${L('Valores reportados', 'Reported values')}</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>${L('Senda proyectada al objetivo 2030', 'Pathway projected to 2030 target')}</span>`;
+  renderChartSubtitle(sd, H);
+  const _hzEl = document.getElementById('horizonSelector');
+  if (_hzEl) _hzEl.innerHTML =
+    `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px;white-space:nowrap">${L('Horizonte:', 'Horizon:')}</span>` +
+    [2030, 2035].map(h => `<button class="filter-tab${h === H ? ' active' : ''}" style="font-size:11px;padding:4px 10px" onclick="setChartHorizon(${h})">${h}</button>`).join('');
   const _sectorObj = SECTORS[currentSector];
   const _subEl = document.getElementById('subMetricSelector');
   const _subKeys = _sectorObj?.hasSubMetrics ? Object.keys(_sectorObj.subMetrics) : [];
@@ -5402,15 +5444,17 @@ function drawChart() {
   if (sd.scenarios) {
     // Serie anual WEO2025 si existe (sectores de Climate Scenarios); si no,
     // línea plana hasta 2024 y luego interpolación lineal hasta 2030.
-    const scData = (sc) => YEARS.map(y => {
+    // Los escenarios curados (sin serie anual) solo llegan a 2030.
+    const scData = (sc) => YRS.map(y => {
       if (sc.years) { const i = sc.years.indexOf(y); return i >= 0 ? sc.values[i] : null; }
+      if (y > 2030) return null;
       if (y <= 2024) return parseFloat(sc.v2024.toFixed(4));
       return parseFloat(_lerp(sc.v2024, sc.end, (y - 2024) / 6).toFixed(4));
     });
-    // Escenarios activos para este sector, ordenados por valor 2030 desc
+    // Escenarios activos para este sector, ordenados por valor final desc
     const activeSc = ['current', 'stated', 'nze']
       .filter(k => sd.scenarios[k] && activeScenarios.has(k))
-      .sort((a, b) => sd.scenarios[b].end - sd.scenarios[a].end);
+      .sort((a, b) => scEndVal(sd.scenarios[b], H) - scEndVal(sd.scenarios[a], H));
     const n = activeSc.length;
 
     if (n === 1) {
@@ -5476,7 +5520,7 @@ function drawChart() {
     const isBBVA = b.name === 'BBVA';
 
     // Solid line: reported data
-    const solidData = YEARS.map(y => y === 2030 ? null : getVal(b, y));
+    const solidData = YRS.map(y => y >= 2030 ? null : getVal(b, y));
     datasets.push({
       label: b.name,
       hidden: !b.show,
@@ -5491,15 +5535,18 @@ function drawChart() {
       order: isBBVA ? 0 : 1,
     });
 
-    // Dashed projection: last real point → 2030 target.
+    // Dashed projection: last real point → target, en el año del objetivo
+    // (2030 por defecto; JPMorgan 2035). Si el objetivo cae fuera del horizonte
+    // visible no se dibuja (no hay un valor intermedio publicado).
     // For range targets (objLow/objHigh) two dashed lines diverge to each bound.
-    if (b.obj !== null || b.objLow != null) {
+    const tY = tgtYear(b);
+    if ((b.obj !== null || b.objLow != null) && tY <= H) {
       const lastReal = b.y2026 ?? b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022 ?? b.base ?? null;
       const lastRealYear = b.y2026 != null ? 2026 : b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : b.baseY;
       if (lastReal !== null) {
         const targets = (b.objLow != null) ? [b.objLow, b.objHigh] : [b.obj];
         targets.forEach(tv => {
-          const projData = YEARS.map(y => (y === lastRealYear ? lastReal : (y === 2030 ? tv : null)));
+          const projData = YRS.map(y => (y === lastRealYear ? lastReal : (y === tY ? tv : null)));
           datasets.push({
             label: `${b.name} target`,
             hidden: !b.show,
@@ -5507,7 +5554,7 @@ function drawChart() {
             borderColor: color,
             borderWidth: isBBVA ? 2 : 1.2,
             borderDash: [5, 4],
-            pointRadius: YEARS.map(y => y === 2030 ? (isBBVA ? 6 : 4) : 0),
+            pointRadius: YRS.map(y => y === tY ? (isBBVA ? 6 : 4) : 0),
             pointStyle: 'circle',
             pointBackgroundColor: '#fff',
             pointBorderColor: color,
@@ -5525,12 +5572,12 @@ function drawChart() {
   if (sd.ieaRef !== null) {
     datasets.push({
       label: 'IEA NZE 2030',
-      data: YEARS.map(y => y === 2030 ? sd.ieaRef : null),
+      data: YRS.map(y => y === 2030 ? sd.ieaRef : null),
       borderColor: '#024700',
       borderDash: [8, 4],
       borderWidth: 2,
       pointStyle: 'triangle',
-      pointRadius: YEARS.map(y => y === 2030 ? 8 : 0),
+      pointRadius: YRS.map(y => y === 2030 ? 8 : 0),
       pointBackgroundColor: '#024700',
       order: 0,
     });
@@ -5551,13 +5598,13 @@ function drawChart() {
         const bm = BANK_META[ds.label];
         if (!bm) return;
         let lastIdx = -1, lastVal = null;
-        ds.data.forEach((v, j) => { if (v !== null && YEARS[j] <= 2025) { lastIdx = j; lastVal = v; } });
+        ds.data.forEach((v, j) => { if (v !== null && YRS[j] <= 2025) { lastIdx = j; lastVal = v; } });
         if (lastIdx < 0) return;
         const baseY = y.getPixelForValue(lastVal);
         let lY = baseY;
         for (const u of usedY) { if (Math.abs(lY - u) < GAP) lY = u - GAP; }
         usedY.push(lY);
-        const lX = x.getPixelForValue(YEARS[lastIdx]) + 7;
+        const lX = x.getPixelForValue(YRS[lastIdx]) + 7;
         ctx.save();
         if (Math.abs(lY - baseY) > 2) {
           ctx.strokeStyle = bm.color || '#999';
@@ -5577,9 +5624,10 @@ function drawChart() {
       if (!sd.scenarios) return;
       const rx = chart.chartArea.right + 10;
       // Escenarios activos, ordenados por end desc (arriba → abajo en el gráfico)
+      const _end = k => scEndVal(sd.scenarios[k], H);
       const _activeSc = ['current', 'stated', 'nze']
         .filter(k => sd.scenarios[k] && activeScenarios.has(k))
-        .sort((a, b) => sd.scenarios[b].end - sd.scenarios[a].end);
+        .sort((a, b) => _end(b) - _end(a));
       if (_activeSc.length === 0) return;
       const _n = _activeSc.length;
 
@@ -5590,8 +5638,8 @@ function drawChart() {
       if (_n >= 2) {
         const bTop = _n === 3 ? 'stated' : _activeSc[0];
         const bBot = _n === 3 ? 'nze'    : _activeSc[_activeSc.length - 1];
-        const pT = y.getPixelForValue(sd.scenarios[bTop].end);
-        const pB = y.getPixelForValue(sd.scenarios[bBot].end);
+        const pT = y.getPixelForValue(_end(bTop));
+        const pB = y.getPixelForValue(_end(bBot));
         ctx.strokeStyle = 'rgba(83,169,239,0.45)';
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -5604,7 +5652,7 @@ function drawChart() {
       }
 
       // Posiciones de etiquetas con anti-colisión (mínimo 26px entre ellas)
-      const _pts = _activeSc.map(k => ({ key: k, py: y.getPixelForValue(sd.scenarios[k].end) }));
+      const _pts = _activeSc.map(k => ({ key: k, py: y.getPixelForValue(_end(k)) }));
       const MIN_GAP = 26;
       for (let i = 1; i < _pts.length; i++) {
         if (_pts[i].py - _pts[i - 1].py < MIN_GAP) _pts[i].py = _pts[i - 1].py + MIN_GAP;
@@ -5612,7 +5660,8 @@ function drawChart() {
 
       _pts.forEach(({ key, py }) => {
         const sc     = sd.scenarios[key];
-        const pNat   = y.getPixelForValue(sc.end);
+        const scV    = _end(key);
+        const pNat   = y.getPixelForValue(scV);
         const isGray = key === 'current' && _n === 3;
         const cLabel = isGray ? 'rgba(134,146,166,0.75)' : 'rgba(83,169,239,0.9)';
         const cVal   = isGray ? 'rgba(134,146,166,0.55)' : 'rgba(83,169,239,0.65)';
@@ -5629,7 +5678,8 @@ function drawChart() {
         ctx.fillText(sc.label, rx + 8, py + 4);
         ctx.font = '500 8px "Lato", sans-serif';
         ctx.fillStyle = cVal;
-        ctx.fillText(sc.end.toFixed(2), rx + 8, py + 14);
+        // Si el escenario no llega al horizonte (curados, solo 2030), se indica el año.
+        ctx.fillText(scV.toFixed(2) + (scV === sc.end && !sc.years && H > 2030 ? ' (2030)' : ''), rx + 8, py + 14);
       });
 
       ctx.restore();
@@ -5641,7 +5691,7 @@ function drawChart() {
 
   chartInst = new Chart(canvas.getContext('2d'), {
     type: 'line',
-    data: { labels: YEARS, datasets },
+    data: { labels: YRS, datasets },
     plugins: [_scenarioPlugin],
     options: {
       responsive: true, maintainAspectRatio: false,
@@ -5696,6 +5746,7 @@ function drawChart() {
       }
     }
   });
+  chartInst.$horizon = H;
 }
 
 // ─── RELEVANT DATA ────────────────────────────────────────────────────────────
@@ -5785,7 +5836,7 @@ const COL_DEFS = {
   y2023:    { label: '2023', sortFn: b => b.y2023 ?? 999 },
   y2024:    { label: '2024', sortFn: b => b.y2024 ?? 999 },
   y2025:    { label: '2025', sortFn: b => b.y2025 ?? 999 },
-  obj:      { label: '2030 Target', sortFn: b => b.obj ?? 999 },
+  obj:      { label: 'Target', sortFn: b => b.obj ?? 999 },
   pctYTD:   { label: '% Red. YTD', sortFn: b => {
     const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
     if (!b.base || lv == null) return -9999;
@@ -5851,7 +5902,12 @@ function renderTable() {
       if (id === 'y2023') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2023)}</td>`;
       if (id === 'y2024') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2024)}</td>`;
       if (id === 'y2025') return `<td class="${isBBVA?'intensity-val highlight':''}">${fmt(b.y2025)}</td>`;
-      if (id === 'obj') return `<td>${b.objLow != null ? `${fmt(b.objLow)}–${fmt(b.objHigh)}` : fmt(b.obj)}</td>`;
+      if (id === 'obj') {
+        const v = b.objLow != null ? `${fmt(b.objLow)}–${fmt(b.objHigh)}` : fmt(b.obj);
+        // Objetivo en otro año (p.ej. JPMorgan 2035): se indica junto al valor.
+        const yTag = hasTarget(b) && tgtYear(b) !== 2030 ? ` <span class="metric-tag" style="font-size:10px">${tgtYear(b)}</span>` : '';
+        return `<td>${v}${yTag}</td>`;
+      }
       if (id === 'pctYTD') {
         const lv = b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022;
         if (!b.base || lv == null) return `<td><span class="intensity-val empty">—</span></td>`;
@@ -5922,17 +5978,8 @@ function setFilter(f) {
   });
   const sd = getSectorData();
   applyFilterVisibility(f, sd);
-  // Update chart visibility
-  if (chartInst) {
-    sd.banks.forEach(b => {
-      chartInst.data.datasets.forEach((ds, i) => {
-        if (ds.label === b.name || ds.label === `${b.name} target`) {
-          chartInst.setDatasetVisibility(i, b.show);
-        }
-      });
-    });
-    chartInst.update();
-  }
+  resetChartHorizon();
+  refreshChartVisibility(sd);
   renderToggles();
   renderTable();
 }
@@ -5943,14 +5990,8 @@ function setRegion(r) {
   document.querySelectorAll('select.region-select').forEach(el => { if (el.value !== currentRegion) el.value = currentRegion; el.classList.toggle('region-on', !!currentRegion); });
   const sd = getSectorData();
   applyFilterVisibility(currentFilter, sd);
-  if (chartInst) {
-    sd.banks.forEach(b => {
-      chartInst.data.datasets.forEach((ds, i) => {
-        if (ds.label === b.name || ds.label === `${b.name} target`) chartInst.setDatasetVisibility(i, b.show);
-      });
-    });
-    chartInst.update();
-  }
+  resetChartHorizon();
+  refreshChartVisibility(sd);
   renderKPIs();
   renderToggles();
   renderTable();
@@ -6023,6 +6064,7 @@ document.addEventListener('click', function(e) {
 function onSectorChange(val) {
   currentSector = val;
   sortCol = null; sortDir = 1; currentFilter = 'top5';
+  resetChartHorizon();
   activeScenarios = new Set(['stated', 'nze']);
   const sec = SECTORS[val];
   currentSubMetric = sec?.defaultSubMetric || 'RPK';
