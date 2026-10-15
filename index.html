@@ -5538,24 +5538,32 @@ function drawChart() {
 
     // Dashed projection: last real point → target, en el año del objetivo
     // (2030 por defecto; JPMorgan 2035). Si el objetivo cae fuera del horizonte
-    // visible no se dibuja (no hay un valor intermedio publicado).
+    // visible (vista 2030 con objetivo 2035), la línea sigue la misma pendiente
+    // hacia el objetivo y se corta en el borde del eje, SIN punto ni tooltip en
+    // ese extremo: no es un valor publicado por el banco.
     // For range targets (objLow/objHigh) two dashed lines diverge to each bound.
     const tY = tgtYear(b);
-    if ((b.obj !== null || b.objLow != null) && tY <= H) {
+    if (b.obj !== null || b.objLow != null) {
       const lastReal = b.y2026 ?? b.y2025 ?? b.y2024 ?? b.y2023 ?? b.y2022 ?? b.base ?? null;
       const lastRealYear = b.y2026 != null ? 2026 : b.y2025 != null ? 2025 : b.y2024 != null ? 2024 : b.y2023 != null ? 2023 : b.y2022 != null ? 2022 : b.baseY;
       if (lastReal !== null) {
+        const clipped = tY > H;
+        const endY = clipped ? H : tY;
         const targets = (b.objLow != null) ? [b.objLow, b.objHigh] : [b.obj];
         targets.forEach(tv => {
-          const projData = YRS.map(y => (y === lastRealYear ? lastReal : (y === tY ? tv : null)));
+          const endV = clipped ? _lerp(lastReal, tv, (endY - lastRealYear) / (tY - lastRealYear)) : tv;
+          const projData = YRS.map(y => (y === lastRealYear ? lastReal : (y === endY ? endV : null)));
           datasets.push({
             label: `${b.name} target`,
             hidden: !b.show,
             data: projData,
+            $clipIdx: clipped ? YRS.indexOf(endY) : -1,   // índice sin tooltip (tramo cortado)
             borderColor: color,
             borderWidth: isBBVA ? 2 : 1.2,
             borderDash: [5, 4],
-            pointRadius: YRS.map(y => y === tY ? (isBBVA ? 6 : 4) : 0),
+            pointHitRadius: YRS.map(y => (clipped && y === endY) ? 0 : 1),
+            pointHoverRadius: YRS.map(y => (clipped && y === endY) ? 0 : 4),
+            pointRadius: YRS.map(y => (y === tY && !clipped) ? (isBBVA ? 6 : 4) : 0),
             pointStyle: 'circle',
             pointBackgroundColor: '#fff',
             pointBorderColor: color,
@@ -5583,6 +5591,22 @@ function drawChart() {
       order: 0,
     });
   }
+  // Vista 2035: mismo triángulo con el NZE 2035, en los sectores con serie anual WEO2025.
+  const _nz = sd.scenarios?.nze;
+  const nz2035 = (H >= 2035 && _nz?.years) ? _nz.values[_nz.years.indexOf(2035)] : null;
+  if (nz2035 != null) {
+    datasets.push({
+      label: 'IEA NZE 2035',
+      data: YRS.map(y => y === 2035 ? +nz2035.toFixed(2) : null),
+      borderColor: '#024700',
+      borderDash: [8, 4],
+      borderWidth: 2,
+      pointStyle: 'triangle',
+      pointRadius: YRS.map(y => y === 2035 ? 8 : 0),
+      pointBackgroundColor: '#024700',
+      order: 0,
+    });
+  }
 
   const _scenarioPlugin = {
     id: 'chartLabels',
@@ -5595,7 +5619,7 @@ function drawChart() {
       const GAP = 13;
       data.datasets.forEach((ds, i) => {
         if (!chart.isDatasetVisible(i)) return;
-        if (ds.order === 99 || !ds.label || ds.label.includes(' target') || ds.label === 'IEA NZE 2030') return;
+        if (ds.order === 99 || !ds.label || ds.label.includes(' target') || ds.label.startsWith('IEA NZE ')) return;
         const bm = BANK_META[ds.label];
         if (!bm) return;
         let lastIdx = -1, lastVal = null;
@@ -5730,7 +5754,7 @@ function drawChart() {
               return L(`CAGR desde ${b.baseY}: ${cagr > 0 ? '+' : ''}${cagr.toFixed(1)}%/año`, `CAGR since ${b.baseY}: ${cagr > 0 ? '+' : ''}${cagr.toFixed(1)}%/yr`);
             }
           },
-          filter: item => item.raw !== null && item.dataset.order !== 99
+          filter: item => item.raw !== null && item.dataset.order !== 99 && item.dataIndex !== item.dataset.$clipIdx
         }
       },
       scales: {
