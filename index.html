@@ -573,7 +573,7 @@ body { font-variant-numeric: tabular-nums; }
             </div>
             <div style="display:flex;align-items:center;gap:10px">
               <div id="horizonSelector" style="display:flex;align-items:center;gap:6px"></div>
-              <div style="width:1px;height:18px;background:var(--border)"></div>
+              <div id="horizonDivider" style="width:1px;height:18px;background:var(--border)"></div>
               <div id="scenarioSelector" style="display:none;align-items:center;gap:6px"></div>
               <div id="scenarioDivider" style="display:none;width:1px;height:18px;background:var(--border)"></div>
               <select class="region-select" onchange="setRegion(this.value)" data-i18n-title="regSelectTitle" title="Filtra los pares por su zona geográfica de origen (sede)">
@@ -5383,13 +5383,20 @@ function drawChart() {
   const sd = getSectorData();
   const canvas = document.getElementById('trajChart');
   if (chartInst) chartInst.destroy();
+  // El selector 2030/2035 solo se ofrece si algún banco del sector (submétrica
+  // activa) tiene objetivo posterior a 2030; si no, horizonte fijo 2030.
+  const _hasLate = sd.banks.some(b => hasTarget(b) && tgtYear(b) > 2030);
+  if (!_hasLate) resetChartHorizon();
   // Horizonte efectivo y eje X (2020 → 2030 | 2035)
   const H = chartHorizon(sd);
   const YRS = Array.from({ length: H - 2020 + 1 }, (_, i) => 2020 + i);
   document.getElementById('chartTitle').textContent = `${currentSector} — ${L('Trayectoria de Intensidad de Emisiones', 'Emissions Intensity Pathway')}`;
   renderChartSubtitle();
   const _hzEl = document.getElementById('horizonSelector');
-  if (_hzEl) _hzEl.innerHTML =
+  const _hzDiv = document.getElementById('horizonDivider');
+  if (_hzEl) _hzEl.style.display = _hasLate ? 'flex' : 'none';
+  if (_hzDiv) _hzDiv.style.display = _hasLate ? '' : 'none';
+  if (_hzEl && _hasLate) _hzEl.innerHTML =
     `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px;white-space:nowrap">${L('Horizonte:', 'Horizon:')}</span>` +
     [2030, 2035].map(h => `<button class="filter-tab${h === H ? ' active' : ''}" style="font-size:11px;padding:4px 10px" onclick="setChartHorizon(${h})">${h}</button>`).join('');
   const _sectorObj = SECTORS[currentSector];
