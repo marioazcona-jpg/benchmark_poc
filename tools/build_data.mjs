@@ -414,7 +414,7 @@ const NEW_META = {
   CreditAgricole:{ flag: '🇫🇷', color: '#009597', european: true,  spanish: false, tier1: true,  mainPeer: false, label: 'Crédit Agricole' },
 };
 
-const SELECTOR_DEFAULT = { 'Oil & Gas': 'Absolutas', Shipping: 'Alignment', Steel: 'Intensidad', Aluminium: 'Intensidad', Agriculture: 'Absolutas', Aviation: 'RTK' };
+const SELECTOR_DEFAULT = { 'Oil & Gas': 'Absolutas', Shipping: 'Alignment', Steel: 'Intensidad', Aluminium: 'Intensidad', Agriculture: 'Absolutas', Aviation: 'RPK' }; // Aviation: RPK es la métrica de BBVA
 const SUBMETRIC_LABEL = { 'Oil & Gas': 'MtCO₂e', Intensidad: 'gCO₂e/MJ', Score: 'SSP score', Alignment: 'Alignment Δ (%)', 'Int. económica': 'tCO₂e/€m', 'Int. física': 'físico' };
 
 const ORDER = ['BBVA', 'Sabadell', 'CaixaBank', 'Santander', 'SocGen', 'CreditAgricole', 'ING', 'Intesa', 'Barclays', 'StanChart', 'HSBC', 'Nordea', 'Bancolombia', 'Citigroup', 'JPMorgan', 'Lloyds', 'UniCredit', 'NatWest', 'Commerzbank', 'UBS', 'MorganStanley', 'Goldman', 'Isbank', 'Akbank'];
@@ -452,7 +452,7 @@ for (const [sec, recs] of Object.entries(bySector)) {
   } else if (sec === 'Aviation') {
     const subs = { RPK: [], RTK: [] };
     for (const rec of recs) (subs[rec.submetric] ||= []).push(recOut(rec));
-    sectorsOut[sec] = { subMetrics: subs, defaultSubMetric: 'RTK' };
+    sectorsOut[sec] = { subMetrics: subs, defaultSubMetric: SELECTOR_DEFAULT.Aviation };
   } else {
     sectorsOut[sec] = { banks: recs.map(recOut) };
   }

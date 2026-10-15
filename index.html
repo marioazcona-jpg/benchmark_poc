@@ -2932,7 +2932,7 @@ const GEN = {
           }
         ]
       },
-      "defaultSubMetric": "RTK"
+      "defaultSubMetric": "RPK"
     },
     "CRE": {
       "banks": [
@@ -4940,7 +4940,6 @@ function refreshChartVisibility(sd, toggled = null) {
     });
   });
   chartInst.update();
-  renderChartSubtitle(sd, chartInst.$horizon);
 }
 
 function toggleScenario(key, btn) {
@@ -5375,14 +5374,9 @@ function renderToggles() {
   });
 }
 
-// Leyenda bajo el título. En la vista 2030, avisa si hay bancos visibles cuyo
-// objetivo es posterior (no se dibuja: no hay valor a 2030 publicado).
-function renderChartSubtitle(sd, H) {
-  const late = H < 2035 ? sd.banks.filter(b => b.show && hasTarget(b) && tgtYear(b) > H) : [];
-  const note = late.length
-    ? `&ensp;·&ensp;<span style="color:var(--text-tertiary)">${L(`Objetivo a ${tgtYear(late[0])} de ${late.map(b => dispName(b.name)).join(', ')}: ver vista ${tgtYear(late[0])}`, `${late.map(b => dispName(b.name)).join(', ')} ${tgtYear(late[0])} target: see ${tgtYear(late[0])} view`)}</span>`
-    : '';
-  document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>${L('Valores reportados', 'Reported values')}</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>${L('Senda proyectada al objetivo', 'Pathway projected to target')}</span>${note}`;
+// Leyenda bajo el título.
+function renderChartSubtitle() {
+  document.getElementById('chartSubtitle').innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8"/></svg>${L('Valores reportados', 'Reported values')}</span>&ensp;·&ensp;<span style="display:inline-flex;align-items:center;gap:5px"><svg width="22" height="8" viewBox="0 0 22 8" style="flex-shrink:0"><line x1="0" y1="4" x2="22" y2="4" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5,3"/></svg>${L('Senda proyectada al objetivo', 'Pathway projected to target')}</span>`;
 }
 
 function drawChart() {
@@ -5393,7 +5387,7 @@ function drawChart() {
   const H = chartHorizon(sd);
   const YRS = Array.from({ length: H - 2020 + 1 }, (_, i) => 2020 + i);
   document.getElementById('chartTitle').textContent = `${currentSector} — ${L('Trayectoria de Intensidad de Emisiones', 'Emissions Intensity Pathway')}`;
-  renderChartSubtitle(sd, H);
+  renderChartSubtitle();
   const _hzEl = document.getElementById('horizonSelector');
   if (_hzEl) _hzEl.innerHTML =
     `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px;white-space:nowrap">${L('Horizonte:', 'Horizon:')}</span>` +
