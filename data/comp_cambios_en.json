@@ -845,28 +845,28 @@
   ],
   "jpmorgan": [
     {
-      "resumen": "Decarbonization horizon extended from 2030 to 2035, with a higher target reduction for both sub-sectors.",
-      "descripcion": "The 2024 Sustainability Report set 2030 targets of -36% for Energy Mix (2019 base of 45.9 gCO2/MJ to 29.5 gCO2/MJ) and -45% for Oil & Gas Operational (2019 base of 4.9 gCO2e/MJ), whereas Carbon Compass 2025 extended the targets to 2035, raising the required reduction to -51% for Energy Mix (target of 22.5 gCO2/MJ) and -47% for Operational (based on the IEA NZE 2025 update)."
+      "resumen": "Horizon extended from 2030 to 2035 with mixed effects: Energy Mix raises the required annual reduction pace while Oil & Gas Operational lowers it.",
+      "descripcion": "The 2024 Sustainability Report set 2030 targets of -36% for Energy Mix (2019 base of 45.9 gCO2/MJ to 29.5 gCO2/MJ) and -45% for Oil & Gas Operational (2019 base of 4.9 gCO2e/MJ), whereas Carbon Compass 2025 extended the targets to 2035, raising the required reduction to -51% for Energy Mix (target of 22.5 gCO2/MJ) and -47% for Operational (based on the IEA NZE 2025 update). In annual terms, Energy Mix goes from -3.9%/year to -4.4%/year, while Operational drops from -5.3%/year to -3.9%/year (practically the same total reduction with five more years to achieve it)."
     },
     {
-      "resumen": "Target year extended from 2030 to 2035, higher reduction ambition and a methodological shift to a global pathway.",
-      "descripcion": "In the 2024 Sustainability Report, JPMorgan Chase set a 2030 target to reduce carbon intensity to 105.3 kgCO2/MWh (-69% from a 2019 baseline of 342.6 kgCO2/MWh) using a regionally weighted approach, whereas in Carbon Compass 2025 it extended the target horizon to 2035, setting a value of 72.4 kgCO2/MWh (-79% from the same base), and moved to a single global power pathway aligned with the IEA NZE 2025 scenario. Both methodologies cover Scope 1 only."
+      "resumen": "Target year extended from 2030 to 2035 and a methodological shift to a single global pathway; the required annual reduction pace falls slightly.",
+      "descripcion": "In the 2024 Sustainability Report, JPMorgan Chase set a 2030 target to reduce carbon intensity to 105.3 kgCO2/MWh (-69% from a 2019 baseline of 342.6 kgCO2/MWh) using a regionally weighted approach, whereas in Carbon Compass 2025 it extended the target horizon to 2035, setting a value of 72.4 kgCO2/MWh (-79% from the same base), and moved to a single global power pathway aligned with the IEA NZE 2025 scenario. Both methodologies cover Scope 1 only. Although the total reduction rises from -69% to -79%, the required annual pace falls slightly (from -10.2%/year to -9.3%/year)."
     },
     {
-      "resumen": "Horizon extended to 2035, target reduction raised to 40% and a change in the target-setting methodology.",
-      "descripcion": "In the 2024 Sustainability Report the bank reported a 2030 target of 0.981 tCO2e/t crude steel (-30% versus the 2020 base of 1.412 tCO2e/t), whereas in Carbon Compass 2025 it extended the horizon to 2035, raising the reduction target to -40% (0.842 tCO2e/t), and replaced the convergence method with a rate-of-change methodology aligned with the IEA NZE 2025."
+      "resumen": "Horizon extended to 2035 (40% reduction) and a switch to a rate-of-change methodology; the required annual reduction pace falls slightly.",
+      "descripcion": "In the 2024 Sustainability Report the bank reported a 2030 target of 0.981 tCO2e/t crude steel (-30% versus the 2020 base of 1.412 tCO2e/t), whereas in Carbon Compass 2025 it extended the horizon to 2035, raising the reduction target to -40% (0.842 tCO2e/t), and replaced the convergence method with a rate-of-change methodology aligned with the IEA NZE 2025. In annual terms, the requirement falls slightly (from -3.6%/year to -3.4%/year)."
     },
     {
       "resumen": "Target extended to 2035, raising the cumulative reduction to 65%.",
       "descripcion": "In the 2024 Sustainability Report the bank set a 2030 target of 86.1 gCO2e/km (-48% from the 2019 base of 164.8 gCO2e/km), whereas in Carbon Compass 2025 it extended the target to 2035 with a goal of 57.7 gCO2e/km (-65% from the 2019 baseline), adapting to the IEA NZE 2025 scenario."
     },
     {
-      "resumen": "Target extended to 2035 with a higher intensity-reduction percentage and a switch to a rate-of-change approach.",
-      "descripcion": "The 2024 Sustainability Report set a 2030 target of 460.0 kgCO2e/t cementitious product (-28% versus the 2020 base of 639.3 kgCO2e/t), whereas Carbon Compass 2025 moved the target to 2035, lowering the intensity to 399.2 kgCO2e/t (-38% versus the same base) and changing the methodology to apply the IEA NZE 2025 scenario's rate of decline directly."
+      "resumen": "Target extended to 2035 (38% reduction) and a switch to a rate-of-change methodology; the required annual reduction pace stays practically unchanged.",
+      "descripcion": "The 2024 Sustainability Report set a 2030 target of 460.0 kgCO2e/t cementitious product (-28% versus the 2020 base of 639.3 kgCO2e/t), whereas Carbon Compass 2025 moved the target to 2035, lowering the intensity to 399.2 kgCO2e/t (-38% versus the same base) and changing the methodology to apply the IEA NZE 2025 scenario's rate of decline directly. In annual terms, the requirement stays practically unchanged (from -3.2%/year to -3.1%/year)."
     },
     {
-      "resumen": "Target horizon extended to 2035, with reduction ambition increased to -38%.",
-      "descripcion": "The 2024 Sustainability Report envisaged a 2030 target of 625.0 gCO2/RTK (-36% from the 2021 base of 972.6 gCO2/RTK), whereas in Carbon Compass 2025 the horizon was pushed back to 2035 with a target intensity of 606.5 gCO2/RTK (-38% versus the 2021 base), keeping the exclusion of dedicated cargo and incorporating adjusted IEA projections."
+      "resumen": "Target horizon extended to 2035 with only 2 more points of reduction (-38%), which lowers the required annual reduction pace.",
+      "descripcion": "The 2024 Sustainability Report envisaged a 2030 target of 625.0 gCO2/RTK (-36% from the 2021 base of 972.6 gCO2/RTK), whereas in Carbon Compass 2025 the horizon was pushed back to 2035 with a target intensity of 606.5 gCO2/RTK (-38% versus the 2021 base), keeping the exclusion of dedicated cargo and incorporating adjusted IEA projections. The required annual reduction pace falls from -4.8%/year to -3.3%/year: practically the same total reduction with five more years to achieve it."
     },
     {
       "resumen": "Methodological adjustment to the 2021 baseline, target extended to 2035 and higher reduction ambition.",

@@ -355,11 +355,11 @@
     ]
   },
   "jpmorgan": {
-    "intro": "JPMorgan Chase has carried out a full structural update of its Carbon Compass® framework, extending the horizon of its sector targets from 2030 to 2035 and raising the final reduction goals in almost every sector. This revision adapts its metrics to the 2025 update of the IEA Net Zero Emissions (NZE) scenario, reflecting a more gradual pace of global transition in the short term while strengthening decarbonization ambition in the medium term.",
+    "intro": "JPMorgan Chase has carried out a full structural update of its Carbon Compass® framework, extending the horizon of its sector targets from 2030 to 2035. Although the total committed reduction increases in almost every sector, the required annual pace only rises in Shipping, Automotive and Energy Mix; in Aviation and Oil & Gas Operational it clearly falls (practically the same reduction with five more years), and in Power, Steel and Cement it stays flat or falls slightly. The revision adapts its metrics to the 2025 update of the IEA Net Zero Emissions (NZE) scenario, which envisages a more gradual transition in the short term.",
     "points": [
       {
         "title": "General extension of the target horizon to 2035",
-        "body": "JPMorgan Chase has moved the target date of its carbon-intensity goals from 2030 to 2035 for 8 of its 9 covered sectors (Electric Power, Oil & Gas Operational, Energy Mix, Auto Manufacturing, Aviation, Shipping, Iron & Steel and Cement). The only exception is aluminium, which keeps its 2030 target because the underlying scenario (IAI 1.5DS) has not yet been updated. This methodological change responds to the inclusion of 2035 as a new interim reference milestone in the 2025 version of the IEA NZE scenario."
+        "body": "JPMorgan Chase has moved the target date of its carbon-intensity goals from 2030 to 2035 for 8 of its 9 sector targets (Electric Power, Oil & Gas Operational, Energy Mix, Auto Manufacturing, Aviation, Shipping, Iron & Steel and Cement). The only exception is aluminium, which keeps its 2030 target because the underlying scenario (IAI 1.5DS) has not yet been updated. This methodological change responds to the inclusion of 2035 as a new interim reference milestone in the 2025 version of the IEA NZE scenario."
       },
       {
         "title": "Methodological shift to a global pathway in Electric Power",
@@ -374,8 +374,8 @@
         "body": "The bank revised the 2021 baselines for Shipping (adjusted from 10.9 to 11.9 gCO2/t-nm in 2025, having already been modified in 2024) and Aluminium (adjusted from 8.6 to 8.3 tCO2e/t), owing to continued improvements in the availability and quality of the data collected."
       },
       {
-        "title": "Launch and consolidation of the proprietary Energy Supply Financing Ratio (ESFR) methodology",
-        "body": "JPMorgan Chase has consolidated its proprietary methodology for calculating the ESFR (Energy Supply Financing Ratio), which classifies energy-supply financing as low- versus high-emission using a forward-looking approach based on capital expenditure (CapEx). As a key development, the bank updated and broadened the eligibility criteria of its $1 trillion Green objective to align them directly with the categories of the ESFR numerator."
+        "title": "Broader eligibility perimeter for the $1 trillion Green objective",
+        "body": "JPMorgan Chase has broadened the eligibility criteria of its $1 trillion Green objective for 2030 to align them with the numerator of its ESFR (Energy Supply Financing Ratio): low-carbon generation by diversified power companies, nuclear energy, electricity networks and grid modernization, and electric-vehicle charging infrastructure now count. The broader perimeter makes the objective easier to reach and reduces comparability with previously reported progress. The document does not disclose the ESFR value."
       }
     ]
   },
