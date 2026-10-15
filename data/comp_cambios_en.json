@@ -845,52 +845,52 @@
   ],
   "jpmorgan": [
     {
-      "resumen": "Energy sector split into end-use and operational, together with the adoption of physical intensity.",
-      "descripcion": "The bank restructured its energy-sector targets, replacing its previous target of a 29% reduction in financed-emissions intensity (FELI) versus the 2019 base in the 2023 report with two physical-intensity indicators, \"Energy-End Use\" (a 10%–19% reduction in gCO2e/MJ) and \"Energy-Operational\" (a 12%–20% reduction in gCO2e/MJ), setting a new 2022 baseline in the 2024 report."
+      "resumen": "Decarbonization horizon extended from 2030 to 2035, with a higher target reduction for both sub-sectors.",
+      "descripcion": "The 2024 Sustainability Report set 2030 targets of -36% for Energy Mix (2019 base of 45.9 gCO2/MJ to 29.5 gCO2/MJ) and -45% for Oil & Gas Operational (2019 base of 4.9 gCO2e/MJ), whereas Carbon Compass 2025 extended the targets to 2035, raising the required reduction to -51% for Energy Mix (target of 22.5 gCO2/MJ) and -47% for Operational (based on the IEA NZE 2025 update)."
     },
     {
-      "resumen": "Addition of a qualitative warning about the impact of artificial intelligence on meeting the targets",
-      "descripcion": "The bank kept its target of a 69% reduction in the power sector's carbon intensity for 2030 versus the 2019 base year, achieving a 21.5% reduction (268.8 kgCO2/MWh) in the 2024 report and a 27.5% reduction (248.4 kgCO2/MWh) in the 2025 report, but introduced a new methodological consideration noting that growing energy demand from AI-driven data centres is expected to negatively affect its future ability to meet this target."
+      "resumen": "Target year extended from 2030 to 2035, higher reduction ambition and a methodological shift to a global pathway.",
+      "descripcion": "In the 2024 Sustainability Report, JPMorgan Chase set a 2030 target to reduce carbon intensity to 105.3 kgCO2/MWh (-69% from a 2019 baseline of 342.6 kgCO2/MWh) using a regionally weighted approach, whereas in Carbon Compass 2025 it extended the target horizon to 2035, setting a value of 72.4 kgCO2/MWh (-79% from the same base), and moved to a single global power pathway aligned with the IEA NZE 2025 scenario. Both methodologies cover Scope 1 only."
+    },
+    {
+      "resumen": "Horizon extended to 2035, target reduction raised to 40% and a change in the target-setting methodology.",
+      "descripcion": "In the 2024 Sustainability Report the bank reported a 2030 target of 0.981 tCO2e/t crude steel (-30% versus the 2020 base of 1.412 tCO2e/t), whereas in Carbon Compass 2025 it extended the horizon to 2035, raising the reduction target to -40% (0.842 tCO2e/t), and replaced the convergence method with a rate-of-change methodology aligned with the IEA NZE 2025."
+    },
+    {
+      "resumen": "Target extended to 2035, raising the cumulative reduction to 65%.",
+      "descripcion": "In the 2024 Sustainability Report the bank set a 2030 target of 86.1 gCO2e/km (-48% from the 2019 base of 164.8 gCO2e/km), whereas in Carbon Compass 2025 it extended the target to 2035 with a goal of 57.7 gCO2e/km (-65% from the 2019 baseline), adapting to the IEA NZE 2025 scenario."
+    },
+    {
+      "resumen": "Target extended to 2035 with a higher intensity-reduction percentage and a switch to a rate-of-change approach.",
+      "descripcion": "The 2024 Sustainability Report set a 2030 target of 460.0 kgCO2e/t cementitious product (-28% versus the 2020 base of 639.3 kgCO2e/t), whereas Carbon Compass 2025 moved the target to 2035, lowering the intensity to 399.2 kgCO2e/t (-38% versus the same base) and changing the methodology to apply the IEA NZE 2025 scenario's rate of decline directly."
+    },
+    {
+      "resumen": "Target horizon extended to 2035, with reduction ambition increased to -38%.",
+      "descripcion": "The 2024 Sustainability Report envisaged a 2030 target of 625.0 gCO2/RTK (-36% from the 2021 base of 972.6 gCO2/RTK), whereas in Carbon Compass 2025 the horizon was pushed back to 2035 with a target intensity of 606.5 gCO2/RTK (-38% versus the 2021 base), keeping the exclusion of dedicated cargo and incorporating adjusted IEA projections."
+    },
+    {
+      "resumen": "Methodological adjustment to the 2021 baseline, target extended to 2035 and higher reduction ambition.",
+      "descripcion": "The 2024 Sustainability Report reported a revised 2021 baseline of 10.9 gCO2/t-nm with a 2030 target of 8.4 gCO2/t-nm (-23%), whereas Carbon Compass 2025 readjusted the 2021 baseline to 11.9 gCO2/t-nm and extended the target to 2035, setting a goal of 4.8 gCO2/t-nm (-60% versus the new 2021 base)."
     },
     {
       "resumen": "No significant changes",
-      "descripcion": "The iron and steel portfolio's carbon intensity progressed, recording a 1.5% reduction (1.390 tCO2e/t) versus the 1.412 tCO2e/t base year in the 2024 report, and reaching an 8.6% reduction (1.291 tCO2e/t) in the 2025 report, keeping the 30% reduction target set for 2030 unchanged."
-    },
-    {
-      "resumen": "Setback in carbon-intensity reduction due to the slowdown in electric-vehicle adoption",
-      "descripcion": "The automotive manufacturing portfolio's carbon intensity suffered a quantitative setback, moving from a 23.3% reduction (126.4 gCO2e/km) versus the 164.8 gCO2e/km baseline in the 2024 report to a smaller 20.3% reduction (131.3 gCO2e/km) in the 2025 report, as global challenges in the pace of electric-vehicle adoption affected the portfolio's performance."
+      "descripcion": "No quantitative carbon-intensity sector targets have been set for Commercial Real Estate in either the 2024 Report or Carbon Compass 2025; only catastrophe-risk models and qualitative assessments are used."
     },
     {
       "resumen": "No significant changes",
-      "descripcion": "The cement sector's carbon intensity showed no methodological changes, moving from a 0.7% reduction (634.6 kgCO2e/t) versus the 639.3 kgCO2e/t base year in the 2024 report to a 3.1% reduction (619.6 kgCO2e/t) in the 2025 report, under the same final target of 28% set for 2030."
+      "descripcion": "The Residential Real Estate sector has no quantitative portfolio decarbonization targets reported in either the 2024 Report or Carbon Compass 2025; it is addressed solely through consumer credit-risk analysis and physical climate models."
     },
     {
       "resumen": "No significant changes",
-      "descripcion": "The aviation portfolio's carbon intensity progressed from a 16.9% reduction (808.0 gCO2/RTK) versus the 972.6 gCO2/RTK base year in the 2024 report to a 20.1% reduction (777.3 gCO2/RTK) in the 2025 report, under the same 36% reduction target for 2030."
+      "descripcion": "JPMorgan Chase has no phase-out or carbon-intensity target for the sector, limiting its strategy to the conditional, case-by-case exclusion of project finance for new coal mines or coal-fired power plants and the review of clients that derive most of their revenue from extraction, under its environmental risk policies."
     },
     {
-      "resumen": "New baseline revision and downward adjustment to the 2030 target reduction percentage",
-      "descripcion": "The shipping carbon-intensity baseline was recalculated downward, from 11.4 gCO2/t-nm in the 2024 report to 10.9 gCO2/t-nm in the 2025 report, which changed the 2030 reduction target from an initial -26% to -23%, while reported intensity stood at an increase of 4.9% (11.9 gCO2/t-nm) and 5.7% (11.5 gCO2/t-nm) respectively."
+      "resumen": "Recalculation and correction of the 2021 baseline without changing the 2030 target year.",
+      "descripcion": "The 2024 Sustainability Report set a 2021 baseline of 8.6 tCO2e/t aluminium to reach a 2030 target of 6.5 tCO2e/t (-24%), whereas Carbon Compass 2025 corrected the 2021 baseline to 8.3 tCO2e/t aluminium while keeping the absolute target of 6.5 tCO2e/t (which adjusts the reduction to -22%); the target stays at 2030 because the underlying IAI 1.5DS scenario has not yet been updated to 2035."
     },
     {
-      "resumen": "Not reported in either report",
-      "descripcion": "The commercial real estate sector has no specific sectoral decarbonization targets or quantitative carbon-intensity metrics reported in either of the two sequential reports, being limited solely to its financial-exposure breakdown within the wholesale credit-risk heat maps."
-    },
-    {
-      "resumen": "Not reported in either report",
-      "descripcion": "The residential real estate sector lacks quantitative emissions-intensity metrics or decarbonization targets in both documents, appearing exclusively under catastrophe-modelling tools for the general assessment of physical risks in the consumer portfolio."
-    },
-    {
-      "resumen": "No significant changes regarding the sectoral exclusion for reputational and environmental risk",
-      "descripcion": "The coal sector remains without quantitative portfolio decarbonization targets in either report, as JPMorgan Chase structurally classifies it as a restricted activity under its risk-management framework, applying a strict policy under which it does not provide financial services to clients that derive the majority of their revenue from coal extraction, nor to those involved in mountaintop-removal mining or other practices that permanently damage the environment.\nThe policies applied and the evolution reflected in the 2024 and 2025 documents are detailed below:\nThe bank prohibits providing financial services to companies whose revenue is mostly derived from coal extraction, destructive practices such as mountaintop-removal mining, and the development or expansion of new mines and thermal-coal plants.\nThe bank's financial exposure to the sector fell from $198 to $136 million in the past year, and the new corporate methodology explicitly classifies coal as a \"High\" risk sector in terms of both transition and physical impact.\nAny client partially involved in the coal value chain (without reaching the full-exclusion thresholds) is automatically subject to a thorough, individualized risk assessment before receiving any type of commercial or financial support."
-    },
-    {
-      "resumen": "Significant increase in carbon intensity due to concentration in emerging markets",
-      "descripcion": "The aluminium sector's carbon intensity worsened notably, moving from a 2.2% increase (8.8 tCO2/t) versus the 8.6 tCO2/t base year in the 2024 report to a cumulative 10.4% increase (9.5 tCO2e/t) in the 2025 report, due to the concentration of financing among emerging-market clients whose operations depend on carbon-intensive power grids."
-    },
-    {
-      "resumen": "Not reported in either report",
-      "descripcion": "The agriculture sector has no decarbonization targets or emissions-intensity metric indicators in either of the two years analyzed, appearing solely in corporate commercial and industrial credit-risk heat maps."
+      "resumen": "No significant changes",
+      "descripcion": "The Agriculture sector has no quantitative carbon-intensity target reported in either the 2024 Report or Carbon Compass 2025, and is categorized as an activity subject to enhanced review under the environmental and social risk framework."
     }
   ],
   "citi": [

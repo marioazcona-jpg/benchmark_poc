@@ -355,23 +355,27 @@
     ]
   },
   "jpmorgan": {
-    "intro": "JPMorgan Chase shows a mixed trend in its climate strategy. While traditional heavy sectors such as power and oil show stable reductions in their intensities, key transition industries such as automotive and aluminium experience clear deterioration in their metrics.",
+    "intro": "JPMorgan Chase has carried out a full structural update of its Carbon Compass® framework, extending the horizon of its sector targets from 2030 to 2035 and raising the final reduction goals in almost every sector. This revision adapts its metrics to the 2025 update of the IEA Net Zero Emissions (NZE) scenario, reflecting a more gradual pace of global transition in the short term while strengthening decarbonization ambition in the medium term.",
     "points": [
       {
-        "title": "Setback in Automotive due to market dynamics",
-        "body": "Carbon intensity in vehicle manufacturing rose from -23.3% to -20.3% versus the base year, due to the global slowdown in electric-vehicle adoption, representing a direct external impact on the bank's portfolio progress."
+        "title": "General extension of the target horizon to 2035",
+        "body": "JPMorgan Chase has moved the target date of its carbon-intensity goals from 2030 to 2035 for 8 of its 9 covered sectors (Electric Power, Oil & Gas Operational, Energy Mix, Auto Manufacturing, Aviation, Shipping, Iron & Steel and Cement). The only exception is aluminium, which keeps its 2030 target because the underlying scenario (IAI 1.5DS) has not yet been updated. This methodological change responds to the inclusion of 2035 as a new interim reference milestone in the 2025 version of the IEA NZE scenario."
       },
       {
-        "title": "Increase in Aluminium emissions",
-        "body": "The aluminium portfolio recorded a severe worsening in carbon intensity, climbing from +2.2% in the previous report to +10.4% above the baseline due to the financing needs of emerging-market clients with highly carbon-intensive power grids."
+        "title": "Methodological shift to a global pathway in Electric Power",
+        "body": "For the Electric Power sector, JPMorgan Chase dropped the methodology that weighted regional exposure between OECD and non-OECD countries and adopted a single global pathway aligned with the IEA NZE scenario. The change seeks consistency in engagement with global clients and to focus financing where transition needs are greatest."
       },
       {
-        "title": "Double methodological readjustment in Shipping",
-        "body": "For the second consecutive year, the institution revised the Shipping baseline (from 11.4 to 10.9 gCO2/t-nm), consequently reducing the ambition of the 2030 reduction target from -26% to -23%, which makes historical comparability of the sector harder."
+        "title": "Standardization of target setting towards a rate-of-change approach in industrial sectors",
+        "body": "In the Iron & Steel and Cement sectors, the bank replaced the previous approach of convergence towards the scenario's 2050 emissions with direct application of the percentage reduction (rate of change) assumed by the IEA NZE scenario relative to the base year. This improves methodological consistency across sectors, although it alters the expected absolute values."
       },
       {
-        "title": "Artificial-intelligence risk to Power targets",
-        "body": "Despite reducing power intensity by 27.5%, the bank added an explicit warning about how rising energy demand from AI-dedicated data centres will put the future achievement of sectoral climate targets at risk."
+        "title": "Adjustment and recalibration of historical baselines in shipping and aluminium",
+        "body": "The bank revised the 2021 baselines for Shipping (adjusted from 10.9 to 11.9 gCO2/t-nm in 2025, having already been modified in 2024) and Aluminium (adjusted from 8.6 to 8.3 tCO2e/t), owing to continued improvements in the availability and quality of the data collected."
+      },
+      {
+        "title": "Launch and consolidation of the proprietary Energy Supply Financing Ratio (ESFR) methodology",
+        "body": "JPMorgan Chase has consolidated its proprietary methodology for calculating the ESFR (Energy Supply Financing Ratio), which classifies energy-supply financing as low- versus high-emission using a forward-looking approach based on capital expenditure (CapEx). As a key development, the bank updated and broadened the eligibility criteria of its $1 trillion Green objective to align them directly with the categories of the ESFR numerator."
       }
     ]
   },
