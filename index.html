@@ -5380,13 +5380,14 @@ function drawChart() {
       _scSel.style.display = 'flex';
       if (_div) _div.style.display = '';
       _scSel.innerHTML =
-        `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px">IEA:</span>` +
+        // La fuente (WEO2025) va en la propia etiqueta "IEA WEO2025:" — antes era una
+        // burbuja aparte que parecía un botón más.
+        `<span style="font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:.02em;margin-right:2px;white-space:nowrap"${sd.scenarioSource ? ` title="${L('Escenarios sectoriales globales ' + sd.scenarioSource + ' — misma fuente que la pantalla Climate Scenarios', 'Global sectoral scenarios ' + sd.scenarioSource + ' — same source as the Climate Scenarios screen')}"` : ''}>${sd.scenarioSource ? 'IEA WEO2025:' : 'IEA:'}</span>` +
         _avail.map(k => {
           const on = activeScenarios.has(k);
           return `<button class="filter-tab${on ? ' active' : ''}" style="font-size:11px;padding:4px 10px"
             onclick="toggleScenario('${k}',this)">${sd.scenarios[k].label}</button>`;
-        }).join('') +
-        (sd.scenarioSource ? `<span style="font-size:10px;font-weight:600;color:var(--text-secondary);background:var(--gray-bg);border:1px solid rgba(70,83,109,0.25);border-radius:10px;padding:3px 8px;margin-left:2px;letter-spacing:.03em;cursor:default" title="${L('Escenarios sectoriales globales ' + sd.scenarioSource + ' — misma fuente que la pantalla Climate Scenarios', 'Global sectoral scenarios ' + sd.scenarioSource + ' — same source as the Climate Scenarios screen')}">WEO2025</span>` : '');
+        }).join('');
     } else {
       _scSel.style.display = 'none';
       if (_div) _div.style.display = 'none';
